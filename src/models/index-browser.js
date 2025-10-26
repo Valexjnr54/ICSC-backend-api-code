@@ -173,7 +173,11 @@ exports.Prisma.AttendeesScalarFieldEnum = {
   remark: 'remark',
   status: 'status',
   role: 'role',
+  password: 'password',
+  temporal_password: 'temporal_password',
   registeredAt: 'registeredAt',
+  created_by_id: 'created_by_id',
+  created_by_type: 'created_by_type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -223,7 +227,8 @@ exports.Prisma.AttendeesOrderByRelevanceFieldEnum = {
   department_agency: 'department_agency',
   staff_id: 'staff_id',
   office_location: 'office_location',
-  remark: 'remark'
+  remark: 'remark',
+  password: 'password'
 };
 exports.Role = exports.$Enums.Role = {
   super_admin: 'super_admin',
@@ -247,6 +252,11 @@ exports.Status = exports.$Enums.Status = {
   Approved: 'Approved',
   Pending: 'Pending',
   Rejected: 'Rejected'
+};
+
+exports.CreatorType = exports.$Enums.CreatorType = {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
 };
 
 exports.Prisma.ModelName = {

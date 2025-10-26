@@ -5,6 +5,7 @@ import { adminAuthRouter } from "./routes/auth/adminAuthRoutes";
 import { adminRouter } from "./routes/admin/admin.routes";
 import { Config } from "./config/config";
 import { userAuthRouter } from "./routes/auth/userAuthRoutes";
+import { ministryRouter } from "./routes/user/user.routes";
 
 
 const app = express();
@@ -35,6 +36,7 @@ app.use(`${route}/auth`, adminAuthRouter);
 app.use(`${route}/auth`, userAuthRouter);
 
 app.use(`${route}/admin`, adminRouter);
+app.use(`${route}/user`, ministryRouter)
 
 
 app.use((error: any, request: Request, response: Response, next: NextFunction) => {

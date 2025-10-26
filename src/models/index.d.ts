@@ -62,6 +62,14 @@ export const Role: {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
+export const CreatorType: {
+  ADMIN: 'ADMIN',
+  USER: 'USER'
+};
+
+export type CreatorType = (typeof CreatorType)[keyof typeof CreatorType]
+
+
 export const Status: {
   Approved: 'Approved',
   Pending: 'Pending',
@@ -79,6 +87,10 @@ export const OrganizationType: typeof $Enums.OrganizationType
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type CreatorType = $Enums.CreatorType
+
+export const CreatorType: typeof $Enums.CreatorType
 
 export type Status = $Enums.Status
 
@@ -4176,10 +4188,12 @@ export namespace Prisma {
 
   export type AttendeesAvgAggregateOutputType = {
     id: number | null
+    created_by_id: number | null
   }
 
   export type AttendeesSumAggregateOutputType = {
     id: number | null
+    created_by_id: number | null
   }
 
   export type AttendeesMinAggregateOutputType = {
@@ -4199,7 +4213,11 @@ export namespace Prisma {
     remark: string | null
     status: $Enums.Status | null
     role: $Enums.Role | null
+    password: string | null
+    temporal_password: boolean | null
     registeredAt: Date | null
+    created_by_id: number | null
+    created_by_type: $Enums.CreatorType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4221,7 +4239,11 @@ export namespace Prisma {
     remark: string | null
     status: $Enums.Status | null
     role: $Enums.Role | null
+    password: string | null
+    temporal_password: boolean | null
     registeredAt: Date | null
+    created_by_id: number | null
+    created_by_type: $Enums.CreatorType | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4243,7 +4265,11 @@ export namespace Prisma {
     remark: number
     status: number
     role: number
+    password: number
+    temporal_password: number
     registeredAt: number
+    created_by_id: number
+    created_by_type: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4252,10 +4278,12 @@ export namespace Prisma {
 
   export type AttendeesAvgAggregateInputType = {
     id?: true
+    created_by_id?: true
   }
 
   export type AttendeesSumAggregateInputType = {
     id?: true
+    created_by_id?: true
   }
 
   export type AttendeesMinAggregateInputType = {
@@ -4275,7 +4303,11 @@ export namespace Prisma {
     remark?: true
     status?: true
     role?: true
+    password?: true
+    temporal_password?: true
     registeredAt?: true
+    created_by_id?: true
+    created_by_type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4297,7 +4329,11 @@ export namespace Prisma {
     remark?: true
     status?: true
     role?: true
+    password?: true
+    temporal_password?: true
     registeredAt?: true
+    created_by_id?: true
+    created_by_type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4319,7 +4355,11 @@ export namespace Prisma {
     remark?: true
     status?: true
     role?: true
+    password?: true
+    temporal_password?: true
     registeredAt?: true
+    created_by_id?: true
+    created_by_type?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4428,7 +4468,11 @@ export namespace Prisma {
     remark: string | null
     status: $Enums.Status
     role: $Enums.Role
+    password: string
+    temporal_password: boolean
     registeredAt: Date
+    created_by_id: number | null
+    created_by_type: $Enums.CreatorType | null
     createdAt: Date
     updatedAt: Date
     _count: AttendeesCountAggregateOutputType | null
@@ -4469,7 +4513,11 @@ export namespace Prisma {
     remark?: boolean
     status?: boolean
     role?: boolean
+    password?: boolean
+    temporal_password?: boolean
     registeredAt?: boolean
+    created_by_id?: boolean
+    created_by_type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["attendees"]>
@@ -4493,12 +4541,16 @@ export namespace Prisma {
     remark?: boolean
     status?: boolean
     role?: boolean
+    password?: boolean
+    temporal_password?: boolean
     registeredAt?: boolean
+    created_by_id?: boolean
+    created_by_type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AttendeesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone_number" | "nin" | "nin_verified" | "position" | "grade" | "organization" | "department" | "department_agency" | "staff_id" | "office_location" | "remark" | "status" | "role" | "registeredAt" | "createdAt" | "updatedAt", ExtArgs["result"]["attendees"]>
+  export type AttendeesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullname" | "email" | "phone_number" | "nin" | "nin_verified" | "position" | "grade" | "organization" | "department" | "department_agency" | "staff_id" | "office_location" | "remark" | "status" | "role" | "password" | "temporal_password" | "registeredAt" | "created_by_id" | "created_by_type" | "createdAt" | "updatedAt", ExtArgs["result"]["attendees"]>
 
   export type $AttendeesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Attendees"
@@ -4520,7 +4572,11 @@ export namespace Prisma {
       remark: string | null
       status: $Enums.Status
       role: $Enums.Role
+      password: string
+      temporal_password: boolean
       registeredAt: Date
+      created_by_id: number | null
+      created_by_type: $Enums.CreatorType | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["attendees"]>
@@ -4908,7 +4964,11 @@ export namespace Prisma {
     readonly remark: FieldRef<"Attendees", 'String'>
     readonly status: FieldRef<"Attendees", 'Status'>
     readonly role: FieldRef<"Attendees", 'Role'>
+    readonly password: FieldRef<"Attendees", 'String'>
+    readonly temporal_password: FieldRef<"Attendees", 'Boolean'>
     readonly registeredAt: FieldRef<"Attendees", 'DateTime'>
+    readonly created_by_id: FieldRef<"Attendees", 'Int'>
+    readonly created_by_type: FieldRef<"Attendees", 'CreatorType'>
     readonly createdAt: FieldRef<"Attendees", 'DateTime'>
     readonly updatedAt: FieldRef<"Attendees", 'DateTime'>
   }
@@ -5308,7 +5368,11 @@ export namespace Prisma {
     remark: 'remark',
     status: 'status',
     role: 'role',
+    password: 'password',
+    temporal_password: 'temporal_password',
     registeredAt: 'registeredAt',
+    created_by_id: 'created_by_id',
+    created_by_type: 'created_by_type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -5376,7 +5440,8 @@ export namespace Prisma {
     department_agency: 'department_agency',
     staff_id: 'staff_id',
     office_location: 'office_location',
-    remark: 'remark'
+    remark: 'remark',
+    password: 'password'
   };
 
   export type AttendeesOrderByRelevanceFieldEnum = (typeof AttendeesOrderByRelevanceFieldEnum)[keyof typeof AttendeesOrderByRelevanceFieldEnum]
@@ -5433,6 +5498,13 @@ export namespace Prisma {
    * Reference to a field of type 'Status'
    */
   export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'CreatorType'
+   */
+  export type EnumCreatorTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CreatorType'>
     
 
 
@@ -5697,7 +5769,11 @@ export namespace Prisma {
     remark?: StringNullableFilter<"Attendees"> | string | null
     status?: EnumStatusFilter<"Attendees"> | $Enums.Status
     role?: EnumRoleFilter<"Attendees"> | $Enums.Role
+    password?: StringFilter<"Attendees"> | string
+    temporal_password?: BoolFilter<"Attendees"> | boolean
     registeredAt?: DateTimeFilter<"Attendees"> | Date | string
+    created_by_id?: IntNullableFilter<"Attendees"> | number | null
+    created_by_type?: EnumCreatorTypeNullableFilter<"Attendees"> | $Enums.CreatorType | null
     createdAt?: DateTimeFilter<"Attendees"> | Date | string
     updatedAt?: DateTimeFilter<"Attendees"> | Date | string
   }
@@ -5719,7 +5795,11 @@ export namespace Prisma {
     remark?: SortOrderInput | SortOrder
     status?: SortOrder
     role?: SortOrder
+    password?: SortOrder
+    temporal_password?: SortOrder
     registeredAt?: SortOrder
+    created_by_id?: SortOrderInput | SortOrder
+    created_by_type?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _relevance?: AttendeesOrderByRelevanceInput
@@ -5745,7 +5825,11 @@ export namespace Prisma {
     remark?: StringNullableFilter<"Attendees"> | string | null
     status?: EnumStatusFilter<"Attendees"> | $Enums.Status
     role?: EnumRoleFilter<"Attendees"> | $Enums.Role
+    password?: StringFilter<"Attendees"> | string
+    temporal_password?: BoolFilter<"Attendees"> | boolean
     registeredAt?: DateTimeFilter<"Attendees"> | Date | string
+    created_by_id?: IntNullableFilter<"Attendees"> | number | null
+    created_by_type?: EnumCreatorTypeNullableFilter<"Attendees"> | $Enums.CreatorType | null
     createdAt?: DateTimeFilter<"Attendees"> | Date | string
     updatedAt?: DateTimeFilter<"Attendees"> | Date | string
   }, "id" | "email" | "nin">
@@ -5767,7 +5851,11 @@ export namespace Prisma {
     remark?: SortOrderInput | SortOrder
     status?: SortOrder
     role?: SortOrder
+    password?: SortOrder
+    temporal_password?: SortOrder
     registeredAt?: SortOrder
+    created_by_id?: SortOrderInput | SortOrder
+    created_by_type?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AttendeesCountOrderByAggregateInput
@@ -5797,7 +5885,11 @@ export namespace Prisma {
     remark?: StringNullableWithAggregatesFilter<"Attendees"> | string | null
     status?: EnumStatusWithAggregatesFilter<"Attendees"> | $Enums.Status
     role?: EnumRoleWithAggregatesFilter<"Attendees"> | $Enums.Role
+    password?: StringWithAggregatesFilter<"Attendees"> | string
+    temporal_password?: BoolWithAggregatesFilter<"Attendees"> | boolean
     registeredAt?: DateTimeWithAggregatesFilter<"Attendees"> | Date | string
+    created_by_id?: IntNullableWithAggregatesFilter<"Attendees"> | number | null
+    created_by_type?: EnumCreatorTypeNullableWithAggregatesFilter<"Attendees"> | $Enums.CreatorType | null
     createdAt?: DateTimeWithAggregatesFilter<"Attendees"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Attendees"> | Date | string
   }
@@ -6064,7 +6156,11 @@ export namespace Prisma {
     remark?: string | null
     status?: $Enums.Status
     role?: $Enums.Role
+    password: string
+    temporal_password?: boolean
     registeredAt?: Date | string
+    created_by_id?: number | null
+    created_by_type?: $Enums.CreatorType | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6086,7 +6182,11 @@ export namespace Prisma {
     remark?: string | null
     status?: $Enums.Status
     role?: $Enums.Role
+    password: string
+    temporal_password?: boolean
     registeredAt?: Date | string
+    created_by_id?: number | null
+    created_by_type?: $Enums.CreatorType | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6107,7 +6207,11 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    password?: StringFieldUpdateOperationsInput | string
+    temporal_password?: BoolFieldUpdateOperationsInput | boolean
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by_id?: NullableIntFieldUpdateOperationsInput | number | null
+    created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6129,7 +6233,11 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    password?: StringFieldUpdateOperationsInput | string
+    temporal_password?: BoolFieldUpdateOperationsInput | boolean
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by_id?: NullableIntFieldUpdateOperationsInput | number | null
+    created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6151,7 +6259,11 @@ export namespace Prisma {
     remark?: string | null
     status?: $Enums.Status
     role?: $Enums.Role
+    password: string
+    temporal_password?: boolean
     registeredAt?: Date | string
+    created_by_id?: number | null
+    created_by_type?: $Enums.CreatorType | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6172,7 +6284,11 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    password?: StringFieldUpdateOperationsInput | string
+    temporal_password?: BoolFieldUpdateOperationsInput | boolean
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by_id?: NullableIntFieldUpdateOperationsInput | number | null
+    created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6194,7 +6310,11 @@ export namespace Prisma {
     remark?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    password?: StringFieldUpdateOperationsInput | string
+    temporal_password?: BoolFieldUpdateOperationsInput | boolean
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by_id?: NullableIntFieldUpdateOperationsInput | number | null
+    created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6562,6 +6682,13 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
+  export type EnumCreatorTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatorType | EnumCreatorTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatorType[] | null
+    notIn?: $Enums.CreatorType[] | null
+    not?: NestedEnumCreatorTypeNullableFilter<$PrismaModel> | $Enums.CreatorType | null
+  }
+
   export type AttendeesOrderByRelevanceInput = {
     fields: AttendeesOrderByRelevanceFieldEnum | AttendeesOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -6585,13 +6712,18 @@ export namespace Prisma {
     remark?: SortOrder
     status?: SortOrder
     role?: SortOrder
+    password?: SortOrder
+    temporal_password?: SortOrder
     registeredAt?: SortOrder
+    created_by_id?: SortOrder
+    created_by_type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AttendeesAvgOrderByAggregateInput = {
     id?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type AttendeesMaxOrderByAggregateInput = {
@@ -6611,7 +6743,11 @@ export namespace Prisma {
     remark?: SortOrder
     status?: SortOrder
     role?: SortOrder
+    password?: SortOrder
+    temporal_password?: SortOrder
     registeredAt?: SortOrder
+    created_by_id?: SortOrder
+    created_by_type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6633,13 +6769,18 @@ export namespace Prisma {
     remark?: SortOrder
     status?: SortOrder
     role?: SortOrder
+    password?: SortOrder
+    temporal_password?: SortOrder
     registeredAt?: SortOrder
+    created_by_id?: SortOrder
+    created_by_type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type AttendeesSumOrderByAggregateInput = {
     id?: SortOrder
+    created_by_id?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -6658,6 +6799,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type EnumCreatorTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatorType | EnumCreatorTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatorType[] | null
+    notIn?: $Enums.CreatorType[] | null
+    not?: NestedEnumCreatorTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.CreatorType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCreatorTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumCreatorTypeNullableFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6760,6 +6911,10 @@ export namespace Prisma {
 
   export type EnumStatusFieldUpdateOperationsInput = {
     set?: $Enums.Status
+  }
+
+  export type NullableEnumCreatorTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CreatorType | null
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6975,6 +7130,13 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
+  export type NestedEnumCreatorTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatorType | EnumCreatorTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatorType[] | null
+    notIn?: $Enums.CreatorType[] | null
+    not?: NestedEnumCreatorTypeNullableFilter<$PrismaModel> | $Enums.CreatorType | null
+  }
+
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -6991,6 +7153,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumCreatorTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatorType | EnumCreatorTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatorType[] | null
+    notIn?: $Enums.CreatorType[] | null
+    not?: NestedEnumCreatorTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.CreatorType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCreatorTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumCreatorTypeNullableFilter<$PrismaModel>
   }
 
   export type OrganizationCreateWithoutChildrenInput = {

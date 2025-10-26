@@ -79,7 +79,15 @@ model Attendees {
   remark String?
   status Status @default(Pending)
   role          Role @default(attendee)
+  password      String   
+  temporal_password  Boolean              @default(true) 
   registeredAt  DateTime  @default(now())
+  
+  // Created by: polymorphic reference stored as id + type (no FK constraint)
+  // Use `created_by_type` to decide which table to join to (ADMIN or USER)
+  created_by_id   Int?
+  created_by_type CreatorType?
+
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 
@@ -102,6 +110,12 @@ enum Role {
   exhibitor
   public_speaker
   other
+}
+
+// Type to indicate which model created a record using polymorphic pattern
+enum CreatorType {
+  ADMIN
+  USER
 }
 
 enum Status {

@@ -8,8 +8,6 @@ import { sendVerificationEmail, sendWelcomeEmail } from "../../utils/emailSender
 
 const prisma = new PrismaClient();
 
-
-
 export async function createUser(request: Request, response: Response) {
     const { organization, organization_short_code, contact_person, contact_person_email, username, password } = request.body;
     const admin_id = request.admin.adminId;
