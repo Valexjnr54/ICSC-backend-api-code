@@ -4,6 +4,7 @@ import cors from "cors";
 import { adminAuthRouter } from "./routes/auth/adminAuthRoutes";
 import { adminRouter } from "./routes/admin/admin.routes";
 import { Config } from "./config/config";
+import { userAuthRouter } from "./routes/auth/userAuthRoutes";
 
 
 const app = express();
@@ -31,7 +32,7 @@ app.get(`${route}`, (_request: Request, response: Response) => {
 });
 
 app.use(`${route}/auth`, adminAuthRouter);
-// app.use(`${route}/auth`, userAuthRouter);
+app.use(`${route}/auth`, userAuthRouter);
 
 app.use(`${route}/admin`, adminRouter);
 
