@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/models"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id            Int      @id @default(autoincrement())
+  fullname      String
+  email         String   @unique
+  username      String   @unique
+  role          Role     @default(super_admin)
+  profile_image String?
+  password      String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("admin")
+}
+
+model Users {
+  id                      Int      @id @default(autoincrement())
+  organization            String
+  organization_short_code String
+  contact_person          String
+  contact_person_email    String   @unique
+  username                String   @unique
+  profile_image           String?
+  role                    Role     @default(ministry)
+  password                String
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Organization {
+  id           Int              @id @default(autoincrement())
+  name         String
+  abbreviation String?          @unique
+  type         OrganizationType @default(OTHER)
+
+  // Self-referencing parent (e.g., an agency -> parent ministry)
+  parentId Int?
+  parent   Organization?  @relation("OrgParent", fields: [parentId], references: [id])
+  children Organization[] @relation("OrgParent")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@map("organizations")
+}
+
+model Attendees {
+  id                Int      @id @default(autoincrement())
+  fullname          String
+  email             String   @unique
+  phone_number      String
+  nin               String   @unique
+  nin_verified      Boolean  @default(false)
+  position          String
+  grade             String
+  organization      String
+  department        String
+  department_agency String
+  staff_id          String?
+  office_location   String?
+  remark            String?
+  status            Status   @default(Pending)
+  role              Role     @default(attendee)
+  registeredAt      DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("attendees")
+}
+
+// Unified organization model for ministries, agencies, parastatals, etc.
+enum OrganizationType {
+  MINISTRY
+  AGENCY
+  PARASTATAL
+  OTHER
+}
+
+enum Role {
+  super_admin
+  attendee
+  ministry
+  agency
+  parastatal
+  exhibitor
+  public_speaker
+  other
+}
+
+enum Status {
+  Approved
+  Pending
+  Rejected
+}
