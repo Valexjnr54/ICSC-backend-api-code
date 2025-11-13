@@ -83,7 +83,7 @@ export async function registerExhibitor(request: Request, response: Response) {
 }
 
 export async function loginExhibitor(request: Request, response: Response) {
-	await body('contact_email').notEmpty().withMessage('email is required').isEmail().withMessage('Invalid email format').bail().isString().run(request);
+	await body('email').notEmpty().withMessage('email is required').isEmail().withMessage('Invalid email format').bail().isString().run(request);
 	await body('password').notEmpty().withMessage('password is required').bail().isString().run(request);
 
 	const errors = validationResult(request);
@@ -91,9 +91,9 @@ export async function loginExhibitor(request: Request, response: Response) {
 		return response.status(422).json({ status: 'fail', errors: errors.array() });
 	}
 
-	const { contact_email, password } = request.body;
+	const { email, password } = request.body;
 	try {
-		const exhibitor = await prisma.exhibitors.findFirst({ where: { contact_email } });
+		const exhibitor = await prisma.exhibitors.findFirst({ where: { contact_email:email } });
 		if (!exhibitor) {
 			return response.status(401).json({ message: 'Invalid credentials' });
 		}
