@@ -64,6 +64,7 @@ model Organization {
 
 model Attendees {
   id            Int       @id @default(autoincrement())
+  prefix        String?
   fullname     String
   email         String    @unique
   phone_number  String
@@ -94,6 +95,136 @@ model Attendees {
   @@map("attendees")
 }
 
+model Booths {
+  id            Int       @id @default(autoincrement())
+  booth_number   String    @unique
+  location      String
+  price         Float
+  booth_size     String
+  features      Json
+  status        Status    @default(Available)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("booths")
+  assigned_booths assigned_booths[]
+}
+
+model Exhibitors {
+  id            Int       @id @default(autoincrement())
+  prefix        String?
+  company_name String
+  contact_person String
+  contact_email  String    @unique
+  contact_phone  String
+  website       String? 
+  description   String?
+  service_product_to_exhibit String?
+  password      String
+  role         Role      @default(exhibitor)
+  status        Status    @default(Pending)
+  registeredAt  DateTime  @default(now())
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("exhibitors")
+  assigned_booths assigned_booths[]
+}
+
+model EventPartners {
+  id            Int       @id @default(autoincrement())
+  prefix        String?
+  fullname      String    
+  email         String    @unique 
+  phone_number String
+  company_name  String
+  logo          String    
+  website       String?  
+  social_media  Json? 
+  description   String?
+  why_interested String?
+  password      String 
+  role         Role      @default(public_speaker)
+  status        Status    @default(Pending)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("event_partners")
+  EventPartnerPackages EventPartnerPackages[]
+}
+
+model Speakers {
+  id            Int       @id @default(autoincrement())
+  prefix        String?
+  first_name    String
+  last_name     String
+  fullname      String
+  country       String
+  job_title     String
+  organization  String
+  phone         String
+  social_media  Json?
+  work_email    String    @unique
+  bio           String
+  topic         String
+  experience    String?
+  password      String
+  role          Role      @default(public_speaker)
+  status        Status    @default(Pending)
+  registeredAt  DateTime  @default(now())
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("speakers")
+}
+
+model EventPackages {
+  id            Int       @id @default(autoincrement())
+  name          String    
+  description   String    
+  price         Float     
+  features      Json      
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("event_packages")
+  EventPartnerPackages EventPartnerPackages[]
+}
+
+model assigned_booths {
+  id            Int       @id @default(autoincrement())
+  booth_id      Int       @unique
+  booth         Booths    @relation(fields: [booth_id], references: [id])
+  assigned_to_id   Int
+  assigned_to   Exhibitors     @relation(fields: [assigned_to_id], references: [id])
+  assignedAt    DateTime  @default(now())
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("assigned_booths")
+}
+
+model EventPartnerPackages {
+  id            Int       @id @default(autoincrement())
+  event_partner_id Int
+  event_partner   EventPartners @relation(fields: [event_partner_id], references: [id])
+  event_package_id Int
+  event_package  EventPackages @relation(fields: [event_package_id], references: [id])
+  payment_reference String?
+  payment_status Status @default(Pending)
+  payment_method String?
+  proof_of_payment String?
+  assignedAt    DateTime  @default(now())
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("event_partner_packages")
+}
+
 // Unified organization model for ministries, agencies, parastatals, etc.
 enum OrganizationType {
   MINISTRY
@@ -109,6 +240,7 @@ enum Role {
   parastatal
   exhibitor
   public_speaker
+  event_partner
   other
 }
 
@@ -122,4 +254,8 @@ enum Status {
   Approved
   Pending
   Rejected
+  Available
+  SoldOut
+  Reserved
+  Paid
 }

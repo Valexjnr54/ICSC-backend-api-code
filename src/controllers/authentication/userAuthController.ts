@@ -5,7 +5,6 @@ import { PrismaClient } from '../../models';
 import { Config } from '../../config/config';
 import * as argon2 from 'argon2';
 import { body, validationResult } from 'express-validator';
-import { Organization } from '../../models/index';
 
 const prisma = new PrismaClient();
 

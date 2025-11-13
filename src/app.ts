@@ -6,6 +6,10 @@ import { adminRouter } from "./routes/admin/admin.routes";
 import { Config } from "./config/config";
 import { userAuthRouter } from "./routes/auth/userAuthRoutes";
 import { ministryRouter } from "./routes/user/user.routes";
+import { attendeeAuthRouter } from "./routes/auth/attendeeAuthRoutes";
+import { speakerAuthRouter } from "./routes/auth/speakerAuthRoutes";
+import { exhibitorAuthRouter } from "./routes/auth/exhibitorAuthRoutes";
+import { eventPartnerAuthRouter } from "./routes/auth/eventPartnerAuthRoutes";
 
 
 const app = express();
@@ -34,6 +38,10 @@ app.get(`${route}`, (_request: Request, response: Response) => {
 
 app.use(`${route}/auth`, adminAuthRouter);
 app.use(`${route}/auth`, userAuthRouter);
+app.use(`${route}/auth`, attendeeAuthRouter);
+app.use(`${route}/auth`, speakerAuthRouter);
+app.use(`${route}/auth`, exhibitorAuthRouter);
+app.use(`${route}/auth`, eventPartnerAuthRouter);
 
 app.use(`${route}/admin`, adminRouter);
 app.use(`${route}/user`, ministryRouter)

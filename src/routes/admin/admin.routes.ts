@@ -5,6 +5,7 @@ import { upload } from "../../middlewares/multerMiddleware";
 import { uploadCSV } from "../../middlewares/uploadCSVMiddleware";
 import { allUser, createUser, deleteUser, singleUser } from "../../controllers/super_admin/users_controller";
 import { allAttendees, createAttendee, deleteAttendee, singleAttendee } from "../../controllers/super_admin/attendee_controller";
+import { createBooth, deleteBooth, getBoothById, getBooths, updateBooth } from "../../controllers/super_admin/booth_controller";
 
 export const adminRouter = express.Router();
 
@@ -20,3 +21,9 @@ adminRouter.post('/create-attendee', createAttendee);
 adminRouter.get('/attendees', allAttendees);
 adminRouter.get('/single-attendee', singleAttendee);
 adminRouter.delete('/delete-attendee', deleteAttendee);
+
+adminRouter.post('/create-booth', createBooth);
+adminRouter.put('/update-booth', updateBooth);
+adminRouter.delete('/delete-booth', deleteBooth);
+adminRouter.get('/get-booths', getBooths);
+adminRouter.get('/single-booth', getBoothById);

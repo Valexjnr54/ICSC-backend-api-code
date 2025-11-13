@@ -130,6 +130,7 @@ exports.Prisma.OrganizationScalarFieldEnum = {
 
 exports.Prisma.AttendeesScalarFieldEnum = {
   id: 'id',
+  prefix: 'prefix',
   fullname: 'fullname',
   email: 'email',
   phone_number: 'phone_number',
@@ -154,9 +155,122 @@ exports.Prisma.AttendeesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BoothsScalarFieldEnum = {
+  id: 'id',
+  booth_number: 'booth_number',
+  location: 'location',
+  price: 'price',
+  booth_size: 'booth_size',
+  features: 'features',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExhibitorsScalarFieldEnum = {
+  id: 'id',
+  prefix: 'prefix',
+  company_name: 'company_name',
+  contact_person: 'contact_person',
+  contact_email: 'contact_email',
+  contact_phone: 'contact_phone',
+  website: 'website',
+  description: 'description',
+  service_product_to_exhibit: 'service_product_to_exhibit',
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  registeredAt: 'registeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventPartnersScalarFieldEnum = {
+  id: 'id',
+  prefix: 'prefix',
+  fullname: 'fullname',
+  email: 'email',
+  phone_number: 'phone_number',
+  company_name: 'company_name',
+  logo: 'logo',
+  website: 'website',
+  social_media: 'social_media',
+  description: 'description',
+  why_interested: 'why_interested',
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SpeakersScalarFieldEnum = {
+  id: 'id',
+  prefix: 'prefix',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  fullname: 'fullname',
+  country: 'country',
+  job_title: 'job_title',
+  organization: 'organization',
+  phone: 'phone',
+  social_media: 'social_media',
+  work_email: 'work_email',
+  bio: 'bio',
+  topic: 'topic',
+  experience: 'experience',
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  registeredAt: 'registeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventPackagesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  features: 'features',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.Assigned_boothsScalarFieldEnum = {
+  id: 'id',
+  booth_id: 'booth_id',
+  assigned_to_id: 'assigned_to_id',
+  assignedAt: 'assignedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventPartnerPackagesScalarFieldEnum = {
+  id: 'id',
+  event_partner_id: 'event_partner_id',
+  event_package_id: 'event_package_id',
+  payment_reference: 'payment_reference',
+  payment_status: 'payment_status',
+  payment_method: 'payment_method',
+  proof_of_payment: 'proof_of_payment',
+  assignedAt: 'assignedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -188,6 +302,7 @@ exports.Prisma.OrganizationOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.AttendeesOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
   fullname: 'fullname',
   email: 'email',
   phone_number: 'phone_number',
@@ -201,6 +316,75 @@ exports.Prisma.AttendeesOrderByRelevanceFieldEnum = {
   office_location: 'office_location',
   remark: 'remark',
   password: 'password'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.BoothsOrderByRelevanceFieldEnum = {
+  booth_number: 'booth_number',
+  location: 'location',
+  booth_size: 'booth_size'
+};
+
+exports.Prisma.ExhibitorsOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
+  company_name: 'company_name',
+  contact_person: 'contact_person',
+  contact_email: 'contact_email',
+  contact_phone: 'contact_phone',
+  website: 'website',
+  description: 'description',
+  service_product_to_exhibit: 'service_product_to_exhibit',
+  password: 'password'
+};
+
+exports.Prisma.EventPartnersOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
+  fullname: 'fullname',
+  email: 'email',
+  phone_number: 'phone_number',
+  company_name: 'company_name',
+  logo: 'logo',
+  website: 'website',
+  description: 'description',
+  why_interested: 'why_interested',
+  password: 'password'
+};
+
+exports.Prisma.SpeakersOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  fullname: 'fullname',
+  country: 'country',
+  job_title: 'job_title',
+  organization: 'organization',
+  phone: 'phone',
+  work_email: 'work_email',
+  bio: 'bio',
+  topic: 'topic',
+  experience: 'experience',
+  password: 'password'
+};
+
+exports.Prisma.EventPackagesOrderByRelevanceFieldEnum = {
+  name: 'name',
+  description: 'description'
+};
+
+exports.Prisma.EventPartnerPackagesOrderByRelevanceFieldEnum = {
+  payment_reference: 'payment_reference',
+  payment_method: 'payment_method',
+  proof_of_payment: 'proof_of_payment'
 };
 exports.OrganizationType = exports.$Enums.OrganizationType = {
   MINISTRY: 'MINISTRY',
@@ -217,6 +401,7 @@ exports.Role = exports.$Enums.Role = {
   parastatal: 'parastatal',
   exhibitor: 'exhibitor',
   public_speaker: 'public_speaker',
+  event_partner: 'event_partner',
   other: 'other'
 };
 
@@ -228,14 +413,25 @@ exports.CreatorType = exports.$Enums.CreatorType = {
 exports.Status = exports.$Enums.Status = {
   Approved: 'Approved',
   Pending: 'Pending',
-  Rejected: 'Rejected'
+  Rejected: 'Rejected',
+  Available: 'Available',
+  SoldOut: 'SoldOut',
+  Reserved: 'Reserved',
+  Paid: 'Paid'
 };
 
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   Users: 'Users',
   Organization: 'Organization',
-  Attendees: 'Attendees'
+  Attendees: 'Attendees',
+  Booths: 'Booths',
+  Exhibitors: 'Exhibitors',
+  EventPartners: 'EventPartners',
+  Speakers: 'Speakers',
+  EventPackages: 'EventPackages',
+  assigned_booths: 'assigned_booths',
+  EventPartnerPackages: 'EventPartnerPackages'
 };
 /**
  * Create the Client
@@ -284,13 +480,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/models\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Admin {\n  id            Int      @id @default(autoincrement())\n  fullname      String\n  email         String   @unique\n  username      String   @unique\n  role          Role     @default(super_admin)\n  profile_image String?\n  password      String\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  @@map(\"admin\")\n}\n\nmodel Users {\n  id                      Int      @id @default(autoincrement())\n  organization            String\n  organization_short_code String\n  contact_person          String\n  contact_person_email    String   @unique\n  username                String   @unique\n  profile_image           String?\n  role                    Role     @default(ministry)\n  password                String\n  createdAt               DateTime @default(now())\n  updatedAt               DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Organization {\n  id           Int              @id @default(autoincrement())\n  name         String\n  abbreviation String?          @unique\n  type         OrganizationType @default(OTHER)\n\n  // Self-referencing parent (e.g., an agency -> parent ministry)\n  parentId Int?\n  parent   Organization?  @relation(\"OrgParent\", fields: [parentId], references: [id])\n  children Organization[] @relation(\"OrgParent\")\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([type])\n  @@map(\"organizations\")\n}\n\nmodel Attendees {\n  id                Int      @id @default(autoincrement())\n  fullname          String\n  email             String   @unique\n  phone_number      String\n  nin               String   @unique\n  nin_verified      Boolean  @default(false)\n  position          String\n  grade             String\n  organization      String\n  department        String\n  department_agency String\n  staff_id          String?\n  office_location   String?\n  remark            String?\n  status            Status   @default(Pending)\n  role              Role     @default(attendee)\n  password          String\n  temporal_password Boolean  @default(true)\n  registeredAt      DateTime @default(now())\n\n  // Created by: polymorphic reference stored as id + type (no FK constraint)\n  // Use `created_by_type` to decide which table to join to (ADMIN or USER)\n  created_by_id   Int?\n  created_by_type CreatorType?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"attendees\")\n}\n\n// Unified organization model for ministries, agencies, parastatals, etc.\nenum OrganizationType {\n  MINISTRY\n  AGENCY\n  PARASTATAL\n  OTHER\n}\n\nenum Role {\n  super_admin\n  attendee\n  ministry\n  agency\n  parastatal\n  exhibitor\n  public_speaker\n  other\n}\n\n// Type to indicate which model created a record using polymorphic pattern\nenum CreatorType {\n  ADMIN\n  USER\n}\n\nenum Status {\n  Approved\n  Pending\n  Rejected\n}\n",
-  "inlineSchemaHash": "d99591e68fe92e11a53f5ad67792fa9e9cefaa214be35d726eea2859dae0402b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/models\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Admin {\n  id            Int      @id @default(autoincrement())\n  fullname      String\n  email         String   @unique\n  username      String   @unique\n  role          Role     @default(super_admin)\n  profile_image String?\n  password      String\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  @@map(\"admin\")\n}\n\nmodel Users {\n  id                      Int      @id @default(autoincrement())\n  organization            String\n  organization_short_code String\n  contact_person          String\n  contact_person_email    String   @unique\n  username                String   @unique\n  profile_image           String?\n  role                    Role     @default(ministry)\n  password                String\n  createdAt               DateTime @default(now())\n  updatedAt               DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Organization {\n  id           Int              @id @default(autoincrement())\n  name         String\n  abbreviation String?          @unique\n  type         OrganizationType @default(OTHER)\n\n  // Self-referencing parent (e.g., an agency -> parent ministry)\n  parentId Int?\n  parent   Organization?  @relation(\"OrgParent\", fields: [parentId], references: [id])\n  children Organization[] @relation(\"OrgParent\")\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([type])\n  @@map(\"organizations\")\n}\n\nmodel Attendees {\n  id                Int      @id @default(autoincrement())\n  prefix            String?\n  fullname          String\n  email             String   @unique\n  phone_number      String\n  nin               String   @unique\n  nin_verified      Boolean  @default(false)\n  position          String\n  grade             String\n  organization      String\n  department        String\n  department_agency String\n  staff_id          String?\n  office_location   String?\n  remark            String?\n  status            Status   @default(Pending)\n  role              Role     @default(attendee)\n  password          String\n  temporal_password Boolean  @default(true)\n  registeredAt      DateTime @default(now())\n\n  // Created by: polymorphic reference stored as id + type (no FK constraint)\n  // Use `created_by_type` to decide which table to join to (ADMIN or USER)\n  created_by_id   Int?\n  created_by_type CreatorType?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"attendees\")\n}\n\nmodel Booths {\n  id              Int               @id @default(autoincrement())\n  booth_number    String            @unique\n  location        String\n  price           Float\n  booth_size      String\n  features        Json\n  status          Status            @default(Available)\n  createdAt       DateTime          @default(now())\n  updatedAt       DateTime          @updatedAt\n  assigned_booths assigned_booths[]\n\n  @@map(\"booths\")\n}\n\nmodel Exhibitors {\n  id                         Int      @id @default(autoincrement())\n  prefix                     String?\n  company_name               String\n  contact_person             String\n  contact_email              String   @unique\n  contact_phone              String\n  website                    String?\n  description                String?\n  service_product_to_exhibit String?\n  password                   String\n  role                       Role     @default(exhibitor)\n  status                     Status   @default(Pending)\n  registeredAt               DateTime @default(now())\n\n  createdAt       DateTime          @default(now())\n  updatedAt       DateTime          @updatedAt\n  assigned_booths assigned_booths[]\n\n  @@map(\"exhibitors\")\n}\n\nmodel EventPartners {\n  id                   Int                    @id @default(autoincrement())\n  prefix               String?\n  fullname             String\n  email                String                 @unique\n  phone_number         String\n  company_name         String\n  logo                 String\n  website              String?\n  social_media         Json?\n  description          String?\n  why_interested       String?\n  password             String\n  role                 Role                   @default(public_speaker)\n  status               Status                 @default(Pending)\n  createdAt            DateTime               @default(now())\n  updatedAt            DateTime               @updatedAt\n  EventPartnerPackages EventPartnerPackages[]\n\n  @@map(\"event_partners\")\n}\n\nmodel Speakers {\n  id           Int      @id @default(autoincrement())\n  prefix       String?\n  first_name   String\n  last_name    String\n  fullname     String\n  country      String\n  job_title    String\n  organization String\n  phone        String\n  social_media Json?\n  work_email   String   @unique\n  bio          String\n  topic        String\n  experience   String?\n  password     String\n  role         Role     @default(public_speaker)\n  status       Status   @default(Pending)\n  registeredAt DateTime @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"speakers\")\n}\n\nmodel EventPackages {\n  id                   Int                    @id @default(autoincrement())\n  name                 String\n  description          String\n  price                Float\n  features             Json\n  createdAt            DateTime               @default(now())\n  updatedAt            DateTime               @updatedAt\n  EventPartnerPackages EventPartnerPackages[]\n\n  @@map(\"event_packages\")\n}\n\nmodel assigned_booths {\n  id             Int        @id @default(autoincrement())\n  booth_id       Int        @unique\n  booth          Booths     @relation(fields: [booth_id], references: [id])\n  assigned_to_id Int\n  assigned_to    Exhibitors @relation(fields: [assigned_to_id], references: [id])\n  assignedAt     DateTime   @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"assigned_booths\")\n}\n\nmodel EventPartnerPackages {\n  id                Int           @id @default(autoincrement())\n  event_partner_id  Int\n  event_partner     EventPartners @relation(fields: [event_partner_id], references: [id])\n  event_package_id  Int\n  event_package     EventPackages @relation(fields: [event_package_id], references: [id])\n  payment_reference String?\n  payment_status    Status        @default(Pending)\n  payment_method    String?\n  proof_of_payment  String?\n  assignedAt        DateTime      @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"event_partner_packages\")\n}\n\n// Unified organization model for ministries, agencies, parastatals, etc.\nenum OrganizationType {\n  MINISTRY\n  AGENCY\n  PARASTATAL\n  OTHER\n}\n\nenum Role {\n  super_admin\n  attendee\n  ministry\n  agency\n  parastatal\n  exhibitor\n  public_speaker\n  event_partner\n  other\n}\n\n// Type to indicate which model created a record using polymorphic pattern\nenum CreatorType {\n  ADMIN\n  USER\n}\n\nenum Status {\n  Approved\n  Pending\n  Rejected\n  Available\n  SoldOut\n  Reserved\n  Paid\n}\n",
+  "inlineSchemaHash": "e1a2d87bb29a62bf9002f266d95a5a58eabca23edc64a7c425db2dc023e53d53",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Admin\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"fullname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"profile_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"admin\"},\"Users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization_short_code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact_person\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact_person_email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profile_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"users\"},\"Organization\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"abbreviation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"OrganizationType\"},{\"name\":\"parentId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"parent\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrgParent\"},{\"name\":\"children\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrgParent\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"organizations\"},\"Attendees\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"fullname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nin\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nin_verified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"position\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"grade\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department_agency\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"staff_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"office_location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"remark\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"temporal_password\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"created_by_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_by_type\",\"kind\":\"enum\",\"type\":\"CreatorType\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"attendees\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Admin\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"fullname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"profile_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"admin\"},\"Users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization_short_code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact_person\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact_person_email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"profile_image\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"users\"},\"Organization\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"abbreviation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"OrganizationType\"},{\"name\":\"parentId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"parent\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrgParent\"},{\"name\":\"children\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrgParent\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"organizations\"},\"Attendees\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prefix\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nin\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nin_verified\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"position\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"grade\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"department_agency\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"staff_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"office_location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"remark\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"temporal_password\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"created_by_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_by_type\",\"kind\":\"enum\",\"type\":\"CreatorType\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"attendees\"},\"Booths\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"booth_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"booth_size\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"features\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"assigned_booths\",\"kind\":\"object\",\"type\":\"assigned_booths\",\"relationName\":\"BoothsToassigned_booths\"}],\"dbName\":\"booths\"},\"Exhibitors\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prefix\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact_person\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact_email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact_phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"website\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service_product_to_exhibit\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"assigned_booths\",\"kind\":\"object\",\"type\":\"assigned_booths\",\"relationName\":\"ExhibitorsToassigned_booths\"}],\"dbName\":\"exhibitors\"},\"EventPartners\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prefix\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone_number\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"company_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"website\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"social_media\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"why_interested\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"EventPartnerPackages\",\"kind\":\"object\",\"type\":\"EventPartnerPackages\",\"relationName\":\"EventPartnerPackagesToEventPartners\"}],\"dbName\":\"event_partners\"},\"Speakers\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"prefix\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullname\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"country\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"job_title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"social_media\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"work_email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"topic\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"experience\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"Role\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"speakers\"},\"EventPackages\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"features\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"EventPartnerPackages\",\"kind\":\"object\",\"type\":\"EventPartnerPackages\",\"relationName\":\"EventPackagesToEventPartnerPackages\"}],\"dbName\":\"event_packages\"},\"assigned_booths\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"booth_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"booth\",\"kind\":\"object\",\"type\":\"Booths\",\"relationName\":\"BoothsToassigned_booths\"},{\"name\":\"assigned_to_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"assigned_to\",\"kind\":\"object\",\"type\":\"Exhibitors\",\"relationName\":\"ExhibitorsToassigned_booths\"},{\"name\":\"assignedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"assigned_booths\"},\"EventPartnerPackages\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"event_partner_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"event_partner\",\"kind\":\"object\",\"type\":\"EventPartners\",\"relationName\":\"EventPartnerPackagesToEventPartners\"},{\"name\":\"event_package_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"event_package\",\"kind\":\"object\",\"type\":\"EventPackages\",\"relationName\":\"EventPackagesToEventPartnerPackages\"},{\"name\":\"payment_reference\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payment_status\",\"kind\":\"enum\",\"type\":\"Status\"},{\"name\":\"payment_method\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"proof_of_payment\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assignedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"event_partner_packages\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

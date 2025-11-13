@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const adminMiddleware_1 = require("../../middlewares/adminMiddleware");
+const authenticationMiddleware_1 = require("../../middlewares/authenticationMiddleware");
+const users_controller_1 = require("../../controllers/super_admin/users_controller");
+const attendee_controller_1 = require("../../controllers/super_admin/attendee_controller");
+const booth_controller_1 = require("../../controllers/super_admin/booth_controller");
+exports.adminRouter = express_1.default.Router();
+exports.adminRouter.use(authenticationMiddleware_1.authenticateJWT, adminMiddleware_1.adminOnly);
+exports.adminRouter.post('/create-user', users_controller_1.createUser);
+exports.adminRouter.get('/users', users_controller_1.allUser);
+exports.adminRouter.get('/single-user', users_controller_1.singleUser);
+// adminRouter.put('/update-user', updateUser);
+exports.adminRouter.delete('/delete-user', users_controller_1.deleteUser);
+exports.adminRouter.post('/create-attendee', attendee_controller_1.createAttendee);
+exports.adminRouter.get('/attendees', attendee_controller_1.allAttendees);
+exports.adminRouter.get('/single-attendee', attendee_controller_1.singleAttendee);
+exports.adminRouter.delete('/delete-attendee', attendee_controller_1.deleteAttendee);
+exports.adminRouter.post('/create-booth', booth_controller_1.createBooth);
+exports.adminRouter.put('/update-booth', booth_controller_1.updateBooth);
+exports.adminRouter.delete('/delete-booth', booth_controller_1.deleteBooth);
+exports.adminRouter.get('/get-booths', booth_controller_1.getBooths);
+exports.adminRouter.get('/single-booth', booth_controller_1.getBoothById);

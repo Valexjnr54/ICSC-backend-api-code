@@ -46,11 +46,6 @@ export async function createAttendee(request: Request, response: Response) {
       body('staff_id').optional(),
       body('office_location').optional(),
       body('remark').optional(),
-      // Status must be one of the Prisma Status enum values
-      body('status')
-        .notEmpty().withMessage('Status is required')
-        .bail()
-        .isIn(['Pending', 'Approved', 'Rejected']).withMessage('Status must be one of: Pending, Approved, Rejected'),
       body('grade').notEmpty().withMessage('Grade is required'),
     ];
     await Promise.all(validationRules.map(rule => rule.run(request)));
@@ -62,7 +57,7 @@ export async function createAttendee(request: Request, response: Response) {
 
     // destructure after validation (request.body will be populated by body-parser middleware)
     const { fullname, organization, phone_number, email, nin, position,
-        department, department_agency, staff_id, office_location, remark, status, grade
+        department, department_agency, staff_id, office_location, remark, grade
      } = request.body;
     // Retrieve the attendees by attendees_id
     const check_admin = await prisma.users.findUnique({ where: { id: admin_id } });
@@ -95,7 +90,6 @@ export async function createAttendee(request: Request, response: Response) {
         staff_id,
         office_location,
         remark,
-        status,
         grade,
         password: hashedPassword,
         created_by_id: admin_id,

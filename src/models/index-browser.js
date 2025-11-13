@@ -158,6 +158,7 @@ exports.Prisma.OrganizationScalarFieldEnum = {
 
 exports.Prisma.AttendeesScalarFieldEnum = {
   id: 'id',
+  prefix: 'prefix',
   fullname: 'fullname',
   email: 'email',
   phone_number: 'phone_number',
@@ -182,9 +183,122 @@ exports.Prisma.AttendeesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.BoothsScalarFieldEnum = {
+  id: 'id',
+  booth_number: 'booth_number',
+  location: 'location',
+  price: 'price',
+  booth_size: 'booth_size',
+  features: 'features',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ExhibitorsScalarFieldEnum = {
+  id: 'id',
+  prefix: 'prefix',
+  company_name: 'company_name',
+  contact_person: 'contact_person',
+  contact_email: 'contact_email',
+  contact_phone: 'contact_phone',
+  website: 'website',
+  description: 'description',
+  service_product_to_exhibit: 'service_product_to_exhibit',
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  registeredAt: 'registeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventPartnersScalarFieldEnum = {
+  id: 'id',
+  prefix: 'prefix',
+  fullname: 'fullname',
+  email: 'email',
+  phone_number: 'phone_number',
+  company_name: 'company_name',
+  logo: 'logo',
+  website: 'website',
+  social_media: 'social_media',
+  description: 'description',
+  why_interested: 'why_interested',
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SpeakersScalarFieldEnum = {
+  id: 'id',
+  prefix: 'prefix',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  fullname: 'fullname',
+  country: 'country',
+  job_title: 'job_title',
+  organization: 'organization',
+  phone: 'phone',
+  social_media: 'social_media',
+  work_email: 'work_email',
+  bio: 'bio',
+  topic: 'topic',
+  experience: 'experience',
+  password: 'password',
+  role: 'role',
+  status: 'status',
+  registeredAt: 'registeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventPackagesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  features: 'features',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.Assigned_boothsScalarFieldEnum = {
+  id: 'id',
+  booth_id: 'booth_id',
+  assigned_to_id: 'assigned_to_id',
+  assignedAt: 'assignedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EventPartnerPackagesScalarFieldEnum = {
+  id: 'id',
+  event_partner_id: 'event_partner_id',
+  event_package_id: 'event_package_id',
+  payment_reference: 'payment_reference',
+  payment_status: 'payment_status',
+  payment_method: 'payment_method',
+  proof_of_payment: 'proof_of_payment',
+  assignedAt: 'assignedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -216,6 +330,7 @@ exports.Prisma.OrganizationOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.AttendeesOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
   fullname: 'fullname',
   email: 'email',
   phone_number: 'phone_number',
@@ -230,6 +345,75 @@ exports.Prisma.AttendeesOrderByRelevanceFieldEnum = {
   remark: 'remark',
   password: 'password'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.BoothsOrderByRelevanceFieldEnum = {
+  booth_number: 'booth_number',
+  location: 'location',
+  booth_size: 'booth_size'
+};
+
+exports.Prisma.ExhibitorsOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
+  company_name: 'company_name',
+  contact_person: 'contact_person',
+  contact_email: 'contact_email',
+  contact_phone: 'contact_phone',
+  website: 'website',
+  description: 'description',
+  service_product_to_exhibit: 'service_product_to_exhibit',
+  password: 'password'
+};
+
+exports.Prisma.EventPartnersOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
+  fullname: 'fullname',
+  email: 'email',
+  phone_number: 'phone_number',
+  company_name: 'company_name',
+  logo: 'logo',
+  website: 'website',
+  description: 'description',
+  why_interested: 'why_interested',
+  password: 'password'
+};
+
+exports.Prisma.SpeakersOrderByRelevanceFieldEnum = {
+  prefix: 'prefix',
+  first_name: 'first_name',
+  last_name: 'last_name',
+  fullname: 'fullname',
+  country: 'country',
+  job_title: 'job_title',
+  organization: 'organization',
+  phone: 'phone',
+  work_email: 'work_email',
+  bio: 'bio',
+  topic: 'topic',
+  experience: 'experience',
+  password: 'password'
+};
+
+exports.Prisma.EventPackagesOrderByRelevanceFieldEnum = {
+  name: 'name',
+  description: 'description'
+};
+
+exports.Prisma.EventPartnerPackagesOrderByRelevanceFieldEnum = {
+  payment_reference: 'payment_reference',
+  payment_method: 'payment_method',
+  proof_of_payment: 'proof_of_payment'
+};
 exports.Role = exports.$Enums.Role = {
   super_admin: 'super_admin',
   attendee: 'attendee',
@@ -238,6 +422,7 @@ exports.Role = exports.$Enums.Role = {
   parastatal: 'parastatal',
   exhibitor: 'exhibitor',
   public_speaker: 'public_speaker',
+  event_partner: 'event_partner',
   other: 'other'
 };
 
@@ -251,7 +436,11 @@ exports.OrganizationType = exports.$Enums.OrganizationType = {
 exports.Status = exports.$Enums.Status = {
   Approved: 'Approved',
   Pending: 'Pending',
-  Rejected: 'Rejected'
+  Rejected: 'Rejected',
+  Available: 'Available',
+  SoldOut: 'SoldOut',
+  Reserved: 'Reserved',
+  Paid: 'Paid'
 };
 
 exports.CreatorType = exports.$Enums.CreatorType = {
@@ -263,7 +452,14 @@ exports.Prisma.ModelName = {
   Admin: 'Admin',
   Users: 'Users',
   Organization: 'Organization',
-  Attendees: 'Attendees'
+  Attendees: 'Attendees',
+  Booths: 'Booths',
+  Exhibitors: 'Exhibitors',
+  EventPartners: 'EventPartners',
+  Speakers: 'Speakers',
+  EventPackages: 'EventPackages',
+  assigned_booths: 'assigned_booths',
+  EventPartnerPackages: 'EventPartnerPackages'
 };
 
 /**
