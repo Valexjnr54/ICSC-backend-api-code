@@ -2,8 +2,8 @@
 import axios from 'axios';
 import { Config } from '../config/config';
 
-const PAYSTACK_SECRET_KEY = Config.paystackSecret;
-const PAYSTACK_BASE_URL = Config.paystackBaseURL;
+const PAYSTACK_SECRET_KEY = "Config.paystackSecret";
+const PAYSTACK_BASE_URL = "Config.paystackBaseURL";
 
 function ensureConfig() {
   if (!PAYSTACK_SECRET_KEY) {
@@ -14,7 +14,7 @@ function ensureConfig() {
   }
 }
 
-export async function initializePayment(farmer_id:number, phone_number:string, price: number, email:string, callback_url: string) {
+export async function initializePayment(farmer_id:number, phone_number:string, price: number, email:string, callback_url: string, currency?: string) {
   ensureConfig();
   try {
     const resp = await axios.post(
@@ -23,6 +23,7 @@ export async function initializePayment(farmer_id:number, phone_number:string, p
         amount: price,
         callback_url,
         email,
+        currency: currency || 'USD',
         metadata: {
           farmer_id,
           phone_number,

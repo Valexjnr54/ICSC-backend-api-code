@@ -6,6 +6,14 @@ import { uploadCSV } from "../../middlewares/uploadCSVMiddleware";
 import { allUser, createUser, deleteUser, singleUser } from "../../controllers/super_admin/users_controller";
 import { allAttendees, createAttendee, deleteAttendee, singleAttendee } from "../../controllers/super_admin/attendee_controller";
 import { createBooth, deleteBooth, getBoothById, getBooths, updateBooth } from "../../controllers/super_admin/booth_controller";
+import {
+	createSpeakerPackage,
+	updateSpeakerPackage,
+	deleteSpeakerPackage,
+	createPartnerPackage,
+	updatePartnerPackage,
+	deletePartnerPackage,
+} from "../../controllers/packages_controller";
 
 export const adminRouter = express.Router();
 
@@ -27,3 +35,12 @@ adminRouter.put('/update-booth', updateBooth);
 adminRouter.delete('/delete-booth', deleteBooth);
 adminRouter.get('/get-booths', getBooths);
 adminRouter.get('/single-booth', getBoothById);
+
+// Packages (admin)
+adminRouter.post('/create-speaker-package', createSpeakerPackage);
+adminRouter.put('/update-speaker-package', updateSpeakerPackage);
+adminRouter.delete('/delete-speaker-package', deleteSpeakerPackage);
+
+adminRouter.post('/create-partner-package', createPartnerPackage);
+adminRouter.put('/update-partner-package', updatePartnerPackage);
+adminRouter.delete('/delete-partner-package', deletePartnerPackage);

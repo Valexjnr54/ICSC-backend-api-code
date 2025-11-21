@@ -74,7 +74,7 @@ export async function registerEventPartner(request: Request, response: Response)
 
 		// send welcome email (non-blocking)
 		// send welcome email (non-blocking)
-		try { await sendWelcomeEmail(contactEmail, 'Welcome to International Civil Service Conference', newPartner, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }
+		// try { await sendWelcomeEmail(contactEmail, 'Welcome to International Civil Service Conference', newPartner, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }
 
 		if (!Config.secret) {
 			console.error('Jwt secret is not defined');

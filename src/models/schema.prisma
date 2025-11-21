@@ -193,6 +193,34 @@ model EventPackages {
   @@map("event_packages")
 }
 
+model SpeakerPackage {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  price       Float
+  description String?
+  features    Json
+  limitedText String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("speaker_packages")
+}
+
+model PartnerPackage {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  price       Float
+  description String?
+  features    Json
+  limitedText String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("partner_packages")
+}
+
 model assigned_booths {
   id             Int        @id @default(autoincrement())
   booth_id       Int        @unique

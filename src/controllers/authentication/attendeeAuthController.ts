@@ -69,7 +69,7 @@ export async function registerAttendee(request: Request, response: Response) {
           },
         });
     
-        await sendWelcomeEmail(email, 'Welcome to International Civil Service Conference', newAttendee, password);
+        // await sendWelcomeEmail(email, 'Welcome to International Civil Service Conference', newAttendee, password);
 
         const token = jwt.sign({ attendeeId: newAttendee.id, attendee: newAttendee, email: newAttendee.email, fullname: newAttendee.fullname }, Config.secret);
 

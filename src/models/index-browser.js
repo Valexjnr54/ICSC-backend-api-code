@@ -265,6 +265,30 @@ exports.Prisma.EventPackagesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SpeakerPackageScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  price: 'price',
+  description: 'description',
+  features: 'features',
+  limitedText: 'limitedText',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PartnerPackageScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  title: 'title',
+  price: 'price',
+  description: 'description',
+  features: 'features',
+  limitedText: 'limitedText',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.Assigned_boothsScalarFieldEnum = {
   id: 'id',
   booth_id: 'booth_id',
@@ -409,6 +433,20 @@ exports.Prisma.EventPackagesOrderByRelevanceFieldEnum = {
   description: 'description'
 };
 
+exports.Prisma.SpeakerPackageOrderByRelevanceFieldEnum = {
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  limitedText: 'limitedText'
+};
+
+exports.Prisma.PartnerPackageOrderByRelevanceFieldEnum = {
+  slug: 'slug',
+  title: 'title',
+  description: 'description',
+  limitedText: 'limitedText'
+};
+
 exports.Prisma.EventPartnerPackagesOrderByRelevanceFieldEnum = {
   payment_reference: 'payment_reference',
   payment_method: 'payment_method',
@@ -458,6 +496,8 @@ exports.Prisma.ModelName = {
   EventPartners: 'EventPartners',
   Speakers: 'Speakers',
   EventPackages: 'EventPackages',
+  SpeakerPackage: 'SpeakerPackage',
+  PartnerPackage: 'PartnerPackage',
   assigned_booths: 'assigned_booths',
   EventPartnerPackages: 'EventPartnerPackages'
 };

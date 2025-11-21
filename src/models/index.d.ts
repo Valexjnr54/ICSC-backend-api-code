@@ -59,6 +59,16 @@ export type Speakers = $Result.DefaultSelection<Prisma.$SpeakersPayload>
  */
 export type EventPackages = $Result.DefaultSelection<Prisma.$EventPackagesPayload>
 /**
+ * Model SpeakerPackage
+ * 
+ */
+export type SpeakerPackage = $Result.DefaultSelection<Prisma.$SpeakerPackagePayload>
+/**
+ * Model PartnerPackage
+ * 
+ */
+export type PartnerPackage = $Result.DefaultSelection<Prisma.$PartnerPackagePayload>
+/**
  * Model assigned_booths
  * 
  */
@@ -343,6 +353,26 @@ export class PrismaClient<
     * ```
     */
   get eventPackages(): Prisma.EventPackagesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.speakerPackage`: Exposes CRUD operations for the **SpeakerPackage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SpeakerPackages
+    * const speakerPackages = await prisma.speakerPackage.findMany()
+    * ```
+    */
+  get speakerPackage(): Prisma.SpeakerPackageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.partnerPackage`: Exposes CRUD operations for the **PartnerPackage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PartnerPackages
+    * const partnerPackages = await prisma.partnerPackage.findMany()
+    * ```
+    */
+  get partnerPackage(): Prisma.PartnerPackageDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.assigned_booths`: Exposes CRUD operations for the **assigned_booths** model.
@@ -813,6 +843,8 @@ export namespace Prisma {
     EventPartners: 'EventPartners',
     Speakers: 'Speakers',
     EventPackages: 'EventPackages',
+    SpeakerPackage: 'SpeakerPackage',
+    PartnerPackage: 'PartnerPackage',
     assigned_booths: 'assigned_booths',
     EventPartnerPackages: 'EventPartnerPackages'
   };
@@ -833,7 +865,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "eventPackages" | "assigned_booths" | "eventPartnerPackages"
+      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "eventPackages" | "speakerPackage" | "partnerPackage" | "assigned_booths" | "eventPartnerPackages"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1431,6 +1463,138 @@ export namespace Prisma {
           }
         }
       }
+      SpeakerPackage: {
+        payload: Prisma.$SpeakerPackagePayload<ExtArgs>
+        fields: Prisma.SpeakerPackageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SpeakerPackageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SpeakerPackageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload>
+          }
+          findFirst: {
+            args: Prisma.SpeakerPackageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SpeakerPackageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload>
+          }
+          findMany: {
+            args: Prisma.SpeakerPackageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload>[]
+          }
+          create: {
+            args: Prisma.SpeakerPackageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload>
+          }
+          createMany: {
+            args: Prisma.SpeakerPackageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.SpeakerPackageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload>
+          }
+          update: {
+            args: Prisma.SpeakerPackageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload>
+          }
+          deleteMany: {
+            args: Prisma.SpeakerPackageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SpeakerPackageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SpeakerPackageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SpeakerPackagePayload>
+          }
+          aggregate: {
+            args: Prisma.SpeakerPackageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSpeakerPackage>
+          }
+          groupBy: {
+            args: Prisma.SpeakerPackageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SpeakerPackageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SpeakerPackageCountArgs<ExtArgs>
+            result: $Utils.Optional<SpeakerPackageCountAggregateOutputType> | number
+          }
+        }
+      }
+      PartnerPackage: {
+        payload: Prisma.$PartnerPackagePayload<ExtArgs>
+        fields: Prisma.PartnerPackageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PartnerPackageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PartnerPackageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload>
+          }
+          findFirst: {
+            args: Prisma.PartnerPackageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PartnerPackageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload>
+          }
+          findMany: {
+            args: Prisma.PartnerPackageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload>[]
+          }
+          create: {
+            args: Prisma.PartnerPackageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload>
+          }
+          createMany: {
+            args: Prisma.PartnerPackageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PartnerPackageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload>
+          }
+          update: {
+            args: Prisma.PartnerPackageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload>
+          }
+          deleteMany: {
+            args: Prisma.PartnerPackageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PartnerPackageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PartnerPackageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerPackagePayload>
+          }
+          aggregate: {
+            args: Prisma.PartnerPackageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePartnerPackage>
+          }
+          groupBy: {
+            args: Prisma.PartnerPackageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PartnerPackageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PartnerPackageCountArgs<ExtArgs>
+            result: $Utils.Optional<PartnerPackageCountAggregateOutputType> | number
+          }
+        }
+      }
       assigned_booths: {
         payload: Prisma.$assigned_boothsPayload<ExtArgs>
         fields: Prisma.assigned_boothsFieldRefs
@@ -1668,6 +1832,8 @@ export namespace Prisma {
     eventPartners?: EventPartnersOmit
     speakers?: SpeakersOmit
     eventPackages?: EventPackagesOmit
+    speakerPackage?: SpeakerPackageOmit
+    partnerPackage?: PartnerPackageOmit
     assigned_booths?: assigned_boothsOmit
     eventPartnerPackages?: EventPartnerPackagesOmit
   }
@@ -11340,6 +11506,1926 @@ export namespace Prisma {
 
 
   /**
+   * Model SpeakerPackage
+   */
+
+  export type AggregateSpeakerPackage = {
+    _count: SpeakerPackageCountAggregateOutputType | null
+    _avg: SpeakerPackageAvgAggregateOutputType | null
+    _sum: SpeakerPackageSumAggregateOutputType | null
+    _min: SpeakerPackageMinAggregateOutputType | null
+    _max: SpeakerPackageMaxAggregateOutputType | null
+  }
+
+  export type SpeakerPackageAvgAggregateOutputType = {
+    id: number | null
+    price: number | null
+  }
+
+  export type SpeakerPackageSumAggregateOutputType = {
+    id: number | null
+    price: number | null
+  }
+
+  export type SpeakerPackageMinAggregateOutputType = {
+    id: number | null
+    slug: string | null
+    title: string | null
+    price: number | null
+    description: string | null
+    limitedText: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SpeakerPackageMaxAggregateOutputType = {
+    id: number | null
+    slug: string | null
+    title: string | null
+    price: number | null
+    description: string | null
+    limitedText: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SpeakerPackageCountAggregateOutputType = {
+    id: number
+    slug: number
+    title: number
+    price: number
+    description: number
+    features: number
+    limitedText: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SpeakerPackageAvgAggregateInputType = {
+    id?: true
+    price?: true
+  }
+
+  export type SpeakerPackageSumAggregateInputType = {
+    id?: true
+    price?: true
+  }
+
+  export type SpeakerPackageMinAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    price?: true
+    description?: true
+    limitedText?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SpeakerPackageMaxAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    price?: true
+    description?: true
+    limitedText?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SpeakerPackageCountAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    price?: true
+    description?: true
+    features?: true
+    limitedText?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SpeakerPackageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SpeakerPackage to aggregate.
+     */
+    where?: SpeakerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SpeakerPackages to fetch.
+     */
+    orderBy?: SpeakerPackageOrderByWithRelationInput | SpeakerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SpeakerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SpeakerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SpeakerPackages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SpeakerPackages
+    **/
+    _count?: true | SpeakerPackageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SpeakerPackageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SpeakerPackageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SpeakerPackageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SpeakerPackageMaxAggregateInputType
+  }
+
+  export type GetSpeakerPackageAggregateType<T extends SpeakerPackageAggregateArgs> = {
+        [P in keyof T & keyof AggregateSpeakerPackage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSpeakerPackage[P]>
+      : GetScalarType<T[P], AggregateSpeakerPackage[P]>
+  }
+
+
+
+
+  export type SpeakerPackageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SpeakerPackageWhereInput
+    orderBy?: SpeakerPackageOrderByWithAggregationInput | SpeakerPackageOrderByWithAggregationInput[]
+    by: SpeakerPackageScalarFieldEnum[] | SpeakerPackageScalarFieldEnum
+    having?: SpeakerPackageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SpeakerPackageCountAggregateInputType | true
+    _avg?: SpeakerPackageAvgAggregateInputType
+    _sum?: SpeakerPackageSumAggregateInputType
+    _min?: SpeakerPackageMinAggregateInputType
+    _max?: SpeakerPackageMaxAggregateInputType
+  }
+
+  export type SpeakerPackageGroupByOutputType = {
+    id: number
+    slug: string
+    title: string
+    price: number
+    description: string | null
+    features: JsonValue
+    limitedText: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SpeakerPackageCountAggregateOutputType | null
+    _avg: SpeakerPackageAvgAggregateOutputType | null
+    _sum: SpeakerPackageSumAggregateOutputType | null
+    _min: SpeakerPackageMinAggregateOutputType | null
+    _max: SpeakerPackageMaxAggregateOutputType | null
+  }
+
+  type GetSpeakerPackageGroupByPayload<T extends SpeakerPackageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SpeakerPackageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SpeakerPackageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SpeakerPackageGroupByOutputType[P]>
+            : GetScalarType<T[P], SpeakerPackageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SpeakerPackageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    title?: boolean
+    price?: boolean
+    description?: boolean
+    features?: boolean
+    limitedText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["speakerPackage"]>
+
+
+
+  export type SpeakerPackageSelectScalar = {
+    id?: boolean
+    slug?: boolean
+    title?: boolean
+    price?: boolean
+    description?: boolean
+    features?: boolean
+    limitedText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SpeakerPackageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "price" | "description" | "features" | "limitedText" | "createdAt" | "updatedAt", ExtArgs["result"]["speakerPackage"]>
+
+  export type $SpeakerPackagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SpeakerPackage"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      slug: string
+      title: string
+      price: number
+      description: string | null
+      features: Prisma.JsonValue
+      limitedText: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["speakerPackage"]>
+    composites: {}
+  }
+
+  type SpeakerPackageGetPayload<S extends boolean | null | undefined | SpeakerPackageDefaultArgs> = $Result.GetResult<Prisma.$SpeakerPackagePayload, S>
+
+  type SpeakerPackageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SpeakerPackageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SpeakerPackageCountAggregateInputType | true
+    }
+
+  export interface SpeakerPackageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SpeakerPackage'], meta: { name: 'SpeakerPackage' } }
+    /**
+     * Find zero or one SpeakerPackage that matches the filter.
+     * @param {SpeakerPackageFindUniqueArgs} args - Arguments to find a SpeakerPackage
+     * @example
+     * // Get one SpeakerPackage
+     * const speakerPackage = await prisma.speakerPackage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SpeakerPackageFindUniqueArgs>(args: SelectSubset<T, SpeakerPackageFindUniqueArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SpeakerPackage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SpeakerPackageFindUniqueOrThrowArgs} args - Arguments to find a SpeakerPackage
+     * @example
+     * // Get one SpeakerPackage
+     * const speakerPackage = await prisma.speakerPackage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SpeakerPackageFindUniqueOrThrowArgs>(args: SelectSubset<T, SpeakerPackageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SpeakerPackage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SpeakerPackageFindFirstArgs} args - Arguments to find a SpeakerPackage
+     * @example
+     * // Get one SpeakerPackage
+     * const speakerPackage = await prisma.speakerPackage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SpeakerPackageFindFirstArgs>(args?: SelectSubset<T, SpeakerPackageFindFirstArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SpeakerPackage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SpeakerPackageFindFirstOrThrowArgs} args - Arguments to find a SpeakerPackage
+     * @example
+     * // Get one SpeakerPackage
+     * const speakerPackage = await prisma.speakerPackage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SpeakerPackageFindFirstOrThrowArgs>(args?: SelectSubset<T, SpeakerPackageFindFirstOrThrowArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SpeakerPackages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SpeakerPackageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SpeakerPackages
+     * const speakerPackages = await prisma.speakerPackage.findMany()
+     * 
+     * // Get first 10 SpeakerPackages
+     * const speakerPackages = await prisma.speakerPackage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const speakerPackageWithIdOnly = await prisma.speakerPackage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SpeakerPackageFindManyArgs>(args?: SelectSubset<T, SpeakerPackageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SpeakerPackage.
+     * @param {SpeakerPackageCreateArgs} args - Arguments to create a SpeakerPackage.
+     * @example
+     * // Create one SpeakerPackage
+     * const SpeakerPackage = await prisma.speakerPackage.create({
+     *   data: {
+     *     // ... data to create a SpeakerPackage
+     *   }
+     * })
+     * 
+     */
+    create<T extends SpeakerPackageCreateArgs>(args: SelectSubset<T, SpeakerPackageCreateArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SpeakerPackages.
+     * @param {SpeakerPackageCreateManyArgs} args - Arguments to create many SpeakerPackages.
+     * @example
+     * // Create many SpeakerPackages
+     * const speakerPackage = await prisma.speakerPackage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SpeakerPackageCreateManyArgs>(args?: SelectSubset<T, SpeakerPackageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a SpeakerPackage.
+     * @param {SpeakerPackageDeleteArgs} args - Arguments to delete one SpeakerPackage.
+     * @example
+     * // Delete one SpeakerPackage
+     * const SpeakerPackage = await prisma.speakerPackage.delete({
+     *   where: {
+     *     // ... filter to delete one SpeakerPackage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SpeakerPackageDeleteArgs>(args: SelectSubset<T, SpeakerPackageDeleteArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SpeakerPackage.
+     * @param {SpeakerPackageUpdateArgs} args - Arguments to update one SpeakerPackage.
+     * @example
+     * // Update one SpeakerPackage
+     * const speakerPackage = await prisma.speakerPackage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SpeakerPackageUpdateArgs>(args: SelectSubset<T, SpeakerPackageUpdateArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SpeakerPackages.
+     * @param {SpeakerPackageDeleteManyArgs} args - Arguments to filter SpeakerPackages to delete.
+     * @example
+     * // Delete a few SpeakerPackages
+     * const { count } = await prisma.speakerPackage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SpeakerPackageDeleteManyArgs>(args?: SelectSubset<T, SpeakerPackageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SpeakerPackages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SpeakerPackageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SpeakerPackages
+     * const speakerPackage = await prisma.speakerPackage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SpeakerPackageUpdateManyArgs>(args: SelectSubset<T, SpeakerPackageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SpeakerPackage.
+     * @param {SpeakerPackageUpsertArgs} args - Arguments to update or create a SpeakerPackage.
+     * @example
+     * // Update or create a SpeakerPackage
+     * const speakerPackage = await prisma.speakerPackage.upsert({
+     *   create: {
+     *     // ... data to create a SpeakerPackage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SpeakerPackage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SpeakerPackageUpsertArgs>(args: SelectSubset<T, SpeakerPackageUpsertArgs<ExtArgs>>): Prisma__SpeakerPackageClient<$Result.GetResult<Prisma.$SpeakerPackagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SpeakerPackages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SpeakerPackageCountArgs} args - Arguments to filter SpeakerPackages to count.
+     * @example
+     * // Count the number of SpeakerPackages
+     * const count = await prisma.speakerPackage.count({
+     *   where: {
+     *     // ... the filter for the SpeakerPackages we want to count
+     *   }
+     * })
+    **/
+    count<T extends SpeakerPackageCountArgs>(
+      args?: Subset<T, SpeakerPackageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SpeakerPackageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SpeakerPackage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SpeakerPackageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SpeakerPackageAggregateArgs>(args: Subset<T, SpeakerPackageAggregateArgs>): Prisma.PrismaPromise<GetSpeakerPackageAggregateType<T>>
+
+    /**
+     * Group by SpeakerPackage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SpeakerPackageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SpeakerPackageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SpeakerPackageGroupByArgs['orderBy'] }
+        : { orderBy?: SpeakerPackageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SpeakerPackageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSpeakerPackageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SpeakerPackage model
+   */
+  readonly fields: SpeakerPackageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SpeakerPackage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SpeakerPackageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SpeakerPackage model
+   */
+  interface SpeakerPackageFieldRefs {
+    readonly id: FieldRef<"SpeakerPackage", 'Int'>
+    readonly slug: FieldRef<"SpeakerPackage", 'String'>
+    readonly title: FieldRef<"SpeakerPackage", 'String'>
+    readonly price: FieldRef<"SpeakerPackage", 'Float'>
+    readonly description: FieldRef<"SpeakerPackage", 'String'>
+    readonly features: FieldRef<"SpeakerPackage", 'Json'>
+    readonly limitedText: FieldRef<"SpeakerPackage", 'String'>
+    readonly createdAt: FieldRef<"SpeakerPackage", 'DateTime'>
+    readonly updatedAt: FieldRef<"SpeakerPackage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SpeakerPackage findUnique
+   */
+  export type SpeakerPackageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which SpeakerPackage to fetch.
+     */
+    where: SpeakerPackageWhereUniqueInput
+  }
+
+  /**
+   * SpeakerPackage findUniqueOrThrow
+   */
+  export type SpeakerPackageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which SpeakerPackage to fetch.
+     */
+    where: SpeakerPackageWhereUniqueInput
+  }
+
+  /**
+   * SpeakerPackage findFirst
+   */
+  export type SpeakerPackageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which SpeakerPackage to fetch.
+     */
+    where?: SpeakerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SpeakerPackages to fetch.
+     */
+    orderBy?: SpeakerPackageOrderByWithRelationInput | SpeakerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SpeakerPackages.
+     */
+    cursor?: SpeakerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SpeakerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SpeakerPackages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SpeakerPackages.
+     */
+    distinct?: SpeakerPackageScalarFieldEnum | SpeakerPackageScalarFieldEnum[]
+  }
+
+  /**
+   * SpeakerPackage findFirstOrThrow
+   */
+  export type SpeakerPackageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which SpeakerPackage to fetch.
+     */
+    where?: SpeakerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SpeakerPackages to fetch.
+     */
+    orderBy?: SpeakerPackageOrderByWithRelationInput | SpeakerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SpeakerPackages.
+     */
+    cursor?: SpeakerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SpeakerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SpeakerPackages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SpeakerPackages.
+     */
+    distinct?: SpeakerPackageScalarFieldEnum | SpeakerPackageScalarFieldEnum[]
+  }
+
+  /**
+   * SpeakerPackage findMany
+   */
+  export type SpeakerPackageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which SpeakerPackages to fetch.
+     */
+    where?: SpeakerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SpeakerPackages to fetch.
+     */
+    orderBy?: SpeakerPackageOrderByWithRelationInput | SpeakerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SpeakerPackages.
+     */
+    cursor?: SpeakerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SpeakerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SpeakerPackages.
+     */
+    skip?: number
+    distinct?: SpeakerPackageScalarFieldEnum | SpeakerPackageScalarFieldEnum[]
+  }
+
+  /**
+   * SpeakerPackage create
+   */
+  export type SpeakerPackageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * The data needed to create a SpeakerPackage.
+     */
+    data: XOR<SpeakerPackageCreateInput, SpeakerPackageUncheckedCreateInput>
+  }
+
+  /**
+   * SpeakerPackage createMany
+   */
+  export type SpeakerPackageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SpeakerPackages.
+     */
+    data: SpeakerPackageCreateManyInput | SpeakerPackageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SpeakerPackage update
+   */
+  export type SpeakerPackageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * The data needed to update a SpeakerPackage.
+     */
+    data: XOR<SpeakerPackageUpdateInput, SpeakerPackageUncheckedUpdateInput>
+    /**
+     * Choose, which SpeakerPackage to update.
+     */
+    where: SpeakerPackageWhereUniqueInput
+  }
+
+  /**
+   * SpeakerPackage updateMany
+   */
+  export type SpeakerPackageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SpeakerPackages.
+     */
+    data: XOR<SpeakerPackageUpdateManyMutationInput, SpeakerPackageUncheckedUpdateManyInput>
+    /**
+     * Filter which SpeakerPackages to update
+     */
+    where?: SpeakerPackageWhereInput
+    /**
+     * Limit how many SpeakerPackages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SpeakerPackage upsert
+   */
+  export type SpeakerPackageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * The filter to search for the SpeakerPackage to update in case it exists.
+     */
+    where: SpeakerPackageWhereUniqueInput
+    /**
+     * In case the SpeakerPackage found by the `where` argument doesn't exist, create a new SpeakerPackage with this data.
+     */
+    create: XOR<SpeakerPackageCreateInput, SpeakerPackageUncheckedCreateInput>
+    /**
+     * In case the SpeakerPackage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SpeakerPackageUpdateInput, SpeakerPackageUncheckedUpdateInput>
+  }
+
+  /**
+   * SpeakerPackage delete
+   */
+  export type SpeakerPackageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+    /**
+     * Filter which SpeakerPackage to delete.
+     */
+    where: SpeakerPackageWhereUniqueInput
+  }
+
+  /**
+   * SpeakerPackage deleteMany
+   */
+  export type SpeakerPackageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SpeakerPackages to delete
+     */
+    where?: SpeakerPackageWhereInput
+    /**
+     * Limit how many SpeakerPackages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SpeakerPackage without action
+   */
+  export type SpeakerPackageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakerPackage
+     */
+    select?: SpeakerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SpeakerPackage
+     */
+    omit?: SpeakerPackageOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PartnerPackage
+   */
+
+  export type AggregatePartnerPackage = {
+    _count: PartnerPackageCountAggregateOutputType | null
+    _avg: PartnerPackageAvgAggregateOutputType | null
+    _sum: PartnerPackageSumAggregateOutputType | null
+    _min: PartnerPackageMinAggregateOutputType | null
+    _max: PartnerPackageMaxAggregateOutputType | null
+  }
+
+  export type PartnerPackageAvgAggregateOutputType = {
+    id: number | null
+    price: number | null
+  }
+
+  export type PartnerPackageSumAggregateOutputType = {
+    id: number | null
+    price: number | null
+  }
+
+  export type PartnerPackageMinAggregateOutputType = {
+    id: number | null
+    slug: string | null
+    title: string | null
+    price: number | null
+    description: string | null
+    limitedText: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PartnerPackageMaxAggregateOutputType = {
+    id: number | null
+    slug: string | null
+    title: string | null
+    price: number | null
+    description: string | null
+    limitedText: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PartnerPackageCountAggregateOutputType = {
+    id: number
+    slug: number
+    title: number
+    price: number
+    description: number
+    features: number
+    limitedText: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PartnerPackageAvgAggregateInputType = {
+    id?: true
+    price?: true
+  }
+
+  export type PartnerPackageSumAggregateInputType = {
+    id?: true
+    price?: true
+  }
+
+  export type PartnerPackageMinAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    price?: true
+    description?: true
+    limitedText?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PartnerPackageMaxAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    price?: true
+    description?: true
+    limitedText?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PartnerPackageCountAggregateInputType = {
+    id?: true
+    slug?: true
+    title?: true
+    price?: true
+    description?: true
+    features?: true
+    limitedText?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PartnerPackageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PartnerPackage to aggregate.
+     */
+    where?: PartnerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerPackages to fetch.
+     */
+    orderBy?: PartnerPackageOrderByWithRelationInput | PartnerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PartnerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerPackages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PartnerPackages
+    **/
+    _count?: true | PartnerPackageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PartnerPackageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PartnerPackageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PartnerPackageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PartnerPackageMaxAggregateInputType
+  }
+
+  export type GetPartnerPackageAggregateType<T extends PartnerPackageAggregateArgs> = {
+        [P in keyof T & keyof AggregatePartnerPackage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePartnerPackage[P]>
+      : GetScalarType<T[P], AggregatePartnerPackage[P]>
+  }
+
+
+
+
+  export type PartnerPackageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PartnerPackageWhereInput
+    orderBy?: PartnerPackageOrderByWithAggregationInput | PartnerPackageOrderByWithAggregationInput[]
+    by: PartnerPackageScalarFieldEnum[] | PartnerPackageScalarFieldEnum
+    having?: PartnerPackageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PartnerPackageCountAggregateInputType | true
+    _avg?: PartnerPackageAvgAggregateInputType
+    _sum?: PartnerPackageSumAggregateInputType
+    _min?: PartnerPackageMinAggregateInputType
+    _max?: PartnerPackageMaxAggregateInputType
+  }
+
+  export type PartnerPackageGroupByOutputType = {
+    id: number
+    slug: string
+    title: string
+    price: number
+    description: string | null
+    features: JsonValue
+    limitedText: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PartnerPackageCountAggregateOutputType | null
+    _avg: PartnerPackageAvgAggregateOutputType | null
+    _sum: PartnerPackageSumAggregateOutputType | null
+    _min: PartnerPackageMinAggregateOutputType | null
+    _max: PartnerPackageMaxAggregateOutputType | null
+  }
+
+  type GetPartnerPackageGroupByPayload<T extends PartnerPackageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PartnerPackageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PartnerPackageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PartnerPackageGroupByOutputType[P]>
+            : GetScalarType<T[P], PartnerPackageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PartnerPackageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    title?: boolean
+    price?: boolean
+    description?: boolean
+    features?: boolean
+    limitedText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["partnerPackage"]>
+
+
+
+  export type PartnerPackageSelectScalar = {
+    id?: boolean
+    slug?: boolean
+    title?: boolean
+    price?: boolean
+    description?: boolean
+    features?: boolean
+    limitedText?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PartnerPackageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "price" | "description" | "features" | "limitedText" | "createdAt" | "updatedAt", ExtArgs["result"]["partnerPackage"]>
+
+  export type $PartnerPackagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PartnerPackage"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      slug: string
+      title: string
+      price: number
+      description: string | null
+      features: Prisma.JsonValue
+      limitedText: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["partnerPackage"]>
+    composites: {}
+  }
+
+  type PartnerPackageGetPayload<S extends boolean | null | undefined | PartnerPackageDefaultArgs> = $Result.GetResult<Prisma.$PartnerPackagePayload, S>
+
+  type PartnerPackageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PartnerPackageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PartnerPackageCountAggregateInputType | true
+    }
+
+  export interface PartnerPackageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PartnerPackage'], meta: { name: 'PartnerPackage' } }
+    /**
+     * Find zero or one PartnerPackage that matches the filter.
+     * @param {PartnerPackageFindUniqueArgs} args - Arguments to find a PartnerPackage
+     * @example
+     * // Get one PartnerPackage
+     * const partnerPackage = await prisma.partnerPackage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PartnerPackageFindUniqueArgs>(args: SelectSubset<T, PartnerPackageFindUniqueArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PartnerPackage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PartnerPackageFindUniqueOrThrowArgs} args - Arguments to find a PartnerPackage
+     * @example
+     * // Get one PartnerPackage
+     * const partnerPackage = await prisma.partnerPackage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PartnerPackageFindUniqueOrThrowArgs>(args: SelectSubset<T, PartnerPackageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PartnerPackage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerPackageFindFirstArgs} args - Arguments to find a PartnerPackage
+     * @example
+     * // Get one PartnerPackage
+     * const partnerPackage = await prisma.partnerPackage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PartnerPackageFindFirstArgs>(args?: SelectSubset<T, PartnerPackageFindFirstArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PartnerPackage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerPackageFindFirstOrThrowArgs} args - Arguments to find a PartnerPackage
+     * @example
+     * // Get one PartnerPackage
+     * const partnerPackage = await prisma.partnerPackage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PartnerPackageFindFirstOrThrowArgs>(args?: SelectSubset<T, PartnerPackageFindFirstOrThrowArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PartnerPackages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerPackageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PartnerPackages
+     * const partnerPackages = await prisma.partnerPackage.findMany()
+     * 
+     * // Get first 10 PartnerPackages
+     * const partnerPackages = await prisma.partnerPackage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const partnerPackageWithIdOnly = await prisma.partnerPackage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PartnerPackageFindManyArgs>(args?: SelectSubset<T, PartnerPackageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PartnerPackage.
+     * @param {PartnerPackageCreateArgs} args - Arguments to create a PartnerPackage.
+     * @example
+     * // Create one PartnerPackage
+     * const PartnerPackage = await prisma.partnerPackage.create({
+     *   data: {
+     *     // ... data to create a PartnerPackage
+     *   }
+     * })
+     * 
+     */
+    create<T extends PartnerPackageCreateArgs>(args: SelectSubset<T, PartnerPackageCreateArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PartnerPackages.
+     * @param {PartnerPackageCreateManyArgs} args - Arguments to create many PartnerPackages.
+     * @example
+     * // Create many PartnerPackages
+     * const partnerPackage = await prisma.partnerPackage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PartnerPackageCreateManyArgs>(args?: SelectSubset<T, PartnerPackageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PartnerPackage.
+     * @param {PartnerPackageDeleteArgs} args - Arguments to delete one PartnerPackage.
+     * @example
+     * // Delete one PartnerPackage
+     * const PartnerPackage = await prisma.partnerPackage.delete({
+     *   where: {
+     *     // ... filter to delete one PartnerPackage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PartnerPackageDeleteArgs>(args: SelectSubset<T, PartnerPackageDeleteArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PartnerPackage.
+     * @param {PartnerPackageUpdateArgs} args - Arguments to update one PartnerPackage.
+     * @example
+     * // Update one PartnerPackage
+     * const partnerPackage = await prisma.partnerPackage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PartnerPackageUpdateArgs>(args: SelectSubset<T, PartnerPackageUpdateArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PartnerPackages.
+     * @param {PartnerPackageDeleteManyArgs} args - Arguments to filter PartnerPackages to delete.
+     * @example
+     * // Delete a few PartnerPackages
+     * const { count } = await prisma.partnerPackage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PartnerPackageDeleteManyArgs>(args?: SelectSubset<T, PartnerPackageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PartnerPackages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerPackageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PartnerPackages
+     * const partnerPackage = await prisma.partnerPackage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PartnerPackageUpdateManyArgs>(args: SelectSubset<T, PartnerPackageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PartnerPackage.
+     * @param {PartnerPackageUpsertArgs} args - Arguments to update or create a PartnerPackage.
+     * @example
+     * // Update or create a PartnerPackage
+     * const partnerPackage = await prisma.partnerPackage.upsert({
+     *   create: {
+     *     // ... data to create a PartnerPackage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PartnerPackage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PartnerPackageUpsertArgs>(args: SelectSubset<T, PartnerPackageUpsertArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PartnerPackages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerPackageCountArgs} args - Arguments to filter PartnerPackages to count.
+     * @example
+     * // Count the number of PartnerPackages
+     * const count = await prisma.partnerPackage.count({
+     *   where: {
+     *     // ... the filter for the PartnerPackages we want to count
+     *   }
+     * })
+    **/
+    count<T extends PartnerPackageCountArgs>(
+      args?: Subset<T, PartnerPackageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PartnerPackageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PartnerPackage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerPackageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PartnerPackageAggregateArgs>(args: Subset<T, PartnerPackageAggregateArgs>): Prisma.PrismaPromise<GetPartnerPackageAggregateType<T>>
+
+    /**
+     * Group by PartnerPackage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerPackageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PartnerPackageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PartnerPackageGroupByArgs['orderBy'] }
+        : { orderBy?: PartnerPackageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PartnerPackageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPartnerPackageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PartnerPackage model
+   */
+  readonly fields: PartnerPackageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PartnerPackage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PartnerPackageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PartnerPackage model
+   */
+  interface PartnerPackageFieldRefs {
+    readonly id: FieldRef<"PartnerPackage", 'Int'>
+    readonly slug: FieldRef<"PartnerPackage", 'String'>
+    readonly title: FieldRef<"PartnerPackage", 'String'>
+    readonly price: FieldRef<"PartnerPackage", 'Float'>
+    readonly description: FieldRef<"PartnerPackage", 'String'>
+    readonly features: FieldRef<"PartnerPackage", 'Json'>
+    readonly limitedText: FieldRef<"PartnerPackage", 'String'>
+    readonly createdAt: FieldRef<"PartnerPackage", 'DateTime'>
+    readonly updatedAt: FieldRef<"PartnerPackage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PartnerPackage findUnique
+   */
+  export type PartnerPackageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which PartnerPackage to fetch.
+     */
+    where: PartnerPackageWhereUniqueInput
+  }
+
+  /**
+   * PartnerPackage findUniqueOrThrow
+   */
+  export type PartnerPackageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which PartnerPackage to fetch.
+     */
+    where: PartnerPackageWhereUniqueInput
+  }
+
+  /**
+   * PartnerPackage findFirst
+   */
+  export type PartnerPackageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which PartnerPackage to fetch.
+     */
+    where?: PartnerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerPackages to fetch.
+     */
+    orderBy?: PartnerPackageOrderByWithRelationInput | PartnerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PartnerPackages.
+     */
+    cursor?: PartnerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerPackages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PartnerPackages.
+     */
+    distinct?: PartnerPackageScalarFieldEnum | PartnerPackageScalarFieldEnum[]
+  }
+
+  /**
+   * PartnerPackage findFirstOrThrow
+   */
+  export type PartnerPackageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which PartnerPackage to fetch.
+     */
+    where?: PartnerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerPackages to fetch.
+     */
+    orderBy?: PartnerPackageOrderByWithRelationInput | PartnerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PartnerPackages.
+     */
+    cursor?: PartnerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerPackages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PartnerPackages.
+     */
+    distinct?: PartnerPackageScalarFieldEnum | PartnerPackageScalarFieldEnum[]
+  }
+
+  /**
+   * PartnerPackage findMany
+   */
+  export type PartnerPackageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Filter, which PartnerPackages to fetch.
+     */
+    where?: PartnerPackageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerPackages to fetch.
+     */
+    orderBy?: PartnerPackageOrderByWithRelationInput | PartnerPackageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PartnerPackages.
+     */
+    cursor?: PartnerPackageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerPackages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerPackages.
+     */
+    skip?: number
+    distinct?: PartnerPackageScalarFieldEnum | PartnerPackageScalarFieldEnum[]
+  }
+
+  /**
+   * PartnerPackage create
+   */
+  export type PartnerPackageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PartnerPackage.
+     */
+    data: XOR<PartnerPackageCreateInput, PartnerPackageUncheckedCreateInput>
+  }
+
+  /**
+   * PartnerPackage createMany
+   */
+  export type PartnerPackageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PartnerPackages.
+     */
+    data: PartnerPackageCreateManyInput | PartnerPackageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PartnerPackage update
+   */
+  export type PartnerPackageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PartnerPackage.
+     */
+    data: XOR<PartnerPackageUpdateInput, PartnerPackageUncheckedUpdateInput>
+    /**
+     * Choose, which PartnerPackage to update.
+     */
+    where: PartnerPackageWhereUniqueInput
+  }
+
+  /**
+   * PartnerPackage updateMany
+   */
+  export type PartnerPackageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PartnerPackages.
+     */
+    data: XOR<PartnerPackageUpdateManyMutationInput, PartnerPackageUncheckedUpdateManyInput>
+    /**
+     * Filter which PartnerPackages to update
+     */
+    where?: PartnerPackageWhereInput
+    /**
+     * Limit how many PartnerPackages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PartnerPackage upsert
+   */
+  export type PartnerPackageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PartnerPackage to update in case it exists.
+     */
+    where: PartnerPackageWhereUniqueInput
+    /**
+     * In case the PartnerPackage found by the `where` argument doesn't exist, create a new PartnerPackage with this data.
+     */
+    create: XOR<PartnerPackageCreateInput, PartnerPackageUncheckedCreateInput>
+    /**
+     * In case the PartnerPackage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PartnerPackageUpdateInput, PartnerPackageUncheckedUpdateInput>
+  }
+
+  /**
+   * PartnerPackage delete
+   */
+  export type PartnerPackageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Filter which PartnerPackage to delete.
+     */
+    where: PartnerPackageWhereUniqueInput
+  }
+
+  /**
+   * PartnerPackage deleteMany
+   */
+  export type PartnerPackageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PartnerPackages to delete
+     */
+    where?: PartnerPackageWhereInput
+    /**
+     * Limit how many PartnerPackages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PartnerPackage without action
+   */
+  export type PartnerPackageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerPackage
+     */
+    select?: PartnerPackageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerPackage
+     */
+    omit?: PartnerPackageOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model assigned_booths
    */
 
@@ -13541,6 +15627,36 @@ export namespace Prisma {
   export type EventPackagesScalarFieldEnum = (typeof EventPackagesScalarFieldEnum)[keyof typeof EventPackagesScalarFieldEnum]
 
 
+  export const SpeakerPackageScalarFieldEnum: {
+    id: 'id',
+    slug: 'slug',
+    title: 'title',
+    price: 'price',
+    description: 'description',
+    features: 'features',
+    limitedText: 'limitedText',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SpeakerPackageScalarFieldEnum = (typeof SpeakerPackageScalarFieldEnum)[keyof typeof SpeakerPackageScalarFieldEnum]
+
+
+  export const PartnerPackageScalarFieldEnum: {
+    id: 'id',
+    slug: 'slug',
+    title: 'title',
+    price: 'price',
+    description: 'description',
+    features: 'features',
+    limitedText: 'limitedText',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PartnerPackageScalarFieldEnum = (typeof PartnerPackageScalarFieldEnum)[keyof typeof PartnerPackageScalarFieldEnum]
+
+
   export const Assigned_boothsScalarFieldEnum: {
     id: 'id',
     booth_id: 'booth_id',
@@ -13734,6 +15850,26 @@ export namespace Prisma {
   };
 
   export type EventPackagesOrderByRelevanceFieldEnum = (typeof EventPackagesOrderByRelevanceFieldEnum)[keyof typeof EventPackagesOrderByRelevanceFieldEnum]
+
+
+  export const SpeakerPackageOrderByRelevanceFieldEnum: {
+    slug: 'slug',
+    title: 'title',
+    description: 'description',
+    limitedText: 'limitedText'
+  };
+
+  export type SpeakerPackageOrderByRelevanceFieldEnum = (typeof SpeakerPackageOrderByRelevanceFieldEnum)[keyof typeof SpeakerPackageOrderByRelevanceFieldEnum]
+
+
+  export const PartnerPackageOrderByRelevanceFieldEnum: {
+    slug: 'slug',
+    title: 'title',
+    description: 'description',
+    limitedText: 'limitedText'
+  };
+
+  export type PartnerPackageOrderByRelevanceFieldEnum = (typeof PartnerPackageOrderByRelevanceFieldEnum)[keyof typeof PartnerPackageOrderByRelevanceFieldEnum]
 
 
   export const EventPartnerPackagesOrderByRelevanceFieldEnum: {
@@ -14706,6 +16842,156 @@ export namespace Prisma {
     features?: JsonWithAggregatesFilter<"EventPackages">
     createdAt?: DateTimeWithAggregatesFilter<"EventPackages"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"EventPackages"> | Date | string
+  }
+
+  export type SpeakerPackageWhereInput = {
+    AND?: SpeakerPackageWhereInput | SpeakerPackageWhereInput[]
+    OR?: SpeakerPackageWhereInput[]
+    NOT?: SpeakerPackageWhereInput | SpeakerPackageWhereInput[]
+    id?: IntFilter<"SpeakerPackage"> | number
+    slug?: StringFilter<"SpeakerPackage"> | string
+    title?: StringFilter<"SpeakerPackage"> | string
+    price?: FloatFilter<"SpeakerPackage"> | number
+    description?: StringNullableFilter<"SpeakerPackage"> | string | null
+    features?: JsonFilter<"SpeakerPackage">
+    limitedText?: StringNullableFilter<"SpeakerPackage"> | string | null
+    createdAt?: DateTimeFilter<"SpeakerPackage"> | Date | string
+    updatedAt?: DateTimeFilter<"SpeakerPackage"> | Date | string
+  }
+
+  export type SpeakerPackageOrderByWithRelationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrderInput | SortOrder
+    features?: SortOrder
+    limitedText?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: SpeakerPackageOrderByRelevanceInput
+  }
+
+  export type SpeakerPackageWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    slug?: string
+    AND?: SpeakerPackageWhereInput | SpeakerPackageWhereInput[]
+    OR?: SpeakerPackageWhereInput[]
+    NOT?: SpeakerPackageWhereInput | SpeakerPackageWhereInput[]
+    title?: StringFilter<"SpeakerPackage"> | string
+    price?: FloatFilter<"SpeakerPackage"> | number
+    description?: StringNullableFilter<"SpeakerPackage"> | string | null
+    features?: JsonFilter<"SpeakerPackage">
+    limitedText?: StringNullableFilter<"SpeakerPackage"> | string | null
+    createdAt?: DateTimeFilter<"SpeakerPackage"> | Date | string
+    updatedAt?: DateTimeFilter<"SpeakerPackage"> | Date | string
+  }, "id" | "slug">
+
+  export type SpeakerPackageOrderByWithAggregationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrderInput | SortOrder
+    features?: SortOrder
+    limitedText?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SpeakerPackageCountOrderByAggregateInput
+    _avg?: SpeakerPackageAvgOrderByAggregateInput
+    _max?: SpeakerPackageMaxOrderByAggregateInput
+    _min?: SpeakerPackageMinOrderByAggregateInput
+    _sum?: SpeakerPackageSumOrderByAggregateInput
+  }
+
+  export type SpeakerPackageScalarWhereWithAggregatesInput = {
+    AND?: SpeakerPackageScalarWhereWithAggregatesInput | SpeakerPackageScalarWhereWithAggregatesInput[]
+    OR?: SpeakerPackageScalarWhereWithAggregatesInput[]
+    NOT?: SpeakerPackageScalarWhereWithAggregatesInput | SpeakerPackageScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SpeakerPackage"> | number
+    slug?: StringWithAggregatesFilter<"SpeakerPackage"> | string
+    title?: StringWithAggregatesFilter<"SpeakerPackage"> | string
+    price?: FloatWithAggregatesFilter<"SpeakerPackage"> | number
+    description?: StringNullableWithAggregatesFilter<"SpeakerPackage"> | string | null
+    features?: JsonWithAggregatesFilter<"SpeakerPackage">
+    limitedText?: StringNullableWithAggregatesFilter<"SpeakerPackage"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SpeakerPackage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SpeakerPackage"> | Date | string
+  }
+
+  export type PartnerPackageWhereInput = {
+    AND?: PartnerPackageWhereInput | PartnerPackageWhereInput[]
+    OR?: PartnerPackageWhereInput[]
+    NOT?: PartnerPackageWhereInput | PartnerPackageWhereInput[]
+    id?: IntFilter<"PartnerPackage"> | number
+    slug?: StringFilter<"PartnerPackage"> | string
+    title?: StringFilter<"PartnerPackage"> | string
+    price?: FloatFilter<"PartnerPackage"> | number
+    description?: StringNullableFilter<"PartnerPackage"> | string | null
+    features?: JsonFilter<"PartnerPackage">
+    limitedText?: StringNullableFilter<"PartnerPackage"> | string | null
+    createdAt?: DateTimeFilter<"PartnerPackage"> | Date | string
+    updatedAt?: DateTimeFilter<"PartnerPackage"> | Date | string
+  }
+
+  export type PartnerPackageOrderByWithRelationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrderInput | SortOrder
+    features?: SortOrder
+    limitedText?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: PartnerPackageOrderByRelevanceInput
+  }
+
+  export type PartnerPackageWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    slug?: string
+    AND?: PartnerPackageWhereInput | PartnerPackageWhereInput[]
+    OR?: PartnerPackageWhereInput[]
+    NOT?: PartnerPackageWhereInput | PartnerPackageWhereInput[]
+    title?: StringFilter<"PartnerPackage"> | string
+    price?: FloatFilter<"PartnerPackage"> | number
+    description?: StringNullableFilter<"PartnerPackage"> | string | null
+    features?: JsonFilter<"PartnerPackage">
+    limitedText?: StringNullableFilter<"PartnerPackage"> | string | null
+    createdAt?: DateTimeFilter<"PartnerPackage"> | Date | string
+    updatedAt?: DateTimeFilter<"PartnerPackage"> | Date | string
+  }, "id" | "slug">
+
+  export type PartnerPackageOrderByWithAggregationInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrderInput | SortOrder
+    features?: SortOrder
+    limitedText?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PartnerPackageCountOrderByAggregateInput
+    _avg?: PartnerPackageAvgOrderByAggregateInput
+    _max?: PartnerPackageMaxOrderByAggregateInput
+    _min?: PartnerPackageMinOrderByAggregateInput
+    _sum?: PartnerPackageSumOrderByAggregateInput
+  }
+
+  export type PartnerPackageScalarWhereWithAggregatesInput = {
+    AND?: PartnerPackageScalarWhereWithAggregatesInput | PartnerPackageScalarWhereWithAggregatesInput[]
+    OR?: PartnerPackageScalarWhereWithAggregatesInput[]
+    NOT?: PartnerPackageScalarWhereWithAggregatesInput | PartnerPackageScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"PartnerPackage"> | number
+    slug?: StringWithAggregatesFilter<"PartnerPackage"> | string
+    title?: StringWithAggregatesFilter<"PartnerPackage"> | string
+    price?: FloatWithAggregatesFilter<"PartnerPackage"> | number
+    description?: StringNullableWithAggregatesFilter<"PartnerPackage"> | string | null
+    features?: JsonWithAggregatesFilter<"PartnerPackage">
+    limitedText?: StringNullableWithAggregatesFilter<"PartnerPackage"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PartnerPackage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PartnerPackage"> | Date | string
   }
 
   export type assigned_boothsWhereInput = {
@@ -15866,6 +18152,168 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SpeakerPackageCreateInput = {
+    slug: string
+    title: string
+    price: number
+    description?: string | null
+    features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SpeakerPackageUncheckedCreateInput = {
+    id?: number
+    slug: string
+    title: string
+    price: number
+    description?: string | null
+    features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SpeakerPackageUpdateInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SpeakerPackageUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SpeakerPackageCreateManyInput = {
+    id?: number
+    slug: string
+    title: string
+    price: number
+    description?: string | null
+    features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SpeakerPackageUpdateManyMutationInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SpeakerPackageUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerPackageCreateInput = {
+    slug: string
+    title: string
+    price: number
+    description?: string | null
+    features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PartnerPackageUncheckedCreateInput = {
+    id?: number
+    slug: string
+    title: string
+    price: number
+    description?: string | null
+    features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PartnerPackageUpdateInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerPackageUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerPackageCreateManyInput = {
+    id?: number
+    slug: string
+    title: string
+    price: number
+    description?: string | null
+    features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PartnerPackageUpdateManyMutationInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerPackageUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type assigned_boothsCreateInput = {
     assignedAt?: Date | string
     createdAt?: Date | string
@@ -16958,6 +19406,106 @@ export namespace Prisma {
   }
 
   export type EventPackagesSumOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+  }
+
+  export type SpeakerPackageOrderByRelevanceInput = {
+    fields: SpeakerPackageOrderByRelevanceFieldEnum | SpeakerPackageOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type SpeakerPackageCountOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrder
+    features?: SortOrder
+    limitedText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SpeakerPackageAvgOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+  }
+
+  export type SpeakerPackageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrder
+    limitedText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SpeakerPackageMinOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrder
+    limitedText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SpeakerPackageSumOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+  }
+
+  export type PartnerPackageOrderByRelevanceInput = {
+    fields: PartnerPackageOrderByRelevanceFieldEnum | PartnerPackageOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PartnerPackageCountOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrder
+    features?: SortOrder
+    limitedText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PartnerPackageAvgOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+  }
+
+  export type PartnerPackageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrder
+    limitedText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PartnerPackageMinOrderByAggregateInput = {
+    id?: SortOrder
+    slug?: SortOrder
+    title?: SortOrder
+    price?: SortOrder
+    description?: SortOrder
+    limitedText?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PartnerPackageSumOrderByAggregateInput = {
     id?: SortOrder
     price?: SortOrder
   }

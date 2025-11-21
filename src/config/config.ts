@@ -11,7 +11,8 @@ export const Config = {
     premblyTestSecretKey: process.env.PREMBLY_SECRET_KEY,
     premblyTestAppID: process.env.PREMBLY_APP_ID,
 
-    paystackSecret: process.env.PAYSTACK_API_KEY,
-    paystackBaseURL: process.env.PAYSTACK_BASE_URL,
-    paystackDeliveryCallback: process.env.PAYSTACK_CALLBACK,
+    flutterwaveSecret: process.env.FLUTTERWAVE_API_KEY,
+    flutterwaveBaseURL: process.env.FLUTTERWAVE_BASE_URL,
+    flutterwaveDeliveryCallback: process.env.FLUTTERWAVE_CALLBACK,
+    flutterwaveCurrency: process.env.FLUTTERWAVE_CURRENCY || 'USD',
 };
