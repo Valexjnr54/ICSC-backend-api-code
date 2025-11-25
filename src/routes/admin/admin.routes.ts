@@ -41,6 +41,6 @@ adminRouter.post('/create-speaker-package', createSpeakerPackage);
 adminRouter.put('/update-speaker-package', updateSpeakerPackage);
 adminRouter.delete('/delete-speaker-package', deleteSpeakerPackage);
 
-adminRouter.post('/create-partner-package', createPartnerPackage);
-adminRouter.put('/update-partner-package', updatePartnerPackage);
-adminRouter.delete('/delete-partner-package', deletePartnerPackage);
+adminRouter.post('/create-event-partner-package', createPartnerPackage);
+adminRouter.put('/update-event-partner-package', updatePartnerPackage);
+adminRouter.delete('/delete-event-partner-package', deletePartnerPackage);

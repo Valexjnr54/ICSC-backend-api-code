@@ -297,132 +297,20 @@ exports.Prisma.NullableJsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.AdminOrderByRelevanceFieldEnum = {
-  fullname: 'fullname',
-  email: 'email',
-  username: 'username',
-  profile_image: 'profile_image',
-  password: 'password'
-};
-
-exports.Prisma.UsersOrderByRelevanceFieldEnum = {
-  organization: 'organization',
-  organization_short_code: 'organization_short_code',
-  contact_person: 'contact_person',
-  contact_person_email: 'contact_person_email',
-  username: 'username',
-  profile_image: 'profile_image',
-  password: 'password'
-};
-
-exports.Prisma.OrganizationOrderByRelevanceFieldEnum = {
-  name: 'name',
-  abbreviation: 'abbreviation'
-};
-
-exports.Prisma.AttendeesOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  fullname: 'fullname',
-  email: 'email',
-  phone_number: 'phone_number',
-  nin: 'nin',
-  position: 'position',
-  grade: 'grade',
-  organization: 'organization',
-  department: 'department',
-  department_agency: 'department_agency',
-  staff_id: 'staff_id',
-  office_location: 'office_location',
-  remark: 'remark',
-  password: 'password'
 };
 
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
-exports.Prisma.BoothsOrderByRelevanceFieldEnum = {
-  booth_number: 'booth_number',
-  location: 'location',
-  booth_size: 'booth_size'
-};
-
-exports.Prisma.ExhibitorsOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  company_name: 'company_name',
-  contact_person: 'contact_person',
-  contact_email: 'contact_email',
-  contact_phone: 'contact_phone',
-  website: 'website',
-  description: 'description',
-  service_product_to_exhibit: 'service_product_to_exhibit',
-  password: 'password'
-};
-
-exports.Prisma.EventPartnersOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  fullname: 'fullname',
-  email: 'email',
-  phone_number: 'phone_number',
-  company_name: 'company_name',
-  logo: 'logo',
-  website: 'website',
-  description: 'description',
-  why_interested: 'why_interested',
-  password: 'password'
-};
-
-exports.Prisma.SpeakersOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  first_name: 'first_name',
-  last_name: 'last_name',
-  fullname: 'fullname',
-  country: 'country',
-  job_title: 'job_title',
-  organization: 'organization',
-  phone: 'phone',
-  work_email: 'work_email',
-  bio: 'bio',
-  topic: 'topic',
-  experience: 'experience',
-  password: 'password'
-};
-
-exports.Prisma.EventPackagesOrderByRelevanceFieldEnum = {
-  name: 'name',
-  description: 'description'
-};
-
-exports.Prisma.SpeakerPackageOrderByRelevanceFieldEnum = {
-  slug: 'slug',
-  title: 'title',
-  description: 'description',
-  limitedText: 'limitedText'
-};
-
-exports.Prisma.PartnerPackageOrderByRelevanceFieldEnum = {
-  slug: 'slug',
-  title: 'title',
-  description: 'description',
-  limitedText: 'limitedText'
-};
-
-exports.Prisma.EventPartnerPackagesOrderByRelevanceFieldEnum = {
-  payment_reference: 'payment_reference',
-  payment_method: 'payment_method',
-  proof_of_payment: 'proof_of_payment'
 };
 exports.OrganizationType = exports.$Enums.OrganizationType = {
   MINISTRY: 'MINISTRY',
@@ -511,7 +399,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -520,8 +408,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/models\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Admin {\n  id            Int      @id @default(autoincrement())\n  fullname      String\n  email         String   @unique\n  username      String   @unique\n  role          Role     @default(super_admin)\n  profile_image String?\n  password      String\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  @@map(\"admin\")\n}\n\nmodel Users {\n  id                      Int      @id @default(autoincrement())\n  organization            String\n  organization_short_code String\n  contact_person          String\n  contact_person_email    String   @unique\n  username                String   @unique\n  profile_image           String?\n  role                    Role     @default(ministry)\n  password                String\n  createdAt               DateTime @default(now())\n  updatedAt               DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Organization {\n  id           Int              @id @default(autoincrement())\n  name         String\n  abbreviation String?          @unique\n  type         OrganizationType @default(OTHER)\n\n  // Self-referencing parent (e.g., an agency -> parent ministry)\n  parentId Int?\n  parent   Organization?  @relation(\"OrgParent\", fields: [parentId], references: [id])\n  children Organization[] @relation(\"OrgParent\")\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([type])\n  @@map(\"organizations\")\n}\n\nmodel Attendees {\n  id                Int      @id @default(autoincrement())\n  prefix            String?\n  fullname          String\n  email             String   @unique\n  phone_number      String\n  nin               String   @unique\n  nin_verified      Boolean  @default(false)\n  position          String\n  grade             String\n  organization      String\n  department        String\n  department_agency String\n  staff_id          String?\n  office_location   String?\n  remark            String?\n  status            Status   @default(Pending)\n  role              Role     @default(attendee)\n  password          String\n  temporal_password Boolean  @default(true)\n  registeredAt      DateTime @default(now())\n\n  // Created by: polymorphic reference stored as id + type (no FK constraint)\n  // Use `created_by_type` to decide which table to join to (ADMIN or USER)\n  created_by_id   Int?\n  created_by_type CreatorType?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"attendees\")\n}\n\nmodel Booths {\n  id              Int               @id @default(autoincrement())\n  booth_number    String            @unique\n  location        String\n  price           Float\n  booth_size      String\n  features        Json\n  status          Status            @default(Available)\n  createdAt       DateTime          @default(now())\n  updatedAt       DateTime          @updatedAt\n  assigned_booths assigned_booths[]\n\n  @@map(\"booths\")\n}\n\nmodel Exhibitors {\n  id                         Int      @id @default(autoincrement())\n  prefix                     String?\n  company_name               String\n  contact_person             String\n  contact_email              String   @unique\n  contact_phone              String\n  website                    String?\n  description                String?\n  service_product_to_exhibit String?\n  password                   String\n  role                       Role     @default(exhibitor)\n  status                     Status   @default(Pending)\n  registeredAt               DateTime @default(now())\n\n  createdAt       DateTime          @default(now())\n  updatedAt       DateTime          @updatedAt\n  assigned_booths assigned_booths[]\n\n  @@map(\"exhibitors\")\n}\n\nmodel EventPartners {\n  id                   Int                    @id @default(autoincrement())\n  prefix               String?\n  fullname             String\n  email                String                 @unique\n  phone_number         String\n  company_name         String\n  logo                 String\n  website              String?\n  social_media         Json?\n  description          String?\n  why_interested       String?\n  password             String\n  role                 Role                   @default(public_speaker)\n  status               Status                 @default(Pending)\n  createdAt            DateTime               @default(now())\n  updatedAt            DateTime               @updatedAt\n  EventPartnerPackages EventPartnerPackages[]\n\n  @@map(\"event_partners\")\n}\n\nmodel Speakers {\n  id           Int      @id @default(autoincrement())\n  prefix       String?\n  first_name   String\n  last_name    String\n  fullname     String\n  country      String\n  job_title    String\n  organization String\n  phone        String\n  social_media Json?\n  work_email   String   @unique\n  bio          String\n  topic        String\n  experience   String?\n  password     String\n  role         Role     @default(public_speaker)\n  status       Status   @default(Pending)\n  registeredAt DateTime @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"speakers\")\n}\n\nmodel EventPackages {\n  id                   Int                    @id @default(autoincrement())\n  name                 String\n  description          String\n  price                Float\n  features             Json\n  createdAt            DateTime               @default(now())\n  updatedAt            DateTime               @updatedAt\n  EventPartnerPackages EventPartnerPackages[]\n\n  @@map(\"event_packages\")\n}\n\nmodel SpeakerPackage {\n  id          Int      @id @default(autoincrement())\n  slug        String   @unique\n  title       String\n  price       Float\n  description String?\n  features    Json\n  limitedText String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  @@map(\"speaker_packages\")\n}\n\nmodel PartnerPackage {\n  id          Int      @id @default(autoincrement())\n  slug        String   @unique\n  title       String\n  price       Float\n  description String?\n  features    Json\n  limitedText String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  @@map(\"partner_packages\")\n}\n\nmodel assigned_booths {\n  id             Int        @id @default(autoincrement())\n  booth_id       Int        @unique\n  booth          Booths     @relation(fields: [booth_id], references: [id])\n  assigned_to_id Int\n  assigned_to    Exhibitors @relation(fields: [assigned_to_id], references: [id])\n  assignedAt     DateTime   @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"assigned_booths\")\n}\n\nmodel EventPartnerPackages {\n  id                Int           @id @default(autoincrement())\n  event_partner_id  Int\n  event_partner     EventPartners @relation(fields: [event_partner_id], references: [id])\n  event_package_id  Int\n  event_package     EventPackages @relation(fields: [event_package_id], references: [id])\n  payment_reference String?\n  payment_status    Status        @default(Pending)\n  payment_method    String?\n  proof_of_payment  String?\n  assignedAt        DateTime      @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"event_partner_packages\")\n}\n\n// Unified organization model for ministries, agencies, parastatals, etc.\nenum OrganizationType {\n  MINISTRY\n  AGENCY\n  PARASTATAL\n  OTHER\n}\n\nenum Role {\n  super_admin\n  attendee\n  ministry\n  agency\n  parastatal\n  exhibitor\n  public_speaker\n  event_partner\n  other\n}\n\n// Type to indicate which model created a record using polymorphic pattern\nenum CreatorType {\n  ADMIN\n  USER\n}\n\nenum Status {\n  Approved\n  Pending\n  Rejected\n  Available\n  SoldOut\n  Reserved\n  Paid\n}\n",
-  "inlineSchemaHash": "9365b8d2f7ca48ebf29ce678f780daa9b4a67b9742ca3133dcff5f7d137f1c2b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/models\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Admin {\n  id            Int      @id @default(autoincrement())\n  fullname      String\n  email         String   @unique\n  username      String   @unique\n  role          Role     @default(super_admin)\n  profile_image String?\n  password      String\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  @@map(\"admin\")\n}\n\nmodel Users {\n  id                      Int      @id @default(autoincrement())\n  organization            String\n  organization_short_code String\n  contact_person          String\n  contact_person_email    String   @unique\n  username                String   @unique\n  profile_image           String?\n  role                    Role     @default(ministry)\n  password                String\n  createdAt               DateTime @default(now())\n  updatedAt               DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Organization {\n  id           Int              @id @default(autoincrement())\n  name         String\n  abbreviation String?          @unique\n  type         OrganizationType @default(OTHER)\n\n  // Self-referencing parent (e.g., an agency -> parent ministry)\n  parentId Int?\n  parent   Organization?  @relation(\"OrgParent\", fields: [parentId], references: [id])\n  children Organization[] @relation(\"OrgParent\")\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([type])\n  @@map(\"organizations\")\n}\n\nmodel Attendees {\n  id                Int      @id @default(autoincrement())\n  prefix            String?\n  fullname          String\n  email             String   @unique\n  phone_number      String\n  nin               String   @unique\n  nin_verified      Boolean  @default(false)\n  position          String\n  grade             String\n  organization      String\n  department        String\n  department_agency String\n  staff_id          String?\n  office_location   String?\n  remark            String?\n  status            Status   @default(Pending)\n  role              Role     @default(attendee)\n  password          String\n  temporal_password Boolean  @default(true)\n  registeredAt      DateTime @default(now())\n\n  // Created by: polymorphic reference stored as id + type (no FK constraint)\n  // Use `created_by_type` to decide which table to join to (ADMIN or USER)\n  created_by_id   Int?\n  created_by_type CreatorType?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"attendees\")\n}\n\nmodel Booths {\n  id              Int               @id @default(autoincrement())\n  booth_number    String            @unique\n  location        String\n  price           Float\n  booth_size      String\n  features        Json\n  status          Status            @default(Available)\n  createdAt       DateTime          @default(now())\n  updatedAt       DateTime          @updatedAt\n  assigned_booths assigned_booths[]\n\n  @@map(\"booths\")\n}\n\nmodel Exhibitors {\n  id                         Int      @id @default(autoincrement())\n  prefix                     String?\n  company_name               String\n  contact_person             String\n  contact_email              String   @unique\n  contact_phone              String\n  website                    String?\n  description                String?\n  service_product_to_exhibit String?\n  password                   String\n  role                       Role     @default(exhibitor)\n  status                     Status   @default(Pending)\n  registeredAt               DateTime @default(now())\n\n  createdAt       DateTime          @default(now())\n  updatedAt       DateTime          @updatedAt\n  assigned_booths assigned_booths[]\n\n  @@map(\"exhibitors\")\n}\n\nmodel EventPartners {\n  id                   Int                    @id @default(autoincrement())\n  prefix               String?\n  fullname             String\n  email                String                 @unique\n  phone_number         String\n  company_name         String\n  logo                 String\n  website              String?\n  social_media         Json?\n  description          String?\n  why_interested       String?\n  password             String\n  role                 Role                   @default(public_speaker)\n  status               Status                 @default(Pending)\n  createdAt            DateTime               @default(now())\n  updatedAt            DateTime               @updatedAt\n  EventPartnerPackages EventPartnerPackages[]\n\n  @@map(\"event_partners\")\n}\n\nmodel Speakers {\n  id           Int      @id @default(autoincrement())\n  prefix       String?\n  first_name   String\n  last_name    String\n  fullname     String\n  country      String\n  job_title    String\n  organization String\n  phone        String\n  social_media Json?\n  work_email   String   @unique\n  bio          String\n  topic        String\n  experience   String?\n  password     String\n  role         Role     @default(public_speaker)\n  status       Status   @default(Pending)\n  registeredAt DateTime @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"speakers\")\n}\n\nmodel EventPackages {\n  id                   Int                    @id @default(autoincrement())\n  name                 String\n  description          String\n  price                Float\n  features             Json\n  createdAt            DateTime               @default(now())\n  updatedAt            DateTime               @updatedAt\n  EventPartnerPackages EventPartnerPackages[]\n\n  @@map(\"event_packages\")\n}\n\nmodel SpeakerPackage {\n  id          Int      @id @default(autoincrement())\n  slug        String   @unique\n  title       String\n  price       Float\n  description String?\n  features    Json\n  limitedText String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  @@map(\"speaker_packages\")\n}\n\nmodel PartnerPackage {\n  id          Int      @id @default(autoincrement())\n  slug        String   @unique\n  title       String\n  price       Float\n  description String?\n  features    Json\n  limitedText String?\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  @@map(\"partner_packages\")\n}\n\nmodel assigned_booths {\n  id             Int        @id @default(autoincrement())\n  booth_id       Int        @unique\n  booth          Booths     @relation(fields: [booth_id], references: [id])\n  assigned_to_id Int\n  assigned_to    Exhibitors @relation(fields: [assigned_to_id], references: [id])\n  assignedAt     DateTime   @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"assigned_booths\")\n}\n\nmodel EventPartnerPackages {\n  id                Int           @id @default(autoincrement())\n  event_partner_id  Int\n  event_partner     EventPartners @relation(fields: [event_partner_id], references: [id])\n  event_package_id  Int\n  event_package     EventPackages @relation(fields: [event_package_id], references: [id])\n  payment_reference String?\n  payment_status    Status        @default(Pending)\n  payment_method    String?\n  proof_of_payment  String?\n  assignedAt        DateTime      @default(now())\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"event_partner_packages\")\n}\n\n// Unified organization model for ministries, agencies, parastatals, etc.\nenum OrganizationType {\n  MINISTRY\n  AGENCY\n  PARASTATAL\n  OTHER\n}\n\nenum Role {\n  super_admin\n  attendee\n  ministry\n  agency\n  parastatal\n  exhibitor\n  public_speaker\n  event_partner\n  other\n}\n\n// Type to indicate which model created a record using polymorphic pattern\nenum CreatorType {\n  ADMIN\n  USER\n}\n\nenum Status {\n  Approved\n  Pending\n  Rejected\n  Available\n  SoldOut\n  Reserved\n  Paid\n}\n",
+  "inlineSchemaHash": "7d4c6b6c38b2e4d7680fb1f77f60defef37e8131dad34dfe4f5092fa5720667d",
   "copyEngine": true
 }
 config.dirname = '/'

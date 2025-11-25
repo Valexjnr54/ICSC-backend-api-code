@@ -12,6 +12,7 @@ import { exhibitorAuthRouter } from "./routes/auth/exhibitorAuthRoutes";
 import { eventPartnerAuthRouter } from "./routes/auth/eventPartnerAuthRoutes";
 import { paymentRouter } from "./routes/user/payment.routes";
 import { packagesRouter } from "./routes/packages.routes";
+import { miscRouter } from "./routes/misc.routes";
 
 
 const app = express();
@@ -49,6 +50,7 @@ app.use(`${route}/admin`, adminRouter);
 app.use(`${route}/user`, ministryRouter)
 app.use(`${route}/payments`, paymentRouter);
 app.use(`${route}/packages`, packagesRouter);
+app.use(`${route}/misc`, miscRouter);
 
 
 app.use((error: any, request: Request, response: Response, next: NextFunction) => {

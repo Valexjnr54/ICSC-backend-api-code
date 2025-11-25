@@ -325,132 +325,20 @@ exports.Prisma.NullableJsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.AdminOrderByRelevanceFieldEnum = {
-  fullname: 'fullname',
-  email: 'email',
-  username: 'username',
-  profile_image: 'profile_image',
-  password: 'password'
-};
-
-exports.Prisma.UsersOrderByRelevanceFieldEnum = {
-  organization: 'organization',
-  organization_short_code: 'organization_short_code',
-  contact_person: 'contact_person',
-  contact_person_email: 'contact_person_email',
-  username: 'username',
-  profile_image: 'profile_image',
-  password: 'password'
-};
-
-exports.Prisma.OrganizationOrderByRelevanceFieldEnum = {
-  name: 'name',
-  abbreviation: 'abbreviation'
-};
-
-exports.Prisma.AttendeesOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  fullname: 'fullname',
-  email: 'email',
-  phone_number: 'phone_number',
-  nin: 'nin',
-  position: 'position',
-  grade: 'grade',
-  organization: 'organization',
-  department: 'department',
-  department_agency: 'department_agency',
-  staff_id: 'staff_id',
-  office_location: 'office_location',
-  remark: 'remark',
-  password: 'password'
 };
 
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
-exports.Prisma.BoothsOrderByRelevanceFieldEnum = {
-  booth_number: 'booth_number',
-  location: 'location',
-  booth_size: 'booth_size'
-};
-
-exports.Prisma.ExhibitorsOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  company_name: 'company_name',
-  contact_person: 'contact_person',
-  contact_email: 'contact_email',
-  contact_phone: 'contact_phone',
-  website: 'website',
-  description: 'description',
-  service_product_to_exhibit: 'service_product_to_exhibit',
-  password: 'password'
-};
-
-exports.Prisma.EventPartnersOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  fullname: 'fullname',
-  email: 'email',
-  phone_number: 'phone_number',
-  company_name: 'company_name',
-  logo: 'logo',
-  website: 'website',
-  description: 'description',
-  why_interested: 'why_interested',
-  password: 'password'
-};
-
-exports.Prisma.SpeakersOrderByRelevanceFieldEnum = {
-  prefix: 'prefix',
-  first_name: 'first_name',
-  last_name: 'last_name',
-  fullname: 'fullname',
-  country: 'country',
-  job_title: 'job_title',
-  organization: 'organization',
-  phone: 'phone',
-  work_email: 'work_email',
-  bio: 'bio',
-  topic: 'topic',
-  experience: 'experience',
-  password: 'password'
-};
-
-exports.Prisma.EventPackagesOrderByRelevanceFieldEnum = {
-  name: 'name',
-  description: 'description'
-};
-
-exports.Prisma.SpeakerPackageOrderByRelevanceFieldEnum = {
-  slug: 'slug',
-  title: 'title',
-  description: 'description',
-  limitedText: 'limitedText'
-};
-
-exports.Prisma.PartnerPackageOrderByRelevanceFieldEnum = {
-  slug: 'slug',
-  title: 'title',
-  description: 'description',
-  limitedText: 'limitedText'
-};
-
-exports.Prisma.EventPartnerPackagesOrderByRelevanceFieldEnum = {
-  payment_reference: 'payment_reference',
-  payment_method: 'payment_method',
-  proof_of_payment: 'proof_of_payment'
 };
 exports.Role = exports.$Enums.Role = {
   super_admin: 'super_admin',

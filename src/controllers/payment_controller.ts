@@ -9,34 +9,21 @@ const prisma = new PrismaClient();
 export async function initializePackagePayment(req: Request, res: Response) {
   try {
     const user: any = (req as any).user; // set by userAuthenticateJWT middleware
-    const { event_package_id, amount, callback_url, currency } = req.body;
+    const { event_package_id, amount, currency } = req.body;
 
     if (!event_package_id) {
       return res.status(400).json({ message: 'event_package_id is required' });
     }
 
     // Ensure event package exists
-    const pkg = await prisma.eventPackages.findUnique({ where: { id: Number(event_package_id) } });
+    const pkg = await prisma.partnerPackage.findUnique({ where: { id: Number(event_package_id) } });
     if (!pkg) {
       return res.status(404).json({ message: 'Event package not found' });
     }
 
     const price = amount ? Number(amount) : Number(pkg.price);
 
-    // Create or find EventPartnerPackages record for this partner + package
-    let partnerPackage = await prisma.eventPartnerPackages.findFirst({
-      where: { event_partner_id: user.id, event_package_id: Number(event_package_id) }
-    });
-
-    if (!partnerPackage) {
-      partnerPackage = await prisma.eventPartnerPackages.create({
-        data: {
-          event_partner_id: user.id,
-          event_package_id: Number(event_package_id),
-          payment_status: 'Pending'
-        }
-      });
-    }
+    const callback_url = "file:///Users/user/Desktop/Frontend-repo/register.html";
 
     // Build callback - allow frontend override or use configured callback
     const cb = callback_url || Config.flutterwaveDeliveryCallback || '';
@@ -45,7 +32,7 @@ export async function initializePackagePayment(req: Request, res: Response) {
     // not in minor units (cents). Pass `price` directly.
     const init = await initializePayment(user.id, user.phone_number || '', Number(price), user.email || '', cb, currency);
 
-    return res.status(200).json({ success: true, data: init, partnerPackage });
+    return res.status(200).json({ success: true, data: init });
   } catch (err: any) {
     console.error('initializePackagePayment error', err);
     return res.status(err?.status || 500).json({ success: false, message: err?.message || 'Internal Server Error', details: err?.details || null });

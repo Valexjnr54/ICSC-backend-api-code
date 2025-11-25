@@ -6,10 +6,10 @@ import { initializePackagePayment, verifyPackagePayment, uploadBankReceipt, veri
 export const paymentRouter = express.Router();
 
 // Init payment (Flutterwave)
-paymentRouter.post('/initialize', userAuthenticateJWT, initializePackagePayment);
+paymentRouter.post('/initialize-event-partner-payment', userAuthenticateJWT, initializePackagePayment);
 
 // Verify payment (callback / frontend can call)
-paymentRouter.get('/verify', verifyPackagePayment);
+paymentRouter.get('/verify-event-partner-payment', verifyPackagePayment);
 
 // Init payment (Flutterwave)
 paymentRouter.post('/initialize-speaker-payment', userAuthenticateJWT, initializeSpeakerPackagePayment);
