@@ -96,7 +96,7 @@ export async function registerSpeaker(request: Request, response: Response) {
 		});
 
 		// optional welcome email (non-blocking)
-		// try { await sendWelcomeEmail(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }
+		try { await sendWelcomeEmail(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }
 
 		if (!Config.secret) {
 			console.error('Jwt secret is not defined');

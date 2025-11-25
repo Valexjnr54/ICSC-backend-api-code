@@ -7,7 +7,7 @@ const MAIL_DEBUG = process.env.MAIL_DEBUG === 'true';
 
 // Helper: Send via SendGrid HTTP API when configured
 const SENDGRID_FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'support@eyzmo.com';
-const SENDGRID_FROM_NAME = process.env.SENDGRID_FROM_NAME || 'Afrik Farm';
+const SENDGRID_FROM_NAME = process.env.SENDGRID_FROM_NAME || 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)';
 
 async function sendViaSendGrid(_from: { email: string; name?: string } | null, to: string, subject: string, html: string) {
   const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
@@ -119,7 +119,7 @@ export async function sendWelcomeEmail(email: string, subject: string, user:obje
   };
 
     // Try SendGrid first (when configured and preferred), otherwise fallback to SMTP
-    const fromObj = { email: 'no-reply@afrikfarm.com', name: 'Afrik Farm' };
+    const fromObj = { email: 'no-reply@gmail.com', name: 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)' };
     const html = mailOptions.html as string;
 
     if (preferSendGrid() || shouldForceSendGrid()) {
@@ -157,7 +157,7 @@ export async function sendVerificationEmail(email:string, subject:string, verifi
     html: ejs.render(template, { verification_code:verification_code, user:user, email:email }),
   };
 
-  const fromObj = { email: 'no-reply@afrikfarm.com', name: 'Afrik Farm' };
+  const fromObj = { email: 'no-reply@gmail.com', name: 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)' };
   const html = mailOptions.html as string;
 
   if (preferSendGrid() || shouldForceSendGrid()) {
