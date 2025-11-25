@@ -23,7 +23,7 @@ export async function initializePackagePayment(req: Request, res: Response) {
 
     const price = amount ? Number(amount) : Number(pkg.price);
 
-    const callback_url = "file:///Users/user/Desktop/Frontend-repo/register.html";
+    const callback_url = "https://icsc-nigeria.netlify.app/register-partner.html";
 
     // Build callback - allow frontend override or use configured callback
     const cb = callback_url || Config.flutterwaveDeliveryCallback || '';
@@ -103,7 +103,7 @@ export async function initializeSpeakerPackagePayment(req: Request, res: Respons
 
     const price = amount ? Number(amount) : Number(pkg.price);
 
-    const callback_url = "file:///Users/user/Desktop/Frontend-repo/register.html";
+    const callback_url = "https://icsc-nigeria.netlify.app/register-speaker.html";
 
     // Build callback - allow frontend override or use configured callback
     const cb = callback_url || Config.flutterwaveDeliveryCallback || '';
