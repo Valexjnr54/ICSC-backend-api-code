@@ -61,7 +61,7 @@ export async function createUser(request: Request, response: Response) {
       },
     });
 
-    await sendWelcomeEmail(contact_person_email, 'Welcome to International Civil Service Conference', newUser, password);
+    // await sendWelcomeEmail(contact_person_email, 'Welcome to International Civil Service Conference', newUser, password);
 
     return response.status(201).json({ message: 'User created successfully', newUser });
   } catch (error) {

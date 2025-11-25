@@ -97,7 +97,7 @@ export async function createAttendee(request: Request, response: Response) {
       },
     });
 
-    await sendWelcomeEmail(email, 'Welcome to International Civil Service Conference', newAttendee, password);
+    // await sendWelcomeEmail(email, 'Welcome to International Civil Service Conference', newAttendee, password);
 
     // Attach creator details to the response
     const creator = await resolveCreator(newAttendee.created_by_type as any, newAttendee.created_by_id as any);
