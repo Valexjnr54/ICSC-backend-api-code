@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { PrismaClient } from '../../models';
 import { Config } from '../../config/config';
 import { body, validationResult } from "express-validator";
-import * as argon2 from 'argon2';
+import bcrypt from 'bcrypt';
 import { sendWelcomeEmail } from '../../utils/emailSender';
 
 const prisma = new PrismaClient();
@@ -57,7 +57,7 @@ export async function registerSpeaker(request: Request, response: Response) {
 			return response.status(400).json({ message: 'Work email already registered' });
 		}
 
-		const hashedPassword = await argon2.hash(password);
+		const hashedPassword = await bcrypt.hash(password, 10);
 
 		const fullname = `${speakerFirstName.trim()} ${speakerLastName.trim()}`.trim();
 
@@ -132,12 +132,12 @@ export async function loginSpeaker(request: Request, response: Response) {
 			return response.status(401).json({ error: 'Invalid email or password' });
 		}
 
-		if (!speaker.password.startsWith('$argon2')) {
+		if (!speaker.password.startsWith('$2')) {
 			console.error('Password format invalid for speaker:', speaker.password);
 			return response.status(400).json({ message: 'Invalid password format in database' });
 		}
 
-		const passwordMatch = await argon2.verify(speaker.password, password);
+		const passwordMatch = await bcrypt.compare(password, speaker.password);
 		if (!passwordMatch) {
 			return response.status(401).json({ error: 'Invalid email or password' });
 		}

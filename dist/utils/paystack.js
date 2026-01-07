@@ -8,9 +8,8 @@ exports.verifyPayment = verifyPayment;
 exports.extractReferenceFromRequest = extractReferenceFromRequest;
 // paystack.ts
 const axios_1 = __importDefault(require("axios"));
-const config_1 = require("../config/config");
-const PAYSTACK_SECRET_KEY = config_1.Config.paystackSecret;
-const PAYSTACK_BASE_URL = config_1.Config.paystackBaseURL;
+const PAYSTACK_SECRET_KEY = "Config.paystackSecret";
+const PAYSTACK_BASE_URL = "Config.paystackBaseURL";
 function ensureConfig() {
     if (!PAYSTACK_SECRET_KEY) {
         throw new Error('PAYSTACK_API_KEY is not configured. Set PAYSTACK_API_KEY in your environment');
@@ -19,13 +18,14 @@ function ensureConfig() {
         throw new Error('PAYSTACK_BASE_URL is not configured. Set PAYSTACK_BASE_URL in your environment');
     }
 }
-async function initializePayment(farmer_id, phone_number, price, email, callback_url) {
+async function initializePayment(farmer_id, phone_number, price, email, callback_url, currency) {
     ensureConfig();
     try {
         const resp = await axios_1.default.post(PAYSTACK_BASE_URL + '/initialize', {
             amount: price,
             callback_url,
             email,
+            currency: currency || 'USD',
             metadata: {
                 farmer_id,
                 phone_number,

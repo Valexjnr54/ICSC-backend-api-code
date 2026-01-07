@@ -6,10 +6,11 @@ exports.sendVerificationEmail = sendVerificationEmail;
 const path = require('path');
 const fs = require('fs');
 const ejs = require('ejs');
+const nodemailer = require('nodemailer');
 const MAIL_DEBUG = process.env.MAIL_DEBUG === 'true';
 // Helper: Send via SendGrid HTTP API when configured
 const SENDGRID_FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'support@eyzmo.com';
-const SENDGRID_FROM_NAME = process.env.SENDGRID_FROM_NAME || 'Afrik Farm';
+const SENDGRID_FROM_NAME = process.env.SENDGRID_FROM_NAME || 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)';
 async function sendViaSendGrid(_from, to, subject, html) {
     const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
     if (!SENDGRID_API_KEY)
@@ -35,6 +36,41 @@ async function sendViaSendGrid(_from, to, subject, html) {
         throw new Error(`SendGrid send failed: ${res.status} ${res.statusText} - ${text}`);
     }
     return true;
+}
+// Helper: send via SMTP using nodemailer
+async function sendViaSMTP(from, to, subject, html) {
+    const SMTP_HOST = process.env.MAIL_HOST;
+    const SMTP_PORT = process.env.MAIL_PORT ? parseInt(process.env.MAIL_PORT, 10) : undefined;
+    const SMTP_USER = process.env.MAIL_USER;
+    const SMTP_PASS = process.env.MAIL_PASSWORD;
+    const SMTP_SECURE = process.env.MAIL_SECURE === 'true';
+    if (!SMTP_HOST || !SMTP_PORT)
+        throw new Error('SMTP configuration missing (SMTP_HOST/SMTP_PORT)');
+    const transporter = nodemailer.createTransport({
+        host: SMTP_HOST,
+        port: SMTP_PORT,
+        secure: !!SMTP_SECURE,
+        auth: SMTP_USER && SMTP_PASS ? { user: SMTP_USER, pass: SMTP_PASS } : undefined,
+    });
+    // Optionally verify transporter first (will throw if unreachable)
+    try {
+        if (process.env.MAIL_VERIFY_SMTP === 'true') {
+            await transporter.verify();
+        }
+        const fromHeader = from ? `${from.name ? from.name + ' ' : ''}<${from.email}>` : `${SENDGRID_FROM_NAME} <${SENDGRID_FROM_EMAIL}>`;
+        const info = await transporter.sendMail({
+            from: fromHeader,
+            to,
+            subject,
+            html,
+        });
+        if (MAIL_DEBUG)
+            console.log('SMTP send info:', info);
+        return true;
+    }
+    catch (err) {
+        throw new Error(`SMTP send failed: ${err && err.message ? err.message : String(err)}`);
+    }
 }
 // Helper to decide whether to force-send via SendGrid (useful for hosts that block SMTP)
 function shouldForceSendGrid() {
@@ -73,15 +109,30 @@ async function sendWelcomeEmail(email, subject, user, temp_password) {
         subject: subject,
         html: ejs.render(template, { user, email, temp_password }),
     };
-    // Send only via SendGrid (production-safe)
+    // Try SendGrid first (when configured and preferred), otherwise fallback to SMTP
+    const fromObj = { email: 'no-reply@gmail.com', name: 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)' };
+    const html = mailOptions.html;
+    if (preferSendGrid() || shouldForceSendGrid()) {
+        try {
+            await sendViaSendGrid(fromObj, email, subject, html);
+            if (MAIL_DEBUG)
+                console.log('Email sent successfully via SendGrid to', email);
+            return;
+        }
+        catch (err) {
+            console.error('SendGrid send failed, falling back to SMTP:', err);
+            // Fall through to SMTP
+        }
+    }
+    // Fallback to SMTP
     try {
-        await sendViaSendGrid({ email: 'no-reply@afrikfarm.com', name: 'Afrik Farm' }, email, subject, mailOptions.html);
+        await sendViaSMTP(fromObj, email, subject, html);
         if (MAIL_DEBUG)
-            console.log('Email sent successfully via SendGrid to', email);
+            console.log('Email sent successfully via SMTP to', email);
         return;
     }
     catch (err) {
-        console.error('SendGrid send failed:', err);
+        console.error('Both SendGrid and SMTP sending failed:', err);
         throw err;
     }
 }
@@ -96,14 +147,28 @@ async function sendVerificationEmail(email, subject, verification_code, user) {
         subject: subject,
         html: ejs.render(template, { verification_code: verification_code, user: user, email: email }),
     };
+    const fromObj = { email: 'no-reply@gmail.com', name: 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)' };
+    const html = mailOptions.html;
+    if (preferSendGrid() || shouldForceSendGrid()) {
+        try {
+            await sendViaSendGrid(fromObj, email, subject, html);
+            if (MAIL_DEBUG)
+                console.log('Verification email sent via SendGrid to', email);
+            return;
+        }
+        catch (err) {
+            console.error('SendGrid send failed, falling back to SMTP:', err);
+        }
+    }
+    // Fallback to SMTP
     try {
-        await sendViaSendGrid({ email: 'no-reply@afrikfarm.com', name: 'Afrik Farm' }, email, subject, mailOptions.html);
+        await sendViaSMTP(fromObj, email, subject, html);
         if (MAIL_DEBUG)
-            console.log('Verification email sent via SendGrid to', email);
+            console.log('Verification email sent via SMTP to', email);
         return;
     }
-    catch (error) {
-        console.error('Error sending email:', error);
-        throw error;
+    catch (err) {
+        console.error('Both SendGrid and SMTP sending failed:', err);
+        throw err;
     }
 }

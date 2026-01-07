@@ -1,37 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -43,42 +10,46 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const models_1 = require("../../models");
 const config_1 = require("../../config/config");
 const express_validator_1 = require("express-validator");
-const argon2 = __importStar(require("argon2"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const prisma = new models_1.PrismaClient();
 async function registerExhibitor(request, response) {
     try {
+        // Validate request using frontend field names
         const validationRules = [
-            (0, express_validator_1.body)('company_name').notEmpty().withMessage('Company name is required'),
-            (0, express_validator_1.body)('contact_person').notEmpty().withMessage('Contact person is required'),
-            (0, express_validator_1.body)('contact_email').isEmail().withMessage('Invalid contact email'),
-            (0, express_validator_1.body)('contact_phone').notEmpty().withMessage('Contact phone is required'),
+            (0, express_validator_1.body)('exhibitorName').notEmpty().withMessage('Company/Organization name is required'),
+            (0, express_validator_1.body)('exhibitorFirstName').notEmpty().withMessage('Contact first name is required'),
+            (0, express_validator_1.body)('exhibitorLastName').notEmpty().withMessage('Contact last name is required'),
+            (0, express_validator_1.body)('exhibitorEmail').isEmail().withMessage('Invalid contact email'),
+            (0, express_validator_1.body)('exhibitorPhone').notEmpty().withMessage('Contact phone is required'),
             (0, express_validator_1.body)('password').notEmpty().withMessage('Password is required').bail().isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-            (0, express_validator_1.body)('website').optional(),
-            (0, express_validator_1.body)('description').optional(),
-            (0, express_validator_1.body)('service_product_to_exhibit').optional(),
-            (0, express_validator_1.body)('prefix').optional(),
+            (0, express_validator_1.body)('exhibitorWebsite').optional(),
+            (0, express_validator_1.body)('exhibitorDescription').notEmpty().withMessage('Company/Organization description is required'),
+            (0, express_validator_1.body)('exhibitorProducts').optional(),
+            (0, express_validator_1.body)('exhibitorPrefix').optional(),
         ];
         await Promise.all(validationRules.map(rule => rule.run(request)));
         const errors = (0, express_validator_1.validationResult)(request);
         if (!errors.isEmpty()) {
             return response.status(400).json({ errors: errors.array() });
         }
-        const { company_name, contact_person, contact_email, contact_phone, website, description, service_product_to_exhibit, prefix, password } = request.body;
-        const existing = await prisma.exhibitors.findUnique({ where: { contact_email } });
+        // Map frontend fields to DB fields
+        const { exhibitorPrefix, exhibitorName, exhibitorFirstName, exhibitorLastName, exhibitorEmail, exhibitorPhone, exhibitorWebsite, exhibitorDescription, exhibitorProducts, password, } = request.body;
+        const existing = await prisma.exhibitors.findUnique({ where: { contact_email: exhibitorEmail } });
         if (existing) {
             return response.status(400).json({ message: 'Email already registered' });
         }
-        const hashedPassword = await argon2.hash(password);
+        const hashedPassword = await bcrypt_1.default.hash(password, 10);
+        const contact_person = `${exhibitorFirstName.trim()} ${exhibitorLastName.trim()}`.trim();
         const newExhibitor = await prisma.exhibitors.create({
             data: {
-                prefix: prefix || null,
-                company_name,
+                prefix: exhibitorPrefix || null,
+                company_name: exhibitorName,
                 contact_person,
-                contact_email,
-                contact_phone,
-                website: website || null,
-                description: description || null,
-                service_product_to_exhibit: service_product_to_exhibit || null,
+                contact_email: exhibitorEmail,
+                contact_phone: exhibitorPhone,
+                website: exhibitorWebsite || null,
+                description: exhibitorDescription || null,
+                service_product_to_exhibit: exhibitorProducts || null,
                 password: hashedPassword,
             }
         });
@@ -95,26 +66,26 @@ async function registerExhibitor(request, response) {
     }
 }
 async function loginExhibitor(request, response) {
-    await (0, express_validator_1.body)('contact_email').notEmpty().withMessage('email is required').isEmail().withMessage('Invalid email format').bail().isString().run(request);
+    await (0, express_validator_1.body)('email').notEmpty().withMessage('email is required').isEmail().withMessage('Invalid email format').bail().isString().run(request);
     await (0, express_validator_1.body)('password').notEmpty().withMessage('password is required').bail().isString().run(request);
     const errors = (0, express_validator_1.validationResult)(request);
     if (!errors.isEmpty()) {
         return response.status(422).json({ status: 'fail', errors: errors.array() });
     }
-    const { contact_email, password } = request.body;
+    const { email, password } = request.body;
     try {
-        const exhibitor = await prisma.exhibitors.findFirst({ where: { contact_email } });
+        const exhibitor = await prisma.exhibitors.findFirst({ where: { contact_email: email } });
         if (!exhibitor) {
             return response.status(401).json({ message: 'Invalid credentials' });
         }
         if (exhibitor.password === null) {
             return response.status(401).json({ error: 'Invalid email or password' });
         }
-        if (!exhibitor.password.startsWith('$argon2')) {
+        if (!exhibitor.password.startsWith('$2')) {
             console.error('Password format invalid for exhibitor:', exhibitor.password);
             return response.status(400).json({ message: 'Invalid password format in database' });
         }
-        const passwordMatch = await argon2.verify(exhibitor.password, password);
+        const passwordMatch = await bcrypt_1.default.compare(password, exhibitor.password);
         if (!passwordMatch) {
             return response.status(401).json({ error: 'Invalid email or password' });
         }

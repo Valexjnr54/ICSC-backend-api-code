@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { PrismaClient } from '../../models';
 import { Config } from '../../config/config';
 import { body, validationResult } from "express-validator";
-import * as argon2 from 'argon2';
+import bcrypt from 'bcrypt';
 import { validateRequestBody } from '../../utils/requestValidator';
 
 const prisma = new PrismaClient();
@@ -36,7 +36,7 @@ export async function registerAdmin(request: Request, response: Response) {
         }
 
         // Hash the password before storing it
-        const hashedPassword = await argon2.hash(password);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         //Uploading Image to Cloudinary
         let imageUrl = "https://res.cloudinary.com/dx2gbcwhp/image/upload/v1699044872/noimage/uyifdentpdqjeyjnmowa.png"; // Default URL
@@ -108,7 +108,7 @@ export async function loginAdmin(request: Request, response: Response) {
     }
 
     // Verify the password
-    const passwordMatch = await argon2.verify(admin.password, password);
+    const passwordMatch = await bcrypt.compare(password, admin.password);
 
     if (!passwordMatch) {
       return response.status(401).json({ 

@@ -2,7 +2,7 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "../../models";
 import crypto from 'crypto';
-import * as argon2 from 'argon2';
+import bcrypt from 'bcrypt';
 import { body, validationResult } from "express-validator";
 
 const prisma = new PrismaClient();
@@ -59,7 +59,7 @@ export async function createExhibitor(request: Request, response: Response) {
     }
 
     const password = generateTempPassword();
-    const hashedPassword = await argon2.hash(password);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
     const newExhibitor = await prisma.exhibitors.create({

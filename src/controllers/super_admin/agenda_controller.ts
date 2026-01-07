@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "../../models";
 import crypto from 'crypto';
-import * as argon2 from 'argon2';
 import { body, validationResult } from "express-validator";
 
 const prisma = new PrismaClient();

@@ -2,7 +2,7 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "../../models";
 import crypto from 'crypto';
-import * as argon2 from 'argon2';
+import bcrypt from 'bcrypt';
 import { body, validationResult } from "express-validator";
 import { sendVerificationEmail, sendWelcomeEmail } from "../../utils/emailSender";
 
@@ -79,7 +79,7 @@ export async function createEventPartner(request: Request, response: Response) {
     }
 
     const password = generateTempPassword();
-    const hashedPassword = await argon2.hash(password);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newEventPartner = await prisma.eventPartners.create({
       data: {
