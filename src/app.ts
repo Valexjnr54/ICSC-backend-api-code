@@ -13,6 +13,7 @@ import { eventPartnerAuthRouter } from "./routes/auth/eventPartnerAuthRoutes";
 import { paymentRouter } from "./routes/user/payment.routes";
 import { packagesRouter } from "./routes/packages.routes";
 import { miscRouter } from "./routes/misc.routes";
+import { attendeeRouter } from "./routes/attendee/attendee.route";
 
 
 const app = express();
@@ -51,6 +52,7 @@ app.use(`${route}/user`, ministryRouter)
 app.use(`${route}/payments`, paymentRouter);
 app.use(`${route}/packages`, packagesRouter);
 app.use(`${route}/misc`, miscRouter);
+app.use(`${route}/attendee`, attendeeRouter);
 
 
 app.use((error: any, request: Request, response: Response, next: NextFunction) => {

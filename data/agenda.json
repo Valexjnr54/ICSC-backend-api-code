@@ -1,0 +1,49 @@
+{
+  "wednesday": [
+    {
+      "id": "wed-1",
+      "time": "08:30-09:00",
+      "title": "Registration and Welcome Coffee",
+      "location": "Main Hall",
+      "description": "",
+      "hasLiveStream": false
+    },
+    {
+      "id": "wed-2",
+      "time": "09:00-09:30",
+      "title": "Opening Ceremony",
+      "location": "Main Stage",
+      "description": "Official opening of the International Civil Service Conference 2026",
+      "hasLiveStream": true,
+      "isKeynote": true
+    },
+    {
+      "id": "wed-3",
+      "time": "09:30-10:30",
+      "title": "Keynote: The Future of Public Service",
+      "location": "Transform Stage",
+      "description": "Exploring the evolving role of civil servants in a rapidly changing world",
+      "hasLiveStream": true,
+      "isKeynote": true,
+      "speakers": ["Speaker A"]
+    }
+  ],
+  "thursday": [
+    {
+      "id": "thu-1",
+      "time": "09:00-09:10",
+      "title": "Opening Welcome",
+      "location": "Main Stage",
+      "description": "",
+      "hasLiveStream": true
+    },
+    {
+      "id": "thu-2",
+      "time": "09:10-10:00",
+      "title": "The Civil Service as the Engine of Governance",
+      "location": "Transform Stage",
+      "description": "Measuring and monitoring performance in public service",
+      "hasLiveStream": true
+    }
+  ]
+}

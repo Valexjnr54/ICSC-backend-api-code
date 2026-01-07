@@ -14,6 +14,10 @@ import {
 	updatePartnerPackage,
 	deletePartnerPackage,
 } from "../../controllers/packages_controller";
+import { allSpeakers, createSpeaker, deleteSpeaker, singleSpeaker } from "../../controllers/super_admin/speaker_controller";
+import { allExhibitors, createExhibitor, deleteExhibitor, singleExhibitor } from "../../controllers/super_admin/exhibitor_controller";
+import { allEventPartners, createEventPartner, deleteEventPartner, singleEventPartner } from "../../controllers/super_admin/event_partner_controller";
+import { createEvent, getEvents } from "../../controllers/super_admin/agenda_controller";
 
 export const adminRouter = express.Router();
 
@@ -44,3 +48,21 @@ adminRouter.delete('/delete-speaker-package', deleteSpeakerPackage);
 adminRouter.post('/create-event-partner-package', createPartnerPackage);
 adminRouter.put('/update-event-partner-package', updatePartnerPackage);
 adminRouter.delete('/delete-event-partner-package', deletePartnerPackage);
+
+adminRouter.post('/create-speaker', createSpeaker);
+adminRouter.get('/speakers', allSpeakers);
+adminRouter.get('/single-speaker', singleSpeaker);
+adminRouter.delete('/delete-speaker', deleteSpeaker);
+
+adminRouter.post('/create-exhibitor', createExhibitor);
+adminRouter.get('/exhibitors', allExhibitors);
+adminRouter.get('/single-exhibitor', singleExhibitor);
+adminRouter.delete('/delete-exhibitor', deleteExhibitor);
+
+adminRouter.post('/create-event-partner', createEventPartner);
+adminRouter.get('/event-partners', allEventPartners);
+adminRouter.get('/single-event-partner', singleEventPartner);
+adminRouter.delete('/delete-event-partner', deleteEventPartner);
+
+adminRouter.post('/agenda/create-event-agenda', createEvent);
+adminRouter.get('/agenda/event-agendas', getEvents);

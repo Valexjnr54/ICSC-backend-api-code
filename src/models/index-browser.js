@@ -311,6 +311,39 @@ exports.Prisma.EventPartnerPackagesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  slug: 'slug',
+  event_date: 'event_date',
+  start_time: 'start_time',
+  end_time: 'end_time',
+  title: 'title',
+  location: 'location',
+  description: 'description',
+  hasLiveStream: 'hasLiveStream',
+  liveStreamUrl: 'liveStreamUrl',
+  isKeynote: 'isKeynote',
+  speakers: 'speakers',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ScheduleScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  email: 'email',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ScheduleEventScalarFieldEnum = {
+  id: 'id',
+  scheduleId: 'scheduleId',
+  eventId: 'eventId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -387,7 +420,10 @@ exports.Prisma.ModelName = {
   SpeakerPackage: 'SpeakerPackage',
   PartnerPackage: 'PartnerPackage',
   assigned_booths: 'assigned_booths',
-  EventPartnerPackages: 'EventPartnerPackages'
+  EventPartnerPackages: 'EventPartnerPackages',
+  Event: 'Event',
+  Schedule: 'Schedule',
+  ScheduleEvent: 'ScheduleEvent'
 };
 
 /**
