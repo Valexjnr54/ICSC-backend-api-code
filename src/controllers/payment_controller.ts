@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 export async function initializePackagePayment(req: Request, res: Response) {
   try {
     const user: any = (req as any).user; // set by userAuthenticateJWT middleware
-    const { event_package_id, amount, currency } = req.body;
+    const { event_package_id, currency } = req.body;
 
     if (!event_package_id) {
       return res.status(400).json({ message: 'event_package_id is required' });
@@ -21,7 +21,11 @@ export async function initializePackagePayment(req: Request, res: Response) {
       return res.status(404).json({ message: 'Event package not found' });
     }
 
-    const price = amount ? Number(amount) : Number(pkg.price);
+    if(pkg.remaining_slot !== null && pkg.remaining_slot <= 0) {
+      return res.status(400).json({ message: 'No remaining slots available for this package' });
+    }
+
+    const price =  Number(pkg.price);
 
     const callback_url = "https://icsc-nigeria.netlify.app/register-partner.html";
 

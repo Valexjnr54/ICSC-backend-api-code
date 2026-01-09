@@ -14,19 +14,21 @@ export async function registerAttendee(request: Request, response: Response) {
     try {
         // Run validation before accessing request.body
         const validationRules = [
-          body('fullname').notEmpty().withMessage('Full Name is required'),
+          body('firstName').notEmpty().withMessage('Full Name is required'),
+          body('lastName').notEmpty().withMessage('Full Name is required'),
           body('phone_number').notEmpty().withMessage('Phone Number is required'),
+          body('jobTitle').notEmpty().withMessage('Job Title is required'),
           // nin is optional — don't attach a "required" message to an optional validator
           body('nin').optional(),
           body('email').isEmail().withMessage('Invalid email address'),
-          body('position').notEmpty().withMessage('Position is required'),
-          body('organization').notEmpty().withMessage('Organization is required'),
-          body('department').notEmpty().withMessage('Department is required'),
-          body('department_agency').notEmpty().withMessage('Department/Agency is required'),
+          body('position').optional().notEmpty().withMessage('Position is required'),
+          body('organization').optional().notEmpty().withMessage('Organization is required'),
+          body('department').optional().notEmpty().withMessage('Department is required'),
+          body('department_agency').optional().notEmpty().withMessage('Department/Agency is required'),
           body('staff_id').optional(),
           body('office_location').optional(),
           body('remark').optional(),
-          body('grade').notEmpty().withMessage('Grade is required'),
+          body('grade').optional().notEmpty().withMessage('Grade is required'),
           body('password').notEmpty().withMessage('Password is required').bail().isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
         ];
         await Promise.all(validationRules.map(rule => rule.run(request)));
@@ -37,7 +39,7 @@ export async function registerAttendee(request: Request, response: Response) {
         }
     
         // destructure after validation (request.body will be populated by body-parser middleware)
-        const { fullname, organization, phone_number, email, nin, position,
+        const { firstName, lastName, organization, phone_number, email, nin, position, jobTitle,
             department, department_agency, staff_id, office_location, remark, grade, password
          } = request.body;
     
@@ -45,7 +47,8 @@ export async function registerAttendee(request: Request, response: Response) {
         if (existing) {
           return response.status(400).json({ message: 'Email already registered' });
         }
-    
+
+        const fullname = `${firstName} ${lastName}`;
         
         const hashedPassword = await bcrypt.hash(password, 10);
         const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
@@ -60,6 +63,7 @@ export async function registerAttendee(request: Request, response: Response) {
             position,
             department,
             department_agency,
+            job_title: jobTitle,
             staff_id,
             office_location,
             remark,

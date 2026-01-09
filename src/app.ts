@@ -14,6 +14,7 @@ import { paymentRouter } from "./routes/user/payment.routes";
 import { packagesRouter } from "./routes/packages.routes";
 import { miscRouter } from "./routes/misc.routes";
 import { attendeeRouter } from "./routes/attendee/attendee.route";
+import { partnerAuthRouter } from "./routes/auth/partnerAuthRoutes";
 
 
 const app = express();
@@ -46,6 +47,7 @@ app.use(`${route}/auth`, attendeeAuthRouter);
 app.use(`${route}/auth`, speakerAuthRouter);
 app.use(`${route}/auth`, exhibitorAuthRouter);
 app.use(`${route}/auth`, eventPartnerAuthRouter);
+app.use(`${route}/auth`, partnerAuthRouter);
 
 app.use(`${route}/admin`, adminRouter);
 app.use(`${route}/user`, ministryRouter)

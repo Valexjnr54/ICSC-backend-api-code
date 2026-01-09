@@ -10,7 +10,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -68,13 +68,14 @@ model Attendees {
   fullname          String
   email             String   @unique
   phone_number      String
-  nin               String   @unique
+  nin               String?  @unique
   nin_verified      Boolean  @default(false)
-  position          String
-  grade             String
-  organization      String
-  department        String
-  department_agency String
+  position          String?
+  grade             String?
+  organization      String?
+  department        String?
+  department_agency String?
+  job_title         String?
   staff_id          String?
   office_location   String?
   remark            String?
@@ -208,15 +209,17 @@ model SpeakerPackage {
 }
 
 model PartnerPackage {
-  id          Int      @id @default(autoincrement())
-  slug        String   @unique
-  title       String
-  price       Float
-  description String?
-  features    Json
-  limitedText String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             Int      @id @default(autoincrement())
+  slug           String   @unique
+  title          String
+  price          Float
+  description    String?
+  features       Json
+  limitedText    String?
+  remaining_slot Int      @default(0)
+  total_slot     Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("partner_packages")
 }
@@ -267,6 +270,7 @@ model Event {
   liveStreamUrl String?
   isKeynote     Boolean  @default(false)
   speakers      Json?
+  track         String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -300,6 +304,23 @@ model ScheduleEvent {
 
   @@unique([scheduleId, eventId])
   @@map("schedule_events")
+}
+
+model Partner {
+  id                     Int      @id @default(autoincrement())
+  prefix                 String?
+  firstname              String
+  lastname               String
+  email                  String   @unique
+  phone_number           String
+  entity_name            String
+  country                String
+  job_title              String
+  subscribe_to_newletter Boolean? @default(false)
+  share_with_third_party Boolean? @default(false)
+  password               String
+
+  @@map("partners")
 }
 
 // Unified organization model for ministries, agencies, parastatals, etc.
