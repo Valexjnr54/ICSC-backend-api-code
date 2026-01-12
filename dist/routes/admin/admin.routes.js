@@ -7,6 +7,7 @@ exports.adminRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const adminMiddleware_1 = require("../../middlewares/adminMiddleware");
 const authenticationMiddleware_1 = require("../../middlewares/authenticationMiddleware");
+const uploadCSVMiddleware_1 = require("../../middlewares/uploadCSVMiddleware");
 const users_controller_1 = require("../../controllers/super_admin/users_controller");
 const attendee_controller_1 = require("../../controllers/super_admin/attendee_controller");
 const booth_controller_1 = require("../../controllers/super_admin/booth_controller");
@@ -26,6 +27,10 @@ exports.adminRouter.post('/create-attendee', attendee_controller_1.createAttende
 exports.adminRouter.get('/attendees', attendee_controller_1.allAttendees);
 exports.adminRouter.get('/single-attendee', attendee_controller_1.singleAttendee);
 exports.adminRouter.delete('/delete-attendee', attendee_controller_1.deleteAttendee);
+// CSV upload for bulk creating attendees
+exports.adminRouter.post('/attendees/upload-csv', uploadCSVMiddleware_1.uploadCSV, attendee_controller_1.uploadAttendeesCSV);
+// Download CSV template
+exports.adminRouter.get('/attendees/template', attendee_controller_1.downloadAttendeeTemplate);
 exports.adminRouter.post('/create-booth', booth_controller_1.createBooth);
 exports.adminRouter.put('/update-booth', booth_controller_1.updateBooth);
 exports.adminRouter.delete('/delete-booth', booth_controller_1.deleteBooth);

@@ -96,6 +96,7 @@ export async function createEvent(request: Request, response: Response) {
       body('description').optional(),
       body('hasLiveStream').optional().isBoolean(),
       body('isKeynote').optional(),
+      body('track').optional(),
     ];
     await Promise.all(validationRules.map(rule => rule.run(request)));
 
@@ -105,7 +106,7 @@ export async function createEvent(request: Request, response: Response) {
     }
 
     // destructure after validation (request.body will be populated by body-parser middleware)
-    const { title, event_date, start_time, end_time, location, description, hasLiveStream, isKeynote } = request.body;
+    const { title, event_date, start_time, end_time, location, description, hasLiveStream, isKeynote, track } = request.body;
     // Retrieve the event_partners by event_partners_id
     const check_admin = await prisma.admin.findUnique({ where: { id: admin_id } });
     const admin_role = check_admin?.role;
@@ -135,7 +136,8 @@ export async function createEvent(request: Request, response: Response) {
         location,
         description,
         hasLiveStream,
-        isKeynote
+        isKeynote,
+        track,
       }
     })
 
@@ -147,7 +149,7 @@ export async function createEvent(request: Request, response: Response) {
 }
 
 export async function getEvents(request: Request, response: Response) {
-    try {
+  try {
     let allEvents = await prisma.event.findMany({});
 
     // Sort by event_date (ISO YYYY-MM-DD) then by parsed start_time (minutes since midnight)
@@ -165,9 +167,68 @@ export async function getEvents(request: Request, response: Response) {
       }
     });
 
-    return response.status(200).json({ message: 'Event(s) fetched', data: allEvents });
-        } catch (error) {
-        console.error(error);
-        return response.status(500).json({ message: 'Internal Server Error' });
+    const DAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+    const counters: Record<string, number> = {};
+    const grouped: Record<string, Array<any>> = {};
+
+    function minutesToHHMM24(min: number) {
+      const hh = Math.floor(min / 60) % 24;
+      const mm = min % 60;
+      return String(hh).padStart(2, '0') + ':' + String(mm).padStart(2, '0');
     }
+    
+    function formatDateVerbose(dateStr: string) {
+      if (!dateStr) return '';
+      const dt = new Date(dateStr + 'T00:00:00Z');
+      if (isNaN(dt.getTime())) return dateStr;
+      const day = String(dt.getUTCDate()).padStart(2, '0');
+      const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const month = months[dt.getUTCMonth()];
+      const year = dt.getUTCFullYear();
+      return `${day} ${month} ${year}`;
+    }
+
+    for (const ev of allEvents) {
+      const dateStr = ev.event_date || '';
+      let dayName = 'unknown';
+      if (dateStr) {
+        const dt = new Date(dateStr + 'T00:00:00Z');
+        dayName = DAYS[dt.getUTCDay()];
+      }
+      if (!grouped[dayName]) grouped[dayName] = [];
+      counters[dayName] = (counters[dayName] || 0) + 1;
+
+      let timeRange = '';
+      try {
+        const sMin = parseTimeToMinutes(ev.start_time || '00:00AM');
+        const eMin = parseTimeToMinutes(ev.end_time || '00:00AM');
+        timeRange = `${minutesToHHMM24(sMin)}-${minutesToHHMM24(eMin)}`;
+      } catch (err) {
+        const s = (ev.start_time || '').replace(/\s+/g, '');
+        const e = (ev.end_time || '').replace(/\s+/g, '');
+        timeRange = `${s}-${e}`;
+      }
+
+      const short = dayName.slice(0, 3);
+      const item = {
+        id: `${ev.id}`,
+        time: timeRange,
+        day: dayName,
+        shortDay: short,
+        event_date: ev.event_date,
+        event_date_verbose: formatDateVerbose(ev.event_date || ''),
+        title: ev.title,
+        location: ev.location,
+        description: ev.description || '',
+        hasLiveStream: !!ev.hasLiveStream,
+      };
+
+      grouped[dayName].push(item);
+    }
+
+    return response.status(200).json({ message: 'Event(s) fetched', data: grouped });
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal Server Error' });
+  }
 }

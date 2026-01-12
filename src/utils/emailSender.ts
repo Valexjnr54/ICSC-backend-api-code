@@ -5,56 +5,84 @@ const nodemailer = require('nodemailer');
 
 const MAIL_DEBUG = process.env.MAIL_DEBUG === 'true';
 
-// Helper: Send via SendGrid HTTP API when configured
-const SENDGRID_FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'support@eyzmo.com';
-const SENDGRID_FROM_NAME = process.env.SENDGRID_FROM_NAME || 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)';
+// Use environment vars for "from" defaults
+const MAIL_FROM_EMAIL = process.env.MAIL_FROM_EMAIL || 'support@eyzmo.com';
+const MAIL_FROM_NAME = process.env.MAIL_FROM_NAME || 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)';
 
-async function sendViaSendGrid(_from: { email: string; name?: string } | null, to: string, subject: string, html: string) {
-  const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-  if (!SENDGRID_API_KEY) throw new Error('SendGrid API key not configured');
+// --- new: cached transporter + creation helper + retry utilities ---
+let cachedTransporter: any | null = null;
 
-  const body = {
-    personalizations: [{ to: [{ email: to }] }],
-    from: { email: SENDGRID_FROM_EMAIL, name: SENDGRID_FROM_NAME },
-    subject,
-    content: [{ type: 'text/html', value: html }]
-  };
-
-  const res = await fetch('https://api.sendgrid.com/v3/mail/send', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${SENDGRID_API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body),
-    // small timeout isn't directly supported by fetch API here - rely on platform timeout
-  });
-
-  if (!res.ok) {
-    const text = await res.text().catch(() => 'unable to read body');
-    // include details from SendGrid for easier debugging
-    throw new Error(`SendGrid send failed: ${res.status} ${res.statusText} - ${text}`);
-  }
-
-  return true;
+function getEnvBool(name: string, def = false) {
+  if (process.env[name] === undefined) return def;
+  return process.env[name] === 'true';
 }
 
-// Helper: send via SMTP using nodemailer
-async function sendViaSMTP(from: { email: string; name?: string } | null, to: string, subject: string, html: string) {
+function sleep(ms: number) {
+  return new Promise((res) => setTimeout(res, ms));
+}
+
+function isTransientError(err: any) {
+  if (!err) return false;
+  const msg = (err && err.message) ? String(err.message) : '';
+  const code = err && err.code ? String(err.code) : '';
+  // Common transient conditions
+  const transientMessages = ['Unexpected socket close', 'ECONNRESET', 'ETIMEDOUT', 'EPIPE', 'ENOTFOUND', 'ECONNREFUSED', 'socket hang up'];
+  if (transientMessages.some(t => msg.includes(t) || code === t)) return true;
+  return false;
+}
+
+function createTransporter() {
+  if (cachedTransporter) return cachedTransporter;
+
   const SMTP_HOST = process.env.MAIL_HOST;
   const SMTP_PORT = process.env.MAIL_PORT ? parseInt(process.env.MAIL_PORT, 10) : undefined;
-  const SMTP_USER = process.env.MAIL_USER;
-  const SMTP_PASS = process.env.MAIL_PASSWORD;
-  const SMTP_SECURE = process.env.MAIL_SECURE === 'true';
-
   if (!SMTP_HOST || !SMTP_PORT) throw new Error('SMTP configuration missing (SMTP_HOST/SMTP_PORT)');
 
-  const transporter = nodemailer.createTransport({
+  const SMTP_USER = process.env.MAIL_USER;
+  const SMTP_PASS = process.env.MAIL_PASSWORD;
+
+  // Timeouts (ms)
+  const connectionTimeout = process.env.MAIL_CONNECTION_TIMEOUT ? parseInt(process.env.MAIL_CONNECTION_TIMEOUT, 10) : 30000;
+  const greetingTimeout = process.env.MAIL_GREETING_TIMEOUT ? parseInt(process.env.MAIL_GREETING_TIMEOUT, 10) : 10000;
+  const socketTimeout = process.env.MAIL_SOCKET_TIMEOUT ? parseInt(process.env.MAIL_SOCKET_TIMEOUT, 10) : 30000;
+
+  // Decide secure: explicit env wins, otherwise port 465 -> secure
+  const SMTP_SECURE = process.env.MAIL_SECURE === 'true' || SMTP_PORT === 465;
+
+  // Allow relaxing TLS verification if desired (useful for some hosts/dev)
+  const tlsRejectUnauthorized = process.env.MAIL_TLS_REJECT_UNAUTHORIZED !== 'false';
+
+  const transportOptions: any = {
     host: SMTP_HOST,
-    port: SMTP_PORT, 
+    port: SMTP_PORT,
     secure: !!SMTP_SECURE,
-    auth: SMTP_USER && SMTP_PASS ? { user: SMTP_USER, pass: SMTP_PASS } : undefined,
-  });
+    logger: MAIL_DEBUG,
+    debug: MAIL_DEBUG,
+    connectionTimeout,
+    greetingTimeout,
+    socketTimeout,
+    tls: { rejectUnauthorized: tlsRejectUnauthorized },
+  };
+
+  if (SMTP_USER && SMTP_PASS) {
+    transportOptions.auth = { user: SMTP_USER, pass: SMTP_PASS };
+  }
+
+  // optional pooling to reuse connections for many sends
+  if (getEnvBool('MAIL_POOL', false)) {
+    transportOptions.pool = true;
+    transportOptions.maxConnections = process.env.MAIL_POOL_MAX_CONNECTIONS ? parseInt(process.env.MAIL_POOL_MAX_CONNECTIONS, 10) : 5;
+  }
+
+  cachedTransporter = nodemailer.createTransport(transportOptions);
+  return cachedTransporter;
+}
+// --- end new ---
+
+// Helper: send via SMTP using nodemailer (now uses cached transporter and retries)
+async function sendViaSMTP(from: { email: string; name?: string } | null, to: string, subject: string, html: string) {
+  // old transporter creation replaced with cached transporter + retry
+  const transporter = createTransporter();
 
   // Optionally verify transporter first (will throw if unreachable)
   try {
@@ -62,121 +90,105 @@ async function sendViaSMTP(from: { email: string; name?: string } | null, to: st
       await transporter.verify();
     }
 
-    const fromHeader = from ? `${from.name ? from.name + ' ' : ''}<${from.email}>` : `${SENDGRID_FROM_NAME} <${SENDGRID_FROM_EMAIL}>`;
+    const fromHeader = from ? `${from.name ? from.name + ' ' : ''}<${from.email}>` : `${MAIL_FROM_NAME} <${MAIL_FROM_EMAIL}>`;
 
-    const info = await transporter.sendMail({
-      from: fromHeader,
-      to,
-      subject,
-      html,
-    });
-
-    if (MAIL_DEBUG) console.log('SMTP send info:', info);
-    return true;
+    const maxAttempts = process.env.MAIL_MAX_RETRIES ? parseInt(process.env.MAIL_MAX_RETRIES, 10) : 3;
+    let attempt = 0;
+    let lastErr: any = null;
+    while (++attempt <= maxAttempts) {
+      try {
+        const info = await transporter.sendMail({
+          from: fromHeader,
+          to,
+          subject,
+          html,
+        });
+        if (MAIL_DEBUG) console.log(`SMTP send info (attempt ${attempt}):`, info);
+        return true;
+      } catch (err: any) {
+        lastErr = err;
+        // If transient, wait and retry
+        if (isTransientError(err) && attempt < maxAttempts) {
+          const backoff = Math.min(30000, 500 * Math.pow(2, attempt)); // exponential backoff
+          if (MAIL_DEBUG) console.warn(`Transient SMTP error (attempt ${attempt}) - will retry after ${backoff}ms:`, err && err.message ? err.message : err);
+          await sleep(backoff);
+          // On certain errors, recreate transporter to reset the socket
+          if (isTransientError(err)) {
+            try {
+              cachedTransporter = null;
+            } catch (_) { /* ignore */ }
+          }
+          continue;
+        }
+        // Non-transient or max attempts reached: throw
+        throw err;
+      }
+    }
+    // If we exit loop with failure
+    throw lastErr || new Error('SMTP send failed (unknown)');
   } catch (err: any) {
     throw new Error(`SMTP send failed: ${err && err.message ? err.message : String(err)}`);
   }
 }
 
-// Helper to decide whether to force-send via SendGrid (useful for hosts that block SMTP)
-function shouldForceSendGrid(): boolean {
-  return process.env.MAIL_FORCE_SENDGRID === 'true' && !!process.env.SENDGRID_API_KEY;
-}
-
-// Prefer SendGrid by default when API key exists (production preference)
-function preferSendGrid(): boolean {
-  return !!process.env.SENDGRID_API_KEY && process.env.MAIL_PREFER_SENDGRID !== 'false';
-}
-
-// Verify that a mail transport is available (SendGrid or SMTP)
+// Verify that an SMTP transport is available
 export async function verifyMailTransport(): Promise<{ ok: boolean; provider: string; detail?: string }> {
-  // Only SendGrid is supported in this deployment-safe path
+  // ...existing code...
   try {
-    const res = await fetch('https://api.sendgrid.com/v3/user/account', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${process.env.SENDGRID_API_KEY}` },
-    });
-    if (res.ok) return { ok: true, provider: 'sendgrid' };
-    const text = await res.text().catch(() => 'no body');
-    return { ok: false, provider: 'sendgrid', detail: `${res.status} ${res.statusText} - ${text}` };
+    const transporter = createTransporter();
+    await transporter.verify();
+    return { ok: true, provider: 'smtp' };
   } catch (err: any) {
-    return { ok: false, provider: 'sendgrid', detail: err && err.message ? err.message : String(err) };
+    return { ok: false, provider: 'smtp', detail: err && err.message ? err.message : String(err) };
   }
 }
 
 export async function sendWelcomeEmail(email: string, subject: string, user:object, temp_password:string) {
   // Load the email template
   const templatePath = path.join(__dirname, '../templates/email-templates/welcome.ejs');
-  // Read the EJS template from the file
   const template = fs.readFileSync(templatePath, 'utf-8');
-//   const template = await ejs.renderFile(templatePath, { fullname, email: email });
 
   const mailOptions = {
-    from: `${SENDGRID_FROM_NAME} <${SENDGRID_FROM_EMAIL}>`,
+    from: `${MAIL_FROM_NAME} <${MAIL_FROM_EMAIL}>`,
     to: email,
     subject: subject,
     html: ejs.render(template, { user, email, temp_password }),
   };
 
-    // Try SendGrid first (when configured and preferred), otherwise fallback to SMTP
-    const fromObj = { email: 'no-reply@gmail.com', name: 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)' };
-    const html = mailOptions.html as string;
+  const fromObj = { email: MAIL_FROM_EMAIL, name: MAIL_FROM_NAME };
+  const html = mailOptions.html as string;
 
-    if (preferSendGrid() || shouldForceSendGrid()) {
-      try {
-        await sendViaSendGrid(fromObj, email, subject, html);
-        if (MAIL_DEBUG) console.log('Email sent successfully via SendGrid to', email);
-        return;
-      } catch (err) {
-        console.error('SendGrid send failed, falling back to SMTP:', err);
-        // Fall through to SMTP
-      }
-    }
-
-    // Fallback to SMTP
-    try {
-      await sendViaSMTP(fromObj, email, subject, html);
-      if (MAIL_DEBUG) console.log('Email sent successfully via SMTP to', email);
-      return;
-    } catch (err) {
-      console.error('Both SendGrid and SMTP sending failed:', err);
-      throw err;
-    }
+  try {
+    await sendViaSMTP(fromObj, email, subject, html);
+    if (MAIL_DEBUG) console.log('Email sent successfully via SMTP to', email);
+    return;
+  } catch (err) {
+    console.error('SMTP sending failed:', err);
+    throw err;
+  }
 }
 
 export async function sendVerificationEmail(email:string, subject:string, verification_code:string, user:object) {
   // Load the email template
   const templatePath = path.join(__dirname, '../templates/email-templates/verification.ejs');
-  // Read the EJS template from the file
   const template = fs.readFileSync(templatePath, 'utf-8');
 
   const mailOptions = {
-    from: `${SENDGRID_FROM_NAME} <${SENDGRID_FROM_EMAIL}>`,
+    from: `${MAIL_FROM_NAME} <${MAIL_FROM_EMAIL}>`,
     to: email,
     subject: subject,
     html: ejs.render(template, { verification_code:verification_code, user:user, email:email }),
   };
 
-  const fromObj = { email: 'no-reply@gmail.com', name: 'INTERNATIONAL CIVIL SERVICE CONFERENCE (ICSC)' };
+  const fromObj = { email: MAIL_FROM_EMAIL, name: MAIL_FROM_NAME };
   const html = mailOptions.html as string;
 
-  if (preferSendGrid() || shouldForceSendGrid()) {
-    try {
-      await sendViaSendGrid(fromObj, email, subject, html);
-      if (MAIL_DEBUG) console.log('Verification email sent via SendGrid to', email);
-      return;
-    } catch (err) {
-      console.error('SendGrid send failed, falling back to SMTP:', err);
-    }
-  }
-
-  // Fallback to SMTP
   try {
     await sendViaSMTP(fromObj, email, subject, html);
     if (MAIL_DEBUG) console.log('Verification email sent via SMTP to', email);
     return;
   } catch (err) {
-    console.error('Both SendGrid and SMTP sending failed:', err);
+    console.error('SMTP sending failed:', err);
     throw err;
   }
 }

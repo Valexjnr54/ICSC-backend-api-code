@@ -11,24 +11,27 @@ const models_1 = require("../../models");
 const config_1 = require("../../config/config");
 const express_validator_1 = require("express-validator");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const emailSender_1 = require("../../utils/emailSender");
 const prisma = new models_1.PrismaClient();
 async function registerAttendee(request, response) {
     try {
         // Run validation before accessing request.body
         const validationRules = [
-            (0, express_validator_1.body)('fullname').notEmpty().withMessage('Full Name is required'),
+            (0, express_validator_1.body)('firstName').notEmpty().withMessage('Full Name is required'),
+            (0, express_validator_1.body)('lastName').notEmpty().withMessage('Full Name is required'),
             (0, express_validator_1.body)('phone_number').notEmpty().withMessage('Phone Number is required'),
+            (0, express_validator_1.body)('jobTitle').notEmpty().withMessage('Job Title is required'),
             // nin is optional — don't attach a "required" message to an optional validator
             (0, express_validator_1.body)('nin').optional(),
             (0, express_validator_1.body)('email').isEmail().withMessage('Invalid email address'),
-            (0, express_validator_1.body)('position').notEmpty().withMessage('Position is required'),
-            (0, express_validator_1.body)('organization').notEmpty().withMessage('Organization is required'),
-            (0, express_validator_1.body)('department').notEmpty().withMessage('Department is required'),
-            (0, express_validator_1.body)('department_agency').notEmpty().withMessage('Department/Agency is required'),
+            (0, express_validator_1.body)('position').optional().notEmpty().withMessage('Position is required'),
+            (0, express_validator_1.body)('organization').optional().notEmpty().withMessage('Organization is required'),
+            (0, express_validator_1.body)('department').optional().notEmpty().withMessage('Department is required'),
+            (0, express_validator_1.body)('department_agency').optional().notEmpty().withMessage('Department/Agency is required'),
             (0, express_validator_1.body)('staff_id').optional(),
             (0, express_validator_1.body)('office_location').optional(),
             (0, express_validator_1.body)('remark').optional(),
-            (0, express_validator_1.body)('grade').notEmpty().withMessage('Grade is required'),
+            (0, express_validator_1.body)('grade').optional().notEmpty().withMessage('Grade is required'),
             (0, express_validator_1.body)('password').notEmpty().withMessage('Password is required').bail().isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
         ];
         await Promise.all(validationRules.map(rule => rule.run(request)));
@@ -37,11 +40,12 @@ async function registerAttendee(request, response) {
             return response.status(400).json({ errors: errors.array() });
         }
         // destructure after validation (request.body will be populated by body-parser middleware)
-        const { fullname, organization, phone_number, email, nin, position, department, department_agency, staff_id, office_location, remark, grade, password } = request.body;
+        const { firstName, lastName, organization, phone_number, email, nin, position, jobTitle, department, department_agency, staff_id, office_location, remark, grade, password } = request.body;
         const existing = await prisma.attendees.findUnique({ where: { email } });
         if (existing) {
             return response.status(400).json({ message: 'Email already registered' });
         }
+        const fullname = `${firstName} ${lastName}`;
         const hashedPassword = await bcrypt_1.default.hash(password, 10);
         const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
         const newAttendee = await prisma.attendees.create({
@@ -54,6 +58,7 @@ async function registerAttendee(request, response) {
                 position,
                 department,
                 department_agency,
+                job_title: jobTitle,
                 staff_id,
                 office_location,
                 remark,
@@ -62,7 +67,7 @@ async function registerAttendee(request, response) {
                 temporal_password: false,
             },
         });
-        // await sendWelcomeEmail(email, 'Welcome to International Civil Service Conference', newAttendee, password);
+        await (0, emailSender_1.sendWelcomeEmail)(email, 'Welcome to International Civil Service Conference', newAttendee, password);
         const token = jsonwebtoken_1.default.sign({ attendeeId: newAttendee.id, attendee: newAttendee, email: newAttendee.email, fullname: newAttendee.fullname }, config_1.Config.secret);
         return response.status(201).json({ message: 'Attendee registered successfully', token, newAttendee });
     }

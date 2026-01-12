@@ -15,7 +15,7 @@ function ensureConfig() {
   }
 }
 
-export async function initializePayment(speaker_id:number, phone_number:string, price: number, email:string, callback_url: string, currency?: string) {
+export async function initializePayment(speaker_id:number, phone_number:string, price: number, email:string, callback_url: string, currency?: string,pkgId?: number) {
   ensureConfig();
   try {
     // Flutterwave requires a transaction reference `tx_ref` in the initialize payload.
@@ -35,10 +35,11 @@ export async function initializePayment(speaker_id:number, phone_number:string, 
         currency: currency || Config.flutterwaveCurrency || 'USD',
         meta: {
           tx_ref,
-          speaker_id,
+          partner_id: speaker_id,
           phone_number,
           amount: price,
           email,
+          package_id:pkgId
         }
       },
       {

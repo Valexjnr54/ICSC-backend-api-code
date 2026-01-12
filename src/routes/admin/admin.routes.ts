@@ -4,7 +4,7 @@ import { authenticateJWT } from "../../middlewares/authenticationMiddleware";
 import { upload } from "../../middlewares/multerMiddleware";
 import { uploadCSV } from "../../middlewares/uploadCSVMiddleware";
 import { allUser, createUser, deleteUser, singleUser } from "../../controllers/super_admin/users_controller";
-import { allAttendees, createAttendee, deleteAttendee, singleAttendee } from "../../controllers/super_admin/attendee_controller";
+import { allAttendees, createAttendee, deleteAttendee, singleAttendee, uploadAttendeesCSV, downloadAttendeeTemplate } from "../../controllers/super_admin/attendee_controller";
 import { createBooth, deleteBooth, getBoothById, getBooths, updateBooth } from "../../controllers/super_admin/booth_controller";
 import {
 	createSpeakerPackage,
@@ -33,6 +33,10 @@ adminRouter.post('/create-attendee', createAttendee);
 adminRouter.get('/attendees', allAttendees);
 adminRouter.get('/single-attendee', singleAttendee);
 adminRouter.delete('/delete-attendee', deleteAttendee);
+// CSV upload for bulk creating attendees
+adminRouter.post('/attendees/upload-csv', uploadCSV, uploadAttendeesCSV);
+// Download CSV template
+adminRouter.get('/attendees/template', downloadAttendeeTemplate);
 
 adminRouter.post('/create-booth', createBooth);
 adminRouter.put('/update-booth', updateBooth);

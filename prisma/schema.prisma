@@ -68,6 +68,7 @@ model Attendees {
   fullname     String
   email         String    @unique
   phone_number  String
+  country String?
   nin           String?    @unique
   nin_verified   Boolean              @default(false)
   position String?
@@ -152,7 +153,6 @@ model EventPartners {
   updatedAt     DateTime  @updatedAt
 
   @@map("event_partners")
-  EventPartnerPackages EventPartnerPackages[]
 }
 
 model Speakers {
@@ -191,7 +191,6 @@ model EventPackages {
   updatedAt     DateTime  @updatedAt
 
   @@map("event_packages")
-  EventPartnerPackages EventPartnerPackages[]
 }
 
 model SpeakerPackage {
@@ -222,6 +221,7 @@ model PartnerPackage {
   updatedAt   DateTime @updatedAt
 
   @@map("partner_packages")
+  EventPartnerPackages EventPartnerPackages[]
 }
 
 model assigned_booths {
@@ -241,9 +241,9 @@ model assigned_booths {
 model EventPartnerPackages {
   id            Int       @id @default(autoincrement())
   event_partner_id Int
-  event_partner   EventPartners @relation(fields: [event_partner_id], references: [id])
+  event_partner   Partner @relation(fields: [event_partner_id], references: [id])
   event_package_id Int
-  event_package  EventPackages @relation(fields: [event_package_id], references: [id])
+  event_package  PartnerPackage @relation(fields: [event_package_id], references: [id])
   payment_reference String?
   payment_status Status @default(Pending)
   payment_method String?
@@ -320,6 +320,7 @@ model Partner {
   share_with_third_party Boolean? @default(false)
   password      String
   @@map("partners")
+  EventPartnerPackages EventPartnerPackages[]
 }
 
 // Unified organization model for ministries, agencies, parastatals, etc.

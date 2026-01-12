@@ -27,14 +27,14 @@ export async function initializePackagePayment(req: Request, res: Response) {
 
     const price =  Number(pkg.price);
 
-    const callback_url = "https://icsc-nigeria.netlify.app/register-partner.html";
+    const callback_url = "http://Users/user/Desktop/Frontend-repo/register-partner.html";
 
     // Build callback - allow frontend override or use configured callback
     const cb = callback_url || Config.flutterwaveDeliveryCallback || '';
 
     // For Flutterwave the `amount` should be in currency units (e.g., 10.50),
     // not in minor units (cents). Pass `price` directly.
-    const init = await initializePayment(user.id, user.phone_number || '', Number(price), user.email || '', cb, currency);
+    const init = await initializePayment(user.id, user.phone_number || '', Number(price), user.email || '', cb, currency,pkg.id);
 
     return res.status(200).json({ success: true, data: init });
   } catch (err: any) {
@@ -46,40 +46,69 @@ export async function initializePackagePayment(req: Request, res: Response) {
 // Verify payment reference returned by Flutterwave and update DB record
 export async function verifyPackagePayment(req: Request, res: Response) {
   try {
-    const { reference, event_package_id } = req.query as any;
+    const { reference } = req.query as any;
     if (!reference) return res.status(400).json({ message: 'reference is required' });
 
   const verification: any = await verifyPayment(reference as string);
 
     const status = verification?.data?.status; // "success" when paid
-    const metadata = verification?.data?.metadata || {};
+    const metadata = verification?.data?.meta || {};
 
-    // Determine possible partner id keys (legacy naming: farmer_id)
-    const possiblePartnerId = metadata?.farmer_id ?? metadata?.event_partner_id ?? metadata?.user_id;
+    // Build a robust where clause: check by payment_reference OR by partner+package with a paid status
+    const paidStatuses = ['Paid', 'Approved'];
+    const normalizedReference = String(reference);
 
-    // Build where clause safely (don't include undefined fields)
-    let partnerPackage = null;
-    if (possiblePartnerId) {
-      const where: any = { event_partner_id: Number(possiblePartnerId) };
-      if (event_package_id) where.event_package_id = Number(event_package_id);
-      partnerPackage = await prisma.eventPartnerPackages.findFirst({ where });
+    const whereClause: any = { OR: [{ payment_reference: normalizedReference }] };
+
+    const partnerIdFromMeta = metadata?.partner_id ? Number(metadata.partner_id) : undefined;
+    const packageIdFromMeta = metadata?.package_id ? Number(metadata.package_id) : undefined;
+
+    if (partnerIdFromMeta && packageIdFromMeta) {
+      whereClause.OR.push({
+        event_partner_id: partnerIdFromMeta,
+        event_package_id: packageIdFromMeta,
+        payment_status: { in: paidStatuses },
+      });
+    } else if (partnerIdFromMeta) {
+      whereClause.OR.push({
+        event_partner_id: partnerIdFromMeta,
+        payment_status: { in: paidStatuses },
+      });
+    } else if (packageIdFromMeta) {
+      whereClause.OR.push({
+        event_package_id: packageIdFromMeta,
+        payment_status: { in: paidStatuses },
+      });
     }
 
-    // If not found by metadata, try matching by payment_reference
-    if (!partnerPackage) {
-      partnerPackage = await prisma.eventPartnerPackages.findFirst({ where: { payment_reference: reference as string } });
+    const payment_exists = await prisma.eventPartnerPackages.findFirst({ where: whereClause });
+
+    if (payment_exists) {
+      return res.status(200).json({ success: true, message: 'Payment already verified' });
     }
 
-    // If found, update the record with reference, method and status
-    if (partnerPackage) {
-      await prisma.eventPartnerPackages.update({
-        where: { id: partnerPackage.id },
+    // If not found, create a new mapping only when we have required ids
+    if (partnerIdFromMeta && packageIdFromMeta) {
+      await prisma.eventPartnerPackages.create({
         data: {
-          payment_reference: reference as string,
+          event_partner_id: partnerIdFromMeta,
+          event_package_id: packageIdFromMeta,
+          payment_reference: normalizedReference,
           payment_method: 'flutterwave',
-          payment_status: status === 'success' ? 'Approved' : 'Rejected'
+          payment_status: 'Paid',
         }
       });
+
+      await prisma.partnerPackage.update({
+        where: { id: packageIdFromMeta },
+        data: {
+          remaining_slot: {
+            decrement: 1,
+          },
+        },
+      });
+    } else {
+      console.warn('Insufficient metadata to create EventPartnerPackages record', { partnerIdFromMeta, packageIdFromMeta });
     }
 
     return res.status(200).json({ success: true, verification });
@@ -113,7 +142,7 @@ export async function initializeSpeakerPackagePayment(req: Request, res: Respons
     const cb = callback_url || Config.flutterwaveDeliveryCallback || '';
 
     // Note: initializePayment's first param is named `farmer_id` in the util; we pass the speaker's user id
-    const init = await initializePayment(user.id, user.phone_number || '', Number(price), user.email || '', cb, currency);
+    const init = await initializePayment(user.id, user.phone_number || '', Number(price), user.email || '', cb, currency,pkg.id);
 
     return res.status(200).json({ success: true, data: init });
   } catch (err: any) {

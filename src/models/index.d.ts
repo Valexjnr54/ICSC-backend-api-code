@@ -2337,63 +2337,32 @@ export namespace Prisma {
 
 
   /**
-   * Count Type EventPartnersCountOutputType
+   * Count Type PartnerPackageCountOutputType
    */
 
-  export type EventPartnersCountOutputType = {
+  export type PartnerPackageCountOutputType = {
     EventPartnerPackages: number
   }
 
-  export type EventPartnersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    EventPartnerPackages?: boolean | EventPartnersCountOutputTypeCountEventPartnerPackagesArgs
+  export type PartnerPackageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    EventPartnerPackages?: boolean | PartnerPackageCountOutputTypeCountEventPartnerPackagesArgs
   }
 
   // Custom InputTypes
   /**
-   * EventPartnersCountOutputType without action
+   * PartnerPackageCountOutputType without action
    */
-  export type EventPartnersCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PartnerPackageCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the EventPartnersCountOutputType
+     * Select specific fields to fetch from the PartnerPackageCountOutputType
      */
-    select?: EventPartnersCountOutputTypeSelect<ExtArgs> | null
+    select?: PartnerPackageCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * EventPartnersCountOutputType without action
+   * PartnerPackageCountOutputType without action
    */
-  export type EventPartnersCountOutputTypeCountEventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EventPartnerPackagesWhereInput
-  }
-
-
-  /**
-   * Count Type EventPackagesCountOutputType
-   */
-
-  export type EventPackagesCountOutputType = {
-    EventPartnerPackages: number
-  }
-
-  export type EventPackagesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    EventPartnerPackages?: boolean | EventPackagesCountOutputTypeCountEventPartnerPackagesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * EventPackagesCountOutputType without action
-   */
-  export type EventPackagesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EventPackagesCountOutputType
-     */
-    select?: EventPackagesCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * EventPackagesCountOutputType without action
-   */
-  export type EventPackagesCountOutputTypeCountEventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PartnerPackageCountOutputTypeCountEventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EventPartnerPackagesWhereInput
   }
 
@@ -2457,6 +2426,37 @@ export namespace Prisma {
    */
   export type ScheduleCountOutputTypeCountScheduleEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScheduleEventWhereInput
+  }
+
+
+  /**
+   * Count Type PartnerCountOutputType
+   */
+
+  export type PartnerCountOutputType = {
+    EventPartnerPackages: number
+  }
+
+  export type PartnerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    EventPartnerPackages?: boolean | PartnerCountOutputTypeCountEventPartnerPackagesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PartnerCountOutputType without action
+   */
+  export type PartnerCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerCountOutputType
+     */
+    select?: PartnerCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PartnerCountOutputType without action
+   */
+  export type PartnerCountOutputTypeCountEventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventPartnerPackagesWhereInput
   }
 
 
@@ -5472,6 +5472,7 @@ export namespace Prisma {
     fullname: string | null
     email: string | null
     phone_number: string | null
+    country: string | null
     nin: string | null
     nin_verified: boolean | null
     position: string | null
@@ -5500,6 +5501,7 @@ export namespace Prisma {
     fullname: string | null
     email: string | null
     phone_number: string | null
+    country: string | null
     nin: string | null
     nin_verified: boolean | null
     position: string | null
@@ -5528,6 +5530,7 @@ export namespace Prisma {
     fullname: number
     email: number
     phone_number: number
+    country: number
     nin: number
     nin_verified: number
     position: number
@@ -5568,6 +5571,7 @@ export namespace Prisma {
     fullname?: true
     email?: true
     phone_number?: true
+    country?: true
     nin?: true
     nin_verified?: true
     position?: true
@@ -5596,6 +5600,7 @@ export namespace Prisma {
     fullname?: true
     email?: true
     phone_number?: true
+    country?: true
     nin?: true
     nin_verified?: true
     position?: true
@@ -5624,6 +5629,7 @@ export namespace Prisma {
     fullname?: true
     email?: true
     phone_number?: true
+    country?: true
     nin?: true
     nin_verified?: true
     position?: true
@@ -5739,6 +5745,7 @@ export namespace Prisma {
     fullname: string
     email: string
     phone_number: string
+    country: string | null
     nin: string | null
     nin_verified: boolean
     position: string | null
@@ -5786,6 +5793,7 @@ export namespace Prisma {
     fullname?: boolean
     email?: boolean
     phone_number?: boolean
+    country?: boolean
     nin?: boolean
     nin_verified?: boolean
     position?: boolean
@@ -5816,6 +5824,7 @@ export namespace Prisma {
     fullname?: boolean
     email?: boolean
     phone_number?: boolean
+    country?: boolean
     nin?: boolean
     nin_verified?: boolean
     position?: boolean
@@ -5838,7 +5847,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AttendeesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "fullname" | "email" | "phone_number" | "nin" | "nin_verified" | "position" | "grade" | "organization" | "department" | "department_agency" | "job_title" | "staff_id" | "office_location" | "remark" | "status" | "role" | "password" | "temporal_password" | "registeredAt" | "created_by_id" | "created_by_type" | "createdAt" | "updatedAt", ExtArgs["result"]["attendees"]>
+  export type AttendeesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "fullname" | "email" | "phone_number" | "country" | "nin" | "nin_verified" | "position" | "grade" | "organization" | "department" | "department_agency" | "job_title" | "staff_id" | "office_location" | "remark" | "status" | "role" | "password" | "temporal_password" | "registeredAt" | "created_by_id" | "created_by_type" | "createdAt" | "updatedAt", ExtArgs["result"]["attendees"]>
 
   export type $AttendeesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Attendees"
@@ -5849,6 +5858,7 @@ export namespace Prisma {
       fullname: string
       email: string
       phone_number: string
+      country: string | null
       nin: string | null
       nin_verified: boolean
       position: string | null
@@ -6243,6 +6253,7 @@ export namespace Prisma {
     readonly fullname: FieldRef<"Attendees", 'String'>
     readonly email: FieldRef<"Attendees", 'String'>
     readonly phone_number: FieldRef<"Attendees", 'String'>
+    readonly country: FieldRef<"Attendees", 'String'>
     readonly nin: FieldRef<"Attendees", 'String'>
     readonly nin_verified: FieldRef<"Attendees", 'Boolean'>
     readonly position: FieldRef<"Attendees", 'String'>
@@ -8998,8 +9009,6 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    EventPartnerPackages?: boolean | EventPartners$EventPartnerPackagesArgs<ExtArgs>
-    _count?: boolean | EventPartnersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["eventPartners"]>
 
 
@@ -9024,16 +9033,10 @@ export namespace Prisma {
   }
 
   export type EventPartnersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "fullname" | "email" | "phone_number" | "company_name" | "logo" | "website" | "social_media" | "description" | "why_interested" | "password" | "role" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["eventPartners"]>
-  export type EventPartnersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    EventPartnerPackages?: boolean | EventPartners$EventPartnerPackagesArgs<ExtArgs>
-    _count?: boolean | EventPartnersCountOutputTypeDefaultArgs<ExtArgs>
-  }
 
   export type $EventPartnersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EventPartners"
-    objects: {
-      EventPartnerPackages: Prisma.$EventPartnerPackagesPayload<ExtArgs>[]
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
       prefix: string | null
@@ -9391,7 +9394,6 @@ export namespace Prisma {
    */
   export interface Prisma__EventPartnersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    EventPartnerPackages<T extends EventPartners$EventPartnerPackagesArgs<ExtArgs> = {}>(args?: Subset<T, EventPartners$EventPartnerPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPartnerPackagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9454,10 +9456,6 @@ export namespace Prisma {
      */
     omit?: EventPartnersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
-    /**
      * Filter, which EventPartners to fetch.
      */
     where: EventPartnersWhereUniqueInput
@@ -9476,10 +9474,6 @@ export namespace Prisma {
      */
     omit?: EventPartnersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
-    /**
      * Filter, which EventPartners to fetch.
      */
     where: EventPartnersWhereUniqueInput
@@ -9497,10 +9491,6 @@ export namespace Prisma {
      * Omit specific fields from the EventPartners
      */
     omit?: EventPartnersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
     /**
      * Filter, which EventPartners to fetch.
      */
@@ -9550,10 +9540,6 @@ export namespace Prisma {
      */
     omit?: EventPartnersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
-    /**
      * Filter, which EventPartners to fetch.
      */
     where?: EventPartnersWhereInput
@@ -9602,10 +9588,6 @@ export namespace Prisma {
      */
     omit?: EventPartnersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
-    /**
      * Filter, which EventPartners to fetch.
      */
     where?: EventPartnersWhereInput
@@ -9649,10 +9631,6 @@ export namespace Prisma {
      */
     omit?: EventPartnersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
-    /**
      * The data needed to create a EventPartners.
      */
     data: XOR<EventPartnersCreateInput, EventPartnersUncheckedCreateInput>
@@ -9681,10 +9659,6 @@ export namespace Prisma {
      * Omit specific fields from the EventPartners
      */
     omit?: EventPartnersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
     /**
      * The data needed to update a EventPartners.
      */
@@ -9726,10 +9700,6 @@ export namespace Prisma {
      */
     omit?: EventPartnersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
-    /**
      * The filter to search for the EventPartners to update in case it exists.
      */
     where: EventPartnersWhereUniqueInput
@@ -9756,10 +9726,6 @@ export namespace Prisma {
      */
     omit?: EventPartnersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
-    /**
      * Filter which EventPartners to delete.
      */
     where: EventPartnersWhereUniqueInput
@@ -9780,30 +9746,6 @@ export namespace Prisma {
   }
 
   /**
-   * EventPartners.EventPartnerPackages
-   */
-  export type EventPartners$EventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EventPartnerPackages
-     */
-    select?: EventPartnerPackagesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EventPartnerPackages
-     */
-    omit?: EventPartnerPackagesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnerPackagesInclude<ExtArgs> | null
-    where?: EventPartnerPackagesWhereInput
-    orderBy?: EventPartnerPackagesOrderByWithRelationInput | EventPartnerPackagesOrderByWithRelationInput[]
-    cursor?: EventPartnerPackagesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EventPartnerPackagesScalarFieldEnum | EventPartnerPackagesScalarFieldEnum[]
-  }
-
-  /**
    * EventPartners without action
    */
   export type EventPartnersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9815,10 +9757,6 @@ export namespace Prisma {
      * Omit specific fields from the EventPartners
      */
     omit?: EventPartnersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnersInclude<ExtArgs> | null
   }
 
 
@@ -11113,8 +11051,6 @@ export namespace Prisma {
     features?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    EventPartnerPackages?: boolean | EventPackages$EventPartnerPackagesArgs<ExtArgs>
-    _count?: boolean | EventPackagesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["eventPackages"]>
 
 
@@ -11130,16 +11066,10 @@ export namespace Prisma {
   }
 
   export type EventPackagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "features" | "createdAt" | "updatedAt", ExtArgs["result"]["eventPackages"]>
-  export type EventPackagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    EventPartnerPackages?: boolean | EventPackages$EventPartnerPackagesArgs<ExtArgs>
-    _count?: boolean | EventPackagesCountOutputTypeDefaultArgs<ExtArgs>
-  }
 
   export type $EventPackagesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EventPackages"
-    objects: {
-      EventPartnerPackages: Prisma.$EventPartnerPackagesPayload<ExtArgs>[]
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
@@ -11488,7 +11418,6 @@ export namespace Prisma {
    */
   export interface Prisma__EventPackagesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    EventPartnerPackages<T extends EventPackages$EventPartnerPackagesArgs<ExtArgs> = {}>(args?: Subset<T, EventPackages$EventPartnerPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPartnerPackagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11542,10 +11471,6 @@ export namespace Prisma {
      */
     omit?: EventPackagesOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
-    /**
      * Filter, which EventPackages to fetch.
      */
     where: EventPackagesWhereUniqueInput
@@ -11564,10 +11489,6 @@ export namespace Prisma {
      */
     omit?: EventPackagesOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
-    /**
      * Filter, which EventPackages to fetch.
      */
     where: EventPackagesWhereUniqueInput
@@ -11585,10 +11506,6 @@ export namespace Prisma {
      * Omit specific fields from the EventPackages
      */
     omit?: EventPackagesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
     /**
      * Filter, which EventPackages to fetch.
      */
@@ -11638,10 +11555,6 @@ export namespace Prisma {
      */
     omit?: EventPackagesOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
-    /**
      * Filter, which EventPackages to fetch.
      */
     where?: EventPackagesWhereInput
@@ -11690,10 +11603,6 @@ export namespace Prisma {
      */
     omit?: EventPackagesOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
-    /**
      * Filter, which EventPackages to fetch.
      */
     where?: EventPackagesWhereInput
@@ -11737,10 +11646,6 @@ export namespace Prisma {
      */
     omit?: EventPackagesOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
-    /**
      * The data needed to create a EventPackages.
      */
     data: XOR<EventPackagesCreateInput, EventPackagesUncheckedCreateInput>
@@ -11769,10 +11674,6 @@ export namespace Prisma {
      * Omit specific fields from the EventPackages
      */
     omit?: EventPackagesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
     /**
      * The data needed to update a EventPackages.
      */
@@ -11814,10 +11715,6 @@ export namespace Prisma {
      */
     omit?: EventPackagesOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
-    /**
      * The filter to search for the EventPackages to update in case it exists.
      */
     where: EventPackagesWhereUniqueInput
@@ -11844,10 +11741,6 @@ export namespace Prisma {
      */
     omit?: EventPackagesOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
-    /**
      * Filter which EventPackages to delete.
      */
     where: EventPackagesWhereUniqueInput
@@ -11868,30 +11761,6 @@ export namespace Prisma {
   }
 
   /**
-   * EventPackages.EventPartnerPackages
-   */
-  export type EventPackages$EventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the EventPartnerPackages
-     */
-    select?: EventPartnerPackagesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the EventPartnerPackages
-     */
-    omit?: EventPartnerPackagesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPartnerPackagesInclude<ExtArgs> | null
-    where?: EventPartnerPackagesWhereInput
-    orderBy?: EventPartnerPackagesOrderByWithRelationInput | EventPartnerPackagesOrderByWithRelationInput[]
-    cursor?: EventPartnerPackagesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EventPartnerPackagesScalarFieldEnum | EventPartnerPackagesScalarFieldEnum[]
-  }
-
-  /**
    * EventPackages without action
    */
   export type EventPackagesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11903,10 +11772,6 @@ export namespace Prisma {
      * Omit specific fields from the EventPackages
      */
     omit?: EventPackagesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: EventPackagesInclude<ExtArgs> | null
   }
 
 
@@ -13124,6 +12989,8 @@ export namespace Prisma {
     total_slot?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    EventPartnerPackages?: boolean | PartnerPackage$EventPartnerPackagesArgs<ExtArgs>
+    _count?: boolean | PartnerPackageCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["partnerPackage"]>
 
 
@@ -13143,10 +13010,16 @@ export namespace Prisma {
   }
 
   export type PartnerPackageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "title" | "price" | "description" | "features" | "limitedText" | "remaining_slot" | "total_slot" | "createdAt" | "updatedAt", ExtArgs["result"]["partnerPackage"]>
+  export type PartnerPackageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    EventPartnerPackages?: boolean | PartnerPackage$EventPartnerPackagesArgs<ExtArgs>
+    _count?: boolean | PartnerPackageCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $PartnerPackagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PartnerPackage"
-    objects: {}
+    objects: {
+      EventPartnerPackages: Prisma.$EventPartnerPackagesPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       slug: string
@@ -13499,6 +13372,7 @@ export namespace Prisma {
    */
   export interface Prisma__PartnerPackageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    EventPartnerPackages<T extends PartnerPackage$EventPartnerPackagesArgs<ExtArgs> = {}>(args?: Subset<T, PartnerPackage$EventPartnerPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPartnerPackagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13556,6 +13430,10 @@ export namespace Prisma {
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
+    /**
      * Filter, which PartnerPackage to fetch.
      */
     where: PartnerPackageWhereUniqueInput
@@ -13574,6 +13452,10 @@ export namespace Prisma {
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
+    /**
      * Filter, which PartnerPackage to fetch.
      */
     where: PartnerPackageWhereUniqueInput
@@ -13591,6 +13473,10 @@ export namespace Prisma {
      * Omit specific fields from the PartnerPackage
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
     /**
      * Filter, which PartnerPackage to fetch.
      */
@@ -13640,6 +13526,10 @@ export namespace Prisma {
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
+    /**
      * Filter, which PartnerPackage to fetch.
      */
     where?: PartnerPackageWhereInput
@@ -13688,6 +13578,10 @@ export namespace Prisma {
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
+    /**
      * Filter, which PartnerPackages to fetch.
      */
     where?: PartnerPackageWhereInput
@@ -13731,6 +13625,10 @@ export namespace Prisma {
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
+    /**
      * The data needed to create a PartnerPackage.
      */
     data: XOR<PartnerPackageCreateInput, PartnerPackageUncheckedCreateInput>
@@ -13759,6 +13657,10 @@ export namespace Prisma {
      * Omit specific fields from the PartnerPackage
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
     /**
      * The data needed to update a PartnerPackage.
      */
@@ -13800,6 +13702,10 @@ export namespace Prisma {
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
+    /**
      * The filter to search for the PartnerPackage to update in case it exists.
      */
     where: PartnerPackageWhereUniqueInput
@@ -13826,6 +13732,10 @@ export namespace Prisma {
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
+    /**
      * Filter which PartnerPackage to delete.
      */
     where: PartnerPackageWhereUniqueInput
@@ -13846,6 +13756,30 @@ export namespace Prisma {
   }
 
   /**
+   * PartnerPackage.EventPartnerPackages
+   */
+  export type PartnerPackage$EventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventPartnerPackages
+     */
+    select?: EventPartnerPackagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventPartnerPackages
+     */
+    omit?: EventPartnerPackagesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventPartnerPackagesInclude<ExtArgs> | null
+    where?: EventPartnerPackagesWhereInput
+    orderBy?: EventPartnerPackagesOrderByWithRelationInput | EventPartnerPackagesOrderByWithRelationInput[]
+    cursor?: EventPartnerPackagesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventPartnerPackagesScalarFieldEnum | EventPartnerPackagesScalarFieldEnum[]
+  }
+
+  /**
    * PartnerPackage without action
    */
   export type PartnerPackageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13857,6 +13791,10 @@ export namespace Prisma {
      * Omit specific fields from the PartnerPackage
      */
     omit?: PartnerPackageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerPackageInclude<ExtArgs> | null
   }
 
 
@@ -15092,8 +15030,8 @@ export namespace Prisma {
     assignedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    event_partner?: boolean | EventPartnersDefaultArgs<ExtArgs>
-    event_package?: boolean | EventPackagesDefaultArgs<ExtArgs>
+    event_partner?: boolean | PartnerDefaultArgs<ExtArgs>
+    event_package?: boolean | PartnerPackageDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["eventPartnerPackages"]>
 
 
@@ -15113,15 +15051,15 @@ export namespace Prisma {
 
   export type EventPartnerPackagesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "event_partner_id" | "event_package_id" | "payment_reference" | "payment_status" | "payment_method" | "proof_of_payment" | "assignedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["eventPartnerPackages"]>
   export type EventPartnerPackagesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    event_partner?: boolean | EventPartnersDefaultArgs<ExtArgs>
-    event_package?: boolean | EventPackagesDefaultArgs<ExtArgs>
+    event_partner?: boolean | PartnerDefaultArgs<ExtArgs>
+    event_package?: boolean | PartnerPackageDefaultArgs<ExtArgs>
   }
 
   export type $EventPartnerPackagesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "EventPartnerPackages"
     objects: {
-      event_partner: Prisma.$EventPartnersPayload<ExtArgs>
-      event_package: Prisma.$EventPackagesPayload<ExtArgs>
+      event_partner: Prisma.$PartnerPayload<ExtArgs>
+      event_package: Prisma.$PartnerPackagePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -15474,8 +15412,8 @@ export namespace Prisma {
    */
   export interface Prisma__EventPartnerPackagesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    event_partner<T extends EventPartnersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventPartnersDefaultArgs<ExtArgs>>): Prisma__EventPartnersClient<$Result.GetResult<Prisma.$EventPartnersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    event_package<T extends EventPackagesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventPackagesDefaultArgs<ExtArgs>>): Prisma__EventPackagesClient<$Result.GetResult<Prisma.$EventPackagesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    event_partner<T extends PartnerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PartnerDefaultArgs<ExtArgs>>): Prisma__PartnerClient<$Result.GetResult<Prisma.$PartnerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    event_package<T extends PartnerPackageDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PartnerPackageDefaultArgs<ExtArgs>>): Prisma__PartnerPackageClient<$Result.GetResult<Prisma.$PartnerPackagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19189,6 +19127,8 @@ export namespace Prisma {
     subscribe_to_newletter?: boolean
     share_with_third_party?: boolean
     password?: boolean
+    EventPartnerPackages?: boolean | Partner$EventPartnerPackagesArgs<ExtArgs>
+    _count?: boolean | PartnerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["partner"]>
 
 
@@ -19209,10 +19149,16 @@ export namespace Prisma {
   }
 
   export type PartnerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "firstname" | "lastname" | "email" | "phone_number" | "entity_name" | "country" | "job_title" | "subscribe_to_newletter" | "share_with_third_party" | "password", ExtArgs["result"]["partner"]>
+  export type PartnerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    EventPartnerPackages?: boolean | Partner$EventPartnerPackagesArgs<ExtArgs>
+    _count?: boolean | PartnerCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $PartnerPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Partner"
-    objects: {}
+    objects: {
+      EventPartnerPackages: Prisma.$EventPartnerPackagesPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       prefix: string | null
@@ -19566,6 +19512,7 @@ export namespace Prisma {
    */
   export interface Prisma__PartnerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    EventPartnerPackages<T extends Partner$EventPartnerPackagesArgs<ExtArgs> = {}>(args?: Subset<T, Partner$EventPartnerPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPartnerPackagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19624,6 +19571,10 @@ export namespace Prisma {
      */
     omit?: PartnerOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    /**
      * Filter, which Partner to fetch.
      */
     where: PartnerWhereUniqueInput
@@ -19642,6 +19593,10 @@ export namespace Prisma {
      */
     omit?: PartnerOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    /**
      * Filter, which Partner to fetch.
      */
     where: PartnerWhereUniqueInput
@@ -19659,6 +19614,10 @@ export namespace Prisma {
      * Omit specific fields from the Partner
      */
     omit?: PartnerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
     /**
      * Filter, which Partner to fetch.
      */
@@ -19708,6 +19667,10 @@ export namespace Prisma {
      */
     omit?: PartnerOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    /**
      * Filter, which Partner to fetch.
      */
     where?: PartnerWhereInput
@@ -19756,6 +19719,10 @@ export namespace Prisma {
      */
     omit?: PartnerOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    /**
      * Filter, which Partners to fetch.
      */
     where?: PartnerWhereInput
@@ -19799,6 +19766,10 @@ export namespace Prisma {
      */
     omit?: PartnerOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    /**
      * The data needed to create a Partner.
      */
     data: XOR<PartnerCreateInput, PartnerUncheckedCreateInput>
@@ -19827,6 +19798,10 @@ export namespace Prisma {
      * Omit specific fields from the Partner
      */
     omit?: PartnerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
     /**
      * The data needed to update a Partner.
      */
@@ -19868,6 +19843,10 @@ export namespace Prisma {
      */
     omit?: PartnerOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    /**
      * The filter to search for the Partner to update in case it exists.
      */
     where: PartnerWhereUniqueInput
@@ -19894,6 +19873,10 @@ export namespace Prisma {
      */
     omit?: PartnerOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    /**
      * Filter which Partner to delete.
      */
     where: PartnerWhereUniqueInput
@@ -19914,6 +19897,30 @@ export namespace Prisma {
   }
 
   /**
+   * Partner.EventPartnerPackages
+   */
+  export type Partner$EventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventPartnerPackages
+     */
+    select?: EventPartnerPackagesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventPartnerPackages
+     */
+    omit?: EventPartnerPackagesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventPartnerPackagesInclude<ExtArgs> | null
+    where?: EventPartnerPackagesWhereInput
+    orderBy?: EventPartnerPackagesOrderByWithRelationInput | EventPartnerPackagesOrderByWithRelationInput[]
+    cursor?: EventPartnerPackagesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventPartnerPackagesScalarFieldEnum | EventPartnerPackagesScalarFieldEnum[]
+  }
+
+  /**
    * Partner without action
    */
   export type PartnerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19925,6 +19932,10 @@ export namespace Prisma {
      * Omit specific fields from the Partner
      */
     omit?: PartnerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
   }
 
 
@@ -19993,6 +20004,7 @@ export namespace Prisma {
     fullname: 'fullname',
     email: 'email',
     phone_number: 'phone_number',
+    country: 'country',
     nin: 'nin',
     nin_verified: 'nin_verified',
     position: 'position',
@@ -20304,6 +20316,7 @@ export namespace Prisma {
     fullname: 'fullname',
     email: 'email',
     phone_number: 'phone_number',
+    country: 'country',
     nin: 'nin',
     position: 'position',
     grade: 'grade',
@@ -20796,6 +20809,7 @@ export namespace Prisma {
     fullname?: StringFilter<"Attendees"> | string
     email?: StringFilter<"Attendees"> | string
     phone_number?: StringFilter<"Attendees"> | string
+    country?: StringNullableFilter<"Attendees"> | string | null
     nin?: StringNullableFilter<"Attendees"> | string | null
     nin_verified?: BoolFilter<"Attendees"> | boolean
     position?: StringNullableFilter<"Attendees"> | string | null
@@ -20824,6 +20838,7 @@ export namespace Prisma {
     fullname?: SortOrder
     email?: SortOrder
     phone_number?: SortOrder
+    country?: SortOrderInput | SortOrder
     nin?: SortOrderInput | SortOrder
     nin_verified?: SortOrder
     position?: SortOrderInput | SortOrder
@@ -20857,6 +20872,7 @@ export namespace Prisma {
     prefix?: StringNullableFilter<"Attendees"> | string | null
     fullname?: StringFilter<"Attendees"> | string
     phone_number?: StringFilter<"Attendees"> | string
+    country?: StringNullableFilter<"Attendees"> | string | null
     nin_verified?: BoolFilter<"Attendees"> | boolean
     position?: StringNullableFilter<"Attendees"> | string | null
     grade?: StringNullableFilter<"Attendees"> | string | null
@@ -20884,6 +20900,7 @@ export namespace Prisma {
     fullname?: SortOrder
     email?: SortOrder
     phone_number?: SortOrder
+    country?: SortOrderInput | SortOrder
     nin?: SortOrderInput | SortOrder
     nin_verified?: SortOrder
     position?: SortOrderInput | SortOrder
@@ -20920,6 +20937,7 @@ export namespace Prisma {
     fullname?: StringWithAggregatesFilter<"Attendees"> | string
     email?: StringWithAggregatesFilter<"Attendees"> | string
     phone_number?: StringWithAggregatesFilter<"Attendees"> | string
+    country?: StringNullableWithAggregatesFilter<"Attendees"> | string | null
     nin?: StringNullableWithAggregatesFilter<"Attendees"> | string | null
     nin_verified?: BoolWithAggregatesFilter<"Attendees"> | boolean
     position?: StringNullableWithAggregatesFilter<"Attendees"> | string | null
@@ -21148,7 +21166,6 @@ export namespace Prisma {
     status?: EnumStatusFilter<"EventPartners"> | $Enums.Status
     createdAt?: DateTimeFilter<"EventPartners"> | Date | string
     updatedAt?: DateTimeFilter<"EventPartners"> | Date | string
-    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }
 
   export type EventPartnersOrderByWithRelationInput = {
@@ -21168,7 +21185,6 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    EventPartnerPackages?: EventPartnerPackagesOrderByRelationAggregateInput
     _relevance?: EventPartnersOrderByRelevanceInput
   }
 
@@ -21192,7 +21208,6 @@ export namespace Prisma {
     status?: EnumStatusFilter<"EventPartners"> | $Enums.Status
     createdAt?: DateTimeFilter<"EventPartners"> | Date | string
     updatedAt?: DateTimeFilter<"EventPartners"> | Date | string
-    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }, "id" | "email">
 
   export type EventPartnersOrderByWithAggregationInput = {
@@ -21382,7 +21397,6 @@ export namespace Prisma {
     features?: JsonFilter<"EventPackages">
     createdAt?: DateTimeFilter<"EventPackages"> | Date | string
     updatedAt?: DateTimeFilter<"EventPackages"> | Date | string
-    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }
 
   export type EventPackagesOrderByWithRelationInput = {
@@ -21393,7 +21407,6 @@ export namespace Prisma {
     features?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    EventPartnerPackages?: EventPartnerPackagesOrderByRelationAggregateInput
     _relevance?: EventPackagesOrderByRelevanceInput
   }
 
@@ -21408,7 +21421,6 @@ export namespace Prisma {
     features?: JsonFilter<"EventPackages">
     createdAt?: DateTimeFilter<"EventPackages"> | Date | string
     updatedAt?: DateTimeFilter<"EventPackages"> | Date | string
-    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }, "id">
 
   export type EventPackagesOrderByWithAggregationInput = {
@@ -21529,6 +21541,7 @@ export namespace Prisma {
     total_slot?: IntFilter<"PartnerPackage"> | number
     createdAt?: DateTimeFilter<"PartnerPackage"> | Date | string
     updatedAt?: DateTimeFilter<"PartnerPackage"> | Date | string
+    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }
 
   export type PartnerPackageOrderByWithRelationInput = {
@@ -21543,6 +21556,7 @@ export namespace Prisma {
     total_slot?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    EventPartnerPackages?: EventPartnerPackagesOrderByRelationAggregateInput
     _relevance?: PartnerPackageOrderByRelevanceInput
   }
 
@@ -21561,6 +21575,7 @@ export namespace Prisma {
     total_slot?: IntFilter<"PartnerPackage"> | number
     createdAt?: DateTimeFilter<"PartnerPackage"> | Date | string
     updatedAt?: DateTimeFilter<"PartnerPackage"> | Date | string
+    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }, "id" | "slug">
 
   export type PartnerPackageOrderByWithAggregationInput = {
@@ -21678,8 +21693,8 @@ export namespace Prisma {
     assignedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
     createdAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
     updatedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
-    event_partner?: XOR<EventPartnersScalarRelationFilter, EventPartnersWhereInput>
-    event_package?: XOR<EventPackagesScalarRelationFilter, EventPackagesWhereInput>
+    event_partner?: XOR<PartnerScalarRelationFilter, PartnerWhereInput>
+    event_package?: XOR<PartnerPackageScalarRelationFilter, PartnerPackageWhereInput>
   }
 
   export type EventPartnerPackagesOrderByWithRelationInput = {
@@ -21693,8 +21708,8 @@ export namespace Prisma {
     assignedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    event_partner?: EventPartnersOrderByWithRelationInput
-    event_package?: EventPackagesOrderByWithRelationInput
+    event_partner?: PartnerOrderByWithRelationInput
+    event_package?: PartnerPackageOrderByWithRelationInput
     _relevance?: EventPartnerPackagesOrderByRelevanceInput
   }
 
@@ -21712,8 +21727,8 @@ export namespace Prisma {
     assignedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
     createdAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
     updatedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
-    event_partner?: XOR<EventPartnersScalarRelationFilter, EventPartnersWhereInput>
-    event_package?: XOR<EventPackagesScalarRelationFilter, EventPackagesWhereInput>
+    event_partner?: XOR<PartnerScalarRelationFilter, PartnerWhereInput>
+    event_package?: XOR<PartnerPackageScalarRelationFilter, PartnerPackageWhereInput>
   }, "id">
 
   export type EventPartnerPackagesOrderByWithAggregationInput = {
@@ -21993,6 +22008,7 @@ export namespace Prisma {
     subscribe_to_newletter?: BoolNullableFilter<"Partner"> | boolean | null
     share_with_third_party?: BoolNullableFilter<"Partner"> | boolean | null
     password?: StringFilter<"Partner"> | string
+    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }
 
   export type PartnerOrderByWithRelationInput = {
@@ -22008,6 +22024,7 @@ export namespace Prisma {
     subscribe_to_newletter?: SortOrderInput | SortOrder
     share_with_third_party?: SortOrderInput | SortOrder
     password?: SortOrder
+    EventPartnerPackages?: EventPartnerPackagesOrderByRelationAggregateInput
     _relevance?: PartnerOrderByRelevanceInput
   }
 
@@ -22027,6 +22044,7 @@ export namespace Prisma {
     subscribe_to_newletter?: BoolNullableFilter<"Partner"> | boolean | null
     share_with_third_party?: BoolNullableFilter<"Partner"> | boolean | null
     password?: StringFilter<"Partner"> | string
+    EventPartnerPackages?: EventPartnerPackagesListRelationFilter
   }, "id" | "email">
 
   export type PartnerOrderByWithAggregationInput = {
@@ -22318,6 +22336,7 @@ export namespace Prisma {
     fullname: string
     email: string
     phone_number: string
+    country?: string | null
     nin?: string | null
     nin_verified?: boolean
     position?: string | null
@@ -22346,6 +22365,7 @@ export namespace Prisma {
     fullname: string
     email: string
     phone_number: string
+    country?: string | null
     nin?: string | null
     nin_verified?: boolean
     position?: string | null
@@ -22373,6 +22393,7 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     nin?: NullableStringFieldUpdateOperationsInput | string | null
     nin_verified?: BoolFieldUpdateOperationsInput | boolean
     position?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22401,6 +22422,7 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     nin?: NullableStringFieldUpdateOperationsInput | string | null
     nin_verified?: BoolFieldUpdateOperationsInput | boolean
     position?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22429,6 +22451,7 @@ export namespace Prisma {
     fullname: string
     email: string
     phone_number: string
+    country?: string | null
     nin?: string | null
     nin_verified?: boolean
     position?: string | null
@@ -22456,6 +22479,7 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     nin?: NullableStringFieldUpdateOperationsInput | string | null
     nin_verified?: BoolFieldUpdateOperationsInput | boolean
     position?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22484,6 +22508,7 @@ export namespace Prisma {
     fullname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     nin?: NullableStringFieldUpdateOperationsInput | string | null
     nin_verified?: BoolFieldUpdateOperationsInput | boolean
     position?: NullableStringFieldUpdateOperationsInput | string | null
@@ -22734,7 +22759,6 @@ export namespace Prisma {
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
-    EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput
   }
 
   export type EventPartnersUncheckedCreateInput = {
@@ -22754,7 +22778,6 @@ export namespace Prisma {
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
-    EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput
   }
 
   export type EventPartnersUpdateInput = {
@@ -22773,7 +22796,6 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput
   }
 
   export type EventPartnersUncheckedUpdateInput = {
@@ -22793,7 +22815,6 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput
   }
 
   export type EventPartnersCreateManyInput = {
@@ -23017,7 +23038,6 @@ export namespace Prisma {
     features: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_packageInput
   }
 
   export type EventPackagesUncheckedCreateInput = {
@@ -23028,7 +23048,6 @@ export namespace Prisma {
     features: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
-    EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_packageInput
   }
 
   export type EventPackagesUpdateInput = {
@@ -23038,7 +23057,6 @@ export namespace Prisma {
     features?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_packageNestedInput
   }
 
   export type EventPackagesUncheckedUpdateInput = {
@@ -23049,7 +23067,6 @@ export namespace Prisma {
     features?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_packageNestedInput
   }
 
   export type EventPackagesCreateManyInput = {
@@ -23173,6 +23190,7 @@ export namespace Prisma {
     total_slot?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_packageInput
   }
 
   export type PartnerPackageUncheckedCreateInput = {
@@ -23187,6 +23205,7 @@ export namespace Prisma {
     total_slot?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_packageInput
   }
 
   export type PartnerPackageUpdateInput = {
@@ -23200,6 +23219,7 @@ export namespace Prisma {
     total_slot?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_packageNestedInput
   }
 
   export type PartnerPackageUncheckedUpdateInput = {
@@ -23214,6 +23234,7 @@ export namespace Prisma {
     total_slot?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_packageNestedInput
   }
 
   export type PartnerPackageCreateManyInput = {
@@ -23323,8 +23344,8 @@ export namespace Prisma {
     assignedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    event_partner: EventPartnersCreateNestedOneWithoutEventPartnerPackagesInput
-    event_package: EventPackagesCreateNestedOneWithoutEventPartnerPackagesInput
+    event_partner: PartnerCreateNestedOneWithoutEventPartnerPackagesInput
+    event_package: PartnerPackageCreateNestedOneWithoutEventPartnerPackagesInput
   }
 
   export type EventPartnerPackagesUncheckedCreateInput = {
@@ -23348,8 +23369,8 @@ export namespace Prisma {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    event_partner?: EventPartnersUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
-    event_package?: EventPackagesUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
+    event_partner?: PartnerUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
+    event_package?: PartnerPackageUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
   }
 
   export type EventPartnerPackagesUncheckedUpdateInput = {
@@ -23648,6 +23669,7 @@ export namespace Prisma {
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
     password: string
+    EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput
   }
 
   export type PartnerUncheckedCreateInput = {
@@ -23663,6 +23685,7 @@ export namespace Prisma {
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
     password: string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput
   }
 
   export type PartnerUpdateInput = {
@@ -23677,6 +23700,7 @@ export namespace Prisma {
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
+    EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput
   }
 
   export type PartnerUncheckedUpdateInput = {
@@ -23692,6 +23716,7 @@ export namespace Prisma {
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput
   }
 
   export type PartnerCreateManyInput = {
@@ -24120,6 +24145,7 @@ export namespace Prisma {
     fullname?: SortOrder
     email?: SortOrder
     phone_number?: SortOrder
+    country?: SortOrder
     nin?: SortOrder
     nin_verified?: SortOrder
     position?: SortOrder
@@ -24153,6 +24179,7 @@ export namespace Prisma {
     fullname?: SortOrder
     email?: SortOrder
     phone_number?: SortOrder
+    country?: SortOrder
     nin?: SortOrder
     nin_verified?: SortOrder
     position?: SortOrder
@@ -24181,6 +24208,7 @@ export namespace Prisma {
     fullname?: SortOrder
     email?: SortOrder
     phone_number?: SortOrder
+    country?: SortOrder
     nin?: SortOrder
     nin_verified?: SortOrder
     position?: SortOrder
@@ -24463,16 +24491,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type EventPartnerPackagesListRelationFilter = {
-    every?: EventPartnerPackagesWhereInput
-    some?: EventPartnerPackagesWhereInput
-    none?: EventPartnerPackagesWhereInput
-  }
-
-  export type EventPartnerPackagesOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type EventPartnersOrderByRelevanceInput = {
     fields: EventPartnersOrderByRelevanceFieldEnum | EventPartnersOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -24743,6 +24761,16 @@ export namespace Prisma {
     price?: SortOrder
   }
 
+  export type EventPartnerPackagesListRelationFilter = {
+    every?: EventPartnerPackagesWhereInput
+    some?: EventPartnerPackagesWhereInput
+    none?: EventPartnerPackagesWhereInput
+  }
+
+  export type EventPartnerPackagesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PartnerPackageOrderByRelevanceInput = {
     fields: PartnerPackageOrderByRelevanceFieldEnum | PartnerPackageOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -24852,14 +24880,14 @@ export namespace Prisma {
     assigned_to_id?: SortOrder
   }
 
-  export type EventPartnersScalarRelationFilter = {
-    is?: EventPartnersWhereInput
-    isNot?: EventPartnersWhereInput
+  export type PartnerScalarRelationFilter = {
+    is?: PartnerWhereInput
+    isNot?: PartnerWhereInput
   }
 
-  export type EventPackagesScalarRelationFilter = {
-    is?: EventPackagesWhereInput
-    isNot?: EventPackagesWhereInput
+  export type PartnerPackageScalarRelationFilter = {
+    is?: PartnerPackageWhereInput
+    isNot?: PartnerPackageWhereInput
   }
 
   export type EventPartnerPackagesOrderByRelevanceInput = {
@@ -25354,48 +25382,6 @@ export namespace Prisma {
     deleteMany?: assigned_boothsScalarWhereInput | assigned_boothsScalarWhereInput[]
   }
 
-  export type EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput = {
-    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
-    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
-    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
-    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-  }
-
-  export type EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput = {
-    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
-    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
-    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
-    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-  }
-
-  export type EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput = {
-    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
-    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
-    upsert?: EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput[]
-    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
-    set?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    disconnect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    delete?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    update?: EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput[]
-    updateMany?: EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput | EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput[]
-    deleteMany?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
-  }
-
-  export type EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput = {
-    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
-    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
-    upsert?: EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput[]
-    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
-    set?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    disconnect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    delete?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
-    update?: EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput[]
-    updateMany?: EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput | EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput[]
-    deleteMany?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
-  }
-
   export type EventPartnerPackagesCreateNestedManyWithoutEvent_packageInput = {
     create?: XOR<EventPartnerPackagesCreateWithoutEvent_packageInput, EventPartnerPackagesUncheckedCreateWithoutEvent_packageInput> | EventPartnerPackagesCreateWithoutEvent_packageInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_packageInput[]
     connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_packageInput | EventPartnerPackagesCreateOrConnectWithoutEvent_packageInput[]
@@ -25466,32 +25452,32 @@ export namespace Prisma {
     update?: XOR<XOR<ExhibitorsUpdateToOneWithWhereWithoutAssigned_boothsInput, ExhibitorsUpdateWithoutAssigned_boothsInput>, ExhibitorsUncheckedUpdateWithoutAssigned_boothsInput>
   }
 
-  export type EventPartnersCreateNestedOneWithoutEventPartnerPackagesInput = {
-    create?: XOR<EventPartnersCreateWithoutEventPartnerPackagesInput, EventPartnersUncheckedCreateWithoutEventPartnerPackagesInput>
-    connectOrCreate?: EventPartnersCreateOrConnectWithoutEventPartnerPackagesInput
-    connect?: EventPartnersWhereUniqueInput
+  export type PartnerCreateNestedOneWithoutEventPartnerPackagesInput = {
+    create?: XOR<PartnerCreateWithoutEventPartnerPackagesInput, PartnerUncheckedCreateWithoutEventPartnerPackagesInput>
+    connectOrCreate?: PartnerCreateOrConnectWithoutEventPartnerPackagesInput
+    connect?: PartnerWhereUniqueInput
   }
 
-  export type EventPackagesCreateNestedOneWithoutEventPartnerPackagesInput = {
-    create?: XOR<EventPackagesCreateWithoutEventPartnerPackagesInput, EventPackagesUncheckedCreateWithoutEventPartnerPackagesInput>
-    connectOrCreate?: EventPackagesCreateOrConnectWithoutEventPartnerPackagesInput
-    connect?: EventPackagesWhereUniqueInput
+  export type PartnerPackageCreateNestedOneWithoutEventPartnerPackagesInput = {
+    create?: XOR<PartnerPackageCreateWithoutEventPartnerPackagesInput, PartnerPackageUncheckedCreateWithoutEventPartnerPackagesInput>
+    connectOrCreate?: PartnerPackageCreateOrConnectWithoutEventPartnerPackagesInput
+    connect?: PartnerPackageWhereUniqueInput
   }
 
-  export type EventPartnersUpdateOneRequiredWithoutEventPartnerPackagesNestedInput = {
-    create?: XOR<EventPartnersCreateWithoutEventPartnerPackagesInput, EventPartnersUncheckedCreateWithoutEventPartnerPackagesInput>
-    connectOrCreate?: EventPartnersCreateOrConnectWithoutEventPartnerPackagesInput
-    upsert?: EventPartnersUpsertWithoutEventPartnerPackagesInput
-    connect?: EventPartnersWhereUniqueInput
-    update?: XOR<XOR<EventPartnersUpdateToOneWithWhereWithoutEventPartnerPackagesInput, EventPartnersUpdateWithoutEventPartnerPackagesInput>, EventPartnersUncheckedUpdateWithoutEventPartnerPackagesInput>
+  export type PartnerUpdateOneRequiredWithoutEventPartnerPackagesNestedInput = {
+    create?: XOR<PartnerCreateWithoutEventPartnerPackagesInput, PartnerUncheckedCreateWithoutEventPartnerPackagesInput>
+    connectOrCreate?: PartnerCreateOrConnectWithoutEventPartnerPackagesInput
+    upsert?: PartnerUpsertWithoutEventPartnerPackagesInput
+    connect?: PartnerWhereUniqueInput
+    update?: XOR<XOR<PartnerUpdateToOneWithWhereWithoutEventPartnerPackagesInput, PartnerUpdateWithoutEventPartnerPackagesInput>, PartnerUncheckedUpdateWithoutEventPartnerPackagesInput>
   }
 
-  export type EventPackagesUpdateOneRequiredWithoutEventPartnerPackagesNestedInput = {
-    create?: XOR<EventPackagesCreateWithoutEventPartnerPackagesInput, EventPackagesUncheckedCreateWithoutEventPartnerPackagesInput>
-    connectOrCreate?: EventPackagesCreateOrConnectWithoutEventPartnerPackagesInput
-    upsert?: EventPackagesUpsertWithoutEventPartnerPackagesInput
-    connect?: EventPackagesWhereUniqueInput
-    update?: XOR<XOR<EventPackagesUpdateToOneWithWhereWithoutEventPartnerPackagesInput, EventPackagesUpdateWithoutEventPartnerPackagesInput>, EventPackagesUncheckedUpdateWithoutEventPartnerPackagesInput>
+  export type PartnerPackageUpdateOneRequiredWithoutEventPartnerPackagesNestedInput = {
+    create?: XOR<PartnerPackageCreateWithoutEventPartnerPackagesInput, PartnerPackageUncheckedCreateWithoutEventPartnerPackagesInput>
+    connectOrCreate?: PartnerPackageCreateOrConnectWithoutEventPartnerPackagesInput
+    upsert?: PartnerPackageUpsertWithoutEventPartnerPackagesInput
+    connect?: PartnerPackageWhereUniqueInput
+    update?: XOR<XOR<PartnerPackageUpdateToOneWithWhereWithoutEventPartnerPackagesInput, PartnerPackageUpdateWithoutEventPartnerPackagesInput>, PartnerPackageUncheckedUpdateWithoutEventPartnerPackagesInput>
   }
 
   export type ScheduleEventCreateNestedManyWithoutEventInput = {
@@ -25606,8 +25592,50 @@ export namespace Prisma {
     update?: XOR<XOR<EventUpdateToOneWithWhereWithoutScheduleEventsInput, EventUpdateWithoutScheduleEventsInput>, EventUncheckedUpdateWithoutScheduleEventsInput>
   }
 
+  export type EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput = {
+    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
+    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
+    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
+    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+  }
+
+  export type EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput = {
+    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
+    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
+    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
+    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+  }
+
   export type NullableBoolFieldUpdateOperationsInput = {
     set?: boolean | null
+  }
+
+  export type EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput = {
+    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
+    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
+    upsert?: EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput[]
+    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
+    set?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    disconnect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    delete?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    update?: EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput[]
+    updateMany?: EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput | EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput[]
+    deleteMany?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
+  }
+
+  export type EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput = {
+    create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
+    connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
+    upsert?: EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput[]
+    createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
+    set?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    disconnect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    delete?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+    update?: EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput | EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput[]
+    updateMany?: EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput | EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput[]
+    deleteMany?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -26139,71 +26167,6 @@ export namespace Prisma {
     data: XOR<assigned_boothsUpdateManyMutationInput, assigned_boothsUncheckedUpdateManyWithoutAssigned_toInput>
   }
 
-  export type EventPartnerPackagesCreateWithoutEvent_partnerInput = {
-    payment_reference?: string | null
-    payment_status?: $Enums.Status
-    payment_method?: string | null
-    proof_of_payment?: string | null
-    assignedAt?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    event_package: EventPackagesCreateNestedOneWithoutEventPartnerPackagesInput
-  }
-
-  export type EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput = {
-    id?: number
-    event_package_id: number
-    payment_reference?: string | null
-    payment_status?: $Enums.Status
-    payment_method?: string | null
-    proof_of_payment?: string | null
-    assignedAt?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput = {
-    where: EventPartnerPackagesWhereUniqueInput
-    create: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput>
-  }
-
-  export type EventPartnerPackagesCreateManyEvent_partnerInputEnvelope = {
-    data: EventPartnerPackagesCreateManyEvent_partnerInput | EventPartnerPackagesCreateManyEvent_partnerInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput = {
-    where: EventPartnerPackagesWhereUniqueInput
-    update: XOR<EventPartnerPackagesUpdateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput>
-    create: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput>
-  }
-
-  export type EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput = {
-    where: EventPartnerPackagesWhereUniqueInput
-    data: XOR<EventPartnerPackagesUpdateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput>
-  }
-
-  export type EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput = {
-    where: EventPartnerPackagesScalarWhereInput
-    data: XOR<EventPartnerPackagesUpdateManyMutationInput, EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerInput>
-  }
-
-  export type EventPartnerPackagesScalarWhereInput = {
-    AND?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
-    OR?: EventPartnerPackagesScalarWhereInput[]
-    NOT?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
-    id?: IntFilter<"EventPartnerPackages"> | number
-    event_partner_id?: IntFilter<"EventPartnerPackages"> | number
-    event_package_id?: IntFilter<"EventPartnerPackages"> | number
-    payment_reference?: StringNullableFilter<"EventPartnerPackages"> | string | null
-    payment_status?: EnumStatusFilter<"EventPartnerPackages"> | $Enums.Status
-    payment_method?: StringNullableFilter<"EventPartnerPackages"> | string | null
-    proof_of_payment?: StringNullableFilter<"EventPartnerPackages"> | string | null
-    assignedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
-    createdAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
-    updatedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
-  }
-
   export type EventPartnerPackagesCreateWithoutEvent_packageInput = {
     payment_reference?: string | null
     payment_status?: $Enums.Status
@@ -26212,7 +26175,7 @@ export namespace Prisma {
     assignedAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    event_partner: EventPartnersCreateNestedOneWithoutEventPartnerPackagesInput
+    event_partner: PartnerCreateNestedOneWithoutEventPartnerPackagesInput
   }
 
   export type EventPartnerPackagesUncheckedCreateWithoutEvent_packageInput = {
@@ -26251,6 +26214,22 @@ export namespace Prisma {
   export type EventPartnerPackagesUpdateManyWithWhereWithoutEvent_packageInput = {
     where: EventPartnerPackagesScalarWhereInput
     data: XOR<EventPartnerPackagesUpdateManyMutationInput, EventPartnerPackagesUncheckedUpdateManyWithoutEvent_packageInput>
+  }
+
+  export type EventPartnerPackagesScalarWhereInput = {
+    AND?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
+    OR?: EventPartnerPackagesScalarWhereInput[]
+    NOT?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
+    id?: IntFilter<"EventPartnerPackages"> | number
+    event_partner_id?: IntFilter<"EventPartnerPackages"> | number
+    event_package_id?: IntFilter<"EventPartnerPackages"> | number
+    payment_reference?: StringNullableFilter<"EventPartnerPackages"> | string | null
+    payment_status?: EnumStatusFilter<"EventPartnerPackages"> | $Enums.Status
+    payment_method?: StringNullableFilter<"EventPartnerPackages"> | string | null
+    proof_of_payment?: StringNullableFilter<"EventPartnerPackages"> | string | null
+    assignedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
+    createdAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
+    updatedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
   }
 
   export type BoothsCreateWithoutAssigned_boothsInput = {
@@ -26401,146 +26380,146 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EventPartnersCreateWithoutEventPartnerPackagesInput = {
+  export type PartnerCreateWithoutEventPartnerPackagesInput = {
     prefix?: string | null
-    fullname: string
+    firstname: string
+    lastname: string
     email: string
     phone_number: string
-    company_name: string
-    logo: string
-    website?: string | null
-    social_media?: NullableJsonNullValueInput | InputJsonValue
-    description?: string | null
-    why_interested?: string | null
+    entity_name: string
+    country: string
+    job_title: string
+    subscribe_to_newletter?: boolean | null
+    share_with_third_party?: boolean | null
     password: string
-    role?: $Enums.Role
-    status?: $Enums.Status
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
-  export type EventPartnersUncheckedCreateWithoutEventPartnerPackagesInput = {
+  export type PartnerUncheckedCreateWithoutEventPartnerPackagesInput = {
     id?: number
     prefix?: string | null
-    fullname: string
+    firstname: string
+    lastname: string
     email: string
     phone_number: string
-    company_name: string
-    logo: string
-    website?: string | null
-    social_media?: NullableJsonNullValueInput | InputJsonValue
-    description?: string | null
-    why_interested?: string | null
+    entity_name: string
+    country: string
+    job_title: string
+    subscribe_to_newletter?: boolean | null
+    share_with_third_party?: boolean | null
     password: string
-    role?: $Enums.Role
-    status?: $Enums.Status
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
-  export type EventPartnersCreateOrConnectWithoutEventPartnerPackagesInput = {
-    where: EventPartnersWhereUniqueInput
-    create: XOR<EventPartnersCreateWithoutEventPartnerPackagesInput, EventPartnersUncheckedCreateWithoutEventPartnerPackagesInput>
+  export type PartnerCreateOrConnectWithoutEventPartnerPackagesInput = {
+    where: PartnerWhereUniqueInput
+    create: XOR<PartnerCreateWithoutEventPartnerPackagesInput, PartnerUncheckedCreateWithoutEventPartnerPackagesInput>
   }
 
-  export type EventPackagesCreateWithoutEventPartnerPackagesInput = {
-    name: string
-    description: string
+  export type PartnerPackageCreateWithoutEventPartnerPackagesInput = {
+    slug: string
+    title: string
     price: number
+    description?: string | null
     features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    remaining_slot?: number
+    total_slot?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type EventPackagesUncheckedCreateWithoutEventPartnerPackagesInput = {
+  export type PartnerPackageUncheckedCreateWithoutEventPartnerPackagesInput = {
     id?: number
-    name: string
-    description: string
+    slug: string
+    title: string
     price: number
+    description?: string | null
     features: JsonNullValueInput | InputJsonValue
+    limitedText?: string | null
+    remaining_slot?: number
+    total_slot?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type EventPackagesCreateOrConnectWithoutEventPartnerPackagesInput = {
-    where: EventPackagesWhereUniqueInput
-    create: XOR<EventPackagesCreateWithoutEventPartnerPackagesInput, EventPackagesUncheckedCreateWithoutEventPartnerPackagesInput>
+  export type PartnerPackageCreateOrConnectWithoutEventPartnerPackagesInput = {
+    where: PartnerPackageWhereUniqueInput
+    create: XOR<PartnerPackageCreateWithoutEventPartnerPackagesInput, PartnerPackageUncheckedCreateWithoutEventPartnerPackagesInput>
   }
 
-  export type EventPartnersUpsertWithoutEventPartnerPackagesInput = {
-    update: XOR<EventPartnersUpdateWithoutEventPartnerPackagesInput, EventPartnersUncheckedUpdateWithoutEventPartnerPackagesInput>
-    create: XOR<EventPartnersCreateWithoutEventPartnerPackagesInput, EventPartnersUncheckedCreateWithoutEventPartnerPackagesInput>
-    where?: EventPartnersWhereInput
+  export type PartnerUpsertWithoutEventPartnerPackagesInput = {
+    update: XOR<PartnerUpdateWithoutEventPartnerPackagesInput, PartnerUncheckedUpdateWithoutEventPartnerPackagesInput>
+    create: XOR<PartnerCreateWithoutEventPartnerPackagesInput, PartnerUncheckedCreateWithoutEventPartnerPackagesInput>
+    where?: PartnerWhereInput
   }
 
-  export type EventPartnersUpdateToOneWithWhereWithoutEventPartnerPackagesInput = {
-    where?: EventPartnersWhereInput
-    data: XOR<EventPartnersUpdateWithoutEventPartnerPackagesInput, EventPartnersUncheckedUpdateWithoutEventPartnerPackagesInput>
+  export type PartnerUpdateToOneWithWhereWithoutEventPartnerPackagesInput = {
+    where?: PartnerWhereInput
+    data: XOR<PartnerUpdateWithoutEventPartnerPackagesInput, PartnerUncheckedUpdateWithoutEventPartnerPackagesInput>
   }
 
-  export type EventPartnersUpdateWithoutEventPartnerPackagesInput = {
+  export type PartnerUpdateWithoutEventPartnerPackagesInput = {
     prefix?: NullableStringFieldUpdateOperationsInput | string | null
-    fullname?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    company_name?: StringFieldUpdateOperationsInput | string
-    logo?: StringFieldUpdateOperationsInput | string
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    social_media?: NullableJsonNullValueInput | InputJsonValue
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    why_interested?: NullableStringFieldUpdateOperationsInput | string | null
+    entity_name?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EventPartnersUncheckedUpdateWithoutEventPartnerPackagesInput = {
+  export type PartnerUncheckedUpdateWithoutEventPartnerPackagesInput = {
     id?: IntFieldUpdateOperationsInput | number
     prefix?: NullableStringFieldUpdateOperationsInput | string | null
-    fullname?: StringFieldUpdateOperationsInput | string
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    company_name?: StringFieldUpdateOperationsInput | string
-    logo?: StringFieldUpdateOperationsInput | string
-    website?: NullableStringFieldUpdateOperationsInput | string | null
-    social_media?: NullableJsonNullValueInput | InputJsonValue
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    why_interested?: NullableStringFieldUpdateOperationsInput | string | null
+    entity_name?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EventPackagesUpsertWithoutEventPartnerPackagesInput = {
-    update: XOR<EventPackagesUpdateWithoutEventPartnerPackagesInput, EventPackagesUncheckedUpdateWithoutEventPartnerPackagesInput>
-    create: XOR<EventPackagesCreateWithoutEventPartnerPackagesInput, EventPackagesUncheckedCreateWithoutEventPartnerPackagesInput>
-    where?: EventPackagesWhereInput
+  export type PartnerPackageUpsertWithoutEventPartnerPackagesInput = {
+    update: XOR<PartnerPackageUpdateWithoutEventPartnerPackagesInput, PartnerPackageUncheckedUpdateWithoutEventPartnerPackagesInput>
+    create: XOR<PartnerPackageCreateWithoutEventPartnerPackagesInput, PartnerPackageUncheckedCreateWithoutEventPartnerPackagesInput>
+    where?: PartnerPackageWhereInput
   }
 
-  export type EventPackagesUpdateToOneWithWhereWithoutEventPartnerPackagesInput = {
-    where?: EventPackagesWhereInput
-    data: XOR<EventPackagesUpdateWithoutEventPartnerPackagesInput, EventPackagesUncheckedUpdateWithoutEventPartnerPackagesInput>
+  export type PartnerPackageUpdateToOneWithWhereWithoutEventPartnerPackagesInput = {
+    where?: PartnerPackageWhereInput
+    data: XOR<PartnerPackageUpdateWithoutEventPartnerPackagesInput, PartnerPackageUncheckedUpdateWithoutEventPartnerPackagesInput>
   }
 
-  export type EventPackagesUpdateWithoutEventPartnerPackagesInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+  export type PartnerPackageUpdateWithoutEventPartnerPackagesInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    remaining_slot?: IntFieldUpdateOperationsInput | number
+    total_slot?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EventPackagesUncheckedUpdateWithoutEventPartnerPackagesInput = {
+  export type PartnerPackageUncheckedUpdateWithoutEventPartnerPackagesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     features?: JsonNullValueInput | InputJsonValue
+    limitedText?: NullableStringFieldUpdateOperationsInput | string | null
+    remaining_slot?: IntFieldUpdateOperationsInput | number
+    total_slot?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26766,6 +26745,55 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EventPartnerPackagesCreateWithoutEvent_partnerInput = {
+    payment_reference?: string | null
+    payment_status?: $Enums.Status
+    payment_method?: string | null
+    proof_of_payment?: string | null
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    event_package: PartnerPackageCreateNestedOneWithoutEventPartnerPackagesInput
+  }
+
+  export type EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput = {
+    id?: number
+    event_package_id: number
+    payment_reference?: string | null
+    payment_status?: $Enums.Status
+    payment_method?: string | null
+    proof_of_payment?: string | null
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput = {
+    where: EventPartnerPackagesWhereUniqueInput
+    create: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput>
+  }
+
+  export type EventPartnerPackagesCreateManyEvent_partnerInputEnvelope = {
+    data: EventPartnerPackagesCreateManyEvent_partnerInput | EventPartnerPackagesCreateManyEvent_partnerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput = {
+    where: EventPartnerPackagesWhereUniqueInput
+    update: XOR<EventPartnerPackagesUpdateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput>
+    create: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput>
+  }
+
+  export type EventPartnerPackagesUpdateWithWhereUniqueWithoutEvent_partnerInput = {
+    where: EventPartnerPackagesWhereUniqueInput
+    data: XOR<EventPartnerPackagesUpdateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput>
+  }
+
+  export type EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput = {
+    where: EventPartnerPackagesScalarWhereInput
+    data: XOR<EventPartnerPackagesUpdateManyMutationInput, EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerInput>
+  }
+
   export type OrganizationCreateManyParentInput = {
     id?: number
     name: string
@@ -26865,53 +26893,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EventPartnerPackagesCreateManyEvent_partnerInput = {
-    id?: number
-    event_package_id: number
-    payment_reference?: string | null
-    payment_status?: $Enums.Status
-    payment_method?: string | null
-    proof_of_payment?: string | null
-    assignedAt?: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type EventPartnerPackagesUpdateWithoutEvent_partnerInput = {
-    payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    payment_method?: NullableStringFieldUpdateOperationsInput | string | null
-    proof_of_payment?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    event_package?: EventPackagesUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
-  }
-
-  export type EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    event_package_id?: IntFieldUpdateOperationsInput | number
-    payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    payment_method?: NullableStringFieldUpdateOperationsInput | string | null
-    proof_of_payment?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    event_package_id?: IntFieldUpdateOperationsInput | number
-    payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
-    payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    payment_method?: NullableStringFieldUpdateOperationsInput | string | null
-    proof_of_payment?: NullableStringFieldUpdateOperationsInput | string | null
-    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type EventPartnerPackagesCreateManyEvent_packageInput = {
     id?: number
     event_partner_id: number
@@ -26932,7 +26913,7 @@ export namespace Prisma {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    event_partner?: EventPartnersUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
+    event_partner?: PartnerUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
   }
 
   export type EventPartnerPackagesUncheckedUpdateWithoutEvent_packageInput = {
@@ -27009,6 +26990,53 @@ export namespace Prisma {
   export type ScheduleEventUncheckedUpdateManyWithoutScheduleInput = {
     id?: IntFieldUpdateOperationsInput | number
     eventId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventPartnerPackagesCreateManyEvent_partnerInput = {
+    id?: number
+    event_package_id: number
+    payment_reference?: string | null
+    payment_status?: $Enums.Status
+    payment_method?: string | null
+    proof_of_payment?: string | null
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EventPartnerPackagesUpdateWithoutEvent_partnerInput = {
+    payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
+    payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    payment_method?: NullableStringFieldUpdateOperationsInput | string | null
+    proof_of_payment?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    event_package?: PartnerPackageUpdateOneRequiredWithoutEventPartnerPackagesNestedInput
+  }
+
+  export type EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    event_package_id?: IntFieldUpdateOperationsInput | number
+    payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
+    payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    payment_method?: NullableStringFieldUpdateOperationsInput | string | null
+    proof_of_payment?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    event_package_id?: IntFieldUpdateOperationsInput | number
+    payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
+    payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    payment_method?: NullableStringFieldUpdateOperationsInput | string | null
+    proof_of_payment?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
