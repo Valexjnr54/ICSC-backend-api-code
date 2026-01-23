@@ -364,6 +364,21 @@ exports.Prisma.PartnerScalarFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.ResourcesScalarFieldEnum = {
+  id: 'id',
+  resource_name: 'resource_name',
+  type: 'type',
+  category: 'category',
+  uploaded_by: 'uploaded_by',
+  file_path: 'file_path',
+  file_type: 'file_type',
+  description: 'description',
+  status: 'status',
+  visibilty: 'visibilty',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -536,6 +551,16 @@ exports.Prisma.PartnerOrderByRelevanceFieldEnum = {
   job_title: 'job_title',
   password: 'password'
 };
+
+exports.Prisma.ResourcesOrderByRelevanceFieldEnum = {
+  resource_name: 'resource_name',
+  type: 'type',
+  category: 'category',
+  uploaded_by: 'uploaded_by',
+  file_path: 'file_path',
+  file_type: 'file_type',
+  description: 'description'
+};
 exports.Role = exports.$Enums.Role = {
   super_admin: 'super_admin',
   attendee: 'attendee',
@@ -570,6 +595,12 @@ exports.CreatorType = exports.$Enums.CreatorType = {
   USER: 'USER'
 };
 
+exports.Visibility = exports.$Enums.Visibility = {
+  Public: 'Public',
+  Private: 'Private',
+  Restricted: 'Restricted'
+};
+
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   Users: 'Users',
@@ -587,7 +618,8 @@ exports.Prisma.ModelName = {
   Event: 'Event',
   Schedule: 'Schedule',
   ScheduleEvent: 'ScheduleEvent',
-  Partner: 'Partner'
+  Partner: 'Partner',
+  Resources: 'Resources'
 };
 
 /**

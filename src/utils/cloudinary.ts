@@ -52,7 +52,10 @@ export async function deleteImageFromCloudinary(url: string) {
 }
 
 function getCloudinaryPublicId(url: string): string {
+  // URL format: https://res.cloudinary.com/{cloud_name}/image/upload/v{version}/{folder}/{public_id}.{format}
   const parts = url.split("/");
-  const fileName = parts[parts.length - 1];
-  return `products/${fileName.split(".")[0]}`; // Assumes 'products' folder
+  const uploadIndex = parts.indexOf("upload");
+  if (uploadIndex === -1) return "";
+  const folderAndId = parts.slice(uploadIndex + 2); // After 'upload' and version
+  return folderAndId.join("/").split(".")[0]; // Remove extension
 }

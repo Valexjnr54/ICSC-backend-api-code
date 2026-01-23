@@ -98,6 +98,11 @@ export type ScheduleEvent = $Result.DefaultSelection<Prisma.$ScheduleEventPayloa
  * 
  */
 export type Partner = $Result.DefaultSelection<Prisma.$PartnerPayload>
+/**
+ * Model Resources
+ * 
+ */
+export type Resources = $Result.DefaultSelection<Prisma.$ResourcesPayload>
 
 /**
  * Enums
@@ -148,6 +153,15 @@ export const Status: {
 
 export type Status = (typeof Status)[keyof typeof Status]
 
+
+export const Visibility: {
+  Public: 'Public',
+  Private: 'Private',
+  Restricted: 'Restricted'
+};
+
+export type Visibility = (typeof Visibility)[keyof typeof Visibility]
+
 }
 
 export type OrganizationType = $Enums.OrganizationType
@@ -165,6 +179,10 @@ export const CreatorType: typeof $Enums.CreatorType
 export type Status = $Enums.Status
 
 export const Status: typeof $Enums.Status
+
+export type Visibility = $Enums.Visibility
+
+export const Visibility: typeof $Enums.Visibility
 
 /**
  * ##  Prisma Client ʲˢ
@@ -453,6 +471,16 @@ export class PrismaClient<
     * ```
     */
   get partner(): Prisma.PartnerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.resources`: Exposes CRUD operations for the **Resources** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Resources
+    * const resources = await prisma.resources.findMany()
+    * ```
+    */
+  get resources(): Prisma.ResourcesDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -910,7 +938,8 @@ export namespace Prisma {
     Event: 'Event',
     Schedule: 'Schedule',
     ScheduleEvent: 'ScheduleEvent',
-    Partner: 'Partner'
+    Partner: 'Partner',
+    Resources: 'Resources'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -929,7 +958,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "eventPackages" | "speakerPackage" | "partnerPackage" | "assigned_booths" | "eventPartnerPackages" | "event" | "schedule" | "scheduleEvent" | "partner"
+      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "eventPackages" | "speakerPackage" | "partnerPackage" | "assigned_booths" | "eventPartnerPackages" | "event" | "schedule" | "scheduleEvent" | "partner" | "resources"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2055,6 +2084,72 @@ export namespace Prisma {
           }
         }
       }
+      Resources: {
+        payload: Prisma.$ResourcesPayload<ExtArgs>
+        fields: Prisma.ResourcesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ResourcesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ResourcesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload>
+          }
+          findFirst: {
+            args: Prisma.ResourcesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ResourcesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload>
+          }
+          findMany: {
+            args: Prisma.ResourcesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload>[]
+          }
+          create: {
+            args: Prisma.ResourcesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload>
+          }
+          createMany: {
+            args: Prisma.ResourcesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ResourcesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload>
+          }
+          update: {
+            args: Prisma.ResourcesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload>
+          }
+          deleteMany: {
+            args: Prisma.ResourcesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ResourcesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ResourcesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ResourcesPayload>
+          }
+          aggregate: {
+            args: Prisma.ResourcesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateResources>
+          }
+          groupBy: {
+            args: Prisma.ResourcesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ResourcesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ResourcesCountArgs<ExtArgs>
+            result: $Utils.Optional<ResourcesCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2168,6 +2263,7 @@ export namespace Prisma {
     schedule?: ScheduleOmit
     scheduleEvent?: ScheduleEventOmit
     partner?: PartnerOmit
+    resources?: ResourcesOmit
   }
 
   /* Types for Logging */
@@ -19940,6 +20036,999 @@ export namespace Prisma {
 
 
   /**
+   * Model Resources
+   */
+
+  export type AggregateResources = {
+    _count: ResourcesCountAggregateOutputType | null
+    _avg: ResourcesAvgAggregateOutputType | null
+    _sum: ResourcesSumAggregateOutputType | null
+    _min: ResourcesMinAggregateOutputType | null
+    _max: ResourcesMaxAggregateOutputType | null
+  }
+
+  export type ResourcesAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ResourcesSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ResourcesMinAggregateOutputType = {
+    id: number | null
+    resource_name: string | null
+    type: string | null
+    category: string | null
+    uploaded_by: string | null
+    file_path: string | null
+    file_type: string | null
+    description: string | null
+    status: $Enums.Status | null
+    visibilty: $Enums.Visibility | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ResourcesMaxAggregateOutputType = {
+    id: number | null
+    resource_name: string | null
+    type: string | null
+    category: string | null
+    uploaded_by: string | null
+    file_path: string | null
+    file_type: string | null
+    description: string | null
+    status: $Enums.Status | null
+    visibilty: $Enums.Visibility | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ResourcesCountAggregateOutputType = {
+    id: number
+    resource_name: number
+    type: number
+    category: number
+    uploaded_by: number
+    file_path: number
+    file_type: number
+    description: number
+    status: number
+    visibilty: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ResourcesAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ResourcesSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ResourcesMinAggregateInputType = {
+    id?: true
+    resource_name?: true
+    type?: true
+    category?: true
+    uploaded_by?: true
+    file_path?: true
+    file_type?: true
+    description?: true
+    status?: true
+    visibilty?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ResourcesMaxAggregateInputType = {
+    id?: true
+    resource_name?: true
+    type?: true
+    category?: true
+    uploaded_by?: true
+    file_path?: true
+    file_type?: true
+    description?: true
+    status?: true
+    visibilty?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ResourcesCountAggregateInputType = {
+    id?: true
+    resource_name?: true
+    type?: true
+    category?: true
+    uploaded_by?: true
+    file_path?: true
+    file_type?: true
+    description?: true
+    status?: true
+    visibilty?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ResourcesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Resources to aggregate.
+     */
+    where?: ResourcesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Resources to fetch.
+     */
+    orderBy?: ResourcesOrderByWithRelationInput | ResourcesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ResourcesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Resources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Resources.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Resources
+    **/
+    _count?: true | ResourcesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ResourcesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ResourcesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ResourcesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ResourcesMaxAggregateInputType
+  }
+
+  export type GetResourcesAggregateType<T extends ResourcesAggregateArgs> = {
+        [P in keyof T & keyof AggregateResources]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateResources[P]>
+      : GetScalarType<T[P], AggregateResources[P]>
+  }
+
+
+
+
+  export type ResourcesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResourcesWhereInput
+    orderBy?: ResourcesOrderByWithAggregationInput | ResourcesOrderByWithAggregationInput[]
+    by: ResourcesScalarFieldEnum[] | ResourcesScalarFieldEnum
+    having?: ResourcesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ResourcesCountAggregateInputType | true
+    _avg?: ResourcesAvgAggregateInputType
+    _sum?: ResourcesSumAggregateInputType
+    _min?: ResourcesMinAggregateInputType
+    _max?: ResourcesMaxAggregateInputType
+  }
+
+  export type ResourcesGroupByOutputType = {
+    id: number
+    resource_name: string
+    type: string
+    category: string
+    uploaded_by: string
+    file_path: string
+    file_type: string
+    description: string | null
+    status: $Enums.Status
+    visibilty: $Enums.Visibility
+    createdAt: Date
+    updatedAt: Date
+    _count: ResourcesCountAggregateOutputType | null
+    _avg: ResourcesAvgAggregateOutputType | null
+    _sum: ResourcesSumAggregateOutputType | null
+    _min: ResourcesMinAggregateOutputType | null
+    _max: ResourcesMaxAggregateOutputType | null
+  }
+
+  type GetResourcesGroupByPayload<T extends ResourcesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ResourcesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ResourcesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ResourcesGroupByOutputType[P]>
+            : GetScalarType<T[P], ResourcesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ResourcesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    resource_name?: boolean
+    type?: boolean
+    category?: boolean
+    uploaded_by?: boolean
+    file_path?: boolean
+    file_type?: boolean
+    description?: boolean
+    status?: boolean
+    visibilty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["resources"]>
+
+
+
+  export type ResourcesSelectScalar = {
+    id?: boolean
+    resource_name?: boolean
+    type?: boolean
+    category?: boolean
+    uploaded_by?: boolean
+    file_path?: boolean
+    file_type?: boolean
+    description?: boolean
+    status?: boolean
+    visibilty?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ResourcesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "resource_name" | "type" | "category" | "uploaded_by" | "file_path" | "file_type" | "description" | "status" | "visibilty" | "createdAt" | "updatedAt", ExtArgs["result"]["resources"]>
+
+  export type $ResourcesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Resources"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      resource_name: string
+      type: string
+      category: string
+      uploaded_by: string
+      file_path: string
+      file_type: string
+      description: string | null
+      status: $Enums.Status
+      visibilty: $Enums.Visibility
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["resources"]>
+    composites: {}
+  }
+
+  type ResourcesGetPayload<S extends boolean | null | undefined | ResourcesDefaultArgs> = $Result.GetResult<Prisma.$ResourcesPayload, S>
+
+  type ResourcesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ResourcesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ResourcesCountAggregateInputType | true
+    }
+
+  export interface ResourcesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Resources'], meta: { name: 'Resources' } }
+    /**
+     * Find zero or one Resources that matches the filter.
+     * @param {ResourcesFindUniqueArgs} args - Arguments to find a Resources
+     * @example
+     * // Get one Resources
+     * const resources = await prisma.resources.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ResourcesFindUniqueArgs>(args: SelectSubset<T, ResourcesFindUniqueArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Resources that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ResourcesFindUniqueOrThrowArgs} args - Arguments to find a Resources
+     * @example
+     * // Get one Resources
+     * const resources = await prisma.resources.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ResourcesFindUniqueOrThrowArgs>(args: SelectSubset<T, ResourcesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Resources that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResourcesFindFirstArgs} args - Arguments to find a Resources
+     * @example
+     * // Get one Resources
+     * const resources = await prisma.resources.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ResourcesFindFirstArgs>(args?: SelectSubset<T, ResourcesFindFirstArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Resources that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResourcesFindFirstOrThrowArgs} args - Arguments to find a Resources
+     * @example
+     * // Get one Resources
+     * const resources = await prisma.resources.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ResourcesFindFirstOrThrowArgs>(args?: SelectSubset<T, ResourcesFindFirstOrThrowArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Resources that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResourcesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Resources
+     * const resources = await prisma.resources.findMany()
+     * 
+     * // Get first 10 Resources
+     * const resources = await prisma.resources.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const resourcesWithIdOnly = await prisma.resources.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ResourcesFindManyArgs>(args?: SelectSubset<T, ResourcesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Resources.
+     * @param {ResourcesCreateArgs} args - Arguments to create a Resources.
+     * @example
+     * // Create one Resources
+     * const Resources = await prisma.resources.create({
+     *   data: {
+     *     // ... data to create a Resources
+     *   }
+     * })
+     * 
+     */
+    create<T extends ResourcesCreateArgs>(args: SelectSubset<T, ResourcesCreateArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Resources.
+     * @param {ResourcesCreateManyArgs} args - Arguments to create many Resources.
+     * @example
+     * // Create many Resources
+     * const resources = await prisma.resources.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ResourcesCreateManyArgs>(args?: SelectSubset<T, ResourcesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Resources.
+     * @param {ResourcesDeleteArgs} args - Arguments to delete one Resources.
+     * @example
+     * // Delete one Resources
+     * const Resources = await prisma.resources.delete({
+     *   where: {
+     *     // ... filter to delete one Resources
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ResourcesDeleteArgs>(args: SelectSubset<T, ResourcesDeleteArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Resources.
+     * @param {ResourcesUpdateArgs} args - Arguments to update one Resources.
+     * @example
+     * // Update one Resources
+     * const resources = await prisma.resources.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ResourcesUpdateArgs>(args: SelectSubset<T, ResourcesUpdateArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Resources.
+     * @param {ResourcesDeleteManyArgs} args - Arguments to filter Resources to delete.
+     * @example
+     * // Delete a few Resources
+     * const { count } = await prisma.resources.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ResourcesDeleteManyArgs>(args?: SelectSubset<T, ResourcesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Resources.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResourcesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Resources
+     * const resources = await prisma.resources.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ResourcesUpdateManyArgs>(args: SelectSubset<T, ResourcesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Resources.
+     * @param {ResourcesUpsertArgs} args - Arguments to update or create a Resources.
+     * @example
+     * // Update or create a Resources
+     * const resources = await prisma.resources.upsert({
+     *   create: {
+     *     // ... data to create a Resources
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Resources we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ResourcesUpsertArgs>(args: SelectSubset<T, ResourcesUpsertArgs<ExtArgs>>): Prisma__ResourcesClient<$Result.GetResult<Prisma.$ResourcesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Resources.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResourcesCountArgs} args - Arguments to filter Resources to count.
+     * @example
+     * // Count the number of Resources
+     * const count = await prisma.resources.count({
+     *   where: {
+     *     // ... the filter for the Resources we want to count
+     *   }
+     * })
+    **/
+    count<T extends ResourcesCountArgs>(
+      args?: Subset<T, ResourcesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ResourcesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Resources.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResourcesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ResourcesAggregateArgs>(args: Subset<T, ResourcesAggregateArgs>): Prisma.PrismaPromise<GetResourcesAggregateType<T>>
+
+    /**
+     * Group by Resources.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ResourcesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ResourcesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ResourcesGroupByArgs['orderBy'] }
+        : { orderBy?: ResourcesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ResourcesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetResourcesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Resources model
+   */
+  readonly fields: ResourcesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Resources.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ResourcesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Resources model
+   */
+  interface ResourcesFieldRefs {
+    readonly id: FieldRef<"Resources", 'Int'>
+    readonly resource_name: FieldRef<"Resources", 'String'>
+    readonly type: FieldRef<"Resources", 'String'>
+    readonly category: FieldRef<"Resources", 'String'>
+    readonly uploaded_by: FieldRef<"Resources", 'String'>
+    readonly file_path: FieldRef<"Resources", 'String'>
+    readonly file_type: FieldRef<"Resources", 'String'>
+    readonly description: FieldRef<"Resources", 'String'>
+    readonly status: FieldRef<"Resources", 'Status'>
+    readonly visibilty: FieldRef<"Resources", 'Visibility'>
+    readonly createdAt: FieldRef<"Resources", 'DateTime'>
+    readonly updatedAt: FieldRef<"Resources", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Resources findUnique
+   */
+  export type ResourcesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * Filter, which Resources to fetch.
+     */
+    where: ResourcesWhereUniqueInput
+  }
+
+  /**
+   * Resources findUniqueOrThrow
+   */
+  export type ResourcesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * Filter, which Resources to fetch.
+     */
+    where: ResourcesWhereUniqueInput
+  }
+
+  /**
+   * Resources findFirst
+   */
+  export type ResourcesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * Filter, which Resources to fetch.
+     */
+    where?: ResourcesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Resources to fetch.
+     */
+    orderBy?: ResourcesOrderByWithRelationInput | ResourcesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Resources.
+     */
+    cursor?: ResourcesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Resources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Resources.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Resources.
+     */
+    distinct?: ResourcesScalarFieldEnum | ResourcesScalarFieldEnum[]
+  }
+
+  /**
+   * Resources findFirstOrThrow
+   */
+  export type ResourcesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * Filter, which Resources to fetch.
+     */
+    where?: ResourcesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Resources to fetch.
+     */
+    orderBy?: ResourcesOrderByWithRelationInput | ResourcesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Resources.
+     */
+    cursor?: ResourcesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Resources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Resources.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Resources.
+     */
+    distinct?: ResourcesScalarFieldEnum | ResourcesScalarFieldEnum[]
+  }
+
+  /**
+   * Resources findMany
+   */
+  export type ResourcesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * Filter, which Resources to fetch.
+     */
+    where?: ResourcesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Resources to fetch.
+     */
+    orderBy?: ResourcesOrderByWithRelationInput | ResourcesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Resources.
+     */
+    cursor?: ResourcesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Resources from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Resources.
+     */
+    skip?: number
+    distinct?: ResourcesScalarFieldEnum | ResourcesScalarFieldEnum[]
+  }
+
+  /**
+   * Resources create
+   */
+  export type ResourcesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Resources.
+     */
+    data: XOR<ResourcesCreateInput, ResourcesUncheckedCreateInput>
+  }
+
+  /**
+   * Resources createMany
+   */
+  export type ResourcesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Resources.
+     */
+    data: ResourcesCreateManyInput | ResourcesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Resources update
+   */
+  export type ResourcesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Resources.
+     */
+    data: XOR<ResourcesUpdateInput, ResourcesUncheckedUpdateInput>
+    /**
+     * Choose, which Resources to update.
+     */
+    where: ResourcesWhereUniqueInput
+  }
+
+  /**
+   * Resources updateMany
+   */
+  export type ResourcesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Resources.
+     */
+    data: XOR<ResourcesUpdateManyMutationInput, ResourcesUncheckedUpdateManyInput>
+    /**
+     * Filter which Resources to update
+     */
+    where?: ResourcesWhereInput
+    /**
+     * Limit how many Resources to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Resources upsert
+   */
+  export type ResourcesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Resources to update in case it exists.
+     */
+    where: ResourcesWhereUniqueInput
+    /**
+     * In case the Resources found by the `where` argument doesn't exist, create a new Resources with this data.
+     */
+    create: XOR<ResourcesCreateInput, ResourcesUncheckedCreateInput>
+    /**
+     * In case the Resources was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ResourcesUpdateInput, ResourcesUncheckedUpdateInput>
+  }
+
+  /**
+   * Resources delete
+   */
+  export type ResourcesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+    /**
+     * Filter which Resources to delete.
+     */
+    where: ResourcesWhereUniqueInput
+  }
+
+  /**
+   * Resources deleteMany
+   */
+  export type ResourcesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Resources to delete
+     */
+    where?: ResourcesWhereInput
+    /**
+     * Limit how many Resources to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Resources without action
+   */
+  export type ResourcesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resources
+     */
+    select?: ResourcesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resources
+     */
+    omit?: ResourcesOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -20248,6 +21337,24 @@ export namespace Prisma {
   export type PartnerScalarFieldEnum = (typeof PartnerScalarFieldEnum)[keyof typeof PartnerScalarFieldEnum]
 
 
+  export const ResourcesScalarFieldEnum: {
+    id: 'id',
+    resource_name: 'resource_name',
+    type: 'type',
+    category: 'category',
+    uploaded_by: 'uploaded_by',
+    file_path: 'file_path',
+    file_type: 'file_type',
+    description: 'description',
+    status: 'status',
+    visibilty: 'visibilty',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ResourcesScalarFieldEnum = (typeof ResourcesScalarFieldEnum)[keyof typeof ResourcesScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -20484,6 +21591,19 @@ export namespace Prisma {
   export type PartnerOrderByRelevanceFieldEnum = (typeof PartnerOrderByRelevanceFieldEnum)[keyof typeof PartnerOrderByRelevanceFieldEnum]
 
 
+  export const ResourcesOrderByRelevanceFieldEnum: {
+    resource_name: 'resource_name',
+    type: 'type',
+    category: 'category',
+    uploaded_by: 'uploaded_by',
+    file_path: 'file_path',
+    file_type: 'file_type',
+    description: 'description'
+  };
+
+  export type ResourcesOrderByRelevanceFieldEnum = (typeof ResourcesOrderByRelevanceFieldEnum)[keyof typeof ResourcesOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -20563,6 +21683,13 @@ export namespace Prisma {
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'Visibility'
+   */
+  export type EnumVisibilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Visibility'>
     
   /**
    * Deep Input Types
@@ -22083,6 +23210,96 @@ export namespace Prisma {
     subscribe_to_newletter?: BoolNullableWithAggregatesFilter<"Partner"> | boolean | null
     share_with_third_party?: BoolNullableWithAggregatesFilter<"Partner"> | boolean | null
     password?: StringWithAggregatesFilter<"Partner"> | string
+  }
+
+  export type ResourcesWhereInput = {
+    AND?: ResourcesWhereInput | ResourcesWhereInput[]
+    OR?: ResourcesWhereInput[]
+    NOT?: ResourcesWhereInput | ResourcesWhereInput[]
+    id?: IntFilter<"Resources"> | number
+    resource_name?: StringFilter<"Resources"> | string
+    type?: StringFilter<"Resources"> | string
+    category?: StringFilter<"Resources"> | string
+    uploaded_by?: StringFilter<"Resources"> | string
+    file_path?: StringFilter<"Resources"> | string
+    file_type?: StringFilter<"Resources"> | string
+    description?: StringNullableFilter<"Resources"> | string | null
+    status?: EnumStatusFilter<"Resources"> | $Enums.Status
+    visibilty?: EnumVisibilityFilter<"Resources"> | $Enums.Visibility
+    createdAt?: DateTimeFilter<"Resources"> | Date | string
+    updatedAt?: DateTimeFilter<"Resources"> | Date | string
+  }
+
+  export type ResourcesOrderByWithRelationInput = {
+    id?: SortOrder
+    resource_name?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    uploaded_by?: SortOrder
+    file_path?: SortOrder
+    file_type?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    visibilty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: ResourcesOrderByRelevanceInput
+  }
+
+  export type ResourcesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ResourcesWhereInput | ResourcesWhereInput[]
+    OR?: ResourcesWhereInput[]
+    NOT?: ResourcesWhereInput | ResourcesWhereInput[]
+    resource_name?: StringFilter<"Resources"> | string
+    type?: StringFilter<"Resources"> | string
+    category?: StringFilter<"Resources"> | string
+    uploaded_by?: StringFilter<"Resources"> | string
+    file_path?: StringFilter<"Resources"> | string
+    file_type?: StringFilter<"Resources"> | string
+    description?: StringNullableFilter<"Resources"> | string | null
+    status?: EnumStatusFilter<"Resources"> | $Enums.Status
+    visibilty?: EnumVisibilityFilter<"Resources"> | $Enums.Visibility
+    createdAt?: DateTimeFilter<"Resources"> | Date | string
+    updatedAt?: DateTimeFilter<"Resources"> | Date | string
+  }, "id">
+
+  export type ResourcesOrderByWithAggregationInput = {
+    id?: SortOrder
+    resource_name?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    uploaded_by?: SortOrder
+    file_path?: SortOrder
+    file_type?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    visibilty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ResourcesCountOrderByAggregateInput
+    _avg?: ResourcesAvgOrderByAggregateInput
+    _max?: ResourcesMaxOrderByAggregateInput
+    _min?: ResourcesMinOrderByAggregateInput
+    _sum?: ResourcesSumOrderByAggregateInput
+  }
+
+  export type ResourcesScalarWhereWithAggregatesInput = {
+    AND?: ResourcesScalarWhereWithAggregatesInput | ResourcesScalarWhereWithAggregatesInput[]
+    OR?: ResourcesScalarWhereWithAggregatesInput[]
+    NOT?: ResourcesScalarWhereWithAggregatesInput | ResourcesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Resources"> | number
+    resource_name?: StringWithAggregatesFilter<"Resources"> | string
+    type?: StringWithAggregatesFilter<"Resources"> | string
+    category?: StringWithAggregatesFilter<"Resources"> | string
+    uploaded_by?: StringWithAggregatesFilter<"Resources"> | string
+    file_path?: StringWithAggregatesFilter<"Resources"> | string
+    file_type?: StringWithAggregatesFilter<"Resources"> | string
+    description?: StringNullableWithAggregatesFilter<"Resources"> | string | null
+    status?: EnumStatusWithAggregatesFilter<"Resources"> | $Enums.Status
+    visibilty?: EnumVisibilityWithAggregatesFilter<"Resources"> | $Enums.Visibility
+    createdAt?: DateTimeWithAggregatesFilter<"Resources"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Resources"> | Date | string
   }
 
   export type AdminCreateInput = {
@@ -23763,6 +24980,108 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ResourcesCreateInput = {
+    resource_name: string
+    type: string
+    category: string
+    uploaded_by: string
+    file_path: string
+    file_type: string
+    description?: string | null
+    status: $Enums.Status
+    visibilty?: $Enums.Visibility
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResourcesUncheckedCreateInput = {
+    id?: number
+    resource_name: string
+    type: string
+    category: string
+    uploaded_by: string
+    file_path: string
+    file_type: string
+    description?: string | null
+    status: $Enums.Status
+    visibilty?: $Enums.Visibility
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResourcesUpdateInput = {
+    resource_name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    uploaded_by?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    visibilty?: EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResourcesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    resource_name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    uploaded_by?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    visibilty?: EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResourcesCreateManyInput = {
+    id?: number
+    resource_name: string
+    type: string
+    category: string
+    uploaded_by: string
+    file_path: string
+    file_type: string
+    description?: string | null
+    status: $Enums.Status
+    visibilty?: $Enums.Visibility
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResourcesUpdateManyMutationInput = {
+    resource_name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    uploaded_by?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    visibilty?: EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResourcesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    resource_name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    uploaded_by?: StringFieldUpdateOperationsInput | string
+    file_path?: StringFieldUpdateOperationsInput | string
+    file_type?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    visibilty?: EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -25184,6 +26503,82 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type EnumVisibilityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Visibility | EnumVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.Visibility[]
+    notIn?: $Enums.Visibility[]
+    not?: NestedEnumVisibilityFilter<$PrismaModel> | $Enums.Visibility
+  }
+
+  export type ResourcesOrderByRelevanceInput = {
+    fields: ResourcesOrderByRelevanceFieldEnum | ResourcesOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ResourcesCountOrderByAggregateInput = {
+    id?: SortOrder
+    resource_name?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    uploaded_by?: SortOrder
+    file_path?: SortOrder
+    file_type?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    visibilty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ResourcesAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ResourcesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    resource_name?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    uploaded_by?: SortOrder
+    file_path?: SortOrder
+    file_type?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    visibilty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ResourcesMinOrderByAggregateInput = {
+    id?: SortOrder
+    resource_name?: SortOrder
+    type?: SortOrder
+    category?: SortOrder
+    uploaded_by?: SortOrder
+    file_path?: SortOrder
+    file_type?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    visibilty?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ResourcesSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumVisibilityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Visibility | EnumVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.Visibility[]
+    notIn?: $Enums.Visibility[]
+    not?: NestedEnumVisibilityWithAggregatesFilter<$PrismaModel> | $Enums.Visibility
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVisibilityFilter<$PrismaModel>
+    _max?: NestedEnumVisibilityFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -25638,6 +27033,10 @@ export namespace Prisma {
     deleteMany?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
   }
 
+  export type EnumVisibilityFieldUpdateOperationsInput = {
+    set?: $Enums.Visibility
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -25959,6 +27358,23 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumVisibilityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Visibility | EnumVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.Visibility[]
+    notIn?: $Enums.Visibility[]
+    not?: NestedEnumVisibilityFilter<$PrismaModel> | $Enums.Visibility
+  }
+
+  export type NestedEnumVisibilityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Visibility | EnumVisibilityFieldRefInput<$PrismaModel>
+    in?: $Enums.Visibility[]
+    notIn?: $Enums.Visibility[]
+    not?: NestedEnumVisibilityWithAggregatesFilter<$PrismaModel> | $Enums.Visibility
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumVisibilityFilter<$PrismaModel>
+    _max?: NestedEnumVisibilityFilter<$PrismaModel>
   }
 
   export type OrganizationCreateWithoutChildrenInput = {

@@ -221,6 +221,9 @@ export async function getEvents(request: Request, response: Response) {
         location: ev.location,
         description: ev.description || '',
         hasLiveStream: !!ev.hasLiveStream,
+        isKeynote: !!ev.isKeynote,
+        track: ev.track || '',
+        speakers: ev.speakers || [],
       };
 
       grouped[dayName].push(item);

@@ -36,8 +36,8 @@ export async function createAttendee(request: Request, response: Response) {
   try {
     // Run validation before accessing request.body
     const validationRules = [
-      body('firstName').notEmpty().withMessage('Full Name is required'),
-      body('lastName').notEmpty().withMessage('Full Name is required'),
+      body('firstName').notEmpty().withMessage('First Name is required'),
+      body('lastName').notEmpty().withMessage('Last Name is required'),
       body('phone_number').notEmpty().withMessage('Phone Number is required'),
       body('jobTitle').notEmpty().withMessage('Job Title is required'),
       // nin is optional — don't attach a "required" message to an optional validator
@@ -96,6 +96,7 @@ export async function createAttendee(request: Request, response: Response) {
         department_agency,
         staff_id,
         office_location,
+        job_title: jobTitle,
         remark,
         status,
         grade,
@@ -299,6 +300,7 @@ export async function uploadAttendeesCSV(request: Request, response: Response) {
             organization: row.ministry,
             phone_number: row.phone_number,
             email: row.email,
+            job_title: row.jobtitle,
             nin: row.nin || null,
             position: row.position,
             department: row.department,

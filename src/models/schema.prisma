@@ -324,6 +324,23 @@ model Partner {
   @@map("partners")
 }
 
+model Resources {
+  id            Int        @id @default(autoincrement())
+  resource_name String
+  type          String
+  category      String
+  uploaded_by   String
+  file_path     String
+  file_type     String
+  description   String?
+  status        Status
+  visibilty     Visibility @default(Public)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@map("resources")
+}
+
 // Unified organization model for ministries, agencies, parastatals, etc.
 enum OrganizationType {
   MINISTRY
@@ -358,4 +375,10 @@ enum Status {
   SoldOut
   Reserved
   Paid
+}
+
+enum Visibility {
+  Public
+  Private
+  Restricted
 }

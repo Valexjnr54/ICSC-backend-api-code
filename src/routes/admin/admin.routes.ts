@@ -18,6 +18,8 @@ import { allSpeakers, createSpeaker, deleteSpeaker, singleSpeaker } from "../../
 import { allExhibitors, createExhibitor, deleteExhibitor, singleExhibitor } from "../../controllers/super_admin/exhibitor_controller";
 import { allEventPartners, createEventPartner, deleteEventPartner, singleEventPartner } from "../../controllers/super_admin/event_partner_controller";
 import { createEvent, getEvents } from "../../controllers/super_admin/agenda_controller";
+import { allPartners, createPartner, deletePartner, singlePartner } from "../../controllers/super_admin/partner_controller";
+import { createResource, getAllResources, getSingleResource, updateResource, deleteResource } from "../../controllers/super_admin/resources_controller";
 
 export const adminRouter = express.Router();
 
@@ -68,5 +70,16 @@ adminRouter.get('/event-partners', allEventPartners);
 adminRouter.get('/single-event-partner', singleEventPartner);
 adminRouter.delete('/delete-event-partner', deleteEventPartner);
 
+adminRouter.post('/create-partner', createPartner);
+adminRouter.get('/partners', allPartners);
+adminRouter.get('/single-partner', singlePartner);
+adminRouter.delete('/delete-partner', deletePartner);
+
 adminRouter.post('/agenda/create-event-agenda', createEvent);
 adminRouter.get('/agenda/event-agendas', getEvents);
+
+adminRouter.post('/create-resource', upload.single('resourceFile'), createResource);
+adminRouter.get('/resources', getAllResources);
+adminRouter.get('/single-resource', getSingleResource);
+adminRouter.put('/update-resource', upload.single('resourceFile'), updateResource);
+adminRouter.delete('/delete-resource', deleteResource);
