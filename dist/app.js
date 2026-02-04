@@ -20,6 +20,7 @@ const packages_routes_1 = require("./routes/packages.routes");
 const misc_routes_1 = require("./routes/misc.routes");
 const attendee_route_1 = require("./routes/attendee/attendee.route");
 const partnerAuthRoutes_1 = require("./routes/auth/partnerAuthRoutes");
+const partner_route_1 = require("./routes/partner/partner.route");
 const app = (0, express_1.default)();
 app.set("trust proxy", 1);
 app.use(express_1.default.json());
@@ -50,6 +51,7 @@ app.use(`${route}/payments`, payment_routes_1.paymentRouter);
 app.use(`${route}/packages`, packages_routes_1.packagesRouter);
 app.use(`${route}/misc`, misc_routes_1.miscRouter);
 app.use(`${route}/attendee`, attendee_route_1.attendeeRouter);
+app.use(`${route}/partner`, partner_route_1.partnerRouter);
 app.use((error, request, response, next) => {
     if (error instanceof SyntaxError && 'body' in error) {
         return response.status(400).json({

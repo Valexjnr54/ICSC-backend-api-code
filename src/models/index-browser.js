@@ -247,6 +247,7 @@ exports.Prisma.SpeakersScalarFieldEnum = {
   social_media: 'social_media',
   work_email: 'work_email',
   bio: 'bio',
+  profile_image: 'profile_image',
   topic: 'topic',
   experience: 'experience',
   password: 'password',
@@ -327,6 +328,9 @@ exports.Prisma.EventScalarFieldEnum = {
   hasLiveStream: 'hasLiveStream',
   liveStreamUrl: 'liveStreamUrl',
   isKeynote: 'isKeynote',
+  moderator: 'moderator',
+  main_speakers: 'main_speakers',
+  lead_speakers: 'lead_speakers',
   speakers: 'speakers',
   track: 'track',
   createdAt: 'createdAt',
@@ -336,6 +340,11 @@ exports.Prisma.EventScalarFieldEnum = {
 exports.Prisma.ScheduleScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  submittedBy: 'submittedBy',
+  submittedById: 'submittedById',
+  attendeeId: 'attendeeId',
+  partnerId: 'partnerId',
+  speakerId: 'speakerId',
   email: 'email',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -375,6 +384,21 @@ exports.Prisma.ResourcesScalarFieldEnum = {
   description: 'description',
   status: 'status',
   visibilty: 'visibilty',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RoundTablesScalarFieldEnum = {
+  id: 'id',
+  session: 'session',
+  session_start_time: 'session_start_time',
+  session_end_time: 'session_end_time',
+  event_date: 'event_date',
+  title: 'title',
+  lead: 'lead',
+  description: 'description',
+  key_question: 'key_question',
+  open_for: 'open_for',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -493,6 +517,7 @@ exports.Prisma.SpeakersOrderByRelevanceFieldEnum = {
   phone: 'phone',
   work_email: 'work_email',
   bio: 'bio',
+  profile_image: 'profile_image',
   topic: 'topic',
   experience: 'experience',
   password: 'password'
@@ -532,11 +557,13 @@ exports.Prisma.EventOrderByRelevanceFieldEnum = {
   location: 'location',
   description: 'description',
   liveStreamUrl: 'liveStreamUrl',
+  moderator: 'moderator',
   track: 'track'
 };
 
 exports.Prisma.ScheduleOrderByRelevanceFieldEnum = {
   userId: 'userId',
+  submittedById: 'submittedById',
   email: 'email'
 };
 
@@ -560,6 +587,15 @@ exports.Prisma.ResourcesOrderByRelevanceFieldEnum = {
   file_path: 'file_path',
   file_type: 'file_type',
   description: 'description'
+};
+
+exports.Prisma.RoundTablesOrderByRelevanceFieldEnum = {
+  session_start_time: 'session_start_time',
+  session_end_time: 'session_end_time',
+  event_date: 'event_date',
+  title: 'title',
+  description: 'description',
+  open_for: 'open_for'
 };
 exports.Role = exports.$Enums.Role = {
   super_admin: 'super_admin',
@@ -595,10 +631,22 @@ exports.CreatorType = exports.$Enums.CreatorType = {
   USER: 'USER'
 };
 
+exports.SubmitterType = exports.$Enums.SubmitterType = {
+  ATTENDEE: 'ATTENDEE',
+  PARTNER: 'PARTNER',
+  SPEAKER: 'SPEAKER',
+  OTHER: 'OTHER'
+};
+
 exports.Visibility = exports.$Enums.Visibility = {
   Public: 'Public',
   Private: 'Private',
   Restricted: 'Restricted'
+};
+
+exports.Session = exports.$Enums.Session = {
+  Morning: 'Morning',
+  Afternoon: 'Afternoon'
 };
 
 exports.Prisma.ModelName = {
@@ -619,7 +667,8 @@ exports.Prisma.ModelName = {
   Schedule: 'Schedule',
   ScheduleEvent: 'ScheduleEvent',
   Partner: 'Partner',
-  Resources: 'Resources'
+  Resources: 'Resources',
+  RoundTables: 'RoundTables'
 };
 
 /**

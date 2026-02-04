@@ -308,7 +308,7 @@ export async function uploadAttendeesCSV(request: Request, response: Response) {
             staff_id: row.staff_id || null,
             office_location: row.office_location || null,
             remark: row.remark || null,
-            status: row.status,
+            status: 'Approved',
             grade: row.grade,
             password: hashedPassword,
             created_by_id: admin_id,

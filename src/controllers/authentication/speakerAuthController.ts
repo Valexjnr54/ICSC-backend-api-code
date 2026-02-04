@@ -21,6 +21,7 @@ export async function registerSpeaker(request: Request, response: Response) {
 			body('speakerOrganization').notEmpty().withMessage('Organization is required'),
 			body('speakerPhone').notEmpty().withMessage('Work phone is required'),
 			body('socialMedia').optional(),
+			body('profile_image').optional(),
 			body('speakerWorkEmail').isEmail().withMessage('Invalid work email'),
 			body('speakerBio').notEmpty().withMessage('Bio is required'),
 			body('speakertopic').notEmpty().withMessage('Proposed topic is required'),
@@ -96,7 +97,7 @@ export async function registerSpeaker(request: Request, response: Response) {
 		});
 
 		// optional welcome email (non-blocking)
-		// try { await sendWelcomeEmail(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }
+		try { await sendWelcomeEmail(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }
 
 		if (!Config.secret) {
 			console.error('Jwt secret is not defined');

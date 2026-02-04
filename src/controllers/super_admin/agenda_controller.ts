@@ -97,6 +97,10 @@ export async function createEvent(request: Request, response: Response) {
       body('hasLiveStream').optional().isBoolean(),
       body('isKeynote').optional(),
       body('track').optional(),
+      body('moderator').optional().isString().trim(),
+      body('main_speakers').optional().isArray({ min: 0 }).withMessage('main_speakers must be an array'),
+      body('lead_speakers').optional().isArray({ min: 0 }).withMessage('lead_speakers must be an array'),
+      body('speakers').optional().isArray({ min: 0 }).withMessage('speakers must be an array'),
     ];
     await Promise.all(validationRules.map(rule => rule.run(request)));
 
@@ -106,7 +110,7 @@ export async function createEvent(request: Request, response: Response) {
     }
 
     // destructure after validation (request.body will be populated by body-parser middleware)
-    const { title, event_date, start_time, end_time, location, description, hasLiveStream, isKeynote, track } = request.body;
+    const { title, event_date, start_time, end_time, location, description, hasLiveStream, isKeynote, track, moderator, main_speakers, lead_speakers, speakers } = request.body;
     // Retrieve the event_partners by event_partners_id
     const check_admin = await prisma.admin.findUnique({ where: { id: admin_id } });
     const admin_role = check_admin?.role;
@@ -138,6 +142,10 @@ export async function createEvent(request: Request, response: Response) {
         hasLiveStream,
         isKeynote,
         track,
+        moderator,
+        main_speakers: main_speakers || null,
+        lead_speakers: lead_speakers || null,
+        speakers: speakers || null,
       }
     })
 
@@ -169,7 +177,7 @@ export async function getEvents(request: Request, response: Response) {
 
     const DAYS = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
     const counters: Record<string, number> = {};
-    const grouped: Record<string, Array<any>> = {};
+    const grouped: Record<string, Record<string, Array<any>>> = {};
 
     function minutesToHHMM24(min: number) {
       const hh = Math.floor(min / 60) % 24;
@@ -195,7 +203,7 @@ export async function getEvents(request: Request, response: Response) {
         const dt = new Date(dateStr + 'T00:00:00Z');
         dayName = DAYS[dt.getUTCDay()];
       }
-      if (!grouped[dayName]) grouped[dayName] = [];
+      if (!grouped[dayName]) grouped[dayName] = {};
       counters[dayName] = (counters[dayName] || 0) + 1;
 
       let timeRange = '';
@@ -223,10 +231,15 @@ export async function getEvents(request: Request, response: Response) {
         hasLiveStream: !!ev.hasLiveStream,
         isKeynote: !!ev.isKeynote,
         track: ev.track || '',
+        moderator: ev.moderator || '',
+        main_speakers: ev.main_speakers || [],
+        lead_speakers: ev.lead_speakers || [],
         speakers: ev.speakers || [],
       };
 
-      grouped[dayName].push(item);
+      const loc = ev.location || 'unknown';
+      if (!grouped[dayName][loc]) grouped[dayName][loc] = [];
+      grouped[dayName][loc].push(item);
     }
 
     return response.status(200).json({ message: 'Event(s) fetched', data: grouped });

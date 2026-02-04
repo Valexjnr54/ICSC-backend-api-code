@@ -20,6 +20,7 @@ import { allEventPartners, createEventPartner, deleteEventPartner, singleEventPa
 import { createEvent, getEvents } from "../../controllers/super_admin/agenda_controller";
 import { allPartners, createPartner, deletePartner, singlePartner } from "../../controllers/super_admin/partner_controller";
 import { createResource, getAllResources, getSingleResource, updateResource, deleteResource } from "../../controllers/super_admin/resources_controller";
+import { createRoundTable, getAllRoundTables } from "../../controllers/super_admin/round_table_controller";
 
 export const adminRouter = express.Router();
 
@@ -83,3 +84,6 @@ adminRouter.get('/resources', getAllResources);
 adminRouter.get('/single-resource', getSingleResource);
 adminRouter.put('/update-resource', upload.single('resourceFile'), updateResource);
 adminRouter.delete('/delete-resource', deleteResource);
+
+adminRouter.post('/round-table/create-round-table', createRoundTable);
+adminRouter.get('/round-tables', getAllRoundTables);

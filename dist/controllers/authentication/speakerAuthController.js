@@ -11,6 +11,7 @@ const models_1 = require("../../models");
 const config_1 = require("../../config/config");
 const express_validator_1 = require("express-validator");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const emailSender_1 = require("../../utils/emailSender");
 const prisma = new models_1.PrismaClient();
 async function registerSpeaker(request, response) {
     try {
@@ -24,6 +25,7 @@ async function registerSpeaker(request, response) {
             (0, express_validator_1.body)('speakerOrganization').notEmpty().withMessage('Organization is required'),
             (0, express_validator_1.body)('speakerPhone').notEmpty().withMessage('Work phone is required'),
             (0, express_validator_1.body)('socialMedia').optional(),
+            (0, express_validator_1.body)('profile_image').optional(),
             (0, express_validator_1.body)('speakerWorkEmail').isEmail().withMessage('Invalid work email'),
             (0, express_validator_1.body)('speakerBio').notEmpty().withMessage('Bio is required'),
             (0, express_validator_1.body)('speakertopic').notEmpty().withMessage('Proposed topic is required'),
@@ -79,7 +81,12 @@ async function registerSpeaker(request, response) {
             }
         });
         // optional welcome email (non-blocking)
-        // try { await sendWelcomeEmail(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }
+        try {
+            await (0, emailSender_1.sendWelcomeEmail)(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password);
+        }
+        catch (e) {
+            console.warn('sendWelcomeEmail failed', e);
+        }
         if (!config_1.Config.secret) {
             console.error('Jwt secret is not defined');
             return response.status(500).json({ message: 'Internal Server Error' });

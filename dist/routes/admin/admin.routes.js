@@ -19,6 +19,7 @@ const event_partner_controller_1 = require("../../controllers/super_admin/event_
 const agenda_controller_1 = require("../../controllers/super_admin/agenda_controller");
 const partner_controller_1 = require("../../controllers/super_admin/partner_controller");
 const resources_controller_1 = require("../../controllers/super_admin/resources_controller");
+const round_table_controller_1 = require("../../controllers/super_admin/round_table_controller");
 exports.adminRouter = express_1.default.Router();
 exports.adminRouter.use(authenticationMiddleware_1.authenticateJWT, adminMiddleware_1.adminOnly);
 exports.adminRouter.post('/create-user', users_controller_1.createUser);
@@ -69,3 +70,5 @@ exports.adminRouter.get('/resources', resources_controller_1.getAllResources);
 exports.adminRouter.get('/single-resource', resources_controller_1.getSingleResource);
 exports.adminRouter.put('/update-resource', multerMiddleware_1.upload.single('resourceFile'), resources_controller_1.updateResource);
 exports.adminRouter.delete('/delete-resource', resources_controller_1.deleteResource);
+exports.adminRouter.post('/round-table/create-round-table', round_table_controller_1.createRoundTable);
+exports.adminRouter.get('/round-tables', round_table_controller_1.getAllRoundTables);

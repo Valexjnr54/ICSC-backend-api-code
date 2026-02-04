@@ -103,6 +103,11 @@ export type Partner = $Result.DefaultSelection<Prisma.$PartnerPayload>
  * 
  */
 export type Resources = $Result.DefaultSelection<Prisma.$ResourcesPayload>
+/**
+ * Model RoundTables
+ * 
+ */
+export type RoundTables = $Result.DefaultSelection<Prisma.$RoundTablesPayload>
 
 /**
  * Enums
@@ -141,6 +146,16 @@ export const CreatorType: {
 export type CreatorType = (typeof CreatorType)[keyof typeof CreatorType]
 
 
+export const SubmitterType: {
+  ATTENDEE: 'ATTENDEE',
+  PARTNER: 'PARTNER',
+  SPEAKER: 'SPEAKER',
+  OTHER: 'OTHER'
+};
+
+export type SubmitterType = (typeof SubmitterType)[keyof typeof SubmitterType]
+
+
 export const Status: {
   Approved: 'Approved',
   Pending: 'Pending',
@@ -162,6 +177,14 @@ export const Visibility: {
 
 export type Visibility = (typeof Visibility)[keyof typeof Visibility]
 
+
+export const Session: {
+  Morning: 'Morning',
+  Afternoon: 'Afternoon'
+};
+
+export type Session = (typeof Session)[keyof typeof Session]
+
 }
 
 export type OrganizationType = $Enums.OrganizationType
@@ -176,6 +199,10 @@ export type CreatorType = $Enums.CreatorType
 
 export const CreatorType: typeof $Enums.CreatorType
 
+export type SubmitterType = $Enums.SubmitterType
+
+export const SubmitterType: typeof $Enums.SubmitterType
+
 export type Status = $Enums.Status
 
 export const Status: typeof $Enums.Status
@@ -183,6 +210,10 @@ export const Status: typeof $Enums.Status
 export type Visibility = $Enums.Visibility
 
 export const Visibility: typeof $Enums.Visibility
+
+export type Session = $Enums.Session
+
+export const Session: typeof $Enums.Session
 
 /**
  * ##  Prisma Client ʲˢ
@@ -481,6 +512,16 @@ export class PrismaClient<
     * ```
     */
   get resources(): Prisma.ResourcesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.roundTables`: Exposes CRUD operations for the **RoundTables** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RoundTables
+    * const roundTables = await prisma.roundTables.findMany()
+    * ```
+    */
+  get roundTables(): Prisma.RoundTablesDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -939,7 +980,8 @@ export namespace Prisma {
     Schedule: 'Schedule',
     ScheduleEvent: 'ScheduleEvent',
     Partner: 'Partner',
-    Resources: 'Resources'
+    Resources: 'Resources',
+    RoundTables: 'RoundTables'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -958,7 +1000,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "eventPackages" | "speakerPackage" | "partnerPackage" | "assigned_booths" | "eventPartnerPackages" | "event" | "schedule" | "scheduleEvent" | "partner" | "resources"
+      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "eventPackages" | "speakerPackage" | "partnerPackage" | "assigned_booths" | "eventPartnerPackages" | "event" | "schedule" | "scheduleEvent" | "partner" | "resources" | "roundTables"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2150,6 +2192,72 @@ export namespace Prisma {
           }
         }
       }
+      RoundTables: {
+        payload: Prisma.$RoundTablesPayload<ExtArgs>
+        fields: Prisma.RoundTablesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RoundTablesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RoundTablesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload>
+          }
+          findFirst: {
+            args: Prisma.RoundTablesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RoundTablesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload>
+          }
+          findMany: {
+            args: Prisma.RoundTablesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload>[]
+          }
+          create: {
+            args: Prisma.RoundTablesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload>
+          }
+          createMany: {
+            args: Prisma.RoundTablesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.RoundTablesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload>
+          }
+          update: {
+            args: Prisma.RoundTablesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload>
+          }
+          deleteMany: {
+            args: Prisma.RoundTablesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RoundTablesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RoundTablesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RoundTablesPayload>
+          }
+          aggregate: {
+            args: Prisma.RoundTablesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRoundTables>
+          }
+          groupBy: {
+            args: Prisma.RoundTablesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RoundTablesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RoundTablesCountArgs<ExtArgs>
+            result: $Utils.Optional<RoundTablesCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2264,6 +2372,7 @@ export namespace Prisma {
     scheduleEvent?: ScheduleEventOmit
     partner?: PartnerOmit
     resources?: ResourcesOmit
+    roundTables?: RoundTablesOmit
   }
 
   /* Types for Logging */
@@ -2371,6 +2480,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type AttendeesCountOutputType
+   */
+
+  export type AttendeesCountOutputType = {
+    schedules: number
+  }
+
+  export type AttendeesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedules?: boolean | AttendeesCountOutputTypeCountSchedulesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AttendeesCountOutputType without action
+   */
+  export type AttendeesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttendeesCountOutputType
+     */
+    select?: AttendeesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AttendeesCountOutputType without action
+   */
+  export type AttendeesCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleWhereInput
+  }
+
+
+  /**
    * Count Type BoothsCountOutputType
    */
 
@@ -2429,6 +2569,37 @@ export namespace Prisma {
    */
   export type ExhibitorsCountOutputTypeCountAssigned_boothsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: assigned_boothsWhereInput
+  }
+
+
+  /**
+   * Count Type SpeakersCountOutputType
+   */
+
+  export type SpeakersCountOutputType = {
+    schedules: number
+  }
+
+  export type SpeakersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedules?: boolean | SpeakersCountOutputTypeCountSchedulesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SpeakersCountOutputType without action
+   */
+  export type SpeakersCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SpeakersCountOutputType
+     */
+    select?: SpeakersCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SpeakersCountOutputType without action
+   */
+  export type SpeakersCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleWhereInput
   }
 
 
@@ -2531,10 +2702,12 @@ export namespace Prisma {
 
   export type PartnerCountOutputType = {
     EventPartnerPackages: number
+    schedules: number
   }
 
   export type PartnerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     EventPartnerPackages?: boolean | PartnerCountOutputTypeCountEventPartnerPackagesArgs
+    schedules?: boolean | PartnerCountOutputTypeCountSchedulesArgs
   }
 
   // Custom InputTypes
@@ -2553,6 +2726,13 @@ export namespace Prisma {
    */
   export type PartnerCountOutputTypeCountEventPartnerPackagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EventPartnerPackagesWhereInput
+  }
+
+  /**
+   * PartnerCountOutputType without action
+   */
+  export type PartnerCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScheduleWhereInput
   }
 
 
@@ -5910,6 +6090,8 @@ export namespace Prisma {
     created_by_type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    schedules?: boolean | Attendees$schedulesArgs<ExtArgs>
+    _count?: boolean | AttendeesCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["attendees"]>
 
 
@@ -5944,10 +6126,16 @@ export namespace Prisma {
   }
 
   export type AttendeesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "fullname" | "email" | "phone_number" | "country" | "nin" | "nin_verified" | "position" | "grade" | "organization" | "department" | "department_agency" | "job_title" | "staff_id" | "office_location" | "remark" | "status" | "role" | "password" | "temporal_password" | "registeredAt" | "created_by_id" | "created_by_type" | "createdAt" | "updatedAt", ExtArgs["result"]["attendees"]>
+  export type AttendeesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedules?: boolean | Attendees$schedulesArgs<ExtArgs>
+    _count?: boolean | AttendeesCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $AttendeesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Attendees"
-    objects: {}
+    objects: {
+      schedules: Prisma.$SchedulePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       prefix: string | null
@@ -6315,6 +6503,7 @@ export namespace Prisma {
    */
   export interface Prisma__AttendeesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    schedules<T extends Attendees$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Attendees$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6387,6 +6576,10 @@ export namespace Prisma {
      */
     omit?: AttendeesOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    /**
      * Filter, which Attendees to fetch.
      */
     where: AttendeesWhereUniqueInput
@@ -6405,6 +6598,10 @@ export namespace Prisma {
      */
     omit?: AttendeesOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    /**
      * Filter, which Attendees to fetch.
      */
     where: AttendeesWhereUniqueInput
@@ -6422,6 +6619,10 @@ export namespace Prisma {
      * Omit specific fields from the Attendees
      */
     omit?: AttendeesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
     /**
      * Filter, which Attendees to fetch.
      */
@@ -6471,6 +6672,10 @@ export namespace Prisma {
      */
     omit?: AttendeesOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    /**
      * Filter, which Attendees to fetch.
      */
     where?: AttendeesWhereInput
@@ -6519,6 +6724,10 @@ export namespace Prisma {
      */
     omit?: AttendeesOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    /**
      * Filter, which Attendees to fetch.
      */
     where?: AttendeesWhereInput
@@ -6562,6 +6771,10 @@ export namespace Prisma {
      */
     omit?: AttendeesOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    /**
      * The data needed to create a Attendees.
      */
     data: XOR<AttendeesCreateInput, AttendeesUncheckedCreateInput>
@@ -6590,6 +6803,10 @@ export namespace Prisma {
      * Omit specific fields from the Attendees
      */
     omit?: AttendeesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
     /**
      * The data needed to update a Attendees.
      */
@@ -6631,6 +6848,10 @@ export namespace Prisma {
      */
     omit?: AttendeesOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    /**
      * The filter to search for the Attendees to update in case it exists.
      */
     where: AttendeesWhereUniqueInput
@@ -6657,6 +6878,10 @@ export namespace Prisma {
      */
     omit?: AttendeesOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    /**
      * Filter which Attendees to delete.
      */
     where: AttendeesWhereUniqueInput
@@ -6677,6 +6902,30 @@ export namespace Prisma {
   }
 
   /**
+   * Attendees.schedules
+   */
+  export type Attendees$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Schedule
+     */
+    omit?: ScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+    orderBy?: ScheduleOrderByWithRelationInput | ScheduleOrderByWithRelationInput[]
+    cursor?: ScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
+  }
+
+  /**
    * Attendees without action
    */
   export type AttendeesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6688,6 +6937,10 @@ export namespace Prisma {
      * Omit specific fields from the Attendees
      */
     omit?: AttendeesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
   }
 
 
@@ -9888,6 +10141,7 @@ export namespace Prisma {
     phone: string | null
     work_email: string | null
     bio: string | null
+    profile_image: string | null
     topic: string | null
     experience: string | null
     password: string | null
@@ -9910,6 +10164,7 @@ export namespace Prisma {
     phone: string | null
     work_email: string | null
     bio: string | null
+    profile_image: string | null
     topic: string | null
     experience: string | null
     password: string | null
@@ -9933,6 +10188,7 @@ export namespace Prisma {
     social_media: number
     work_email: number
     bio: number
+    profile_image: number
     topic: number
     experience: number
     password: number
@@ -9965,6 +10221,7 @@ export namespace Prisma {
     phone?: true
     work_email?: true
     bio?: true
+    profile_image?: true
     topic?: true
     experience?: true
     password?: true
@@ -9987,6 +10244,7 @@ export namespace Prisma {
     phone?: true
     work_email?: true
     bio?: true
+    profile_image?: true
     topic?: true
     experience?: true
     password?: true
@@ -10010,6 +10268,7 @@ export namespace Prisma {
     social_media?: true
     work_email?: true
     bio?: true
+    profile_image?: true
     topic?: true
     experience?: true
     password?: true
@@ -10120,6 +10379,7 @@ export namespace Prisma {
     social_media: JsonValue | null
     work_email: string
     bio: string
+    profile_image: string | null
     topic: string
     experience: string | null
     password: string
@@ -10162,6 +10422,7 @@ export namespace Prisma {
     social_media?: boolean
     work_email?: boolean
     bio?: boolean
+    profile_image?: boolean
     topic?: boolean
     experience?: boolean
     password?: boolean
@@ -10170,6 +10431,8 @@ export namespace Prisma {
     registeredAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    schedules?: boolean | Speakers$schedulesArgs<ExtArgs>
+    _count?: boolean | SpeakersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["speakers"]>
 
 
@@ -10187,6 +10450,7 @@ export namespace Prisma {
     social_media?: boolean
     work_email?: boolean
     bio?: boolean
+    profile_image?: boolean
     topic?: boolean
     experience?: boolean
     password?: boolean
@@ -10197,11 +10461,17 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SpeakersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "first_name" | "last_name" | "fullname" | "country" | "job_title" | "organization" | "phone" | "social_media" | "work_email" | "bio" | "topic" | "experience" | "password" | "role" | "status" | "registeredAt" | "createdAt" | "updatedAt", ExtArgs["result"]["speakers"]>
+  export type SpeakersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "first_name" | "last_name" | "fullname" | "country" | "job_title" | "organization" | "phone" | "social_media" | "work_email" | "bio" | "profile_image" | "topic" | "experience" | "password" | "role" | "status" | "registeredAt" | "createdAt" | "updatedAt", ExtArgs["result"]["speakers"]>
+  export type SpeakersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    schedules?: boolean | Speakers$schedulesArgs<ExtArgs>
+    _count?: boolean | SpeakersCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $SpeakersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Speakers"
-    objects: {}
+    objects: {
+      schedules: Prisma.$SchedulePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       prefix: string | null
@@ -10215,6 +10485,7 @@ export namespace Prisma {
       social_media: Prisma.JsonValue | null
       work_email: string
       bio: string
+      profile_image: string | null
       topic: string
       experience: string | null
       password: string
@@ -10563,6 +10834,7 @@ export namespace Prisma {
    */
   export interface Prisma__SpeakersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    schedules<T extends Speakers$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Speakers$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10604,6 +10876,7 @@ export namespace Prisma {
     readonly social_media: FieldRef<"Speakers", 'Json'>
     readonly work_email: FieldRef<"Speakers", 'String'>
     readonly bio: FieldRef<"Speakers", 'String'>
+    readonly profile_image: FieldRef<"Speakers", 'String'>
     readonly topic: FieldRef<"Speakers", 'String'>
     readonly experience: FieldRef<"Speakers", 'String'>
     readonly password: FieldRef<"Speakers", 'String'>
@@ -10629,6 +10902,10 @@ export namespace Prisma {
      */
     omit?: SpeakersOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    /**
      * Filter, which Speakers to fetch.
      */
     where: SpeakersWhereUniqueInput
@@ -10647,6 +10924,10 @@ export namespace Prisma {
      */
     omit?: SpeakersOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    /**
      * Filter, which Speakers to fetch.
      */
     where: SpeakersWhereUniqueInput
@@ -10664,6 +10945,10 @@ export namespace Prisma {
      * Omit specific fields from the Speakers
      */
     omit?: SpeakersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
     /**
      * Filter, which Speakers to fetch.
      */
@@ -10713,6 +10998,10 @@ export namespace Prisma {
      */
     omit?: SpeakersOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    /**
      * Filter, which Speakers to fetch.
      */
     where?: SpeakersWhereInput
@@ -10761,6 +11050,10 @@ export namespace Prisma {
      */
     omit?: SpeakersOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    /**
      * Filter, which Speakers to fetch.
      */
     where?: SpeakersWhereInput
@@ -10804,6 +11097,10 @@ export namespace Prisma {
      */
     omit?: SpeakersOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    /**
      * The data needed to create a Speakers.
      */
     data: XOR<SpeakersCreateInput, SpeakersUncheckedCreateInput>
@@ -10832,6 +11129,10 @@ export namespace Prisma {
      * Omit specific fields from the Speakers
      */
     omit?: SpeakersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
     /**
      * The data needed to update a Speakers.
      */
@@ -10873,6 +11174,10 @@ export namespace Prisma {
      */
     omit?: SpeakersOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    /**
      * The filter to search for the Speakers to update in case it exists.
      */
     where: SpeakersWhereUniqueInput
@@ -10899,6 +11204,10 @@ export namespace Prisma {
      */
     omit?: SpeakersOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    /**
      * Filter which Speakers to delete.
      */
     where: SpeakersWhereUniqueInput
@@ -10919,6 +11228,30 @@ export namespace Prisma {
   }
 
   /**
+   * Speakers.schedules
+   */
+  export type Speakers$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Schedule
+     */
+    omit?: ScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+    orderBy?: ScheduleOrderByWithRelationInput | ScheduleOrderByWithRelationInput[]
+    cursor?: ScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
+  }
+
+  /**
    * Speakers without action
    */
   export type SpeakersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10930,6 +11263,10 @@ export namespace Prisma {
      * Omit specific fields from the Speakers
      */
     omit?: SpeakersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
   }
 
 
@@ -15942,6 +16279,7 @@ export namespace Prisma {
     hasLiveStream: boolean | null
     liveStreamUrl: string | null
     isKeynote: boolean | null
+    moderator: string | null
     track: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15959,6 +16297,7 @@ export namespace Prisma {
     hasLiveStream: boolean | null
     liveStreamUrl: string | null
     isKeynote: boolean | null
+    moderator: string | null
     track: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -15976,6 +16315,9 @@ export namespace Prisma {
     hasLiveStream: number
     liveStreamUrl: number
     isKeynote: number
+    moderator: number
+    main_speakers: number
+    lead_speakers: number
     speakers: number
     track: number
     createdAt: number
@@ -16004,6 +16346,7 @@ export namespace Prisma {
     hasLiveStream?: true
     liveStreamUrl?: true
     isKeynote?: true
+    moderator?: true
     track?: true
     createdAt?: true
     updatedAt?: true
@@ -16021,6 +16364,7 @@ export namespace Prisma {
     hasLiveStream?: true
     liveStreamUrl?: true
     isKeynote?: true
+    moderator?: true
     track?: true
     createdAt?: true
     updatedAt?: true
@@ -16038,6 +16382,9 @@ export namespace Prisma {
     hasLiveStream?: true
     liveStreamUrl?: true
     isKeynote?: true
+    moderator?: true
+    main_speakers?: true
+    lead_speakers?: true
     speakers?: true
     track?: true
     createdAt?: true
@@ -16143,6 +16490,9 @@ export namespace Prisma {
     hasLiveStream: boolean
     liveStreamUrl: string | null
     isKeynote: boolean
+    moderator: string | null
+    main_speakers: JsonValue | null
+    lead_speakers: JsonValue | null
     speakers: JsonValue | null
     track: string | null
     createdAt: Date
@@ -16180,6 +16530,9 @@ export namespace Prisma {
     hasLiveStream?: boolean
     liveStreamUrl?: boolean
     isKeynote?: boolean
+    moderator?: boolean
+    main_speakers?: boolean
+    lead_speakers?: boolean
     speakers?: boolean
     track?: boolean
     createdAt?: boolean
@@ -16202,13 +16555,16 @@ export namespace Prisma {
     hasLiveStream?: boolean
     liveStreamUrl?: boolean
     isKeynote?: boolean
+    moderator?: boolean
+    main_speakers?: boolean
+    lead_speakers?: boolean
     speakers?: boolean
     track?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "event_date" | "start_time" | "end_time" | "title" | "location" | "description" | "hasLiveStream" | "liveStreamUrl" | "isKeynote" | "speakers" | "track" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "event_date" | "start_time" | "end_time" | "title" | "location" | "description" | "hasLiveStream" | "liveStreamUrl" | "isKeynote" | "moderator" | "main_speakers" | "lead_speakers" | "speakers" | "track" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     scheduleEvents?: boolean | Event$scheduleEventsArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
@@ -16231,6 +16587,9 @@ export namespace Prisma {
       hasLiveStream: boolean
       liveStreamUrl: string | null
       isKeynote: boolean
+      moderator: string | null
+      main_speakers: Prisma.JsonValue | null
+      lead_speakers: Prisma.JsonValue | null
       speakers: Prisma.JsonValue | null
       track: string | null
       createdAt: Date
@@ -16616,6 +16975,9 @@ export namespace Prisma {
     readonly hasLiveStream: FieldRef<"Event", 'Boolean'>
     readonly liveStreamUrl: FieldRef<"Event", 'String'>
     readonly isKeynote: FieldRef<"Event", 'Boolean'>
+    readonly moderator: FieldRef<"Event", 'String'>
+    readonly main_speakers: FieldRef<"Event", 'Json'>
+    readonly lead_speakers: FieldRef<"Event", 'Json'>
     readonly speakers: FieldRef<"Event", 'Json'>
     readonly track: FieldRef<"Event", 'String'>
     readonly createdAt: FieldRef<"Event", 'DateTime'>
@@ -17019,15 +17381,26 @@ export namespace Prisma {
 
   export type ScheduleAvgAggregateOutputType = {
     id: number | null
+    attendeeId: number | null
+    partnerId: number | null
+    speakerId: number | null
   }
 
   export type ScheduleSumAggregateOutputType = {
     id: number | null
+    attendeeId: number | null
+    partnerId: number | null
+    speakerId: number | null
   }
 
   export type ScheduleMinAggregateOutputType = {
     id: number | null
     userId: string | null
+    submittedBy: $Enums.SubmitterType | null
+    submittedById: string | null
+    attendeeId: number | null
+    partnerId: number | null
+    speakerId: number | null
     email: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17036,6 +17409,11 @@ export namespace Prisma {
   export type ScheduleMaxAggregateOutputType = {
     id: number | null
     userId: string | null
+    submittedBy: $Enums.SubmitterType | null
+    submittedById: string | null
+    attendeeId: number | null
+    partnerId: number | null
+    speakerId: number | null
     email: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -17044,6 +17422,11 @@ export namespace Prisma {
   export type ScheduleCountAggregateOutputType = {
     id: number
     userId: number
+    submittedBy: number
+    submittedById: number
+    attendeeId: number
+    partnerId: number
+    speakerId: number
     email: number
     createdAt: number
     updatedAt: number
@@ -17053,15 +17436,26 @@ export namespace Prisma {
 
   export type ScheduleAvgAggregateInputType = {
     id?: true
+    attendeeId?: true
+    partnerId?: true
+    speakerId?: true
   }
 
   export type ScheduleSumAggregateInputType = {
     id?: true
+    attendeeId?: true
+    partnerId?: true
+    speakerId?: true
   }
 
   export type ScheduleMinAggregateInputType = {
     id?: true
     userId?: true
+    submittedBy?: true
+    submittedById?: true
+    attendeeId?: true
+    partnerId?: true
+    speakerId?: true
     email?: true
     createdAt?: true
     updatedAt?: true
@@ -17070,6 +17464,11 @@ export namespace Prisma {
   export type ScheduleMaxAggregateInputType = {
     id?: true
     userId?: true
+    submittedBy?: true
+    submittedById?: true
+    attendeeId?: true
+    partnerId?: true
+    speakerId?: true
     email?: true
     createdAt?: true
     updatedAt?: true
@@ -17078,6 +17477,11 @@ export namespace Prisma {
   export type ScheduleCountAggregateInputType = {
     id?: true
     userId?: true
+    submittedBy?: true
+    submittedById?: true
+    attendeeId?: true
+    partnerId?: true
+    speakerId?: true
     email?: true
     createdAt?: true
     updatedAt?: true
@@ -17173,6 +17577,11 @@ export namespace Prisma {
   export type ScheduleGroupByOutputType = {
     id: number
     userId: string
+    submittedBy: $Enums.SubmitterType | null
+    submittedById: string | null
+    attendeeId: number | null
+    partnerId: number | null
+    speakerId: number | null
     email: string | null
     createdAt: Date
     updatedAt: Date
@@ -17200,9 +17609,17 @@ export namespace Prisma {
   export type ScheduleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
+    submittedBy?: boolean
+    submittedById?: boolean
+    attendeeId?: boolean
+    partnerId?: boolean
+    speakerId?: boolean
     email?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    attendee?: boolean | Schedule$attendeeArgs<ExtArgs>
+    partner?: boolean | Schedule$partnerArgs<ExtArgs>
+    speaker?: boolean | Schedule$speakerArgs<ExtArgs>
     scheduleEvents?: boolean | Schedule$scheduleEventsArgs<ExtArgs>
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["schedule"]>
@@ -17212,13 +17629,21 @@ export namespace Prisma {
   export type ScheduleSelectScalar = {
     id?: boolean
     userId?: boolean
+    submittedBy?: boolean
+    submittedById?: boolean
+    attendeeId?: boolean
+    partnerId?: boolean
+    speakerId?: boolean
     email?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
+  export type ScheduleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "submittedBy" | "submittedById" | "attendeeId" | "partnerId" | "speakerId" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["schedule"]>
   export type ScheduleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attendee?: boolean | Schedule$attendeeArgs<ExtArgs>
+    partner?: boolean | Schedule$partnerArgs<ExtArgs>
+    speaker?: boolean | Schedule$speakerArgs<ExtArgs>
     scheduleEvents?: boolean | Schedule$scheduleEventsArgs<ExtArgs>
     _count?: boolean | ScheduleCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -17226,11 +17651,19 @@ export namespace Prisma {
   export type $SchedulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Schedule"
     objects: {
+      attendee: Prisma.$AttendeesPayload<ExtArgs> | null
+      partner: Prisma.$PartnerPayload<ExtArgs> | null
+      speaker: Prisma.$SpeakersPayload<ExtArgs> | null
       scheduleEvents: Prisma.$ScheduleEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       userId: string
+      submittedBy: $Enums.SubmitterType | null
+      submittedById: string | null
+      attendeeId: number | null
+      partnerId: number | null
+      speakerId: number | null
       email: string | null
       createdAt: Date
       updatedAt: Date
@@ -17574,6 +18007,9 @@ export namespace Prisma {
    */
   export interface Prisma__ScheduleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    attendee<T extends Schedule$attendeeArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$attendeeArgs<ExtArgs>>): Prisma__AttendeesClient<$Result.GetResult<Prisma.$AttendeesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    partner<T extends Schedule$partnerArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$partnerArgs<ExtArgs>>): Prisma__PartnerClient<$Result.GetResult<Prisma.$PartnerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    speaker<T extends Schedule$speakerArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$speakerArgs<ExtArgs>>): Prisma__SpeakersClient<$Result.GetResult<Prisma.$SpeakersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     scheduleEvents<T extends Schedule$scheduleEventsArgs<ExtArgs> = {}>(args?: Subset<T, Schedule$scheduleEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17606,6 +18042,11 @@ export namespace Prisma {
   interface ScheduleFieldRefs {
     readonly id: FieldRef<"Schedule", 'Int'>
     readonly userId: FieldRef<"Schedule", 'String'>
+    readonly submittedBy: FieldRef<"Schedule", 'SubmitterType'>
+    readonly submittedById: FieldRef<"Schedule", 'String'>
+    readonly attendeeId: FieldRef<"Schedule", 'Int'>
+    readonly partnerId: FieldRef<"Schedule", 'Int'>
+    readonly speakerId: FieldRef<"Schedule", 'Int'>
     readonly email: FieldRef<"Schedule", 'String'>
     readonly createdAt: FieldRef<"Schedule", 'DateTime'>
     readonly updatedAt: FieldRef<"Schedule", 'DateTime'>
@@ -17949,6 +18390,63 @@ export namespace Prisma {
      * Limit how many Schedules to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Schedule.attendee
+   */
+  export type Schedule$attendeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Attendees
+     */
+    select?: AttendeesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Attendees
+     */
+    omit?: AttendeesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttendeesInclude<ExtArgs> | null
+    where?: AttendeesWhereInput
+  }
+
+  /**
+   * Schedule.partner
+   */
+  export type Schedule$partnerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partner
+     */
+    select?: PartnerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partner
+     */
+    omit?: PartnerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerInclude<ExtArgs> | null
+    where?: PartnerWhereInput
+  }
+
+  /**
+   * Schedule.speaker
+   */
+  export type Schedule$speakerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Speakers
+     */
+    select?: SpeakersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Speakers
+     */
+    omit?: SpeakersOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SpeakersInclude<ExtArgs> | null
+    where?: SpeakersWhereInput
   }
 
   /**
@@ -19224,6 +19722,7 @@ export namespace Prisma {
     share_with_third_party?: boolean
     password?: boolean
     EventPartnerPackages?: boolean | Partner$EventPartnerPackagesArgs<ExtArgs>
+    schedules?: boolean | Partner$schedulesArgs<ExtArgs>
     _count?: boolean | PartnerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["partner"]>
 
@@ -19247,6 +19746,7 @@ export namespace Prisma {
   export type PartnerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "firstname" | "lastname" | "email" | "phone_number" | "entity_name" | "country" | "job_title" | "subscribe_to_newletter" | "share_with_third_party" | "password", ExtArgs["result"]["partner"]>
   export type PartnerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     EventPartnerPackages?: boolean | Partner$EventPartnerPackagesArgs<ExtArgs>
+    schedules?: boolean | Partner$schedulesArgs<ExtArgs>
     _count?: boolean | PartnerCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -19254,6 +19754,7 @@ export namespace Prisma {
     name: "Partner"
     objects: {
       EventPartnerPackages: Prisma.$EventPartnerPackagesPayload<ExtArgs>[]
+      schedules: Prisma.$SchedulePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -19609,6 +20110,7 @@ export namespace Prisma {
   export interface Prisma__PartnerClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     EventPartnerPackages<T extends Partner$EventPartnerPackagesArgs<ExtArgs> = {}>(args?: Subset<T, Partner$EventPartnerPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPartnerPackagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    schedules<T extends Partner$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Partner$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20014,6 +20516,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EventPartnerPackagesScalarFieldEnum | EventPartnerPackagesScalarFieldEnum[]
+  }
+
+  /**
+   * Partner.schedules
+   */
+  export type Partner$schedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Schedule
+     */
+    select?: ScheduleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Schedule
+     */
+    omit?: ScheduleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScheduleInclude<ExtArgs> | null
+    where?: ScheduleWhereInput
+    orderBy?: ScheduleOrderByWithRelationInput | ScheduleOrderByWithRelationInput[]
+    cursor?: ScheduleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScheduleScalarFieldEnum | ScheduleScalarFieldEnum[]
   }
 
   /**
@@ -21029,6 +21555,991 @@ export namespace Prisma {
 
 
   /**
+   * Model RoundTables
+   */
+
+  export type AggregateRoundTables = {
+    _count: RoundTablesCountAggregateOutputType | null
+    _avg: RoundTablesAvgAggregateOutputType | null
+    _sum: RoundTablesSumAggregateOutputType | null
+    _min: RoundTablesMinAggregateOutputType | null
+    _max: RoundTablesMaxAggregateOutputType | null
+  }
+
+  export type RoundTablesAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type RoundTablesSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type RoundTablesMinAggregateOutputType = {
+    id: number | null
+    session: $Enums.Session | null
+    session_start_time: string | null
+    session_end_time: string | null
+    event_date: string | null
+    title: string | null
+    description: string | null
+    open_for: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RoundTablesMaxAggregateOutputType = {
+    id: number | null
+    session: $Enums.Session | null
+    session_start_time: string | null
+    session_end_time: string | null
+    event_date: string | null
+    title: string | null
+    description: string | null
+    open_for: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RoundTablesCountAggregateOutputType = {
+    id: number
+    session: number
+    session_start_time: number
+    session_end_time: number
+    event_date: number
+    title: number
+    lead: number
+    description: number
+    key_question: number
+    open_for: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RoundTablesAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type RoundTablesSumAggregateInputType = {
+    id?: true
+  }
+
+  export type RoundTablesMinAggregateInputType = {
+    id?: true
+    session?: true
+    session_start_time?: true
+    session_end_time?: true
+    event_date?: true
+    title?: true
+    description?: true
+    open_for?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RoundTablesMaxAggregateInputType = {
+    id?: true
+    session?: true
+    session_start_time?: true
+    session_end_time?: true
+    event_date?: true
+    title?: true
+    description?: true
+    open_for?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RoundTablesCountAggregateInputType = {
+    id?: true
+    session?: true
+    session_start_time?: true
+    session_end_time?: true
+    event_date?: true
+    title?: true
+    lead?: true
+    description?: true
+    key_question?: true
+    open_for?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RoundTablesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoundTables to aggregate.
+     */
+    where?: RoundTablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoundTables to fetch.
+     */
+    orderBy?: RoundTablesOrderByWithRelationInput | RoundTablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RoundTablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoundTables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoundTables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RoundTables
+    **/
+    _count?: true | RoundTablesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RoundTablesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RoundTablesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RoundTablesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RoundTablesMaxAggregateInputType
+  }
+
+  export type GetRoundTablesAggregateType<T extends RoundTablesAggregateArgs> = {
+        [P in keyof T & keyof AggregateRoundTables]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRoundTables[P]>
+      : GetScalarType<T[P], AggregateRoundTables[P]>
+  }
+
+
+
+
+  export type RoundTablesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoundTablesWhereInput
+    orderBy?: RoundTablesOrderByWithAggregationInput | RoundTablesOrderByWithAggregationInput[]
+    by: RoundTablesScalarFieldEnum[] | RoundTablesScalarFieldEnum
+    having?: RoundTablesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RoundTablesCountAggregateInputType | true
+    _avg?: RoundTablesAvgAggregateInputType
+    _sum?: RoundTablesSumAggregateInputType
+    _min?: RoundTablesMinAggregateInputType
+    _max?: RoundTablesMaxAggregateInputType
+  }
+
+  export type RoundTablesGroupByOutputType = {
+    id: number
+    session: $Enums.Session
+    session_start_time: string
+    session_end_time: string
+    event_date: string | null
+    title: string
+    lead: JsonValue
+    description: string | null
+    key_question: JsonValue | null
+    open_for: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RoundTablesCountAggregateOutputType | null
+    _avg: RoundTablesAvgAggregateOutputType | null
+    _sum: RoundTablesSumAggregateOutputType | null
+    _min: RoundTablesMinAggregateOutputType | null
+    _max: RoundTablesMaxAggregateOutputType | null
+  }
+
+  type GetRoundTablesGroupByPayload<T extends RoundTablesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RoundTablesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RoundTablesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RoundTablesGroupByOutputType[P]>
+            : GetScalarType<T[P], RoundTablesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RoundTablesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    session?: boolean
+    session_start_time?: boolean
+    session_end_time?: boolean
+    event_date?: boolean
+    title?: boolean
+    lead?: boolean
+    description?: boolean
+    key_question?: boolean
+    open_for?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["roundTables"]>
+
+
+
+  export type RoundTablesSelectScalar = {
+    id?: boolean
+    session?: boolean
+    session_start_time?: boolean
+    session_end_time?: boolean
+    event_date?: boolean
+    title?: boolean
+    lead?: boolean
+    description?: boolean
+    key_question?: boolean
+    open_for?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RoundTablesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "session" | "session_start_time" | "session_end_time" | "event_date" | "title" | "lead" | "description" | "key_question" | "open_for" | "createdAt" | "updatedAt", ExtArgs["result"]["roundTables"]>
+
+  export type $RoundTablesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RoundTables"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      session: $Enums.Session
+      session_start_time: string
+      session_end_time: string
+      event_date: string | null
+      title: string
+      lead: Prisma.JsonValue
+      description: string | null
+      key_question: Prisma.JsonValue | null
+      open_for: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["roundTables"]>
+    composites: {}
+  }
+
+  type RoundTablesGetPayload<S extends boolean | null | undefined | RoundTablesDefaultArgs> = $Result.GetResult<Prisma.$RoundTablesPayload, S>
+
+  type RoundTablesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RoundTablesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RoundTablesCountAggregateInputType | true
+    }
+
+  export interface RoundTablesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RoundTables'], meta: { name: 'RoundTables' } }
+    /**
+     * Find zero or one RoundTables that matches the filter.
+     * @param {RoundTablesFindUniqueArgs} args - Arguments to find a RoundTables
+     * @example
+     * // Get one RoundTables
+     * const roundTables = await prisma.roundTables.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RoundTablesFindUniqueArgs>(args: SelectSubset<T, RoundTablesFindUniqueArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RoundTables that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RoundTablesFindUniqueOrThrowArgs} args - Arguments to find a RoundTables
+     * @example
+     * // Get one RoundTables
+     * const roundTables = await prisma.roundTables.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RoundTablesFindUniqueOrThrowArgs>(args: SelectSubset<T, RoundTablesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RoundTables that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundTablesFindFirstArgs} args - Arguments to find a RoundTables
+     * @example
+     * // Get one RoundTables
+     * const roundTables = await prisma.roundTables.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RoundTablesFindFirstArgs>(args?: SelectSubset<T, RoundTablesFindFirstArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RoundTables that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundTablesFindFirstOrThrowArgs} args - Arguments to find a RoundTables
+     * @example
+     * // Get one RoundTables
+     * const roundTables = await prisma.roundTables.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RoundTablesFindFirstOrThrowArgs>(args?: SelectSubset<T, RoundTablesFindFirstOrThrowArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RoundTables that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundTablesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RoundTables
+     * const roundTables = await prisma.roundTables.findMany()
+     * 
+     * // Get first 10 RoundTables
+     * const roundTables = await prisma.roundTables.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const roundTablesWithIdOnly = await prisma.roundTables.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RoundTablesFindManyArgs>(args?: SelectSubset<T, RoundTablesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RoundTables.
+     * @param {RoundTablesCreateArgs} args - Arguments to create a RoundTables.
+     * @example
+     * // Create one RoundTables
+     * const RoundTables = await prisma.roundTables.create({
+     *   data: {
+     *     // ... data to create a RoundTables
+     *   }
+     * })
+     * 
+     */
+    create<T extends RoundTablesCreateArgs>(args: SelectSubset<T, RoundTablesCreateArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RoundTables.
+     * @param {RoundTablesCreateManyArgs} args - Arguments to create many RoundTables.
+     * @example
+     * // Create many RoundTables
+     * const roundTables = await prisma.roundTables.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RoundTablesCreateManyArgs>(args?: SelectSubset<T, RoundTablesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a RoundTables.
+     * @param {RoundTablesDeleteArgs} args - Arguments to delete one RoundTables.
+     * @example
+     * // Delete one RoundTables
+     * const RoundTables = await prisma.roundTables.delete({
+     *   where: {
+     *     // ... filter to delete one RoundTables
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RoundTablesDeleteArgs>(args: SelectSubset<T, RoundTablesDeleteArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RoundTables.
+     * @param {RoundTablesUpdateArgs} args - Arguments to update one RoundTables.
+     * @example
+     * // Update one RoundTables
+     * const roundTables = await prisma.roundTables.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RoundTablesUpdateArgs>(args: SelectSubset<T, RoundTablesUpdateArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RoundTables.
+     * @param {RoundTablesDeleteManyArgs} args - Arguments to filter RoundTables to delete.
+     * @example
+     * // Delete a few RoundTables
+     * const { count } = await prisma.roundTables.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RoundTablesDeleteManyArgs>(args?: SelectSubset<T, RoundTablesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RoundTables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundTablesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RoundTables
+     * const roundTables = await prisma.roundTables.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RoundTablesUpdateManyArgs>(args: SelectSubset<T, RoundTablesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RoundTables.
+     * @param {RoundTablesUpsertArgs} args - Arguments to update or create a RoundTables.
+     * @example
+     * // Update or create a RoundTables
+     * const roundTables = await prisma.roundTables.upsert({
+     *   create: {
+     *     // ... data to create a RoundTables
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RoundTables we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RoundTablesUpsertArgs>(args: SelectSubset<T, RoundTablesUpsertArgs<ExtArgs>>): Prisma__RoundTablesClient<$Result.GetResult<Prisma.$RoundTablesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RoundTables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundTablesCountArgs} args - Arguments to filter RoundTables to count.
+     * @example
+     * // Count the number of RoundTables
+     * const count = await prisma.roundTables.count({
+     *   where: {
+     *     // ... the filter for the RoundTables we want to count
+     *   }
+     * })
+    **/
+    count<T extends RoundTablesCountArgs>(
+      args?: Subset<T, RoundTablesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RoundTablesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RoundTables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundTablesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RoundTablesAggregateArgs>(args: Subset<T, RoundTablesAggregateArgs>): Prisma.PrismaPromise<GetRoundTablesAggregateType<T>>
+
+    /**
+     * Group by RoundTables.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RoundTablesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RoundTablesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RoundTablesGroupByArgs['orderBy'] }
+        : { orderBy?: RoundTablesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RoundTablesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRoundTablesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RoundTables model
+   */
+  readonly fields: RoundTablesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RoundTables.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RoundTablesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RoundTables model
+   */
+  interface RoundTablesFieldRefs {
+    readonly id: FieldRef<"RoundTables", 'Int'>
+    readonly session: FieldRef<"RoundTables", 'Session'>
+    readonly session_start_time: FieldRef<"RoundTables", 'String'>
+    readonly session_end_time: FieldRef<"RoundTables", 'String'>
+    readonly event_date: FieldRef<"RoundTables", 'String'>
+    readonly title: FieldRef<"RoundTables", 'String'>
+    readonly lead: FieldRef<"RoundTables", 'Json'>
+    readonly description: FieldRef<"RoundTables", 'String'>
+    readonly key_question: FieldRef<"RoundTables", 'Json'>
+    readonly open_for: FieldRef<"RoundTables", 'String'>
+    readonly createdAt: FieldRef<"RoundTables", 'DateTime'>
+    readonly updatedAt: FieldRef<"RoundTables", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RoundTables findUnique
+   */
+  export type RoundTablesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * Filter, which RoundTables to fetch.
+     */
+    where: RoundTablesWhereUniqueInput
+  }
+
+  /**
+   * RoundTables findUniqueOrThrow
+   */
+  export type RoundTablesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * Filter, which RoundTables to fetch.
+     */
+    where: RoundTablesWhereUniqueInput
+  }
+
+  /**
+   * RoundTables findFirst
+   */
+  export type RoundTablesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * Filter, which RoundTables to fetch.
+     */
+    where?: RoundTablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoundTables to fetch.
+     */
+    orderBy?: RoundTablesOrderByWithRelationInput | RoundTablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoundTables.
+     */
+    cursor?: RoundTablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoundTables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoundTables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoundTables.
+     */
+    distinct?: RoundTablesScalarFieldEnum | RoundTablesScalarFieldEnum[]
+  }
+
+  /**
+   * RoundTables findFirstOrThrow
+   */
+  export type RoundTablesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * Filter, which RoundTables to fetch.
+     */
+    where?: RoundTablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoundTables to fetch.
+     */
+    orderBy?: RoundTablesOrderByWithRelationInput | RoundTablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RoundTables.
+     */
+    cursor?: RoundTablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoundTables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoundTables.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RoundTables.
+     */
+    distinct?: RoundTablesScalarFieldEnum | RoundTablesScalarFieldEnum[]
+  }
+
+  /**
+   * RoundTables findMany
+   */
+  export type RoundTablesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * Filter, which RoundTables to fetch.
+     */
+    where?: RoundTablesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RoundTables to fetch.
+     */
+    orderBy?: RoundTablesOrderByWithRelationInput | RoundTablesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RoundTables.
+     */
+    cursor?: RoundTablesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RoundTables from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RoundTables.
+     */
+    skip?: number
+    distinct?: RoundTablesScalarFieldEnum | RoundTablesScalarFieldEnum[]
+  }
+
+  /**
+   * RoundTables create
+   */
+  export type RoundTablesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * The data needed to create a RoundTables.
+     */
+    data: XOR<RoundTablesCreateInput, RoundTablesUncheckedCreateInput>
+  }
+
+  /**
+   * RoundTables createMany
+   */
+  export type RoundTablesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RoundTables.
+     */
+    data: RoundTablesCreateManyInput | RoundTablesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RoundTables update
+   */
+  export type RoundTablesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * The data needed to update a RoundTables.
+     */
+    data: XOR<RoundTablesUpdateInput, RoundTablesUncheckedUpdateInput>
+    /**
+     * Choose, which RoundTables to update.
+     */
+    where: RoundTablesWhereUniqueInput
+  }
+
+  /**
+   * RoundTables updateMany
+   */
+  export type RoundTablesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RoundTables.
+     */
+    data: XOR<RoundTablesUpdateManyMutationInput, RoundTablesUncheckedUpdateManyInput>
+    /**
+     * Filter which RoundTables to update
+     */
+    where?: RoundTablesWhereInput
+    /**
+     * Limit how many RoundTables to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RoundTables upsert
+   */
+  export type RoundTablesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * The filter to search for the RoundTables to update in case it exists.
+     */
+    where: RoundTablesWhereUniqueInput
+    /**
+     * In case the RoundTables found by the `where` argument doesn't exist, create a new RoundTables with this data.
+     */
+    create: XOR<RoundTablesCreateInput, RoundTablesUncheckedCreateInput>
+    /**
+     * In case the RoundTables was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RoundTablesUpdateInput, RoundTablesUncheckedUpdateInput>
+  }
+
+  /**
+   * RoundTables delete
+   */
+  export type RoundTablesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+    /**
+     * Filter which RoundTables to delete.
+     */
+    where: RoundTablesWhereUniqueInput
+  }
+
+  /**
+   * RoundTables deleteMany
+   */
+  export type RoundTablesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RoundTables to delete
+     */
+    where?: RoundTablesWhereInput
+    /**
+     * Limit how many RoundTables to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RoundTables without action
+   */
+  export type RoundTablesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RoundTables
+     */
+    select?: RoundTablesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RoundTables
+     */
+    omit?: RoundTablesOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -21190,6 +22701,7 @@ export namespace Prisma {
     social_media: 'social_media',
     work_email: 'work_email',
     bio: 'bio',
+    profile_image: 'profile_image',
     topic: 'topic',
     experience: 'experience',
     password: 'password',
@@ -21288,6 +22800,9 @@ export namespace Prisma {
     hasLiveStream: 'hasLiveStream',
     liveStreamUrl: 'liveStreamUrl',
     isKeynote: 'isKeynote',
+    moderator: 'moderator',
+    main_speakers: 'main_speakers',
+    lead_speakers: 'lead_speakers',
     speakers: 'speakers',
     track: 'track',
     createdAt: 'createdAt',
@@ -21300,6 +22815,11 @@ export namespace Prisma {
   export const ScheduleScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
+    submittedBy: 'submittedBy',
+    submittedById: 'submittedById',
+    attendeeId: 'attendeeId',
+    partnerId: 'partnerId',
+    speakerId: 'speakerId',
     email: 'email',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -21353,6 +22873,24 @@ export namespace Prisma {
   };
 
   export type ResourcesScalarFieldEnum = (typeof ResourcesScalarFieldEnum)[keyof typeof ResourcesScalarFieldEnum]
+
+
+  export const RoundTablesScalarFieldEnum: {
+    id: 'id',
+    session: 'session',
+    session_start_time: 'session_start_time',
+    session_end_time: 'session_end_time',
+    event_date: 'event_date',
+    title: 'title',
+    lead: 'lead',
+    description: 'description',
+    key_question: 'key_question',
+    open_for: 'open_for',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RoundTablesScalarFieldEnum = (typeof RoundTablesScalarFieldEnum)[keyof typeof RoundTablesScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -21508,6 +23046,7 @@ export namespace Prisma {
     phone: 'phone',
     work_email: 'work_email',
     bio: 'bio',
+    profile_image: 'profile_image',
     topic: 'topic',
     experience: 'experience',
     password: 'password'
@@ -21562,6 +23101,7 @@ export namespace Prisma {
     location: 'location',
     description: 'description',
     liveStreamUrl: 'liveStreamUrl',
+    moderator: 'moderator',
     track: 'track'
   };
 
@@ -21570,6 +23110,7 @@ export namespace Prisma {
 
   export const ScheduleOrderByRelevanceFieldEnum: {
     userId: 'userId',
+    submittedById: 'submittedById',
     email: 'email'
   };
 
@@ -21602,6 +23143,18 @@ export namespace Prisma {
   };
 
   export type ResourcesOrderByRelevanceFieldEnum = (typeof ResourcesOrderByRelevanceFieldEnum)[keyof typeof ResourcesOrderByRelevanceFieldEnum]
+
+
+  export const RoundTablesOrderByRelevanceFieldEnum: {
+    session_start_time: 'session_start_time',
+    session_end_time: 'session_end_time',
+    event_date: 'event_date',
+    title: 'title',
+    description: 'description',
+    open_for: 'open_for'
+  };
+
+  export type RoundTablesOrderByRelevanceFieldEnum = (typeof RoundTablesOrderByRelevanceFieldEnum)[keyof typeof RoundTablesOrderByRelevanceFieldEnum]
 
 
   /**
@@ -21687,9 +23240,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'SubmitterType'
+   */
+  export type EnumSubmitterTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubmitterType'>
+    
+
+
+  /**
    * Reference to a field of type 'Visibility'
    */
   export type EnumVisibilityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Visibility'>
+    
+
+
+  /**
+   * Reference to a field of type 'Session'
+   */
+  export type EnumSessionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Session'>
     
   /**
    * Deep Input Types
@@ -21957,6 +23524,7 @@ export namespace Prisma {
     created_by_type?: EnumCreatorTypeNullableFilter<"Attendees"> | $Enums.CreatorType | null
     createdAt?: DateTimeFilter<"Attendees"> | Date | string
     updatedAt?: DateTimeFilter<"Attendees"> | Date | string
+    schedules?: ScheduleListRelationFilter
   }
 
   export type AttendeesOrderByWithRelationInput = {
@@ -21986,6 +23554,7 @@ export namespace Prisma {
     created_by_type?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    schedules?: ScheduleOrderByRelationAggregateInput
     _relevance?: AttendeesOrderByRelevanceInput
   }
 
@@ -22019,6 +23588,7 @@ export namespace Prisma {
     created_by_type?: EnumCreatorTypeNullableFilter<"Attendees"> | $Enums.CreatorType | null
     createdAt?: DateTimeFilter<"Attendees"> | Date | string
     updatedAt?: DateTimeFilter<"Attendees"> | Date | string
+    schedules?: ScheduleListRelationFilter
   }, "id" | "email" | "nin">
 
   export type AttendeesOrderByWithAggregationInput = {
@@ -22399,6 +23969,7 @@ export namespace Prisma {
     social_media?: JsonNullableFilter<"Speakers">
     work_email?: StringFilter<"Speakers"> | string
     bio?: StringFilter<"Speakers"> | string
+    profile_image?: StringNullableFilter<"Speakers"> | string | null
     topic?: StringFilter<"Speakers"> | string
     experience?: StringNullableFilter<"Speakers"> | string | null
     password?: StringFilter<"Speakers"> | string
@@ -22407,6 +23978,7 @@ export namespace Prisma {
     registeredAt?: DateTimeFilter<"Speakers"> | Date | string
     createdAt?: DateTimeFilter<"Speakers"> | Date | string
     updatedAt?: DateTimeFilter<"Speakers"> | Date | string
+    schedules?: ScheduleListRelationFilter
   }
 
   export type SpeakersOrderByWithRelationInput = {
@@ -22422,6 +23994,7 @@ export namespace Prisma {
     social_media?: SortOrderInput | SortOrder
     work_email?: SortOrder
     bio?: SortOrder
+    profile_image?: SortOrderInput | SortOrder
     topic?: SortOrder
     experience?: SortOrderInput | SortOrder
     password?: SortOrder
@@ -22430,6 +24003,7 @@ export namespace Prisma {
     registeredAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    schedules?: ScheduleOrderByRelationAggregateInput
     _relevance?: SpeakersOrderByRelevanceInput
   }
 
@@ -22449,6 +24023,7 @@ export namespace Prisma {
     phone?: StringFilter<"Speakers"> | string
     social_media?: JsonNullableFilter<"Speakers">
     bio?: StringFilter<"Speakers"> | string
+    profile_image?: StringNullableFilter<"Speakers"> | string | null
     topic?: StringFilter<"Speakers"> | string
     experience?: StringNullableFilter<"Speakers"> | string | null
     password?: StringFilter<"Speakers"> | string
@@ -22457,6 +24032,7 @@ export namespace Prisma {
     registeredAt?: DateTimeFilter<"Speakers"> | Date | string
     createdAt?: DateTimeFilter<"Speakers"> | Date | string
     updatedAt?: DateTimeFilter<"Speakers"> | Date | string
+    schedules?: ScheduleListRelationFilter
   }, "id" | "work_email">
 
   export type SpeakersOrderByWithAggregationInput = {
@@ -22472,6 +24048,7 @@ export namespace Prisma {
     social_media?: SortOrderInput | SortOrder
     work_email?: SortOrder
     bio?: SortOrder
+    profile_image?: SortOrderInput | SortOrder
     topic?: SortOrder
     experience?: SortOrderInput | SortOrder
     password?: SortOrder
@@ -22503,6 +24080,7 @@ export namespace Prisma {
     social_media?: JsonNullableWithAggregatesFilter<"Speakers">
     work_email?: StringWithAggregatesFilter<"Speakers"> | string
     bio?: StringWithAggregatesFilter<"Speakers"> | string
+    profile_image?: StringNullableWithAggregatesFilter<"Speakers"> | string | null
     topic?: StringWithAggregatesFilter<"Speakers"> | string
     experience?: StringNullableWithAggregatesFilter<"Speakers"> | string | null
     password?: StringWithAggregatesFilter<"Speakers"> | string
@@ -22907,6 +24485,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFilter<"Event"> | boolean
     liveStreamUrl?: StringNullableFilter<"Event"> | string | null
     isKeynote?: BoolFilter<"Event"> | boolean
+    moderator?: StringNullableFilter<"Event"> | string | null
+    main_speakers?: JsonNullableFilter<"Event">
+    lead_speakers?: JsonNullableFilter<"Event">
     speakers?: JsonNullableFilter<"Event">
     track?: StringNullableFilter<"Event"> | string | null
     createdAt?: DateTimeFilter<"Event"> | Date | string
@@ -22926,6 +24507,9 @@ export namespace Prisma {
     hasLiveStream?: SortOrder
     liveStreamUrl?: SortOrderInput | SortOrder
     isKeynote?: SortOrder
+    moderator?: SortOrderInput | SortOrder
+    main_speakers?: SortOrderInput | SortOrder
+    lead_speakers?: SortOrderInput | SortOrder
     speakers?: SortOrderInput | SortOrder
     track?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -22949,6 +24533,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFilter<"Event"> | boolean
     liveStreamUrl?: StringNullableFilter<"Event"> | string | null
     isKeynote?: BoolFilter<"Event"> | boolean
+    moderator?: StringNullableFilter<"Event"> | string | null
+    main_speakers?: JsonNullableFilter<"Event">
+    lead_speakers?: JsonNullableFilter<"Event">
     speakers?: JsonNullableFilter<"Event">
     track?: StringNullableFilter<"Event"> | string | null
     createdAt?: DateTimeFilter<"Event"> | Date | string
@@ -22968,6 +24555,9 @@ export namespace Prisma {
     hasLiveStream?: SortOrder
     liveStreamUrl?: SortOrderInput | SortOrder
     isKeynote?: SortOrder
+    moderator?: SortOrderInput | SortOrder
+    main_speakers?: SortOrderInput | SortOrder
+    lead_speakers?: SortOrderInput | SortOrder
     speakers?: SortOrderInput | SortOrder
     track?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -22994,6 +24584,9 @@ export namespace Prisma {
     hasLiveStream?: BoolWithAggregatesFilter<"Event"> | boolean
     liveStreamUrl?: StringNullableWithAggregatesFilter<"Event"> | string | null
     isKeynote?: BoolWithAggregatesFilter<"Event"> | boolean
+    moderator?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    main_speakers?: JsonNullableWithAggregatesFilter<"Event">
+    lead_speakers?: JsonNullableWithAggregatesFilter<"Event">
     speakers?: JsonNullableWithAggregatesFilter<"Event">
     track?: StringNullableWithAggregatesFilter<"Event"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
@@ -23006,18 +24599,34 @@ export namespace Prisma {
     NOT?: ScheduleWhereInput | ScheduleWhereInput[]
     id?: IntFilter<"Schedule"> | number
     userId?: StringFilter<"Schedule"> | string
+    submittedBy?: EnumSubmitterTypeNullableFilter<"Schedule"> | $Enums.SubmitterType | null
+    submittedById?: StringNullableFilter<"Schedule"> | string | null
+    attendeeId?: IntNullableFilter<"Schedule"> | number | null
+    partnerId?: IntNullableFilter<"Schedule"> | number | null
+    speakerId?: IntNullableFilter<"Schedule"> | number | null
     email?: StringNullableFilter<"Schedule"> | string | null
     createdAt?: DateTimeFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeFilter<"Schedule"> | Date | string
+    attendee?: XOR<AttendeesNullableScalarRelationFilter, AttendeesWhereInput> | null
+    partner?: XOR<PartnerNullableScalarRelationFilter, PartnerWhereInput> | null
+    speaker?: XOR<SpeakersNullableScalarRelationFilter, SpeakersWhereInput> | null
     scheduleEvents?: ScheduleEventListRelationFilter
   }
 
   export type ScheduleOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
+    submittedBy?: SortOrderInput | SortOrder
+    submittedById?: SortOrderInput | SortOrder
+    attendeeId?: SortOrderInput | SortOrder
+    partnerId?: SortOrderInput | SortOrder
+    speakerId?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    attendee?: AttendeesOrderByWithRelationInput
+    partner?: PartnerOrderByWithRelationInput
+    speaker?: SpeakersOrderByWithRelationInput
     scheduleEvents?: ScheduleEventOrderByRelationAggregateInput
     _relevance?: ScheduleOrderByRelevanceInput
   }
@@ -23028,15 +24637,28 @@ export namespace Prisma {
     OR?: ScheduleWhereInput[]
     NOT?: ScheduleWhereInput | ScheduleWhereInput[]
     userId?: StringFilter<"Schedule"> | string
+    submittedBy?: EnumSubmitterTypeNullableFilter<"Schedule"> | $Enums.SubmitterType | null
+    submittedById?: StringNullableFilter<"Schedule"> | string | null
+    attendeeId?: IntNullableFilter<"Schedule"> | number | null
+    partnerId?: IntNullableFilter<"Schedule"> | number | null
+    speakerId?: IntNullableFilter<"Schedule"> | number | null
     email?: StringNullableFilter<"Schedule"> | string | null
     createdAt?: DateTimeFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeFilter<"Schedule"> | Date | string
+    attendee?: XOR<AttendeesNullableScalarRelationFilter, AttendeesWhereInput> | null
+    partner?: XOR<PartnerNullableScalarRelationFilter, PartnerWhereInput> | null
+    speaker?: XOR<SpeakersNullableScalarRelationFilter, SpeakersWhereInput> | null
     scheduleEvents?: ScheduleEventListRelationFilter
   }, "id">
 
   export type ScheduleOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
+    submittedBy?: SortOrderInput | SortOrder
+    submittedById?: SortOrderInput | SortOrder
+    attendeeId?: SortOrderInput | SortOrder
+    partnerId?: SortOrderInput | SortOrder
+    speakerId?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -23053,6 +24675,11 @@ export namespace Prisma {
     NOT?: ScheduleScalarWhereWithAggregatesInput | ScheduleScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Schedule"> | number
     userId?: StringWithAggregatesFilter<"Schedule"> | string
+    submittedBy?: EnumSubmitterTypeNullableWithAggregatesFilter<"Schedule"> | $Enums.SubmitterType | null
+    submittedById?: StringNullableWithAggregatesFilter<"Schedule"> | string | null
+    attendeeId?: IntNullableWithAggregatesFilter<"Schedule"> | number | null
+    partnerId?: IntNullableWithAggregatesFilter<"Schedule"> | number | null
+    speakerId?: IntNullableWithAggregatesFilter<"Schedule"> | number | null
     email?: StringNullableWithAggregatesFilter<"Schedule"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Schedule"> | Date | string
@@ -23136,6 +24763,7 @@ export namespace Prisma {
     share_with_third_party?: BoolNullableFilter<"Partner"> | boolean | null
     password?: StringFilter<"Partner"> | string
     EventPartnerPackages?: EventPartnerPackagesListRelationFilter
+    schedules?: ScheduleListRelationFilter
   }
 
   export type PartnerOrderByWithRelationInput = {
@@ -23152,6 +24780,7 @@ export namespace Prisma {
     share_with_third_party?: SortOrderInput | SortOrder
     password?: SortOrder
     EventPartnerPackages?: EventPartnerPackagesOrderByRelationAggregateInput
+    schedules?: ScheduleOrderByRelationAggregateInput
     _relevance?: PartnerOrderByRelevanceInput
   }
 
@@ -23172,6 +24801,7 @@ export namespace Prisma {
     share_with_third_party?: BoolNullableFilter<"Partner"> | boolean | null
     password?: StringFilter<"Partner"> | string
     EventPartnerPackages?: EventPartnerPackagesListRelationFilter
+    schedules?: ScheduleListRelationFilter
   }, "id" | "email">
 
   export type PartnerOrderByWithAggregationInput = {
@@ -23300,6 +24930,96 @@ export namespace Prisma {
     visibilty?: EnumVisibilityWithAggregatesFilter<"Resources"> | $Enums.Visibility
     createdAt?: DateTimeWithAggregatesFilter<"Resources"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Resources"> | Date | string
+  }
+
+  export type RoundTablesWhereInput = {
+    AND?: RoundTablesWhereInput | RoundTablesWhereInput[]
+    OR?: RoundTablesWhereInput[]
+    NOT?: RoundTablesWhereInput | RoundTablesWhereInput[]
+    id?: IntFilter<"RoundTables"> | number
+    session?: EnumSessionFilter<"RoundTables"> | $Enums.Session
+    session_start_time?: StringFilter<"RoundTables"> | string
+    session_end_time?: StringFilter<"RoundTables"> | string
+    event_date?: StringNullableFilter<"RoundTables"> | string | null
+    title?: StringFilter<"RoundTables"> | string
+    lead?: JsonFilter<"RoundTables">
+    description?: StringNullableFilter<"RoundTables"> | string | null
+    key_question?: JsonNullableFilter<"RoundTables">
+    open_for?: StringNullableFilter<"RoundTables"> | string | null
+    createdAt?: DateTimeFilter<"RoundTables"> | Date | string
+    updatedAt?: DateTimeFilter<"RoundTables"> | Date | string
+  }
+
+  export type RoundTablesOrderByWithRelationInput = {
+    id?: SortOrder
+    session?: SortOrder
+    session_start_time?: SortOrder
+    session_end_time?: SortOrder
+    event_date?: SortOrderInput | SortOrder
+    title?: SortOrder
+    lead?: SortOrder
+    description?: SortOrderInput | SortOrder
+    key_question?: SortOrderInput | SortOrder
+    open_for?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _relevance?: RoundTablesOrderByRelevanceInput
+  }
+
+  export type RoundTablesWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: RoundTablesWhereInput | RoundTablesWhereInput[]
+    OR?: RoundTablesWhereInput[]
+    NOT?: RoundTablesWhereInput | RoundTablesWhereInput[]
+    session?: EnumSessionFilter<"RoundTables"> | $Enums.Session
+    session_start_time?: StringFilter<"RoundTables"> | string
+    session_end_time?: StringFilter<"RoundTables"> | string
+    event_date?: StringNullableFilter<"RoundTables"> | string | null
+    title?: StringFilter<"RoundTables"> | string
+    lead?: JsonFilter<"RoundTables">
+    description?: StringNullableFilter<"RoundTables"> | string | null
+    key_question?: JsonNullableFilter<"RoundTables">
+    open_for?: StringNullableFilter<"RoundTables"> | string | null
+    createdAt?: DateTimeFilter<"RoundTables"> | Date | string
+    updatedAt?: DateTimeFilter<"RoundTables"> | Date | string
+  }, "id">
+
+  export type RoundTablesOrderByWithAggregationInput = {
+    id?: SortOrder
+    session?: SortOrder
+    session_start_time?: SortOrder
+    session_end_time?: SortOrder
+    event_date?: SortOrderInput | SortOrder
+    title?: SortOrder
+    lead?: SortOrder
+    description?: SortOrderInput | SortOrder
+    key_question?: SortOrderInput | SortOrder
+    open_for?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RoundTablesCountOrderByAggregateInput
+    _avg?: RoundTablesAvgOrderByAggregateInput
+    _max?: RoundTablesMaxOrderByAggregateInput
+    _min?: RoundTablesMinOrderByAggregateInput
+    _sum?: RoundTablesSumOrderByAggregateInput
+  }
+
+  export type RoundTablesScalarWhereWithAggregatesInput = {
+    AND?: RoundTablesScalarWhereWithAggregatesInput | RoundTablesScalarWhereWithAggregatesInput[]
+    OR?: RoundTablesScalarWhereWithAggregatesInput[]
+    NOT?: RoundTablesScalarWhereWithAggregatesInput | RoundTablesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"RoundTables"> | number
+    session?: EnumSessionWithAggregatesFilter<"RoundTables"> | $Enums.Session
+    session_start_time?: StringWithAggregatesFilter<"RoundTables"> | string
+    session_end_time?: StringWithAggregatesFilter<"RoundTables"> | string
+    event_date?: StringNullableWithAggregatesFilter<"RoundTables"> | string | null
+    title?: StringWithAggregatesFilter<"RoundTables"> | string
+    lead?: JsonWithAggregatesFilter<"RoundTables">
+    description?: StringNullableWithAggregatesFilter<"RoundTables"> | string | null
+    key_question?: JsonNullableWithAggregatesFilter<"RoundTables">
+    open_for?: StringNullableWithAggregatesFilter<"RoundTables"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"RoundTables"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"RoundTables"> | Date | string
   }
 
   export type AdminCreateInput = {
@@ -23574,6 +25294,7 @@ export namespace Prisma {
     created_by_type?: $Enums.CreatorType | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedules?: ScheduleCreateNestedManyWithoutAttendeeInput
   }
 
   export type AttendeesUncheckedCreateInput = {
@@ -23603,6 +25324,7 @@ export namespace Prisma {
     created_by_type?: $Enums.CreatorType | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedules?: ScheduleUncheckedCreateNestedManyWithoutAttendeeInput
   }
 
   export type AttendeesUpdateInput = {
@@ -23631,6 +25353,7 @@ export namespace Prisma {
     created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: ScheduleUpdateManyWithoutAttendeeNestedInput
   }
 
   export type AttendeesUncheckedUpdateInput = {
@@ -23660,6 +25383,7 @@ export namespace Prisma {
     created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: ScheduleUncheckedUpdateManyWithoutAttendeeNestedInput
   }
 
   export type AttendeesCreateManyInput = {
@@ -24102,6 +25826,7 @@ export namespace Prisma {
     social_media?: NullableJsonNullValueInput | InputJsonValue
     work_email: string
     bio: string
+    profile_image?: string | null
     topic: string
     experience?: string | null
     password: string
@@ -24110,6 +25835,7 @@ export namespace Prisma {
     registeredAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedules?: ScheduleCreateNestedManyWithoutSpeakerInput
   }
 
   export type SpeakersUncheckedCreateInput = {
@@ -24125,6 +25851,7 @@ export namespace Prisma {
     social_media?: NullableJsonNullValueInput | InputJsonValue
     work_email: string
     bio: string
+    profile_image?: string | null
     topic: string
     experience?: string | null
     password: string
@@ -24133,6 +25860,7 @@ export namespace Prisma {
     registeredAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    schedules?: ScheduleUncheckedCreateNestedManyWithoutSpeakerInput
   }
 
   export type SpeakersUpdateInput = {
@@ -24147,6 +25875,7 @@ export namespace Prisma {
     social_media?: NullableJsonNullValueInput | InputJsonValue
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
     topic?: StringFieldUpdateOperationsInput | string
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
@@ -24155,6 +25884,7 @@ export namespace Prisma {
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: ScheduleUpdateManyWithoutSpeakerNestedInput
   }
 
   export type SpeakersUncheckedUpdateInput = {
@@ -24170,6 +25900,7 @@ export namespace Prisma {
     social_media?: NullableJsonNullValueInput | InputJsonValue
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
     topic?: StringFieldUpdateOperationsInput | string
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
@@ -24178,6 +25909,7 @@ export namespace Prisma {
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: ScheduleUncheckedUpdateManyWithoutSpeakerNestedInput
   }
 
   export type SpeakersCreateManyInput = {
@@ -24193,6 +25925,7 @@ export namespace Prisma {
     social_media?: NullableJsonNullValueInput | InputJsonValue
     work_email: string
     bio: string
+    profile_image?: string | null
     topic: string
     experience?: string | null
     password: string
@@ -24215,6 +25948,7 @@ export namespace Prisma {
     social_media?: NullableJsonNullValueInput | InputJsonValue
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
     topic?: StringFieldUpdateOperationsInput | string
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
@@ -24238,6 +25972,7 @@ export namespace Prisma {
     social_media?: NullableJsonNullValueInput | InputJsonValue
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
     topic?: StringFieldUpdateOperationsInput | string
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
@@ -24650,6 +26385,9 @@ export namespace Prisma {
     hasLiveStream?: boolean
     liveStreamUrl?: string | null
     isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: string | null
     createdAt?: Date | string
@@ -24669,6 +26407,9 @@ export namespace Prisma {
     hasLiveStream?: boolean
     liveStreamUrl?: string | null
     isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: string | null
     createdAt?: Date | string
@@ -24687,6 +26428,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
     liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24706,6 +26450,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
     liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24725,6 +26472,9 @@ export namespace Prisma {
     hasLiveStream?: boolean
     liveStreamUrl?: string | null
     isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: string | null
     createdAt?: Date | string
@@ -24742,6 +26492,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
     liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24760,6 +26513,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
     liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24768,15 +26524,25 @@ export namespace Prisma {
 
   export type ScheduleCreateInput = {
     userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    attendee?: AttendeesCreateNestedOneWithoutSchedulesInput
+    partner?: PartnerCreateNestedOneWithoutSchedulesInput
+    speaker?: SpeakersCreateNestedOneWithoutSchedulesInput
     scheduleEvents?: ScheduleEventCreateNestedManyWithoutScheduleInput
   }
 
   export type ScheduleUncheckedCreateInput = {
     id?: number
     userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    attendeeId?: number | null
+    partnerId?: number | null
+    speakerId?: number | null
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24785,15 +26551,25 @@ export namespace Prisma {
 
   export type ScheduleUpdateInput = {
     userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendee?: AttendeesUpdateOneWithoutSchedulesNestedInput
+    partner?: PartnerUpdateOneWithoutSchedulesNestedInput
+    speaker?: SpeakersUpdateOneWithoutSchedulesNestedInput
     scheduleEvents?: ScheduleEventUpdateManyWithoutScheduleNestedInput
   }
 
   export type ScheduleUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
+    partnerId?: NullableIntFieldUpdateOperationsInput | number | null
+    speakerId?: NullableIntFieldUpdateOperationsInput | number | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24803,6 +26579,11 @@ export namespace Prisma {
   export type ScheduleCreateManyInput = {
     id?: number
     userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    attendeeId?: number | null
+    partnerId?: number | null
+    speakerId?: number | null
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24810,6 +26591,8 @@ export namespace Prisma {
 
   export type ScheduleUpdateManyMutationInput = {
     userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24818,6 +26601,11 @@ export namespace Prisma {
   export type ScheduleUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
+    partnerId?: NullableIntFieldUpdateOperationsInput | number | null
+    speakerId?: NullableIntFieldUpdateOperationsInput | number | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24887,6 +26675,7 @@ export namespace Prisma {
     share_with_third_party?: boolean | null
     password: string
     EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput
+    schedules?: ScheduleCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerUncheckedCreateInput = {
@@ -24903,6 +26692,7 @@ export namespace Prisma {
     share_with_third_party?: boolean | null
     password: string
     EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput
+    schedules?: ScheduleUncheckedCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerUpdateInput = {
@@ -24918,6 +26708,7 @@ export namespace Prisma {
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
     EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput
+    schedules?: ScheduleUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerUncheckedUpdateInput = {
@@ -24934,6 +26725,7 @@ export namespace Prisma {
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
     EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput
+    schedules?: ScheduleUncheckedUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerCreateManyInput = {
@@ -25078,6 +26870,108 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     visibilty?: EnumVisibilityFieldUpdateOperationsInput | $Enums.Visibility
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoundTablesCreateInput = {
+    session?: $Enums.Session
+    session_start_time: string
+    session_end_time: string
+    event_date?: string | null
+    title: string
+    lead: JsonNullValueInput | InputJsonValue
+    description?: string | null
+    key_question?: NullableJsonNullValueInput | InputJsonValue
+    open_for?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoundTablesUncheckedCreateInput = {
+    id?: number
+    session?: $Enums.Session
+    session_start_time: string
+    session_end_time: string
+    event_date?: string | null
+    title: string
+    lead: JsonNullValueInput | InputJsonValue
+    description?: string | null
+    key_question?: NullableJsonNullValueInput | InputJsonValue
+    open_for?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoundTablesUpdateInput = {
+    session?: EnumSessionFieldUpdateOperationsInput | $Enums.Session
+    session_start_time?: StringFieldUpdateOperationsInput | string
+    session_end_time?: StringFieldUpdateOperationsInput | string
+    event_date?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    lead?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    key_question?: NullableJsonNullValueInput | InputJsonValue
+    open_for?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoundTablesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session?: EnumSessionFieldUpdateOperationsInput | $Enums.Session
+    session_start_time?: StringFieldUpdateOperationsInput | string
+    session_end_time?: StringFieldUpdateOperationsInput | string
+    event_date?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    lead?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    key_question?: NullableJsonNullValueInput | InputJsonValue
+    open_for?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoundTablesCreateManyInput = {
+    id?: number
+    session?: $Enums.Session
+    session_start_time: string
+    session_end_time: string
+    event_date?: string | null
+    title: string
+    lead: JsonNullValueInput | InputJsonValue
+    description?: string | null
+    key_question?: NullableJsonNullValueInput | InputJsonValue
+    open_for?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RoundTablesUpdateManyMutationInput = {
+    session?: EnumSessionFieldUpdateOperationsInput | $Enums.Session
+    session_start_time?: StringFieldUpdateOperationsInput | string
+    session_end_time?: StringFieldUpdateOperationsInput | string
+    event_date?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    lead?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    key_question?: NullableJsonNullValueInput | InputJsonValue
+    open_for?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RoundTablesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    session?: EnumSessionFieldUpdateOperationsInput | $Enums.Session
+    session_start_time?: StringFieldUpdateOperationsInput | string
+    session_end_time?: StringFieldUpdateOperationsInput | string
+    event_date?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    lead?: JsonNullValueInput | InputJsonValue
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    key_question?: NullableJsonNullValueInput | InputJsonValue
+    open_for?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25450,6 +27344,16 @@ export namespace Prisma {
     in?: $Enums.CreatorType[] | null
     notIn?: $Enums.CreatorType[] | null
     not?: NestedEnumCreatorTypeNullableFilter<$PrismaModel> | $Enums.CreatorType | null
+  }
+
+  export type ScheduleListRelationFilter = {
+    every?: ScheduleWhereInput
+    some?: ScheduleWhereInput
+    none?: ScheduleWhereInput
+  }
+
+  export type ScheduleOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type AttendeesOrderByRelevanceInput = {
@@ -25924,6 +27828,7 @@ export namespace Prisma {
     social_media?: SortOrder
     work_email?: SortOrder
     bio?: SortOrder
+    profile_image?: SortOrder
     topic?: SortOrder
     experience?: SortOrder
     password?: SortOrder
@@ -25950,6 +27855,7 @@ export namespace Prisma {
     phone?: SortOrder
     work_email?: SortOrder
     bio?: SortOrder
+    profile_image?: SortOrder
     topic?: SortOrder
     experience?: SortOrder
     password?: SortOrder
@@ -25972,6 +27878,7 @@ export namespace Prisma {
     phone?: SortOrder
     work_email?: SortOrder
     bio?: SortOrder
+    profile_image?: SortOrder
     topic?: SortOrder
     experience?: SortOrder
     password?: SortOrder
@@ -26294,6 +28201,9 @@ export namespace Prisma {
     hasLiveStream?: SortOrder
     liveStreamUrl?: SortOrder
     isKeynote?: SortOrder
+    moderator?: SortOrder
+    main_speakers?: SortOrder
+    lead_speakers?: SortOrder
     speakers?: SortOrder
     track?: SortOrder
     createdAt?: SortOrder
@@ -26316,6 +28226,7 @@ export namespace Prisma {
     hasLiveStream?: SortOrder
     liveStreamUrl?: SortOrder
     isKeynote?: SortOrder
+    moderator?: SortOrder
     track?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26333,6 +28244,7 @@ export namespace Prisma {
     hasLiveStream?: SortOrder
     liveStreamUrl?: SortOrder
     isKeynote?: SortOrder
+    moderator?: SortOrder
     track?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26340,6 +28252,28 @@ export namespace Prisma {
 
   export type EventSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type EnumSubmitterTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubmitterType | EnumSubmitterTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.SubmitterType[] | null
+    notIn?: $Enums.SubmitterType[] | null
+    not?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel> | $Enums.SubmitterType | null
+  }
+
+  export type AttendeesNullableScalarRelationFilter = {
+    is?: AttendeesWhereInput | null
+    isNot?: AttendeesWhereInput | null
+  }
+
+  export type PartnerNullableScalarRelationFilter = {
+    is?: PartnerWhereInput | null
+    isNot?: PartnerWhereInput | null
+  }
+
+  export type SpeakersNullableScalarRelationFilter = {
+    is?: SpeakersWhereInput | null
+    isNot?: SpeakersWhereInput | null
   }
 
   export type ScheduleOrderByRelevanceInput = {
@@ -26351,6 +28285,11 @@ export namespace Prisma {
   export type ScheduleCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    submittedBy?: SortOrder
+    submittedById?: SortOrder
+    attendeeId?: SortOrder
+    partnerId?: SortOrder
+    speakerId?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26358,11 +28297,19 @@ export namespace Prisma {
 
   export type ScheduleAvgOrderByAggregateInput = {
     id?: SortOrder
+    attendeeId?: SortOrder
+    partnerId?: SortOrder
+    speakerId?: SortOrder
   }
 
   export type ScheduleMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    submittedBy?: SortOrder
+    submittedById?: SortOrder
+    attendeeId?: SortOrder
+    partnerId?: SortOrder
+    speakerId?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26371,6 +28318,11 @@ export namespace Prisma {
   export type ScheduleMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    submittedBy?: SortOrder
+    submittedById?: SortOrder
+    attendeeId?: SortOrder
+    partnerId?: SortOrder
+    speakerId?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -26378,6 +28330,19 @@ export namespace Prisma {
 
   export type ScheduleSumOrderByAggregateInput = {
     id?: SortOrder
+    attendeeId?: SortOrder
+    partnerId?: SortOrder
+    speakerId?: SortOrder
+  }
+
+  export type EnumSubmitterTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubmitterType | EnumSubmitterTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.SubmitterType[] | null
+    notIn?: $Enums.SubmitterType[] | null
+    not?: NestedEnumSubmitterTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.SubmitterType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel>
   }
 
   export type ScheduleScalarRelationFilter = {
@@ -26579,6 +28544,78 @@ export namespace Prisma {
     _max?: NestedEnumVisibilityFilter<$PrismaModel>
   }
 
+  export type EnumSessionFilter<$PrismaModel = never> = {
+    equals?: $Enums.Session | EnumSessionFieldRefInput<$PrismaModel>
+    in?: $Enums.Session[]
+    notIn?: $Enums.Session[]
+    not?: NestedEnumSessionFilter<$PrismaModel> | $Enums.Session
+  }
+
+  export type RoundTablesOrderByRelevanceInput = {
+    fields: RoundTablesOrderByRelevanceFieldEnum | RoundTablesOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type RoundTablesCountOrderByAggregateInput = {
+    id?: SortOrder
+    session?: SortOrder
+    session_start_time?: SortOrder
+    session_end_time?: SortOrder
+    event_date?: SortOrder
+    title?: SortOrder
+    lead?: SortOrder
+    description?: SortOrder
+    key_question?: SortOrder
+    open_for?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoundTablesAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type RoundTablesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    session?: SortOrder
+    session_start_time?: SortOrder
+    session_end_time?: SortOrder
+    event_date?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    open_for?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoundTablesMinOrderByAggregateInput = {
+    id?: SortOrder
+    session?: SortOrder
+    session_start_time?: SortOrder
+    session_end_time?: SortOrder
+    event_date?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    open_for?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RoundTablesSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumSessionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Session | EnumSessionFieldRefInput<$PrismaModel>
+    in?: $Enums.Session[]
+    notIn?: $Enums.Session[]
+    not?: NestedEnumSessionWithAggregatesFilter<$PrismaModel> | $Enums.Session
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSessionFilter<$PrismaModel>
+    _max?: NestedEnumSessionFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -26673,6 +28710,20 @@ export namespace Prisma {
     deleteMany?: OrganizationScalarWhereInput | OrganizationScalarWhereInput[]
   }
 
+  export type ScheduleCreateNestedManyWithoutAttendeeInput = {
+    create?: XOR<ScheduleCreateWithoutAttendeeInput, ScheduleUncheckedCreateWithoutAttendeeInput> | ScheduleCreateWithoutAttendeeInput[] | ScheduleUncheckedCreateWithoutAttendeeInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutAttendeeInput | ScheduleCreateOrConnectWithoutAttendeeInput[]
+    createMany?: ScheduleCreateManyAttendeeInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type ScheduleUncheckedCreateNestedManyWithoutAttendeeInput = {
+    create?: XOR<ScheduleCreateWithoutAttendeeInput, ScheduleUncheckedCreateWithoutAttendeeInput> | ScheduleCreateWithoutAttendeeInput[] | ScheduleUncheckedCreateWithoutAttendeeInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutAttendeeInput | ScheduleCreateOrConnectWithoutAttendeeInput[]
+    createMany?: ScheduleCreateManyAttendeeInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -26683,6 +28734,34 @@ export namespace Prisma {
 
   export type NullableEnumCreatorTypeFieldUpdateOperationsInput = {
     set?: $Enums.CreatorType | null
+  }
+
+  export type ScheduleUpdateManyWithoutAttendeeNestedInput = {
+    create?: XOR<ScheduleCreateWithoutAttendeeInput, ScheduleUncheckedCreateWithoutAttendeeInput> | ScheduleCreateWithoutAttendeeInput[] | ScheduleUncheckedCreateWithoutAttendeeInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutAttendeeInput | ScheduleCreateOrConnectWithoutAttendeeInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutAttendeeInput | ScheduleUpsertWithWhereUniqueWithoutAttendeeInput[]
+    createMany?: ScheduleCreateManyAttendeeInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutAttendeeInput | ScheduleUpdateWithWhereUniqueWithoutAttendeeInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutAttendeeInput | ScheduleUpdateManyWithWhereWithoutAttendeeInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutAttendeeNestedInput = {
+    create?: XOR<ScheduleCreateWithoutAttendeeInput, ScheduleUncheckedCreateWithoutAttendeeInput> | ScheduleCreateWithoutAttendeeInput[] | ScheduleUncheckedCreateWithoutAttendeeInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutAttendeeInput | ScheduleCreateOrConnectWithoutAttendeeInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutAttendeeInput | ScheduleUpsertWithWhereUniqueWithoutAttendeeInput[]
+    createMany?: ScheduleCreateManyAttendeeInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutAttendeeInput | ScheduleUpdateWithWhereUniqueWithoutAttendeeInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutAttendeeInput | ScheduleUpdateManyWithWhereWithoutAttendeeInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
   }
 
   export type assigned_boothsCreateNestedManyWithoutBoothInput = {
@@ -26775,6 +28854,48 @@ export namespace Prisma {
     update?: assigned_boothsUpdateWithWhereUniqueWithoutAssigned_toInput | assigned_boothsUpdateWithWhereUniqueWithoutAssigned_toInput[]
     updateMany?: assigned_boothsUpdateManyWithWhereWithoutAssigned_toInput | assigned_boothsUpdateManyWithWhereWithoutAssigned_toInput[]
     deleteMany?: assigned_boothsScalarWhereInput | assigned_boothsScalarWhereInput[]
+  }
+
+  export type ScheduleCreateNestedManyWithoutSpeakerInput = {
+    create?: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput> | ScheduleCreateWithoutSpeakerInput[] | ScheduleUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSpeakerInput | ScheduleCreateOrConnectWithoutSpeakerInput[]
+    createMany?: ScheduleCreateManySpeakerInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type ScheduleUncheckedCreateNestedManyWithoutSpeakerInput = {
+    create?: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput> | ScheduleCreateWithoutSpeakerInput[] | ScheduleUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSpeakerInput | ScheduleCreateOrConnectWithoutSpeakerInput[]
+    createMany?: ScheduleCreateManySpeakerInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type ScheduleUpdateManyWithoutSpeakerNestedInput = {
+    create?: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput> | ScheduleCreateWithoutSpeakerInput[] | ScheduleUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSpeakerInput | ScheduleCreateOrConnectWithoutSpeakerInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutSpeakerInput | ScheduleUpsertWithWhereUniqueWithoutSpeakerInput[]
+    createMany?: ScheduleCreateManySpeakerInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutSpeakerInput | ScheduleUpdateWithWhereUniqueWithoutSpeakerInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutSpeakerInput | ScheduleUpdateManyWithWhereWithoutSpeakerInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutSpeakerNestedInput = {
+    create?: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput> | ScheduleCreateWithoutSpeakerInput[] | ScheduleUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutSpeakerInput | ScheduleCreateOrConnectWithoutSpeakerInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutSpeakerInput | ScheduleUpsertWithWhereUniqueWithoutSpeakerInput[]
+    createMany?: ScheduleCreateManySpeakerInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutSpeakerInput | ScheduleUpdateWithWhereUniqueWithoutSpeakerInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutSpeakerInput | ScheduleUpdateManyWithWhereWithoutSpeakerInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
   }
 
   export type EventPartnerPackagesCreateNestedManyWithoutEvent_packageInput = {
@@ -26917,6 +29038,24 @@ export namespace Prisma {
     deleteMany?: ScheduleEventScalarWhereInput | ScheduleEventScalarWhereInput[]
   }
 
+  export type AttendeesCreateNestedOneWithoutSchedulesInput = {
+    create?: XOR<AttendeesCreateWithoutSchedulesInput, AttendeesUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: AttendeesCreateOrConnectWithoutSchedulesInput
+    connect?: AttendeesWhereUniqueInput
+  }
+
+  export type PartnerCreateNestedOneWithoutSchedulesInput = {
+    create?: XOR<PartnerCreateWithoutSchedulesInput, PartnerUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: PartnerCreateOrConnectWithoutSchedulesInput
+    connect?: PartnerWhereUniqueInput
+  }
+
+  export type SpeakersCreateNestedOneWithoutSchedulesInput = {
+    create?: XOR<SpeakersCreateWithoutSchedulesInput, SpeakersUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: SpeakersCreateOrConnectWithoutSchedulesInput
+    connect?: SpeakersWhereUniqueInput
+  }
+
   export type ScheduleEventCreateNestedManyWithoutScheduleInput = {
     create?: XOR<ScheduleEventCreateWithoutScheduleInput, ScheduleEventUncheckedCreateWithoutScheduleInput> | ScheduleEventCreateWithoutScheduleInput[] | ScheduleEventUncheckedCreateWithoutScheduleInput[]
     connectOrCreate?: ScheduleEventCreateOrConnectWithoutScheduleInput | ScheduleEventCreateOrConnectWithoutScheduleInput[]
@@ -26929,6 +29068,40 @@ export namespace Prisma {
     connectOrCreate?: ScheduleEventCreateOrConnectWithoutScheduleInput | ScheduleEventCreateOrConnectWithoutScheduleInput[]
     createMany?: ScheduleEventCreateManyScheduleInputEnvelope
     connect?: ScheduleEventWhereUniqueInput | ScheduleEventWhereUniqueInput[]
+  }
+
+  export type NullableEnumSubmitterTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SubmitterType | null
+  }
+
+  export type AttendeesUpdateOneWithoutSchedulesNestedInput = {
+    create?: XOR<AttendeesCreateWithoutSchedulesInput, AttendeesUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: AttendeesCreateOrConnectWithoutSchedulesInput
+    upsert?: AttendeesUpsertWithoutSchedulesInput
+    disconnect?: AttendeesWhereInput | boolean
+    delete?: AttendeesWhereInput | boolean
+    connect?: AttendeesWhereUniqueInput
+    update?: XOR<XOR<AttendeesUpdateToOneWithWhereWithoutSchedulesInput, AttendeesUpdateWithoutSchedulesInput>, AttendeesUncheckedUpdateWithoutSchedulesInput>
+  }
+
+  export type PartnerUpdateOneWithoutSchedulesNestedInput = {
+    create?: XOR<PartnerCreateWithoutSchedulesInput, PartnerUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: PartnerCreateOrConnectWithoutSchedulesInput
+    upsert?: PartnerUpsertWithoutSchedulesInput
+    disconnect?: PartnerWhereInput | boolean
+    delete?: PartnerWhereInput | boolean
+    connect?: PartnerWhereUniqueInput
+    update?: XOR<XOR<PartnerUpdateToOneWithWhereWithoutSchedulesInput, PartnerUpdateWithoutSchedulesInput>, PartnerUncheckedUpdateWithoutSchedulesInput>
+  }
+
+  export type SpeakersUpdateOneWithoutSchedulesNestedInput = {
+    create?: XOR<SpeakersCreateWithoutSchedulesInput, SpeakersUncheckedCreateWithoutSchedulesInput>
+    connectOrCreate?: SpeakersCreateOrConnectWithoutSchedulesInput
+    upsert?: SpeakersUpsertWithoutSchedulesInput
+    disconnect?: SpeakersWhereInput | boolean
+    delete?: SpeakersWhereInput | boolean
+    connect?: SpeakersWhereUniqueInput
+    update?: XOR<XOR<SpeakersUpdateToOneWithWhereWithoutSchedulesInput, SpeakersUpdateWithoutSchedulesInput>, SpeakersUncheckedUpdateWithoutSchedulesInput>
   }
 
   export type ScheduleEventUpdateManyWithoutScheduleNestedInput = {
@@ -26994,11 +29167,25 @@ export namespace Prisma {
     connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
   }
 
+  export type ScheduleCreateNestedManyWithoutPartnerInput = {
+    create?: XOR<ScheduleCreateWithoutPartnerInput, ScheduleUncheckedCreateWithoutPartnerInput> | ScheduleCreateWithoutPartnerInput[] | ScheduleUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutPartnerInput | ScheduleCreateOrConnectWithoutPartnerInput[]
+    createMany?: ScheduleCreateManyPartnerInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
   export type EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput = {
     create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
     connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
     createMany?: EventPartnerPackagesCreateManyEvent_partnerInputEnvelope
     connect?: EventPartnerPackagesWhereUniqueInput | EventPartnerPackagesWhereUniqueInput[]
+  }
+
+  export type ScheduleUncheckedCreateNestedManyWithoutPartnerInput = {
+    create?: XOR<ScheduleCreateWithoutPartnerInput, ScheduleUncheckedCreateWithoutPartnerInput> | ScheduleCreateWithoutPartnerInput[] | ScheduleUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutPartnerInput | ScheduleCreateOrConnectWithoutPartnerInput[]
+    createMany?: ScheduleCreateManyPartnerInputEnvelope
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -27019,6 +29206,20 @@ export namespace Prisma {
     deleteMany?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
   }
 
+  export type ScheduleUpdateManyWithoutPartnerNestedInput = {
+    create?: XOR<ScheduleCreateWithoutPartnerInput, ScheduleUncheckedCreateWithoutPartnerInput> | ScheduleCreateWithoutPartnerInput[] | ScheduleUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutPartnerInput | ScheduleCreateOrConnectWithoutPartnerInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutPartnerInput | ScheduleUpsertWithWhereUniqueWithoutPartnerInput[]
+    createMany?: ScheduleCreateManyPartnerInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutPartnerInput | ScheduleUpdateWithWhereUniqueWithoutPartnerInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutPartnerInput | ScheduleUpdateManyWithWhereWithoutPartnerInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
   export type EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput = {
     create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
     connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
@@ -27033,8 +29234,26 @@ export namespace Prisma {
     deleteMany?: EventPartnerPackagesScalarWhereInput | EventPartnerPackagesScalarWhereInput[]
   }
 
+  export type ScheduleUncheckedUpdateManyWithoutPartnerNestedInput = {
+    create?: XOR<ScheduleCreateWithoutPartnerInput, ScheduleUncheckedCreateWithoutPartnerInput> | ScheduleCreateWithoutPartnerInput[] | ScheduleUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: ScheduleCreateOrConnectWithoutPartnerInput | ScheduleCreateOrConnectWithoutPartnerInput[]
+    upsert?: ScheduleUpsertWithWhereUniqueWithoutPartnerInput | ScheduleUpsertWithWhereUniqueWithoutPartnerInput[]
+    createMany?: ScheduleCreateManyPartnerInputEnvelope
+    set?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    disconnect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    delete?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+    update?: ScheduleUpdateWithWhereUniqueWithoutPartnerInput | ScheduleUpdateWithWhereUniqueWithoutPartnerInput[]
+    updateMany?: ScheduleUpdateManyWithWhereWithoutPartnerInput | ScheduleUpdateManyWithWhereWithoutPartnerInput[]
+    deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
   export type EnumVisibilityFieldUpdateOperationsInput = {
     set?: $Enums.Visibility
+  }
+
+  export type EnumSessionFieldUpdateOperationsInput = {
+    set?: $Enums.Session
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -27347,6 +29566,23 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedEnumSubmitterTypeNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubmitterType | EnumSubmitterTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.SubmitterType[] | null
+    notIn?: $Enums.SubmitterType[] | null
+    not?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel> | $Enums.SubmitterType | null
+  }
+
+  export type NestedEnumSubmitterTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SubmitterType | EnumSubmitterTypeFieldRefInput<$PrismaModel> | null
+    in?: $Enums.SubmitterType[] | null
+    notIn?: $Enums.SubmitterType[] | null
+    not?: NestedEnumSubmitterTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.SubmitterType | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel>
+    _max?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel>
+  }
+
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
@@ -27375,6 +29611,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumVisibilityFilter<$PrismaModel>
     _max?: NestedEnumVisibilityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSessionFilter<$PrismaModel = never> = {
+    equals?: $Enums.Session | EnumSessionFieldRefInput<$PrismaModel>
+    in?: $Enums.Session[]
+    notIn?: $Enums.Session[]
+    not?: NestedEnumSessionFilter<$PrismaModel> | $Enums.Session
+  }
+
+  export type NestedEnumSessionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Session | EnumSessionFieldRefInput<$PrismaModel>
+    in?: $Enums.Session[]
+    notIn?: $Enums.Session[]
+    not?: NestedEnumSessionWithAggregatesFilter<$PrismaModel> | $Enums.Session
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSessionFilter<$PrismaModel>
+    _max?: NestedEnumSessionFilter<$PrismaModel>
   }
 
   export type OrganizationCreateWithoutChildrenInput = {
@@ -27489,6 +29742,73 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Organization"> | Date | string
   }
 
+  export type ScheduleCreateWithoutAttendeeInput = {
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    partner?: PartnerCreateNestedOneWithoutSchedulesInput
+    speaker?: SpeakersCreateNestedOneWithoutSchedulesInput
+    scheduleEvents?: ScheduleEventCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutAttendeeInput = {
+    id?: number
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    partnerId?: number | null
+    speakerId?: number | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scheduleEvents?: ScheduleEventUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutAttendeeInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutAttendeeInput, ScheduleUncheckedCreateWithoutAttendeeInput>
+  }
+
+  export type ScheduleCreateManyAttendeeInputEnvelope = {
+    data: ScheduleCreateManyAttendeeInput | ScheduleCreateManyAttendeeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduleUpsertWithWhereUniqueWithoutAttendeeInput = {
+    where: ScheduleWhereUniqueInput
+    update: XOR<ScheduleUpdateWithoutAttendeeInput, ScheduleUncheckedUpdateWithoutAttendeeInput>
+    create: XOR<ScheduleCreateWithoutAttendeeInput, ScheduleUncheckedCreateWithoutAttendeeInput>
+  }
+
+  export type ScheduleUpdateWithWhereUniqueWithoutAttendeeInput = {
+    where: ScheduleWhereUniqueInput
+    data: XOR<ScheduleUpdateWithoutAttendeeInput, ScheduleUncheckedUpdateWithoutAttendeeInput>
+  }
+
+  export type ScheduleUpdateManyWithWhereWithoutAttendeeInput = {
+    where: ScheduleScalarWhereInput
+    data: XOR<ScheduleUpdateManyMutationInput, ScheduleUncheckedUpdateManyWithoutAttendeeInput>
+  }
+
+  export type ScheduleScalarWhereInput = {
+    AND?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+    OR?: ScheduleScalarWhereInput[]
+    NOT?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+    id?: IntFilter<"Schedule"> | number
+    userId?: StringFilter<"Schedule"> | string
+    submittedBy?: EnumSubmitterTypeNullableFilter<"Schedule"> | $Enums.SubmitterType | null
+    submittedById?: StringNullableFilter<"Schedule"> | string | null
+    attendeeId?: IntNullableFilter<"Schedule"> | number | null
+    partnerId?: IntNullableFilter<"Schedule"> | number | null
+    speakerId?: IntNullableFilter<"Schedule"> | number | null
+    email?: StringNullableFilter<"Schedule"> | string | null
+    createdAt?: DateTimeFilter<"Schedule"> | Date | string
+    updatedAt?: DateTimeFilter<"Schedule"> | Date | string
+  }
+
   export type assigned_boothsCreateWithoutBoothInput = {
     assignedAt?: Date | string
     createdAt?: Date | string
@@ -27581,6 +29901,57 @@ export namespace Prisma {
   export type assigned_boothsUpdateManyWithWhereWithoutAssigned_toInput = {
     where: assigned_boothsScalarWhereInput
     data: XOR<assigned_boothsUpdateManyMutationInput, assigned_boothsUncheckedUpdateManyWithoutAssigned_toInput>
+  }
+
+  export type ScheduleCreateWithoutSpeakerInput = {
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attendee?: AttendeesCreateNestedOneWithoutSchedulesInput
+    partner?: PartnerCreateNestedOneWithoutSchedulesInput
+    scheduleEvents?: ScheduleEventCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutSpeakerInput = {
+    id?: number
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    attendeeId?: number | null
+    partnerId?: number | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scheduleEvents?: ScheduleEventUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutSpeakerInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput>
+  }
+
+  export type ScheduleCreateManySpeakerInputEnvelope = {
+    data: ScheduleCreateManySpeakerInput | ScheduleCreateManySpeakerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScheduleUpsertWithWhereUniqueWithoutSpeakerInput = {
+    where: ScheduleWhereUniqueInput
+    update: XOR<ScheduleUpdateWithoutSpeakerInput, ScheduleUncheckedUpdateWithoutSpeakerInput>
+    create: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput>
+  }
+
+  export type ScheduleUpdateWithWhereUniqueWithoutSpeakerInput = {
+    where: ScheduleWhereUniqueInput
+    data: XOR<ScheduleUpdateWithoutSpeakerInput, ScheduleUncheckedUpdateWithoutSpeakerInput>
+  }
+
+  export type ScheduleUpdateManyWithWhereWithoutSpeakerInput = {
+    where: ScheduleScalarWhereInput
+    data: XOR<ScheduleUpdateManyMutationInput, ScheduleUncheckedUpdateManyWithoutSpeakerInput>
   }
 
   export type EventPartnerPackagesCreateWithoutEvent_packageInput = {
@@ -27808,6 +30179,7 @@ export namespace Prisma {
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
     password: string
+    schedules?: ScheduleCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerUncheckedCreateWithoutEventPartnerPackagesInput = {
@@ -27823,6 +30195,7 @@ export namespace Prisma {
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
     password: string
+    schedules?: ScheduleUncheckedCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerCreateOrConnectWithoutEventPartnerPackagesInput = {
@@ -27885,6 +30258,7 @@ export namespace Prisma {
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
+    schedules?: ScheduleUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerUncheckedUpdateWithoutEventPartnerPackagesInput = {
@@ -27900,6 +30274,7 @@ export namespace Prisma {
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
     password?: StringFieldUpdateOperationsInput | string
+    schedules?: ScheduleUncheckedUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerPackageUpsertWithoutEventPartnerPackagesInput = {
@@ -27990,6 +30365,156 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ScheduleEvent"> | Date | string
   }
 
+  export type AttendeesCreateWithoutSchedulesInput = {
+    prefix?: string | null
+    fullname: string
+    email: string
+    phone_number: string
+    country?: string | null
+    nin?: string | null
+    nin_verified?: boolean
+    position?: string | null
+    grade?: string | null
+    organization?: string | null
+    department?: string | null
+    department_agency?: string | null
+    job_title?: string | null
+    staff_id?: string | null
+    office_location?: string | null
+    remark?: string | null
+    status?: $Enums.Status
+    role?: $Enums.Role
+    password: string
+    temporal_password?: boolean
+    registeredAt?: Date | string
+    created_by_id?: number | null
+    created_by_type?: $Enums.CreatorType | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AttendeesUncheckedCreateWithoutSchedulesInput = {
+    id?: number
+    prefix?: string | null
+    fullname: string
+    email: string
+    phone_number: string
+    country?: string | null
+    nin?: string | null
+    nin_verified?: boolean
+    position?: string | null
+    grade?: string | null
+    organization?: string | null
+    department?: string | null
+    department_agency?: string | null
+    job_title?: string | null
+    staff_id?: string | null
+    office_location?: string | null
+    remark?: string | null
+    status?: $Enums.Status
+    role?: $Enums.Role
+    password: string
+    temporal_password?: boolean
+    registeredAt?: Date | string
+    created_by_id?: number | null
+    created_by_type?: $Enums.CreatorType | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AttendeesCreateOrConnectWithoutSchedulesInput = {
+    where: AttendeesWhereUniqueInput
+    create: XOR<AttendeesCreateWithoutSchedulesInput, AttendeesUncheckedCreateWithoutSchedulesInput>
+  }
+
+  export type PartnerCreateWithoutSchedulesInput = {
+    prefix?: string | null
+    firstname: string
+    lastname: string
+    email: string
+    phone_number: string
+    entity_name: string
+    country: string
+    job_title: string
+    subscribe_to_newletter?: boolean | null
+    share_with_third_party?: boolean | null
+    password: string
+    EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput
+  }
+
+  export type PartnerUncheckedCreateWithoutSchedulesInput = {
+    id?: number
+    prefix?: string | null
+    firstname: string
+    lastname: string
+    email: string
+    phone_number: string
+    entity_name: string
+    country: string
+    job_title: string
+    subscribe_to_newletter?: boolean | null
+    share_with_third_party?: boolean | null
+    password: string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput
+  }
+
+  export type PartnerCreateOrConnectWithoutSchedulesInput = {
+    where: PartnerWhereUniqueInput
+    create: XOR<PartnerCreateWithoutSchedulesInput, PartnerUncheckedCreateWithoutSchedulesInput>
+  }
+
+  export type SpeakersCreateWithoutSchedulesInput = {
+    prefix?: string | null
+    first_name: string
+    last_name: string
+    fullname: string
+    country: string
+    job_title: string
+    organization: string
+    phone: string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email: string
+    bio: string
+    profile_image?: string | null
+    topic: string
+    experience?: string | null
+    password: string
+    role?: $Enums.Role
+    status?: $Enums.Status
+    registeredAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SpeakersUncheckedCreateWithoutSchedulesInput = {
+    id?: number
+    prefix?: string | null
+    first_name: string
+    last_name: string
+    fullname: string
+    country: string
+    job_title: string
+    organization: string
+    phone: string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email: string
+    bio: string
+    profile_image?: string | null
+    topic: string
+    experience?: string | null
+    password: string
+    role?: $Enums.Role
+    status?: $Enums.Status
+    registeredAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SpeakersCreateOrConnectWithoutSchedulesInput = {
+    where: SpeakersWhereUniqueInput
+    create: XOR<SpeakersCreateWithoutSchedulesInput, SpeakersUncheckedCreateWithoutSchedulesInput>
+  }
+
   export type ScheduleEventCreateWithoutScheduleInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28013,6 +30538,174 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AttendeesUpsertWithoutSchedulesInput = {
+    update: XOR<AttendeesUpdateWithoutSchedulesInput, AttendeesUncheckedUpdateWithoutSchedulesInput>
+    create: XOR<AttendeesCreateWithoutSchedulesInput, AttendeesUncheckedCreateWithoutSchedulesInput>
+    where?: AttendeesWhereInput
+  }
+
+  export type AttendeesUpdateToOneWithWhereWithoutSchedulesInput = {
+    where?: AttendeesWhereInput
+    data: XOR<AttendeesUpdateWithoutSchedulesInput, AttendeesUncheckedUpdateWithoutSchedulesInput>
+  }
+
+  export type AttendeesUpdateWithoutSchedulesInput = {
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    nin?: NullableStringFieldUpdateOperationsInput | string | null
+    nin_verified?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    grade?: NullableStringFieldUpdateOperationsInput | string | null
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    department_agency?: NullableStringFieldUpdateOperationsInput | string | null
+    job_title?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_id?: NullableStringFieldUpdateOperationsInput | string | null
+    office_location?: NullableStringFieldUpdateOperationsInput | string | null
+    remark?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    password?: StringFieldUpdateOperationsInput | string
+    temporal_password?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by_id?: NullableIntFieldUpdateOperationsInput | number | null
+    created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AttendeesUncheckedUpdateWithoutSchedulesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    nin?: NullableStringFieldUpdateOperationsInput | string | null
+    nin_verified?: BoolFieldUpdateOperationsInput | boolean
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    grade?: NullableStringFieldUpdateOperationsInput | string | null
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    department?: NullableStringFieldUpdateOperationsInput | string | null
+    department_agency?: NullableStringFieldUpdateOperationsInput | string | null
+    job_title?: NullableStringFieldUpdateOperationsInput | string | null
+    staff_id?: NullableStringFieldUpdateOperationsInput | string | null
+    office_location?: NullableStringFieldUpdateOperationsInput | string | null
+    remark?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    password?: StringFieldUpdateOperationsInput | string
+    temporal_password?: BoolFieldUpdateOperationsInput | boolean
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_by_id?: NullableIntFieldUpdateOperationsInput | number | null
+    created_by_type?: NullableEnumCreatorTypeFieldUpdateOperationsInput | $Enums.CreatorType | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerUpsertWithoutSchedulesInput = {
+    update: XOR<PartnerUpdateWithoutSchedulesInput, PartnerUncheckedUpdateWithoutSchedulesInput>
+    create: XOR<PartnerCreateWithoutSchedulesInput, PartnerUncheckedCreateWithoutSchedulesInput>
+    where?: PartnerWhereInput
+  }
+
+  export type PartnerUpdateToOneWithWhereWithoutSchedulesInput = {
+    where?: PartnerWhereInput
+    data: XOR<PartnerUpdateWithoutSchedulesInput, PartnerUncheckedUpdateWithoutSchedulesInput>
+  }
+
+  export type PartnerUpdateWithoutSchedulesInput = {
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    entity_name?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    password?: StringFieldUpdateOperationsInput | string
+    EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput
+  }
+
+  export type PartnerUncheckedUpdateWithoutSchedulesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    entity_name?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    password?: StringFieldUpdateOperationsInput | string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput
+  }
+
+  export type SpeakersUpsertWithoutSchedulesInput = {
+    update: XOR<SpeakersUpdateWithoutSchedulesInput, SpeakersUncheckedUpdateWithoutSchedulesInput>
+    create: XOR<SpeakersCreateWithoutSchedulesInput, SpeakersUncheckedCreateWithoutSchedulesInput>
+    where?: SpeakersWhereInput
+  }
+
+  export type SpeakersUpdateToOneWithWhereWithoutSchedulesInput = {
+    where?: SpeakersWhereInput
+    data: XOR<SpeakersUpdateWithoutSchedulesInput, SpeakersUncheckedUpdateWithoutSchedulesInput>
+  }
+
+  export type SpeakersUpdateWithoutSchedulesInput = {
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    fullname?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    organization?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: StringFieldUpdateOperationsInput | string
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SpeakersUncheckedUpdateWithoutSchedulesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    fullname?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    organization?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
+    topic?: StringFieldUpdateOperationsInput | string
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ScheduleEventUpsertWithWhereUniqueWithoutScheduleInput = {
     where: ScheduleEventWhereUniqueInput
     update: XOR<ScheduleEventUpdateWithoutScheduleInput, ScheduleEventUncheckedUpdateWithoutScheduleInput>
@@ -28031,14 +30724,24 @@ export namespace Prisma {
 
   export type ScheduleCreateWithoutScheduleEventsInput = {
     userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    attendee?: AttendeesCreateNestedOneWithoutSchedulesInput
+    partner?: PartnerCreateNestedOneWithoutSchedulesInput
+    speaker?: SpeakersCreateNestedOneWithoutSchedulesInput
   }
 
   export type ScheduleUncheckedCreateWithoutScheduleEventsInput = {
     id?: number
     userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    attendeeId?: number | null
+    partnerId?: number | null
+    speakerId?: number | null
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28060,6 +30763,9 @@ export namespace Prisma {
     hasLiveStream?: boolean
     liveStreamUrl?: string | null
     isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: string | null
     createdAt?: Date | string
@@ -28078,6 +30784,9 @@ export namespace Prisma {
     hasLiveStream?: boolean
     liveStreamUrl?: string | null
     isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: string | null
     createdAt?: Date | string
@@ -28102,14 +30811,24 @@ export namespace Prisma {
 
   export type ScheduleUpdateWithoutScheduleEventsInput = {
     userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendee?: AttendeesUpdateOneWithoutSchedulesNestedInput
+    partner?: PartnerUpdateOneWithoutSchedulesNestedInput
+    speaker?: SpeakersUpdateOneWithoutSchedulesNestedInput
   }
 
   export type ScheduleUncheckedUpdateWithoutScheduleEventsInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
+    partnerId?: NullableIntFieldUpdateOperationsInput | number | null
+    speakerId?: NullableIntFieldUpdateOperationsInput | number | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28137,6 +30856,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
     liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28155,6 +30877,9 @@ export namespace Prisma {
     hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
     liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
     speakers?: NullableJsonNullValueInput | InputJsonValue
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28194,6 +30919,41 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ScheduleCreateWithoutPartnerInput = {
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attendee?: AttendeesCreateNestedOneWithoutSchedulesInput
+    speaker?: SpeakersCreateNestedOneWithoutSchedulesInput
+    scheduleEvents?: ScheduleEventCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleUncheckedCreateWithoutPartnerInput = {
+    id?: number
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    attendeeId?: number | null
+    speakerId?: number | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    scheduleEvents?: ScheduleEventUncheckedCreateNestedManyWithoutScheduleInput
+  }
+
+  export type ScheduleCreateOrConnectWithoutPartnerInput = {
+    where: ScheduleWhereUniqueInput
+    create: XOR<ScheduleCreateWithoutPartnerInput, ScheduleUncheckedCreateWithoutPartnerInput>
+  }
+
+  export type ScheduleCreateManyPartnerInputEnvelope = {
+    data: ScheduleCreateManyPartnerInput | ScheduleCreateManyPartnerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput = {
     where: EventPartnerPackagesWhereUniqueInput
     update: XOR<EventPartnerPackagesUpdateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput>
@@ -28208,6 +30968,22 @@ export namespace Prisma {
   export type EventPartnerPackagesUpdateManyWithWhereWithoutEvent_partnerInput = {
     where: EventPartnerPackagesScalarWhereInput
     data: XOR<EventPartnerPackagesUpdateManyMutationInput, EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerInput>
+  }
+
+  export type ScheduleUpsertWithWhereUniqueWithoutPartnerInput = {
+    where: ScheduleWhereUniqueInput
+    update: XOR<ScheduleUpdateWithoutPartnerInput, ScheduleUncheckedUpdateWithoutPartnerInput>
+    create: XOR<ScheduleCreateWithoutPartnerInput, ScheduleUncheckedCreateWithoutPartnerInput>
+  }
+
+  export type ScheduleUpdateWithWhereUniqueWithoutPartnerInput = {
+    where: ScheduleWhereUniqueInput
+    data: XOR<ScheduleUpdateWithoutPartnerInput, ScheduleUncheckedUpdateWithoutPartnerInput>
+  }
+
+  export type ScheduleUpdateManyWithWhereWithoutPartnerInput = {
+    where: ScheduleScalarWhereInput
+    data: XOR<ScheduleUpdateManyMutationInput, ScheduleUncheckedUpdateManyWithoutPartnerInput>
   }
 
   export type OrganizationCreateManyParentInput = {
@@ -28243,6 +31019,55 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     abbreviation?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumOrganizationTypeFieldUpdateOperationsInput | $Enums.OrganizationType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleCreateManyAttendeeInput = {
+    id?: number
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    partnerId?: number | null
+    speakerId?: number | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScheduleUpdateWithoutAttendeeInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: PartnerUpdateOneWithoutSchedulesNestedInput
+    speaker?: SpeakersUpdateOneWithoutSchedulesNestedInput
+    scheduleEvents?: ScheduleEventUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutAttendeeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    partnerId?: NullableIntFieldUpdateOperationsInput | number | null
+    speakerId?: NullableIntFieldUpdateOperationsInput | number | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleEvents?: ScheduleEventUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutAttendeeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    partnerId?: NullableIntFieldUpdateOperationsInput | number | null
+    speakerId?: NullableIntFieldUpdateOperationsInput | number | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28305,6 +31130,55 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     booth_id?: IntFieldUpdateOperationsInput | number
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleCreateManySpeakerInput = {
+    id?: number
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    attendeeId?: number | null
+    partnerId?: number | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ScheduleUpdateWithoutSpeakerInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendee?: AttendeesUpdateOneWithoutSchedulesNestedInput
+    partner?: PartnerUpdateOneWithoutSchedulesNestedInput
+    scheduleEvents?: ScheduleEventUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutSpeakerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
+    partnerId?: NullableIntFieldUpdateOperationsInput | number | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleEvents?: ScheduleEventUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutSpeakerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
+    partnerId?: NullableIntFieldUpdateOperationsInput | number | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -28422,6 +31296,18 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ScheduleCreateManyPartnerInput = {
+    id?: number
+    userId: string
+    submittedBy?: $Enums.SubmitterType | null
+    submittedById?: string | null
+    attendeeId?: number | null
+    speakerId?: number | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type EventPartnerPackagesUpdateWithoutEvent_partnerInput = {
     payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
     payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -28453,6 +31339,43 @@ export namespace Prisma {
     payment_method?: NullableStringFieldUpdateOperationsInput | string | null
     proof_of_payment?: NullableStringFieldUpdateOperationsInput | string | null
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ScheduleUpdateWithoutPartnerInput = {
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attendee?: AttendeesUpdateOneWithoutSchedulesNestedInput
+    speaker?: SpeakersUpdateOneWithoutSchedulesNestedInput
+    scheduleEvents?: ScheduleEventUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateWithoutPartnerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
+    speakerId?: NullableIntFieldUpdateOperationsInput | number | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    scheduleEvents?: ScheduleEventUncheckedUpdateManyWithoutScheduleNestedInput
+  }
+
+  export type ScheduleUncheckedUpdateManyWithoutPartnerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
+    submittedById?: NullableStringFieldUpdateOperationsInput | string | null
+    attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
+    speakerId?: NullableIntFieldUpdateOperationsInput | number | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

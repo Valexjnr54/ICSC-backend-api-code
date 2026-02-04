@@ -94,6 +94,9 @@ model Attendees {
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
 
+  // Relation: an attendee may have many saved schedules
+  schedules     Schedule[]
+
   @@map("attendees")
 }
 
@@ -120,7 +123,7 @@ model Exhibitors {
   contact_email  String    @unique
   contact_phone  String
   website       String? 
-  description   String?
+  description   String? @db.Text
   service_product_to_exhibit String?
   password      String
   role         Role      @default(exhibitor)
@@ -144,7 +147,7 @@ model EventPartners {
   logo          String    
   website       String?  
   social_media  Json? 
-  description   String?
+  description   String? @db.Text
   why_interested String?
   password      String 
   role         Role      @default(public_speaker)
@@ -167,9 +170,10 @@ model Speakers {
   phone         String
   social_media  Json?
   work_email    String    @unique
-  bio           String
+  bio           String    @db.Text
+  profile_image String?
   topic         String
-  experience    String?
+  experience    String?   @db.Text
   password      String
   role          Role      @default(public_speaker)
   status        Status    @default(Pending)
@@ -179,12 +183,13 @@ model Speakers {
   updatedAt     DateTime  @updatedAt
 
   @@map("speakers")
+  schedules     Schedule[]
 }
 
 model EventPackages {
   id            Int       @id @default(autoincrement())
   name          String    
-  description   String    
+  description   String    @db.Text
   price         Float     
   features      Json      
   createdAt     DateTime  @default(now())
@@ -198,7 +203,7 @@ model SpeakerPackage {
   slug        String   @unique
   title       String
   price       Float
-  description String?
+  description String? @db.Text
   features    Json
   limitedText String?
   createdAt   DateTime @default(now())
@@ -212,7 +217,7 @@ model PartnerPackage {
   slug        String   @unique
   title       String
   price       Float
-  description String?
+  description String? @db.Text
   features    Json
   limitedText String?
   remaining_slot Int @default(0)
@@ -264,11 +269,14 @@ model Event {
   start_time    String
   end_time      String
   title         String
-  location      String
-  description   String?
+  location      String  //this can be called stage
+  description   String? @db.Text
   hasLiveStream Boolean  @default(false)
   liveStreamUrl String?
   isKeynote     Boolean  @default(false)
+  moderator     String?
+  main_speakers Json?
+  lead_speakers Json?
   speakers      Json?
   track         String?
   createdAt     DateTime @default(now())
@@ -282,6 +290,18 @@ model Event {
 model Schedule {
   id            Int      @id @default(autoincrement())
   userId        String
+  // Indicates which type of actor submitted this schedule (ATTENDEE, PARTNER, SPEAKER, etc.)
+  submittedBy   SubmitterType?
+  // Free-form reference ID of the submitter (stored as string to support different id types)
+  submittedById String?
+  attendeeId    Int?
+  attendee      Attendees? @relation(fields: [attendeeId], references: [id])
+  // If submitted by a partner, store the partner FK here
+  partnerId     Int?
+  partner       Partner?   @relation(fields: [partnerId], references: [id])
+  // If submitted by a speaker, store the speaker FK here
+  speakerId     Int?
+  speaker       Speakers?  @relation(fields: [speakerId], references: [id])
   email         String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -321,6 +341,7 @@ model Partner {
   password      String
   @@map("partners")
   EventPartnerPackages EventPartnerPackages[]
+  schedules     Schedule[]
 }
 
 model Resources {
@@ -331,12 +352,29 @@ model Resources {
   uploaded_by String
   file_path String
   file_type String
-  description String?
+  description String? @db.Text
   status Status
   visibilty Visibility @default(Public)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   @@map("resources")
+}
+
+model RoundTables {
+  id  Int @id @default(autoincrement())
+  session Session @default(Morning)
+  session_start_time String
+  session_end_time String
+  event_date    String?
+  title String
+  lead Json
+  description  String? @db.Text
+  key_question Json?
+  open_for  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("round_tables")
 }
 
 // Unified organization model for ministries, agencies, parastatals, etc.
@@ -364,6 +402,14 @@ enum CreatorType {
   USER
 }
 
+// Who submitted a schedule
+enum SubmitterType {
+  ATTENDEE
+  PARTNER
+  SPEAKER
+  OTHER
+}
+
 enum Status {
   Approved
   Pending
@@ -378,4 +424,9 @@ enum Visibility {
   Public
   Private
   Restricted
+}
+
+enum Session{
+  Morning
+  Afternoon
 }
