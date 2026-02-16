@@ -16,6 +16,7 @@ import { miscRouter } from "./routes/misc.routes";
 import { attendeeRouter } from "./routes/attendee/attendee.route";
 import { partnerAuthRouter } from "./routes/auth/partnerAuthRoutes";
 import { partnerRouter } from "./routes/partner/partner.route";
+import { speakerRouter } from "./routes/speaker/speaker.route";
 
 
 const app = express();
@@ -57,6 +58,7 @@ app.use(`${route}/packages`, packagesRouter);
 app.use(`${route}/misc`, miscRouter);
 app.use(`${route}/attendee`, attendeeRouter);
 app.use(`${route}/partner`, partnerRouter);
+app.use(`${route}/speaker`, speakerRouter);
 
 
 app.use((error: any, request: Request, response: Response, next: NextFunction) => {

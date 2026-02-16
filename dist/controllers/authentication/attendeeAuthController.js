@@ -113,10 +113,10 @@ async function loginAttendee(request, response) {
             response.status(500).json({ message: 'Internal Server Error' });
             return;
         }
-        if (!user.status || user.status !== 'Approved') {
-            console.error('Account Not Approved:', user.password);
-            return response.status(400).json({ message: 'Account Not Approved' });
-        }
+        // if (!user.status || user.status !== 'Approved') {
+        //     console.error('Account Not Approved:', user.password);
+        //     return response.status(400).json({ message: 'Account Not Approved' });
+        // }
         // Generate a JWT token for the admin
         const token = jsonwebtoken_1.default.sign({
             id: user.id,

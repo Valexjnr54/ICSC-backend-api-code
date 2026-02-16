@@ -248,12 +248,28 @@ exports.Prisma.SpeakersScalarFieldEnum = {
   work_email: 'work_email',
   bio: 'bio',
   profile_image: 'profile_image',
-  topic: 'topic',
+  area_of_expertise: 'area_of_expertise',
   experience: 'experience',
   password: 'password',
   role: 'role',
   status: 'status',
   registeredAt: 'registeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.Speaker_assignmentScalarFieldEnum = {
+  id: 'id',
+  speaker_id: 'speaker_id',
+  event_id: 'event_id',
+  topic_one: 'topic_one',
+  topic_one_approved: 'topic_one_approved',
+  topic_two: 'topic_two',
+  topic_two_approved: 'topic_two_approved',
+  topic_one_event_id: 'topic_one_event_id',
+  topic_two_event_id: 'topic_two_event_id',
+  admin_note: 'admin_note',
+  submittedAt: 'submittedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -370,7 +386,21 @@ exports.Prisma.PartnerScalarFieldEnum = {
   job_title: 'job_title',
   subscribe_to_newletter: 'subscribe_to_newletter',
   share_with_third_party: 'share_with_third_party',
+  benefits: 'benefits',
+  remaining_benefits: 'remaining_benefits',
   password: 'password'
+};
+
+exports.Prisma.PartnerAssignedBoothScalarFieldEnum = {
+  id: 'id',
+  exhibition_title: 'exhibition_title',
+  description: 'description',
+  exhibition_material: 'exhibition_material',
+  booth_id: 'booth_id',
+  partner_id: 'partner_id',
+  assignedAt: 'assignedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ResourcesScalarFieldEnum = {
@@ -518,9 +548,15 @@ exports.Prisma.SpeakersOrderByRelevanceFieldEnum = {
   work_email: 'work_email',
   bio: 'bio',
   profile_image: 'profile_image',
-  topic: 'topic',
+  area_of_expertise: 'area_of_expertise',
   experience: 'experience',
   password: 'password'
+};
+
+exports.Prisma.speaker_assignmentOrderByRelevanceFieldEnum = {
+  topic_one: 'topic_one',
+  topic_two: 'topic_two',
+  admin_note: 'admin_note'
 };
 
 exports.Prisma.EventPackagesOrderByRelevanceFieldEnum = {
@@ -579,6 +615,11 @@ exports.Prisma.PartnerOrderByRelevanceFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.PartnerAssignedBoothOrderByRelevanceFieldEnum = {
+  exhibition_title: 'exhibition_title',
+  description: 'description'
+};
+
 exports.Prisma.ResourcesOrderByRelevanceFieldEnum = {
   resource_name: 'resource_name',
   type: 'type',
@@ -628,7 +669,8 @@ exports.Status = exports.$Enums.Status = {
 
 exports.CreatorType = exports.$Enums.CreatorType = {
   ADMIN: 'ADMIN',
-  USER: 'USER'
+  USER: 'USER',
+  PARTNER: 'PARTNER'
 };
 
 exports.SubmitterType = exports.$Enums.SubmitterType = {
@@ -658,6 +700,7 @@ exports.Prisma.ModelName = {
   Exhibitors: 'Exhibitors',
   EventPartners: 'EventPartners',
   Speakers: 'Speakers',
+  speaker_assignment: 'speaker_assignment',
   EventPackages: 'EventPackages',
   SpeakerPackage: 'SpeakerPackage',
   PartnerPackage: 'PartnerPackage',
@@ -667,6 +710,7 @@ exports.Prisma.ModelName = {
   Schedule: 'Schedule',
   ScheduleEvent: 'ScheduleEvent',
   Partner: 'Partner',
+  PartnerAssignedBooth: 'PartnerAssignedBooth',
   Resources: 'Resources',
   RoundTables: 'RoundTables'
 };

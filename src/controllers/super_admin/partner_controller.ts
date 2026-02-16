@@ -1,3 +1,68 @@
+// Approve payment for an event partner package
+export async function approvePayment(request: Request, response: Response) {
+  const admin_id = (request as any).admin?.adminId;
+  const packageIdParam = request.query.package_id as string | undefined;
+  const package_id = packageIdParam ? parseInt(packageIdParam, 10) : NaN;
+
+  if (!admin_id) {
+    return response.status(403).json({ message: 'Unauthorized User' });
+  }
+  if (!packageIdParam || isNaN(package_id)) {
+    return response.status(400).json({ message: 'Valid package_id required' });
+  }
+  try {
+    const check_admin = await prisma.admin.findUnique({ where: { id: admin_id } });
+    const role = check_admin?.role;
+    if (role !== 'super_admin') {
+      return response.status(403).json({ message: 'Unauthorized User' });
+    }
+    const eventPartnerPackage = await prisma.eventPartnerPackages.findUnique({ where: { id: package_id } });
+    if (!eventPartnerPackage) {
+      return response.status(404).json({ message: 'EventPartnerPackage not found' });
+    }
+    const updated = await prisma.eventPartnerPackages.update({
+      where: { id: package_id },
+      data: { payment_status: 'Paid' },
+    });
+    return response.status(200).json({ message: 'Payment approved', data: updated });
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+// Reject payment for an event partner package
+export async function rejectPayment(request: Request, response: Response) {
+  const admin_id = (request as any).admin?.adminId;
+  const packageIdParam = request.body.package_id as string | undefined;
+  const package_id = packageIdParam ? parseInt(packageIdParam, 10) : NaN;
+
+  if (!admin_id) {
+    return response.status(403).json({ message: 'Unauthorized User' });
+  }
+  if (!packageIdParam || isNaN(package_id)) {
+    return response.status(400).json({ message: 'Valid package_id required' });
+  }
+  try {
+    const check_admin = await prisma.admin.findUnique({ where: { id: admin_id } });
+    const role = check_admin?.role;
+    if (role !== 'super_admin') {
+      return response.status(403).json({ message: 'Unauthorized User' });
+    }
+    const eventPartnerPackage = await prisma.eventPartnerPackages.findUnique({ where: { id: package_id } });
+    if (!eventPartnerPackage) {
+      return response.status(404).json({ message: 'EventPartnerPackage not found' });
+    }
+    const updated = await prisma.eventPartnerPackages.update({
+      where: { id: package_id },
+      data: { payment_status: 'Rejected' },
+    });
+    return response.status(200).json({ message: 'Payment rejected', data: updated });
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal Server Error' });
+  }
+}
 // src/controllers/authController.ts
 import { Request, Response } from "express";
 import { PrismaClient } from "../../models";
@@ -201,4 +266,34 @@ export async function deletePartner (request: Request, response: Response) {
         console.error(error);
         return response.status(500).json({ message: 'Internal Server Error' });
       }
+}
+
+export async function pendingPayments(request: Request, response: Response) {
+  const admin_id = (request as any).admin?.adminId;
+
+  // Check admin presence
+  if (!admin_id) {
+    return response.status(403).json({ message: 'Unauthorized User' });
+  }
+
+  try {
+    // Retrieve the event_partners by event_partners_id
+    const check_admin = await prisma.admin.findUnique({ where: { id: admin_id } });
+    const role = check_admin?.role;
+
+    // Check if the role is not 'EventPartner'
+    if (role !== 'super_admin') {
+      return response.status(403).json({ message: 'Unauthorized User' });
+    }
+
+    const pendingPayments = await prisma.eventPartnerPackages.findMany({
+      where: { payment_status: 'Pending' },
+      include: { event_partner: true, event_package: true }
+    });
+
+    return response.status(200).json({message: 'Pending payments fetched', data: pendingPayments });
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal Server Error' });
+  }
 }

@@ -14,11 +14,11 @@ import {
 	updatePartnerPackage,
 	deletePartnerPackage,
 } from "../../controllers/packages_controller";
-import { allSpeakers, createSpeaker, deleteSpeaker, singleSpeaker } from "../../controllers/super_admin/speaker_controller";
+import { allSpeakers, createSpeaker, deleteSpeaker, singleSpeaker, assignOrApproveSpeakerTopic } from "../../controllers/super_admin/speaker_controller";
 import { allExhibitors, createExhibitor, deleteExhibitor, singleExhibitor } from "../../controllers/super_admin/exhibitor_controller";
 import { allEventPartners, createEventPartner, deleteEventPartner, singleEventPartner } from "../../controllers/super_admin/event_partner_controller";
 import { createEvent, getEvents } from "../../controllers/super_admin/agenda_controller";
-import { allPartners, createPartner, deletePartner, singlePartner } from "../../controllers/super_admin/partner_controller";
+import { allPartners, approvePayment, createPartner, deletePartner, pendingPayments, rejectPayment, singlePartner } from "../../controllers/super_admin/partner_controller";
 import { createResource, getAllResources, getSingleResource, updateResource, deleteResource } from "../../controllers/super_admin/resources_controller";
 import { createRoundTable, getAllRoundTables } from "../../controllers/super_admin/round_table_controller";
 
@@ -60,6 +60,7 @@ adminRouter.post('/create-speaker', createSpeaker);
 adminRouter.get('/speakers', allSpeakers);
 adminRouter.get('/single-speaker', singleSpeaker);
 adminRouter.delete('/delete-speaker', deleteSpeaker);
+adminRouter.post('/speaker/assign-or-approve-topic', assignOrApproveSpeakerTopic);
 
 adminRouter.post('/create-exhibitor', createExhibitor);
 adminRouter.get('/exhibitors', allExhibitors);
@@ -87,3 +88,7 @@ adminRouter.delete('/delete-resource', deleteResource);
 
 adminRouter.post('/round-table/create-round-table', createRoundTable);
 adminRouter.get('/round-tables', getAllRoundTables);
+
+adminRouter.get('/pending-payments', pendingPayments);
+adminRouter.post('/approve-payment', approvePayment);
+adminRouter.post('/reject-payment', rejectPayment);

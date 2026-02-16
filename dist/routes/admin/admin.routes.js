@@ -51,6 +51,7 @@ exports.adminRouter.post('/create-speaker', speaker_controller_1.createSpeaker);
 exports.adminRouter.get('/speakers', speaker_controller_1.allSpeakers);
 exports.adminRouter.get('/single-speaker', speaker_controller_1.singleSpeaker);
 exports.adminRouter.delete('/delete-speaker', speaker_controller_1.deleteSpeaker);
+exports.adminRouter.post('/speaker/assign-or-approve-topic', speaker_controller_1.assignOrApproveSpeakerTopic);
 exports.adminRouter.post('/create-exhibitor', exhibitor_controller_1.createExhibitor);
 exports.adminRouter.get('/exhibitors', exhibitor_controller_1.allExhibitors);
 exports.adminRouter.get('/single-exhibitor', exhibitor_controller_1.singleExhibitor);
@@ -72,3 +73,6 @@ exports.adminRouter.put('/update-resource', multerMiddleware_1.upload.single('re
 exports.adminRouter.delete('/delete-resource', resources_controller_1.deleteResource);
 exports.adminRouter.post('/round-table/create-round-table', round_table_controller_1.createRoundTable);
 exports.adminRouter.get('/round-tables', round_table_controller_1.getAllRoundTables);
+exports.adminRouter.get('/pending-payments', partner_controller_1.pendingPayments);
+exports.adminRouter.post('/approve-payment', partner_controller_1.approvePayment);
+exports.adminRouter.post('/reject-payment', partner_controller_1.rejectPayment);

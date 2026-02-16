@@ -29,7 +29,9 @@ async function registerSpeaker(request, response) {
             (0, express_validator_1.body)('speakerWorkEmail').isEmail().withMessage('Invalid work email'),
             (0, express_validator_1.body)('speakerBio').notEmpty().withMessage('Bio is required'),
             (0, express_validator_1.body)('speakertopic').notEmpty().withMessage('Proposed topic is required'),
+            (0, express_validator_1.body)('speakerSecondTopic').optional(),
             (0, express_validator_1.body)('speakerExperience').optional(),
+            (0, express_validator_1.body)('speakerExpertise').optional(),
             (0, express_validator_1.body)('password').notEmpty().withMessage('Password is required').bail().isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
         ];
         await Promise.all(validationRules.map(rule => rule.run(request)));
@@ -38,7 +40,7 @@ async function registerSpeaker(request, response) {
             return response.status(400).json({ errors: errors.array() });
         }
         // Map frontend fields
-        const { speakerPrefix, speakerFirstName, speakerLastName, speakerCountry, speakerJobTitle, speakerOrganization, speakerPhone, socialMedia, speakerWorkEmail, speakerBio, speakertopic, speakerExperience, password, } = request.body;
+        const { speakerPrefix, speakerFirstName, speakerLastName, speakerCountry, speakerJobTitle, speakerOrganization, speakerPhone, socialMedia, speakerWorkEmail, speakerBio, speakertopic, speakerExperience, speakerExpertise, speakerSecondTopic, password, } = request.body;
         // Check existing by work_email
         const existing = await prisma.speakers.findUnique({ where: { work_email: speakerWorkEmail } });
         if (existing) {
@@ -75,11 +77,23 @@ async function registerSpeaker(request, response) {
                 social_media: socialMediaValue,
                 work_email: speakerWorkEmail,
                 bio: speakerBio,
-                topic: speakertopic,
                 experience: speakerExperience || null,
+                area_of_expertise: speakerExpertise || null,
                 password: hashedPassword,
             }
         });
+        const speakerAssignment = await prisma.speaker_assignment.create({
+            data: {
+                speaker_id: newSpeaker.id,
+                topic_one: speakertopic,
+            }
+        });
+        if (speakerSecondTopic != null) {
+            await prisma.speaker_assignment.update({
+                where: { id: speakerAssignment.id },
+                data: { topic_two: speakerSecondTopic }
+            });
+        }
         // optional welcome email (non-blocking)
         try {
             await (0, emailSender_1.sendWelcomeEmail)(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password);

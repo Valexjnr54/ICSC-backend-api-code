@@ -1,3 +1,4 @@
+
 // src/controllers/authController.ts
 import { Request, Response } from "express";
 import { PrismaClient } from "../../models";
@@ -44,7 +45,8 @@ export async function createSpeaker(request: Request, response: Response) {
       body('organization').notEmpty().withMessage('Organization is required'),
       body('job_title').notEmpty().withMessage('Job title is required'),
       body('bio').notEmpty().withMessage('Bio is required'),
-      body('topic').notEmpty().withMessage('Topic is required'),
+      body('topic_one').optional(),
+      body('topic_two').optional(),
       body('status')
         .optional()
         .isIn(['Pending', 'Approved', 'Rejected']).withMessage('Status must be one of: Pending, Approved, Rejected'),
@@ -59,7 +61,7 @@ export async function createSpeaker(request: Request, response: Response) {
     }
 
     // destructure after validation (request.body will be populated by body-parser middleware)
-    const { first_name, last_name, work_email, phone, organization, job_title, bio, topic, status, country, experience, social_media } = request.body;
+    const { first_name, last_name, work_email, phone, organization, job_title, bio, status, country, experience, social_media, topic_one, topic_two } = request.body;
     // Retrieve the speakers by speakers_id
     const check_admin = await prisma.admin.findUnique({ where: { id: admin_id } });
     const admin_role = check_admin?.role;
@@ -93,11 +95,19 @@ export async function createSpeaker(request: Request, response: Response) {
         social_media: social_media || undefined,
         work_email,
         bio,
-        topic,
         experience: experience || undefined,
         password: hashedPassword,
         status: (status as any) || undefined,
       },
+    });
+
+    // Create speaker_assignment record
+    await prisma.speaker_assignment.create({
+      data: {
+        speaker_id: newSpeaker.id,
+        topic_one: topic_one || null,
+        topic_two: topic_two || null,
+      }
     });
 
     // await sendWelcomeEmail(work_email, 'Welcome to International Civil Service Conference', newSpeaker, password);
@@ -128,7 +138,8 @@ export async function allSpeakers(request: Request, response: Response) {
     }
 
     const allSpeakers = await prisma.speakers.findMany({
-      orderBy: { createdAt: 'desc' }
+      orderBy: { createdAt: 'desc' },
+      include: { speaker_assignments: true },
     });
 
     return response.status(200).json({message: 'Speaker(s) fetched', data: allSpeakers });
@@ -161,7 +172,7 @@ export async function singleSpeaker(request: Request, response: Response) {
         return response.status(403).json({ message: 'Unauthorized User' });
     }
 
-  const singleSpeaker = await prisma.speakers.findUnique({ where: { id } });
+  const singleSpeaker = await prisma.speakers.findUnique({ where: { id }, include: { speaker_assignments: true } });
   if (!singleSpeaker) {
     return response.status(404).json({ message: 'Speaker not found' });
   }
@@ -217,4 +228,49 @@ export async function deleteSpeaker (request: Request, response: Response) {
         console.error(error);
         return response.status(500).json({ message: 'Internal Server Error' });
       }
+}
+
+// Assign a speaker's topic(s) to an event and/or approve topic(s)
+export async function assignOrApproveSpeakerTopic(request: Request, response: Response) {
+  const admin_id = request.admin.adminId;
+  if (!admin_id) return response.status(403).json({ message: 'Unauthorized User' });
+  try {
+    const {
+      speaker_assignment_id,
+      topic_one_event_id,
+      topic_two_event_id,
+      approve_topic_one,
+      approve_topic_two
+    } = request.body;
+    const check_admin = await prisma.admin.findUnique({ where: { id: admin_id } });
+    if (check_admin?.role !== 'super_admin') return response.status(403).json({ message: 'Unauthorized User' });
+
+    // Build update data object dynamically
+    const updateData: any = {};
+    if (typeof topic_one_event_id !== 'undefined') updateData.topic_one_event_id = topic_one_event_id || null;
+    if (typeof topic_two_event_id !== 'undefined') updateData.topic_two_event_id = topic_two_event_id || null;
+    if (typeof approve_topic_one !== 'undefined') updateData.topic_one_approved = approve_topic_one;
+    if (typeof approve_topic_two !== 'undefined') updateData.topic_two_approved = approve_topic_two;
+
+    if (Object.keys(updateData).length === 0) {
+      return response.status(400).json({ message: 'No valid fields provided to update.' });
+    }
+
+    const assignment = await prisma.speaker_assignment.update({
+      where: { id: speaker_assignment_id },
+      data: updateData
+    });
+
+    await prisma.speakers.update({
+      where: { id: assignment.speaker_id },
+      data: {
+        status:  'Approved'
+      }
+    });
+
+    return response.status(200).json({ message: 'Speaker assignment updated', data: assignment });
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal Server Error' });
+  }
 }

@@ -25,7 +25,9 @@ export async function registerSpeaker(request: Request, response: Response) {
 			body('speakerWorkEmail').isEmail().withMessage('Invalid work email'),
 			body('speakerBio').notEmpty().withMessage('Bio is required'),
 			body('speakertopic').notEmpty().withMessage('Proposed topic is required'),
+			body('speakerSecondTopic').optional(),
 			body('speakerExperience').optional(),
+			body('speakerExpertise').optional(),
 			body('password').notEmpty().withMessage('Password is required').bail().isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
 		];
 		await Promise.all(validationRules.map(rule => rule.run(request)));
@@ -49,6 +51,8 @@ export async function registerSpeaker(request: Request, response: Response) {
 			speakerBio,
 			speakertopic,
 			speakerExperience,
+			speakerExpertise,
+			speakerSecondTopic,
 			password,
 		} = request.body;
 
@@ -90,11 +94,25 @@ export async function registerSpeaker(request: Request, response: Response) {
 				social_media: socialMediaValue,
 				work_email: speakerWorkEmail,
 				bio: speakerBio,
-				topic: speakertopic,
 				experience: speakerExperience || null,
+				area_of_expertise : speakerExpertise || null,
 				password: hashedPassword,
 			}
 		});
+
+		const speakerAssignment = await prisma.speaker_assignment.create({
+			data: {
+				speaker_id: newSpeaker.id,
+				topic_one: speakertopic,
+			}
+		});
+
+		if (speakerSecondTopic != null) {
+			await prisma.speaker_assignment.update({
+				where: { id: speakerAssignment.id },
+				data: { topic_two: speakerSecondTopic }
+			});
+		}
 
 		// optional welcome email (non-blocking)
 		try { await sendWelcomeEmail(speakerWorkEmail, 'Welcome to ICSC Speakers', newSpeaker, password); } catch (e) { console.warn('sendWelcomeEmail failed', e); }

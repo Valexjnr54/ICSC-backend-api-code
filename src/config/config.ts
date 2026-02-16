@@ -15,4 +15,11 @@ export const Config = {
     flutterwaveBaseURL: process.env.FLUTTERWAVE_BASE_URL,
     flutterwaveDeliveryCallback: process.env.FLUTTERWAVE_CALLBACK,
     flutterwaveCurrency: process.env.FLUTTERWAVE_CURRENCY || 'USD',
+
+    remitaApiKey: process.env.REMITA_API_KEY,
+    remitaMerchantId: process.env.REMITA_MERCHANT_ID,
+    remitaBaseURL: process.env.REMITA_BASE_URL,
+    remitaServiceTypeId: process.env.REMITA_SERVICE_TYPE_ID,
+    remitaDeliveryCallback: process.env.REMITA_CALLBACK,
+    remitaCurrency: process.env.REMITA_CURRENCY || 'NGN',
 };

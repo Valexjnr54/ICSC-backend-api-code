@@ -112,6 +112,8 @@ model Booths {
   updatedAt       DateTime          @updatedAt
   assigned_booths assigned_booths[]
 
+  PartnerAssignedBooth PartnerAssignedBooth[]
+
   @@map("booths")
 }
 
@@ -159,31 +161,56 @@ model EventPartners {
 }
 
 model Speakers {
-  id            Int      @id @default(autoincrement())
-  prefix        String?
-  first_name    String
-  last_name     String
-  fullname      String
-  country       String
-  job_title     String
-  organization  String
-  phone         String
-  social_media  Json?
-  work_email    String   @unique
-  bio           String   @db.Text
-  profile_image String?
-  topic         String
-  experience    String?  @db.Text
-  password      String
-  role          Role     @default(public_speaker)
-  status        Status   @default(Pending)
-  registeredAt  DateTime @default(now())
+  id                Int      @id @default(autoincrement())
+  prefix            String?
+  first_name        String
+  last_name         String
+  fullname          String
+  country           String
+  job_title         String
+  organization      String
+  phone             String
+  social_media      Json?
+  work_email        String   @unique
+  bio               String   @db.Text
+  profile_image     String?
+  // Topics are now managed via speaker_assignment
+  area_of_expertise String?
+  experience        String?  @db.Text
+  password          String
+  role              Role     @default(public_speaker)
+  status            Status   @default(Pending)
+  registeredAt      DateTime @default(now())
 
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  schedules Schedule[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  schedules           Schedule[]
+  speaker_assignments speaker_assignment[] // Add this
 
   @@map("speakers")
+}
+
+model speaker_assignment {
+  id                 Int      @id @default(autoincrement())
+  speaker_id         Int
+  speaker            Speakers @relation(fields: [speaker_id], references: [id])
+  event_id           Int?
+  event              Event?   @relation(fields: [event_id], references: [id])
+  topic_one          String?
+  topic_one_approved Boolean  @default(false)
+  topic_two          String?
+  topic_two_approved Boolean? @default(false)
+  topic_one_event_id Int?
+  topic_one_event    Event?   @relation("TopicOneEvent", fields: [topic_one_event_id], references: [id])
+  topic_two_event_id Int?
+  topic_two_event    Event?   @relation("TopicTwoEvent", fields: [topic_two_event_id], references: [id])
+  admin_note         String?  @db.Text
+  submittedAt        DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("speaker_assignment")
 }
 
 model EventPackages {
@@ -258,6 +285,7 @@ model EventPartnerPackages {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([event_partner_id, event_package_id])
   @@map("event_partner_packages")
 }
 
@@ -281,6 +309,11 @@ model Event {
   track         String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  // Relations for speaker assignments
+  speaker_assignments           speaker_assignment[] // For the default event relation
+  topic_one_speaker_assignments speaker_assignment[] @relation("TopicOneEvent") // For topic one
+  topic_two_speaker_assignments speaker_assignment[] @relation("TopicTwoEvent") // For topic two
 
   scheduleEvents ScheduleEvent[]
 
@@ -338,11 +371,31 @@ model Partner {
   job_title              String
   subscribe_to_newletter Boolean?               @default(false)
   share_with_third_party Boolean?               @default(false)
+  benefits               Json?
+  remaining_benefits     Json?
   password               String
   EventPartnerPackages   EventPartnerPackages[]
   schedules              Schedule[]
+  PartnerAssignedBooth   PartnerAssignedBooth[]
 
   @@map("partners")
+}
+
+model PartnerAssignedBooth {
+  id                  Int      @id @default(autoincrement())
+  exhibition_title    String
+  description         String?  @db.Text
+  exhibition_material Json?
+  booth_id            Int
+  booth               Booths   @relation(fields: [booth_id], references: [id])
+  partner_id          Int
+  partner             Partner  @relation(fields: [partner_id], references: [id])
+  assignedAt          DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("partner_assigned_booth")
 }
 
 model Resources {
@@ -403,6 +456,7 @@ enum Role {
 enum CreatorType {
   ADMIN
   USER
+  PARTNER
 }
 
 // Who submitted a schedule

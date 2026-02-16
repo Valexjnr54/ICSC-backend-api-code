@@ -15,185 +15,212 @@ datasource db {
 }
 
 model Admin {
-  id            Int       @id @default(autoincrement())
-  fullname      String    
-  email         String    @unique 
-  username      String    @unique
-  role          Role      @default(super_admin)
-  profile_image String?   
-  password      String    
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id            Int      @id @default(autoincrement())
+  fullname      String
+  email         String   @unique
+  username      String   @unique
+  role          Role     @default(super_admin)
+  profile_image String?
+  password      String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   @@map("admin")
 }
 
 model Users {
-  id            Int       @id @default(autoincrement())
-  organization  String
+  id                      Int      @id @default(autoincrement())
+  organization            String
   organization_short_code String
-  contact_person String
-  contact_person_email String @unique
-  username      String    @unique
-  profile_image String? 
-  role          Role      @default(ministry)  
-  password      String    
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  contact_person          String
+  contact_person_email    String   @unique
+  username                String   @unique
+  profile_image           String?
+  role                    Role     @default(ministry)
+  password                String
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
 
   @@map("users")
 }
 
 model Organization {
-  id           Int               @id @default(autoincrement())
+  id           Int              @id @default(autoincrement())
   name         String
-  abbreviation String?           @unique
-  type         OrganizationType  @default(OTHER)
+  abbreviation String?          @unique
+  type         OrganizationType @default(OTHER)
 
   // Self-referencing parent (e.g., an agency -> parent ministry)
-  parentId     Int?
-  parent       Organization?     @relation("OrgParent", fields: [parentId], references: [id])
-  children     Organization[]    @relation("OrgParent")
+  parentId Int?
+  parent   Organization?  @relation("OrgParent", fields: [parentId], references: [id])
+  children Organization[] @relation("OrgParent")
 
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@map("organizations")
   @@index([type])
+  @@map("organizations")
 }
 
 model Attendees {
-  id            Int       @id @default(autoincrement())
-  prefix        String?
-  fullname     String
-  email         String    @unique
-  phone_number  String
-  country String?
-  nin           String?    @unique
-  nin_verified   Boolean              @default(false)
-  position String?
-  grade String?
-  organization  String?
-  department String?
+  id                Int      @id @default(autoincrement())
+  prefix            String?
+  fullname          String
+  email             String   @unique
+  phone_number      String
+  country           String?
+  nin               String?  @unique
+  nin_verified      Boolean  @default(false)
+  position          String?
+  grade             String?
+  organization      String?
+  department        String?
   department_agency String?
-  job_title String?
-  staff_id String?
-  office_location String?
-  remark String?
-  status Status @default(Pending)
-  role          Role @default(attendee)
-  password      String   
-  temporal_password  Boolean              @default(true) 
-  registeredAt  DateTime  @default(now())
-  
+  job_title         String?
+  staff_id          String?
+  office_location   String?
+  remark            String?
+  status            Status   @default(Pending)
+  role              Role     @default(attendee)
+  password          String
+  temporal_password Boolean  @default(true)
+  registeredAt      DateTime @default(now())
+
   // Created by: polymorphic reference stored as id + type (no FK constraint)
   // Use `created_by_type` to decide which table to join to (ADMIN or USER)
   created_by_id   Int?
   created_by_type CreatorType?
 
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relation: an attendee may have many saved schedules
-  schedules     Schedule[]
+  schedules Schedule[]
 
   @@map("attendees")
 }
 
 model Booths {
-  id            Int       @id @default(autoincrement())
-  booth_number   String    @unique
-  location      String
-  price         Float
-  booth_size     String
-  features      Json
-  status        Status    @default(Available)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id              Int               @id @default(autoincrement())
+  booth_number    String            @unique
+  location        String
+  price           Float
+  booth_size      String
+  features        Json
+  status          Status            @default(Available)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  assigned_booths assigned_booths[]
+
+  PartnerAssignedBooth PartnerAssignedBooth[]
 
   @@map("booths")
-  assigned_booths assigned_booths[]
 }
 
 model Exhibitors {
-  id            Int       @id @default(autoincrement())
-  prefix        String?
-  company_name String
-  contact_person String
-  contact_email  String    @unique
-  contact_phone  String
-  website       String? 
-  description   String? @db.Text
+  id                         Int      @id @default(autoincrement())
+  prefix                     String?
+  company_name               String
+  contact_person             String
+  contact_email              String   @unique
+  contact_phone              String
+  website                    String?
+  description                String?  @db.Text
   service_product_to_exhibit String?
-  password      String
-  role         Role      @default(exhibitor)
-  status        Status    @default(Pending)
-  registeredAt  DateTime  @default(now())
+  password                   String
+  role                       Role     @default(exhibitor)
+  status                     Status   @default(Pending)
+  registeredAt               DateTime @default(now())
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  assigned_booths assigned_booths[]
 
   @@map("exhibitors")
-  assigned_booths assigned_booths[]
 }
 
 model EventPartners {
-  id            Int       @id @default(autoincrement())
-  prefix        String?
-  fullname      String    
-  email         String    @unique 
-  phone_number String
-  company_name  String
-  logo          String    
-  website       String?  
-  social_media  Json? 
-  description   String? @db.Text
+  id             Int      @id @default(autoincrement())
+  prefix         String?
+  fullname       String
+  email          String   @unique
+  phone_number   String
+  company_name   String
+  logo           String
+  website        String?
+  social_media   Json?
+  description    String?  @db.Text
   why_interested String?
-  password      String 
-  role         Role      @default(public_speaker)
-  status        Status    @default(Pending)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  password       String
+  role           Role     @default(public_speaker)
+  status         Status   @default(Pending)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("event_partners")
 }
 
 model Speakers {
-  id            Int       @id @default(autoincrement())
-  prefix        String?
-  first_name    String
-  last_name     String
-  fullname      String
-  country       String
-  job_title     String
-  organization  String
-  phone         String
-  social_media  Json?
-  work_email    String    @unique
-  bio           String    @db.Text
-  profile_image String?
-  topic         String
-  experience    String?   @db.Text
-  password      String
-  role          Role      @default(public_speaker)
-  status        Status    @default(Pending)
-  registeredAt  DateTime  @default(now())
+  id                Int      @id @default(autoincrement())
+  prefix            String?
+  first_name        String
+  last_name         String
+  fullname          String
+  country           String
+  job_title         String
+  organization      String
+  phone             String
+  social_media      Json?
+  work_email        String   @unique
+  bio               String   @db.Text
+  profile_image     String?
+  // Topics are now managed via speaker_assignment
+  area_of_expertise String?
+  experience        String?  @db.Text
+  password          String
+  role              Role     @default(public_speaker)
+  status            Status   @default(Pending)
+  registeredAt      DateTime @default(now())
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  schedules           Schedule[]
+  speaker_assignments speaker_assignment[] // Add this
 
   @@map("speakers")
-  schedules     Schedule[]
+}
+
+model speaker_assignment {
+  id                 Int      @id @default(autoincrement())
+  speaker_id         Int
+  speaker            Speakers @relation(fields: [speaker_id], references: [id])
+  event_id           Int?
+  event              Event?   @relation(fields: [event_id], references: [id])
+  topic_one          String?
+  topic_one_approved Boolean  @default(false)
+  topic_two          String?
+  topic_two_approved Boolean?  @default(false)
+  topic_one_event_id Int?
+  topic_one_event    Event?   @relation("TopicOneEvent", fields: [topic_one_event_id], references: [id])
+  topic_two_event_id Int?
+  topic_two_event    Event?   @relation("TopicTwoEvent", fields: [topic_two_event_id], references: [id])
+  admin_note         String?  @db.Text
+  submittedAt        DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("speaker_assignment")
 }
 
 model EventPackages {
-  id            Int       @id @default(autoincrement())
-  name          String    
-  description   String    @db.Text
-  price         Float     
-  features      Json      
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String   @db.Text
+  price       Float
+  features    Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("event_packages")
 }
@@ -203,7 +230,7 @@ model SpeakerPackage {
   slug        String   @unique
   title       String
   price       Float
-  description String? @db.Text
+  description String?  @db.Text
   features    Json
   limitedText String?
   createdAt   DateTime @default(now())
@@ -213,51 +240,52 @@ model SpeakerPackage {
 }
 
 model PartnerPackage {
-  id          Int      @id @default(autoincrement())
-  slug        String   @unique
-  title       String
-  price       Float
-  description String? @db.Text
-  features    Json
-  limitedText String?
-  remaining_slot Int @default(0)
-  total_slot Int @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                   Int                    @id @default(autoincrement())
+  slug                 String                 @unique
+  title                String
+  price                Float
+  description          String?                @db.Text
+  features             Json
+  limitedText          String?
+  remaining_slot       Int                    @default(0)
+  total_slot           Int                    @default(0)
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  EventPartnerPackages EventPartnerPackages[]
 
   @@map("partner_packages")
-  EventPartnerPackages EventPartnerPackages[]
 }
 
 model assigned_booths {
-  id            Int       @id @default(autoincrement())
-  booth_id      Int       @unique
-  booth         Booths    @relation(fields: [booth_id], references: [id])
-  assigned_to_id   Int
-  assigned_to   Exhibitors     @relation(fields: [assigned_to_id], references: [id])
-  assignedAt    DateTime  @default(now())
+  id             Int        @id @default(autoincrement())
+  booth_id       Int        @unique
+  booth          Booths     @relation(fields: [booth_id], references: [id])
+  assigned_to_id Int
+  assigned_to    Exhibitors @relation(fields: [assigned_to_id], references: [id])
+  assignedAt     DateTime   @default(now())
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("assigned_booths")
 }
 
 model EventPartnerPackages {
-  id            Int       @id @default(autoincrement())
-  event_partner_id Int
-  event_partner   Partner @relation(fields: [event_partner_id], references: [id])
-  event_package_id Int
-  event_package  PartnerPackage @relation(fields: [event_package_id], references: [id])
+  id                Int            @id @default(autoincrement())
+  event_partner_id  Int
+  event_partner     Partner        @relation(fields: [event_partner_id], references: [id])
+  event_package_id  Int
+  event_package     PartnerPackage @relation(fields: [event_package_id], references: [id])
   payment_reference String?
-  payment_status Status @default(Pending)
-  payment_method String?
-  proof_of_payment String?
-  assignedAt    DateTime  @default(now())
+  payment_status    Status         @default(Pending)
+  payment_method    String?
+  proof_of_payment  String?
+  assignedAt        DateTime       @default(now())
 
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  @@unique([event_partner_id, event_package_id])
   @@map("event_partner_packages")
 }
 
@@ -269,8 +297,8 @@ model Event {
   start_time    String
   end_time      String
   title         String
-  location      String  //this can be called stage
-  description   String? @db.Text
+  location      String //this can be called stage
+  description   String?  @db.Text
   hasLiveStream Boolean  @default(false)
   liveStreamUrl String?
   isKeynote     Boolean  @default(false)
@@ -282,29 +310,34 @@ model Event {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
+  // Relations for speaker assignments
+  speaker_assignments           speaker_assignment[] // For the default event relation
+  topic_one_speaker_assignments speaker_assignment[] @relation("TopicOneEvent") // For topic one
+  topic_two_speaker_assignments speaker_assignment[] @relation("TopicTwoEvent") // For topic two
+
   scheduleEvents ScheduleEvent[]
 
   @@map("events")
 }
 
 model Schedule {
-  id            Int      @id @default(autoincrement())
+  id            Int            @id @default(autoincrement())
   userId        String
   // Indicates which type of actor submitted this schedule (ATTENDEE, PARTNER, SPEAKER, etc.)
   submittedBy   SubmitterType?
   // Free-form reference ID of the submitter (stored as string to support different id types)
   submittedById String?
   attendeeId    Int?
-  attendee      Attendees? @relation(fields: [attendeeId], references: [id])
+  attendee      Attendees?     @relation(fields: [attendeeId], references: [id])
   // If submitted by a partner, store the partner FK here
   partnerId     Int?
-  partner       Partner?   @relation(fields: [partnerId], references: [id])
+  partner       Partner?       @relation(fields: [partnerId], references: [id])
   // If submitted by a speaker, store the speaker FK here
   speakerId     Int?
-  speaker       Speakers?  @relation(fields: [speakerId], references: [id])
+  speaker       Speakers?      @relation(fields: [speakerId], references: [id])
   email         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
 
   scheduleEvents ScheduleEvent[]
 
@@ -312,67 +345,89 @@ model Schedule {
 }
 
 model ScheduleEvent {
-  id         Int      @id @default(autoincrement())
+  id         Int @id @default(autoincrement())
   scheduleId Int
   eventId    Int
 
-  schedule   Schedule @relation(fields: [scheduleId], references: [id])
-  event      Event    @relation(fields: [eventId], references: [id])
+  schedule Schedule @relation(fields: [scheduleId], references: [id])
+  event    Event    @relation(fields: [eventId], references: [id])
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([scheduleId, eventId])
   @@map("schedule_events")
 }
 
 model Partner {
-  id         Int      @id @default(autoincrement())
-  prefix        String?
-  firstname      String
-  lastname      String    
-  email         String    @unique 
-  phone_number String
-  entity_name  String
-  country       String
-  job_title     String
-  subscribe_to_newletter Boolean? @default(false)
-  share_with_third_party Boolean? @default(false)
-  password      String
+  id                     Int                    @id @default(autoincrement())
+  prefix                 String?
+  firstname              String
+  lastname               String
+  email                  String                 @unique
+  phone_number           String
+  entity_name            String
+  country                String
+  job_title              String
+  subscribe_to_newletter Boolean?               @default(false)
+  share_with_third_party Boolean?               @default(false)
+  benefits               Json?
+  remaining_benefits     Json?
+  password               String
+  EventPartnerPackages   EventPartnerPackages[]
+  schedules              Schedule[]
+  PartnerAssignedBooth   PartnerAssignedBooth[]
+
   @@map("partners")
-  EventPartnerPackages EventPartnerPackages[]
-  schedules     Schedule[]
+}
+
+model PartnerAssignedBooth {
+  id                  Int      @id @default(autoincrement())
+  exhibition_title    String
+  description         String?  @db.Text
+  exhibition_material Json?
+  booth_id            Int
+  booth               Booths   @relation(fields: [booth_id], references: [id])
+  partner_id          Int
+  partner             Partner  @relation(fields: [partner_id], references: [id])
+  assignedAt          DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("partner_assigned_booth")
 }
 
 model Resources {
-  id         Int      @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
   resource_name String
-  type String
-  category String
-  uploaded_by String
-  file_path String
-  file_type String
-  description String? @db.Text
-  status Status
-  visibilty Visibility @default(Public)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  type          String
+  category      String
+  uploaded_by   String
+  file_path     String
+  file_type     String
+  description   String?    @db.Text
+  status        Status
+  visibilty     Visibility @default(Public)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
   @@map("resources")
 }
 
 model RoundTables {
-  id  Int @id @default(autoincrement())
-  session Session @default(Morning)
+  id                 Int      @id @default(autoincrement())
+  session            Session  @default(Morning)
   session_start_time String
-  session_end_time String
-  event_date    String?
-  title String
-  lead Json
-  description  String? @db.Text
-  key_question Json?
-  open_for  String?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  session_end_time   String
+  event_date         String?
+  title              String
+  lead               Json
+  description        String?  @db.Text
+  key_question       Json?
+  open_for           String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 
   @@map("round_tables")
 }
@@ -384,6 +439,7 @@ enum OrganizationType {
   PARASTATAL
   OTHER
 }
+
 enum Role {
   super_admin
   attendee
@@ -400,6 +456,7 @@ enum Role {
 enum CreatorType {
   ADMIN
   USER
+  PARTNER
 }
 
 // Who submitted a schedule
@@ -426,7 +483,7 @@ enum Visibility {
   Restricted
 }
 
-enum Session{
+enum Session {
   Morning
   Afternoon
 }

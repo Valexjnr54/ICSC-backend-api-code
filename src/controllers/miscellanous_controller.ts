@@ -81,6 +81,64 @@ export async function profile_imageUpload(request: Request, response: Response) 
     }
 }
 
+export async function exhibition_material_imageUpload(request: Request, response: Response) {
+    try {
+        let files: Express.Multer.File[] = [];
+        
+        // Check if it's single file or multiple files
+        if (request.file) {
+            files = [request.file];
+        } else if (request.files) {
+            files = request.files as Express.Multer.File[];
+        } else {
+            return response.status(400).json({ message: 'At least one exhibition image is required' });
+        }
+
+        if (files.length === 0) {
+            return response.status(400).json({ message: 'At least one exhibition image is required' });
+        }
+
+        const uploadedUrls: string[] = [];
+
+        // Upload all files to Cloudinary
+        for (const file of files) {
+            try {
+                const image_path = file.path;
+                
+                // Upload image to Cloudinary
+                const uploadedImageUrl = await uploadImage(image_path, 'icsc/images/exhibition_material/');
+                
+                if (uploadedImageUrl) {
+                    uploadedUrls.push(uploadedImageUrl);
+                }
+
+                // Delete the local file after uploading
+                fs.unlink(image_path, (err) => {
+                    if (err) {
+                        console.error(`Error deleting file: ${image_path}`, err);
+                    }
+                });
+            } catch (fileError) {
+                console.error(`Error uploading file ${file.originalname}:`, fileError);
+            }
+        }
+
+        if (uploadedUrls.length > 0) {
+            return response.status(200).json({
+                message: `${uploadedUrls.length} exhibition image(s) uploaded successfully`,
+                image_urls: uploadedUrls,
+                total_uploaded: uploadedUrls.length,
+                total_received: files.length
+            });
+        } else {
+            return response.status(500).json({ message: 'Failed to upload any images' });
+        }
+    } catch (error) {
+        console.error('Image upload error:', error);
+        return response.status(500).json({ message: 'Server error', error });
+    }
+}
+
 export async function profile_pictureUpload(request: Request, response: Response) {
 
     try {
@@ -305,4 +363,15 @@ export async function getAllRoundTables(request: Request, response: Response) {
         console.error(error);
         return response.status(500).json({ message: 'Internal Server Error' });
     }
+}
+
+export async function getBooths(request: Request, response: Response) {
+
+  try {
+    const all = await prisma.booths.findMany({ orderBy: { createdAt: 'asc' } });
+    return response.status(200).json({ message: 'Booth(s) fetched', data: all });
+  } catch (error) {
+    console.error(error);
+    return response.status(500).json({ message: 'Internal Server Error' });
+  }
 }

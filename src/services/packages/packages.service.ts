@@ -33,7 +33,7 @@ export async function createPartnerPackage(data: any) {
 }
 
 export async function getAllPartnerPackages() {
-  return prisma.partnerPackage.findMany({ orderBy: { createdAt: 'asc' } });
+  return prisma.partnerPackage.findMany({ orderBy: { createdAt: 'desc' } });
 }
 
 export async function getPartnerPackageById(id: number) {

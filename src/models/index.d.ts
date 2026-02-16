@@ -54,6 +54,11 @@ export type EventPartners = $Result.DefaultSelection<Prisma.$EventPartnersPayloa
  */
 export type Speakers = $Result.DefaultSelection<Prisma.$SpeakersPayload>
 /**
+ * Model speaker_assignment
+ * 
+ */
+export type speaker_assignment = $Result.DefaultSelection<Prisma.$speaker_assignmentPayload>
+/**
  * Model EventPackages
  * 
  */
@@ -99,6 +104,11 @@ export type ScheduleEvent = $Result.DefaultSelection<Prisma.$ScheduleEventPayloa
  */
 export type Partner = $Result.DefaultSelection<Prisma.$PartnerPayload>
 /**
+ * Model PartnerAssignedBooth
+ * 
+ */
+export type PartnerAssignedBooth = $Result.DefaultSelection<Prisma.$PartnerAssignedBoothPayload>
+/**
  * Model Resources
  * 
  */
@@ -140,7 +150,8 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 export const CreatorType: {
   ADMIN: 'ADMIN',
-  USER: 'USER'
+  USER: 'USER',
+  PARTNER: 'PARTNER'
 };
 
 export type CreatorType = (typeof CreatorType)[keyof typeof CreatorType]
@@ -414,6 +425,16 @@ export class PrismaClient<
   get speakers(): Prisma.SpeakersDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.speaker_assignment`: Exposes CRUD operations for the **speaker_assignment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Speaker_assignments
+    * const speaker_assignments = await prisma.speaker_assignment.findMany()
+    * ```
+    */
+  get speaker_assignment(): Prisma.speaker_assignmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.eventPackages`: Exposes CRUD operations for the **EventPackages** model.
     * Example usage:
     * ```ts
@@ -502,6 +523,16 @@ export class PrismaClient<
     * ```
     */
   get partner(): Prisma.PartnerDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.partnerAssignedBooth`: Exposes CRUD operations for the **PartnerAssignedBooth** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PartnerAssignedBooths
+    * const partnerAssignedBooths = await prisma.partnerAssignedBooth.findMany()
+    * ```
+    */
+  get partnerAssignedBooth(): Prisma.PartnerAssignedBoothDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.resources`: Exposes CRUD operations for the **Resources** model.
@@ -971,6 +1002,7 @@ export namespace Prisma {
     Exhibitors: 'Exhibitors',
     EventPartners: 'EventPartners',
     Speakers: 'Speakers',
+    speaker_assignment: 'speaker_assignment',
     EventPackages: 'EventPackages',
     SpeakerPackage: 'SpeakerPackage',
     PartnerPackage: 'PartnerPackage',
@@ -980,6 +1012,7 @@ export namespace Prisma {
     Schedule: 'Schedule',
     ScheduleEvent: 'ScheduleEvent',
     Partner: 'Partner',
+    PartnerAssignedBooth: 'PartnerAssignedBooth',
     Resources: 'Resources',
     RoundTables: 'RoundTables'
   };
@@ -1000,7 +1033,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "eventPackages" | "speakerPackage" | "partnerPackage" | "assigned_booths" | "eventPartnerPackages" | "event" | "schedule" | "scheduleEvent" | "partner" | "resources" | "roundTables"
+      modelProps: "admin" | "users" | "organization" | "attendees" | "booths" | "exhibitors" | "eventPartners" | "speakers" | "speaker_assignment" | "eventPackages" | "speakerPackage" | "partnerPackage" | "assigned_booths" | "eventPartnerPackages" | "event" | "schedule" | "scheduleEvent" | "partner" | "partnerAssignedBooth" | "resources" | "roundTables"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1529,6 +1562,72 @@ export namespace Prisma {
           count: {
             args: Prisma.SpeakersCountArgs<ExtArgs>
             result: $Utils.Optional<SpeakersCountAggregateOutputType> | number
+          }
+        }
+      }
+      speaker_assignment: {
+        payload: Prisma.$speaker_assignmentPayload<ExtArgs>
+        fields: Prisma.speaker_assignmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.speaker_assignmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.speaker_assignmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload>
+          }
+          findFirst: {
+            args: Prisma.speaker_assignmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.speaker_assignmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload>
+          }
+          findMany: {
+            args: Prisma.speaker_assignmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload>[]
+          }
+          create: {
+            args: Prisma.speaker_assignmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload>
+          }
+          createMany: {
+            args: Prisma.speaker_assignmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.speaker_assignmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload>
+          }
+          update: {
+            args: Prisma.speaker_assignmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.speaker_assignmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.speaker_assignmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.speaker_assignmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$speaker_assignmentPayload>
+          }
+          aggregate: {
+            args: Prisma.Speaker_assignmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSpeaker_assignment>
+          }
+          groupBy: {
+            args: Prisma.speaker_assignmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Speaker_assignmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.speaker_assignmentCountArgs<ExtArgs>
+            result: $Utils.Optional<Speaker_assignmentCountAggregateOutputType> | number
           }
         }
       }
@@ -2126,6 +2225,72 @@ export namespace Prisma {
           }
         }
       }
+      PartnerAssignedBooth: {
+        payload: Prisma.$PartnerAssignedBoothPayload<ExtArgs>
+        fields: Prisma.PartnerAssignedBoothFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PartnerAssignedBoothFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PartnerAssignedBoothFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload>
+          }
+          findFirst: {
+            args: Prisma.PartnerAssignedBoothFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PartnerAssignedBoothFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload>
+          }
+          findMany: {
+            args: Prisma.PartnerAssignedBoothFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload>[]
+          }
+          create: {
+            args: Prisma.PartnerAssignedBoothCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload>
+          }
+          createMany: {
+            args: Prisma.PartnerAssignedBoothCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PartnerAssignedBoothDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload>
+          }
+          update: {
+            args: Prisma.PartnerAssignedBoothUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload>
+          }
+          deleteMany: {
+            args: Prisma.PartnerAssignedBoothDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PartnerAssignedBoothUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PartnerAssignedBoothUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnerAssignedBoothPayload>
+          }
+          aggregate: {
+            args: Prisma.PartnerAssignedBoothAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePartnerAssignedBooth>
+          }
+          groupBy: {
+            args: Prisma.PartnerAssignedBoothGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PartnerAssignedBoothGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PartnerAssignedBoothCountArgs<ExtArgs>
+            result: $Utils.Optional<PartnerAssignedBoothCountAggregateOutputType> | number
+          }
+        }
+      }
       Resources: {
         payload: Prisma.$ResourcesPayload<ExtArgs>
         fields: Prisma.ResourcesFieldRefs
@@ -2362,6 +2527,7 @@ export namespace Prisma {
     exhibitors?: ExhibitorsOmit
     eventPartners?: EventPartnersOmit
     speakers?: SpeakersOmit
+    speaker_assignment?: speaker_assignmentOmit
     eventPackages?: EventPackagesOmit
     speakerPackage?: SpeakerPackageOmit
     partnerPackage?: PartnerPackageOmit
@@ -2371,6 +2537,7 @@ export namespace Prisma {
     schedule?: ScheduleOmit
     scheduleEvent?: ScheduleEventOmit
     partner?: PartnerOmit
+    partnerAssignedBooth?: PartnerAssignedBoothOmit
     resources?: ResourcesOmit
     roundTables?: RoundTablesOmit
   }
@@ -2516,10 +2683,12 @@ export namespace Prisma {
 
   export type BoothsCountOutputType = {
     assigned_booths: number
+    PartnerAssignedBooth: number
   }
 
   export type BoothsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assigned_booths?: boolean | BoothsCountOutputTypeCountAssigned_boothsArgs
+    PartnerAssignedBooth?: boolean | BoothsCountOutputTypeCountPartnerAssignedBoothArgs
   }
 
   // Custom InputTypes
@@ -2538,6 +2707,13 @@ export namespace Prisma {
    */
   export type BoothsCountOutputTypeCountAssigned_boothsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: assigned_boothsWhereInput
+  }
+
+  /**
+   * BoothsCountOutputType without action
+   */
+  export type BoothsCountOutputTypeCountPartnerAssignedBoothArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PartnerAssignedBoothWhereInput
   }
 
 
@@ -2578,10 +2754,12 @@ export namespace Prisma {
 
   export type SpeakersCountOutputType = {
     schedules: number
+    speaker_assignments: number
   }
 
   export type SpeakersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedules?: boolean | SpeakersCountOutputTypeCountSchedulesArgs
+    speaker_assignments?: boolean | SpeakersCountOutputTypeCountSpeaker_assignmentsArgs
   }
 
   // Custom InputTypes
@@ -2600,6 +2778,13 @@ export namespace Prisma {
    */
   export type SpeakersCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScheduleWhereInput
+  }
+
+  /**
+   * SpeakersCountOutputType without action
+   */
+  export type SpeakersCountOutputTypeCountSpeaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: speaker_assignmentWhereInput
   }
 
 
@@ -2639,10 +2824,16 @@ export namespace Prisma {
    */
 
   export type EventCountOutputType = {
+    speaker_assignments: number
+    topic_one_speaker_assignments: number
+    topic_two_speaker_assignments: number
     scheduleEvents: number
   }
 
   export type EventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    speaker_assignments?: boolean | EventCountOutputTypeCountSpeaker_assignmentsArgs
+    topic_one_speaker_assignments?: boolean | EventCountOutputTypeCountTopic_one_speaker_assignmentsArgs
+    topic_two_speaker_assignments?: boolean | EventCountOutputTypeCountTopic_two_speaker_assignmentsArgs
     scheduleEvents?: boolean | EventCountOutputTypeCountScheduleEventsArgs
   }
 
@@ -2655,6 +2846,27 @@ export namespace Prisma {
      * Select specific fields to fetch from the EventCountOutputType
      */
     select?: EventCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountSpeaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: speaker_assignmentWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountTopic_one_speaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: speaker_assignmentWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountTopic_two_speaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: speaker_assignmentWhereInput
   }
 
   /**
@@ -2703,11 +2915,13 @@ export namespace Prisma {
   export type PartnerCountOutputType = {
     EventPartnerPackages: number
     schedules: number
+    PartnerAssignedBooth: number
   }
 
   export type PartnerCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     EventPartnerPackages?: boolean | PartnerCountOutputTypeCountEventPartnerPackagesArgs
     schedules?: boolean | PartnerCountOutputTypeCountSchedulesArgs
+    PartnerAssignedBooth?: boolean | PartnerCountOutputTypeCountPartnerAssignedBoothArgs
   }
 
   // Custom InputTypes
@@ -2733,6 +2947,13 @@ export namespace Prisma {
    */
   export type PartnerCountOutputTypeCountSchedulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ScheduleWhereInput
+  }
+
+  /**
+   * PartnerCountOutputType without action
+   */
+  export type PartnerCountOutputTypeCountPartnerAssignedBoothArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PartnerAssignedBoothWhereInput
   }
 
 
@@ -7175,6 +7396,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     assigned_booths?: boolean | Booths$assigned_boothsArgs<ExtArgs>
+    PartnerAssignedBooth?: boolean | Booths$PartnerAssignedBoothArgs<ExtArgs>
     _count?: boolean | BoothsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["booths"]>
 
@@ -7195,6 +7417,7 @@ export namespace Prisma {
   export type BoothsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "booth_number" | "location" | "price" | "booth_size" | "features" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["booths"]>
   export type BoothsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assigned_booths?: boolean | Booths$assigned_boothsArgs<ExtArgs>
+    PartnerAssignedBooth?: boolean | Booths$PartnerAssignedBoothArgs<ExtArgs>
     _count?: boolean | BoothsCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7202,6 +7425,7 @@ export namespace Prisma {
     name: "Booths"
     objects: {
       assigned_booths: Prisma.$assigned_boothsPayload<ExtArgs>[]
+      PartnerAssignedBooth: Prisma.$PartnerAssignedBoothPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -7554,6 +7778,7 @@ export namespace Prisma {
   export interface Prisma__BoothsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     assigned_booths<T extends Booths$assigned_boothsArgs<ExtArgs> = {}>(args?: Subset<T, Booths$assigned_boothsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$assigned_boothsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    PartnerAssignedBooth<T extends Booths$PartnerAssignedBoothArgs<ExtArgs> = {}>(args?: Subset<T, Booths$PartnerAssignedBoothArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7956,6 +8181,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Assigned_boothsScalarFieldEnum | Assigned_boothsScalarFieldEnum[]
+  }
+
+  /**
+   * Booths.PartnerAssignedBooth
+   */
+  export type Booths$PartnerAssignedBoothArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    where?: PartnerAssignedBoothWhereInput
+    orderBy?: PartnerAssignedBoothOrderByWithRelationInput | PartnerAssignedBoothOrderByWithRelationInput[]
+    cursor?: PartnerAssignedBoothWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PartnerAssignedBoothScalarFieldEnum | PartnerAssignedBoothScalarFieldEnum[]
   }
 
   /**
@@ -10142,7 +10391,7 @@ export namespace Prisma {
     work_email: string | null
     bio: string | null
     profile_image: string | null
-    topic: string | null
+    area_of_expertise: string | null
     experience: string | null
     password: string | null
     role: $Enums.Role | null
@@ -10165,7 +10414,7 @@ export namespace Prisma {
     work_email: string | null
     bio: string | null
     profile_image: string | null
-    topic: string | null
+    area_of_expertise: string | null
     experience: string | null
     password: string | null
     role: $Enums.Role | null
@@ -10189,7 +10438,7 @@ export namespace Prisma {
     work_email: number
     bio: number
     profile_image: number
-    topic: number
+    area_of_expertise: number
     experience: number
     password: number
     role: number
@@ -10222,7 +10471,7 @@ export namespace Prisma {
     work_email?: true
     bio?: true
     profile_image?: true
-    topic?: true
+    area_of_expertise?: true
     experience?: true
     password?: true
     role?: true
@@ -10245,7 +10494,7 @@ export namespace Prisma {
     work_email?: true
     bio?: true
     profile_image?: true
-    topic?: true
+    area_of_expertise?: true
     experience?: true
     password?: true
     role?: true
@@ -10269,7 +10518,7 @@ export namespace Prisma {
     work_email?: true
     bio?: true
     profile_image?: true
-    topic?: true
+    area_of_expertise?: true
     experience?: true
     password?: true
     role?: true
@@ -10380,7 +10629,7 @@ export namespace Prisma {
     work_email: string
     bio: string
     profile_image: string | null
-    topic: string
+    area_of_expertise: string | null
     experience: string | null
     password: string
     role: $Enums.Role
@@ -10423,7 +10672,7 @@ export namespace Prisma {
     work_email?: boolean
     bio?: boolean
     profile_image?: boolean
-    topic?: boolean
+    area_of_expertise?: boolean
     experience?: boolean
     password?: boolean
     role?: boolean
@@ -10432,6 +10681,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     schedules?: boolean | Speakers$schedulesArgs<ExtArgs>
+    speaker_assignments?: boolean | Speakers$speaker_assignmentsArgs<ExtArgs>
     _count?: boolean | SpeakersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["speakers"]>
 
@@ -10451,7 +10701,7 @@ export namespace Prisma {
     work_email?: boolean
     bio?: boolean
     profile_image?: boolean
-    topic?: boolean
+    area_of_expertise?: boolean
     experience?: boolean
     password?: boolean
     role?: boolean
@@ -10461,9 +10711,10 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type SpeakersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "first_name" | "last_name" | "fullname" | "country" | "job_title" | "organization" | "phone" | "social_media" | "work_email" | "bio" | "profile_image" | "topic" | "experience" | "password" | "role" | "status" | "registeredAt" | "createdAt" | "updatedAt", ExtArgs["result"]["speakers"]>
+  export type SpeakersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "first_name" | "last_name" | "fullname" | "country" | "job_title" | "organization" | "phone" | "social_media" | "work_email" | "bio" | "profile_image" | "area_of_expertise" | "experience" | "password" | "role" | "status" | "registeredAt" | "createdAt" | "updatedAt", ExtArgs["result"]["speakers"]>
   export type SpeakersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     schedules?: boolean | Speakers$schedulesArgs<ExtArgs>
+    speaker_assignments?: boolean | Speakers$speaker_assignmentsArgs<ExtArgs>
     _count?: boolean | SpeakersCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -10471,6 +10722,7 @@ export namespace Prisma {
     name: "Speakers"
     objects: {
       schedules: Prisma.$SchedulePayload<ExtArgs>[]
+      speaker_assignments: Prisma.$speaker_assignmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10486,7 +10738,7 @@ export namespace Prisma {
       work_email: string
       bio: string
       profile_image: string | null
-      topic: string
+      area_of_expertise: string | null
       experience: string | null
       password: string
       role: $Enums.Role
@@ -10835,6 +11087,7 @@ export namespace Prisma {
   export interface Prisma__SpeakersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     schedules<T extends Speakers$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Speakers$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    speaker_assignments<T extends Speakers$speaker_assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Speakers$speaker_assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10877,7 +11130,7 @@ export namespace Prisma {
     readonly work_email: FieldRef<"Speakers", 'String'>
     readonly bio: FieldRef<"Speakers", 'String'>
     readonly profile_image: FieldRef<"Speakers", 'String'>
-    readonly topic: FieldRef<"Speakers", 'String'>
+    readonly area_of_expertise: FieldRef<"Speakers", 'String'>
     readonly experience: FieldRef<"Speakers", 'String'>
     readonly password: FieldRef<"Speakers", 'String'>
     readonly role: FieldRef<"Speakers", 'Role'>
@@ -11252,6 +11505,30 @@ export namespace Prisma {
   }
 
   /**
+   * Speakers.speaker_assignments
+   */
+  export type Speakers$speaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    where?: speaker_assignmentWhereInput
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    cursor?: speaker_assignmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Speaker_assignmentScalarFieldEnum | Speaker_assignmentScalarFieldEnum[]
+  }
+
+  /**
    * Speakers without action
    */
   export type SpeakersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11267,6 +11544,1142 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SpeakersInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model speaker_assignment
+   */
+
+  export type AggregateSpeaker_assignment = {
+    _count: Speaker_assignmentCountAggregateOutputType | null
+    _avg: Speaker_assignmentAvgAggregateOutputType | null
+    _sum: Speaker_assignmentSumAggregateOutputType | null
+    _min: Speaker_assignmentMinAggregateOutputType | null
+    _max: Speaker_assignmentMaxAggregateOutputType | null
+  }
+
+  export type Speaker_assignmentAvgAggregateOutputType = {
+    id: number | null
+    speaker_id: number | null
+    event_id: number | null
+    topic_one_event_id: number | null
+    topic_two_event_id: number | null
+  }
+
+  export type Speaker_assignmentSumAggregateOutputType = {
+    id: number | null
+    speaker_id: number | null
+    event_id: number | null
+    topic_one_event_id: number | null
+    topic_two_event_id: number | null
+  }
+
+  export type Speaker_assignmentMinAggregateOutputType = {
+    id: number | null
+    speaker_id: number | null
+    event_id: number | null
+    topic_one: string | null
+    topic_one_approved: boolean | null
+    topic_two: string | null
+    topic_two_approved: boolean | null
+    topic_one_event_id: number | null
+    topic_two_event_id: number | null
+    admin_note: string | null
+    submittedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type Speaker_assignmentMaxAggregateOutputType = {
+    id: number | null
+    speaker_id: number | null
+    event_id: number | null
+    topic_one: string | null
+    topic_one_approved: boolean | null
+    topic_two: string | null
+    topic_two_approved: boolean | null
+    topic_one_event_id: number | null
+    topic_two_event_id: number | null
+    admin_note: string | null
+    submittedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type Speaker_assignmentCountAggregateOutputType = {
+    id: number
+    speaker_id: number
+    event_id: number
+    topic_one: number
+    topic_one_approved: number
+    topic_two: number
+    topic_two_approved: number
+    topic_one_event_id: number
+    topic_two_event_id: number
+    admin_note: number
+    submittedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type Speaker_assignmentAvgAggregateInputType = {
+    id?: true
+    speaker_id?: true
+    event_id?: true
+    topic_one_event_id?: true
+    topic_two_event_id?: true
+  }
+
+  export type Speaker_assignmentSumAggregateInputType = {
+    id?: true
+    speaker_id?: true
+    event_id?: true
+    topic_one_event_id?: true
+    topic_two_event_id?: true
+  }
+
+  export type Speaker_assignmentMinAggregateInputType = {
+    id?: true
+    speaker_id?: true
+    event_id?: true
+    topic_one?: true
+    topic_one_approved?: true
+    topic_two?: true
+    topic_two_approved?: true
+    topic_one_event_id?: true
+    topic_two_event_id?: true
+    admin_note?: true
+    submittedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type Speaker_assignmentMaxAggregateInputType = {
+    id?: true
+    speaker_id?: true
+    event_id?: true
+    topic_one?: true
+    topic_one_approved?: true
+    topic_two?: true
+    topic_two_approved?: true
+    topic_one_event_id?: true
+    topic_two_event_id?: true
+    admin_note?: true
+    submittedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type Speaker_assignmentCountAggregateInputType = {
+    id?: true
+    speaker_id?: true
+    event_id?: true
+    topic_one?: true
+    topic_one_approved?: true
+    topic_two?: true
+    topic_two_approved?: true
+    topic_one_event_id?: true
+    topic_two_event_id?: true
+    admin_note?: true
+    submittedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type Speaker_assignmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which speaker_assignment to aggregate.
+     */
+    where?: speaker_assignmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of speaker_assignments to fetch.
+     */
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: speaker_assignmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` speaker_assignments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` speaker_assignments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned speaker_assignments
+    **/
+    _count?: true | Speaker_assignmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Speaker_assignmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Speaker_assignmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Speaker_assignmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Speaker_assignmentMaxAggregateInputType
+  }
+
+  export type GetSpeaker_assignmentAggregateType<T extends Speaker_assignmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateSpeaker_assignment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSpeaker_assignment[P]>
+      : GetScalarType<T[P], AggregateSpeaker_assignment[P]>
+  }
+
+
+
+
+  export type speaker_assignmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: speaker_assignmentWhereInput
+    orderBy?: speaker_assignmentOrderByWithAggregationInput | speaker_assignmentOrderByWithAggregationInput[]
+    by: Speaker_assignmentScalarFieldEnum[] | Speaker_assignmentScalarFieldEnum
+    having?: speaker_assignmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Speaker_assignmentCountAggregateInputType | true
+    _avg?: Speaker_assignmentAvgAggregateInputType
+    _sum?: Speaker_assignmentSumAggregateInputType
+    _min?: Speaker_assignmentMinAggregateInputType
+    _max?: Speaker_assignmentMaxAggregateInputType
+  }
+
+  export type Speaker_assignmentGroupByOutputType = {
+    id: number
+    speaker_id: number
+    event_id: number | null
+    topic_one: string | null
+    topic_one_approved: boolean
+    topic_two: string | null
+    topic_two_approved: boolean | null
+    topic_one_event_id: number | null
+    topic_two_event_id: number | null
+    admin_note: string | null
+    submittedAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: Speaker_assignmentCountAggregateOutputType | null
+    _avg: Speaker_assignmentAvgAggregateOutputType | null
+    _sum: Speaker_assignmentSumAggregateOutputType | null
+    _min: Speaker_assignmentMinAggregateOutputType | null
+    _max: Speaker_assignmentMaxAggregateOutputType | null
+  }
+
+  type GetSpeaker_assignmentGroupByPayload<T extends speaker_assignmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Speaker_assignmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Speaker_assignmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Speaker_assignmentGroupByOutputType[P]>
+            : GetScalarType<T[P], Speaker_assignmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type speaker_assignmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    speaker_id?: boolean
+    event_id?: boolean
+    topic_one?: boolean
+    topic_one_approved?: boolean
+    topic_two?: boolean
+    topic_two_approved?: boolean
+    topic_one_event_id?: boolean
+    topic_two_event_id?: boolean
+    admin_note?: boolean
+    submittedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    speaker?: boolean | SpeakersDefaultArgs<ExtArgs>
+    event?: boolean | speaker_assignment$eventArgs<ExtArgs>
+    topic_one_event?: boolean | speaker_assignment$topic_one_eventArgs<ExtArgs>
+    topic_two_event?: boolean | speaker_assignment$topic_two_eventArgs<ExtArgs>
+  }, ExtArgs["result"]["speaker_assignment"]>
+
+
+
+  export type speaker_assignmentSelectScalar = {
+    id?: boolean
+    speaker_id?: boolean
+    event_id?: boolean
+    topic_one?: boolean
+    topic_one_approved?: boolean
+    topic_two?: boolean
+    topic_two_approved?: boolean
+    topic_one_event_id?: boolean
+    topic_two_event_id?: boolean
+    admin_note?: boolean
+    submittedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type speaker_assignmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "speaker_id" | "event_id" | "topic_one" | "topic_one_approved" | "topic_two" | "topic_two_approved" | "topic_one_event_id" | "topic_two_event_id" | "admin_note" | "submittedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["speaker_assignment"]>
+  export type speaker_assignmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    speaker?: boolean | SpeakersDefaultArgs<ExtArgs>
+    event?: boolean | speaker_assignment$eventArgs<ExtArgs>
+    topic_one_event?: boolean | speaker_assignment$topic_one_eventArgs<ExtArgs>
+    topic_two_event?: boolean | speaker_assignment$topic_two_eventArgs<ExtArgs>
+  }
+
+  export type $speaker_assignmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "speaker_assignment"
+    objects: {
+      speaker: Prisma.$SpeakersPayload<ExtArgs>
+      event: Prisma.$EventPayload<ExtArgs> | null
+      topic_one_event: Prisma.$EventPayload<ExtArgs> | null
+      topic_two_event: Prisma.$EventPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      speaker_id: number
+      event_id: number | null
+      topic_one: string | null
+      topic_one_approved: boolean
+      topic_two: string | null
+      topic_two_approved: boolean | null
+      topic_one_event_id: number | null
+      topic_two_event_id: number | null
+      admin_note: string | null
+      submittedAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["speaker_assignment"]>
+    composites: {}
+  }
+
+  type speaker_assignmentGetPayload<S extends boolean | null | undefined | speaker_assignmentDefaultArgs> = $Result.GetResult<Prisma.$speaker_assignmentPayload, S>
+
+  type speaker_assignmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<speaker_assignmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Speaker_assignmentCountAggregateInputType | true
+    }
+
+  export interface speaker_assignmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['speaker_assignment'], meta: { name: 'speaker_assignment' } }
+    /**
+     * Find zero or one Speaker_assignment that matches the filter.
+     * @param {speaker_assignmentFindUniqueArgs} args - Arguments to find a Speaker_assignment
+     * @example
+     * // Get one Speaker_assignment
+     * const speaker_assignment = await prisma.speaker_assignment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends speaker_assignmentFindUniqueArgs>(args: SelectSubset<T, speaker_assignmentFindUniqueArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Speaker_assignment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {speaker_assignmentFindUniqueOrThrowArgs} args - Arguments to find a Speaker_assignment
+     * @example
+     * // Get one Speaker_assignment
+     * const speaker_assignment = await prisma.speaker_assignment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends speaker_assignmentFindUniqueOrThrowArgs>(args: SelectSubset<T, speaker_assignmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Speaker_assignment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {speaker_assignmentFindFirstArgs} args - Arguments to find a Speaker_assignment
+     * @example
+     * // Get one Speaker_assignment
+     * const speaker_assignment = await prisma.speaker_assignment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends speaker_assignmentFindFirstArgs>(args?: SelectSubset<T, speaker_assignmentFindFirstArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Speaker_assignment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {speaker_assignmentFindFirstOrThrowArgs} args - Arguments to find a Speaker_assignment
+     * @example
+     * // Get one Speaker_assignment
+     * const speaker_assignment = await prisma.speaker_assignment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends speaker_assignmentFindFirstOrThrowArgs>(args?: SelectSubset<T, speaker_assignmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Speaker_assignments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {speaker_assignmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Speaker_assignments
+     * const speaker_assignments = await prisma.speaker_assignment.findMany()
+     * 
+     * // Get first 10 Speaker_assignments
+     * const speaker_assignments = await prisma.speaker_assignment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const speaker_assignmentWithIdOnly = await prisma.speaker_assignment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends speaker_assignmentFindManyArgs>(args?: SelectSubset<T, speaker_assignmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Speaker_assignment.
+     * @param {speaker_assignmentCreateArgs} args - Arguments to create a Speaker_assignment.
+     * @example
+     * // Create one Speaker_assignment
+     * const Speaker_assignment = await prisma.speaker_assignment.create({
+     *   data: {
+     *     // ... data to create a Speaker_assignment
+     *   }
+     * })
+     * 
+     */
+    create<T extends speaker_assignmentCreateArgs>(args: SelectSubset<T, speaker_assignmentCreateArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Speaker_assignments.
+     * @param {speaker_assignmentCreateManyArgs} args - Arguments to create many Speaker_assignments.
+     * @example
+     * // Create many Speaker_assignments
+     * const speaker_assignment = await prisma.speaker_assignment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends speaker_assignmentCreateManyArgs>(args?: SelectSubset<T, speaker_assignmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Speaker_assignment.
+     * @param {speaker_assignmentDeleteArgs} args - Arguments to delete one Speaker_assignment.
+     * @example
+     * // Delete one Speaker_assignment
+     * const Speaker_assignment = await prisma.speaker_assignment.delete({
+     *   where: {
+     *     // ... filter to delete one Speaker_assignment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends speaker_assignmentDeleteArgs>(args: SelectSubset<T, speaker_assignmentDeleteArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Speaker_assignment.
+     * @param {speaker_assignmentUpdateArgs} args - Arguments to update one Speaker_assignment.
+     * @example
+     * // Update one Speaker_assignment
+     * const speaker_assignment = await prisma.speaker_assignment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends speaker_assignmentUpdateArgs>(args: SelectSubset<T, speaker_assignmentUpdateArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Speaker_assignments.
+     * @param {speaker_assignmentDeleteManyArgs} args - Arguments to filter Speaker_assignments to delete.
+     * @example
+     * // Delete a few Speaker_assignments
+     * const { count } = await prisma.speaker_assignment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends speaker_assignmentDeleteManyArgs>(args?: SelectSubset<T, speaker_assignmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Speaker_assignments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {speaker_assignmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Speaker_assignments
+     * const speaker_assignment = await prisma.speaker_assignment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends speaker_assignmentUpdateManyArgs>(args: SelectSubset<T, speaker_assignmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Speaker_assignment.
+     * @param {speaker_assignmentUpsertArgs} args - Arguments to update or create a Speaker_assignment.
+     * @example
+     * // Update or create a Speaker_assignment
+     * const speaker_assignment = await prisma.speaker_assignment.upsert({
+     *   create: {
+     *     // ... data to create a Speaker_assignment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Speaker_assignment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends speaker_assignmentUpsertArgs>(args: SelectSubset<T, speaker_assignmentUpsertArgs<ExtArgs>>): Prisma__speaker_assignmentClient<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Speaker_assignments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {speaker_assignmentCountArgs} args - Arguments to filter Speaker_assignments to count.
+     * @example
+     * // Count the number of Speaker_assignments
+     * const count = await prisma.speaker_assignment.count({
+     *   where: {
+     *     // ... the filter for the Speaker_assignments we want to count
+     *   }
+     * })
+    **/
+    count<T extends speaker_assignmentCountArgs>(
+      args?: Subset<T, speaker_assignmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Speaker_assignmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Speaker_assignment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Speaker_assignmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Speaker_assignmentAggregateArgs>(args: Subset<T, Speaker_assignmentAggregateArgs>): Prisma.PrismaPromise<GetSpeaker_assignmentAggregateType<T>>
+
+    /**
+     * Group by Speaker_assignment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {speaker_assignmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends speaker_assignmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: speaker_assignmentGroupByArgs['orderBy'] }
+        : { orderBy?: speaker_assignmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, speaker_assignmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSpeaker_assignmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the speaker_assignment model
+   */
+  readonly fields: speaker_assignmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for speaker_assignment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__speaker_assignmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    speaker<T extends SpeakersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SpeakersDefaultArgs<ExtArgs>>): Prisma__SpeakersClient<$Result.GetResult<Prisma.$SpeakersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    event<T extends speaker_assignment$eventArgs<ExtArgs> = {}>(args?: Subset<T, speaker_assignment$eventArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    topic_one_event<T extends speaker_assignment$topic_one_eventArgs<ExtArgs> = {}>(args?: Subset<T, speaker_assignment$topic_one_eventArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    topic_two_event<T extends speaker_assignment$topic_two_eventArgs<ExtArgs> = {}>(args?: Subset<T, speaker_assignment$topic_two_eventArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the speaker_assignment model
+   */
+  interface speaker_assignmentFieldRefs {
+    readonly id: FieldRef<"speaker_assignment", 'Int'>
+    readonly speaker_id: FieldRef<"speaker_assignment", 'Int'>
+    readonly event_id: FieldRef<"speaker_assignment", 'Int'>
+    readonly topic_one: FieldRef<"speaker_assignment", 'String'>
+    readonly topic_one_approved: FieldRef<"speaker_assignment", 'Boolean'>
+    readonly topic_two: FieldRef<"speaker_assignment", 'String'>
+    readonly topic_two_approved: FieldRef<"speaker_assignment", 'Boolean'>
+    readonly topic_one_event_id: FieldRef<"speaker_assignment", 'Int'>
+    readonly topic_two_event_id: FieldRef<"speaker_assignment", 'Int'>
+    readonly admin_note: FieldRef<"speaker_assignment", 'String'>
+    readonly submittedAt: FieldRef<"speaker_assignment", 'DateTime'>
+    readonly createdAt: FieldRef<"speaker_assignment", 'DateTime'>
+    readonly updatedAt: FieldRef<"speaker_assignment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * speaker_assignment findUnique
+   */
+  export type speaker_assignmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * Filter, which speaker_assignment to fetch.
+     */
+    where: speaker_assignmentWhereUniqueInput
+  }
+
+  /**
+   * speaker_assignment findUniqueOrThrow
+   */
+  export type speaker_assignmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * Filter, which speaker_assignment to fetch.
+     */
+    where: speaker_assignmentWhereUniqueInput
+  }
+
+  /**
+   * speaker_assignment findFirst
+   */
+  export type speaker_assignmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * Filter, which speaker_assignment to fetch.
+     */
+    where?: speaker_assignmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of speaker_assignments to fetch.
+     */
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for speaker_assignments.
+     */
+    cursor?: speaker_assignmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` speaker_assignments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` speaker_assignments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of speaker_assignments.
+     */
+    distinct?: Speaker_assignmentScalarFieldEnum | Speaker_assignmentScalarFieldEnum[]
+  }
+
+  /**
+   * speaker_assignment findFirstOrThrow
+   */
+  export type speaker_assignmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * Filter, which speaker_assignment to fetch.
+     */
+    where?: speaker_assignmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of speaker_assignments to fetch.
+     */
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for speaker_assignments.
+     */
+    cursor?: speaker_assignmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` speaker_assignments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` speaker_assignments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of speaker_assignments.
+     */
+    distinct?: Speaker_assignmentScalarFieldEnum | Speaker_assignmentScalarFieldEnum[]
+  }
+
+  /**
+   * speaker_assignment findMany
+   */
+  export type speaker_assignmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * Filter, which speaker_assignments to fetch.
+     */
+    where?: speaker_assignmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of speaker_assignments to fetch.
+     */
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing speaker_assignments.
+     */
+    cursor?: speaker_assignmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` speaker_assignments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` speaker_assignments.
+     */
+    skip?: number
+    distinct?: Speaker_assignmentScalarFieldEnum | Speaker_assignmentScalarFieldEnum[]
+  }
+
+  /**
+   * speaker_assignment create
+   */
+  export type speaker_assignmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a speaker_assignment.
+     */
+    data: XOR<speaker_assignmentCreateInput, speaker_assignmentUncheckedCreateInput>
+  }
+
+  /**
+   * speaker_assignment createMany
+   */
+  export type speaker_assignmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many speaker_assignments.
+     */
+    data: speaker_assignmentCreateManyInput | speaker_assignmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * speaker_assignment update
+   */
+  export type speaker_assignmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a speaker_assignment.
+     */
+    data: XOR<speaker_assignmentUpdateInput, speaker_assignmentUncheckedUpdateInput>
+    /**
+     * Choose, which speaker_assignment to update.
+     */
+    where: speaker_assignmentWhereUniqueInput
+  }
+
+  /**
+   * speaker_assignment updateMany
+   */
+  export type speaker_assignmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update speaker_assignments.
+     */
+    data: XOR<speaker_assignmentUpdateManyMutationInput, speaker_assignmentUncheckedUpdateManyInput>
+    /**
+     * Filter which speaker_assignments to update
+     */
+    where?: speaker_assignmentWhereInput
+    /**
+     * Limit how many speaker_assignments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * speaker_assignment upsert
+   */
+  export type speaker_assignmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the speaker_assignment to update in case it exists.
+     */
+    where: speaker_assignmentWhereUniqueInput
+    /**
+     * In case the speaker_assignment found by the `where` argument doesn't exist, create a new speaker_assignment with this data.
+     */
+    create: XOR<speaker_assignmentCreateInput, speaker_assignmentUncheckedCreateInput>
+    /**
+     * In case the speaker_assignment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<speaker_assignmentUpdateInput, speaker_assignmentUncheckedUpdateInput>
+  }
+
+  /**
+   * speaker_assignment delete
+   */
+  export type speaker_assignmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    /**
+     * Filter which speaker_assignment to delete.
+     */
+    where: speaker_assignmentWhereUniqueInput
+  }
+
+  /**
+   * speaker_assignment deleteMany
+   */
+  export type speaker_assignmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which speaker_assignments to delete
+     */
+    where?: speaker_assignmentWhereInput
+    /**
+     * Limit how many speaker_assignments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * speaker_assignment.event
+   */
+  export type speaker_assignment$eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+  }
+
+  /**
+   * speaker_assignment.topic_one_event
+   */
+  export type speaker_assignment$topic_one_eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+  }
+
+  /**
+   * speaker_assignment.topic_two_event
+   */
+  export type speaker_assignment$topic_two_eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+  }
+
+  /**
+   * speaker_assignment without action
+   */
+  export type speaker_assignmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
   }
 
 
@@ -16537,6 +17950,9 @@ export namespace Prisma {
     track?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    speaker_assignments?: boolean | Event$speaker_assignmentsArgs<ExtArgs>
+    topic_one_speaker_assignments?: boolean | Event$topic_one_speaker_assignmentsArgs<ExtArgs>
+    topic_two_speaker_assignments?: boolean | Event$topic_two_speaker_assignmentsArgs<ExtArgs>
     scheduleEvents?: boolean | Event$scheduleEventsArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
@@ -16566,6 +17982,9 @@ export namespace Prisma {
 
   export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "event_date" | "start_time" | "end_time" | "title" | "location" | "description" | "hasLiveStream" | "liveStreamUrl" | "isKeynote" | "moderator" | "main_speakers" | "lead_speakers" | "speakers" | "track" | "createdAt" | "updatedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    speaker_assignments?: boolean | Event$speaker_assignmentsArgs<ExtArgs>
+    topic_one_speaker_assignments?: boolean | Event$topic_one_speaker_assignmentsArgs<ExtArgs>
+    topic_two_speaker_assignments?: boolean | Event$topic_two_speaker_assignmentsArgs<ExtArgs>
     scheduleEvents?: boolean | Event$scheduleEventsArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -16573,6 +17992,9 @@ export namespace Prisma {
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Event"
     objects: {
+      speaker_assignments: Prisma.$speaker_assignmentPayload<ExtArgs>[]
+      topic_one_speaker_assignments: Prisma.$speaker_assignmentPayload<ExtArgs>[]
+      topic_two_speaker_assignments: Prisma.$speaker_assignmentPayload<ExtArgs>[]
       scheduleEvents: Prisma.$ScheduleEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -16934,6 +18356,9 @@ export namespace Prisma {
    */
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    speaker_assignments<T extends Event$speaker_assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Event$speaker_assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    topic_one_speaker_assignments<T extends Event$topic_one_speaker_assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Event$topic_one_speaker_assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    topic_two_speaker_assignments<T extends Event$topic_two_speaker_assignmentsArgs<ExtArgs> = {}>(args?: Subset<T, Event$topic_two_speaker_assignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$speaker_assignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     scheduleEvents<T extends Event$scheduleEventsArgs<ExtArgs> = {}>(args?: Subset<T, Event$scheduleEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScheduleEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -17322,6 +18747,78 @@ export namespace Prisma {
      * Limit how many Events to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Event.speaker_assignments
+   */
+  export type Event$speaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    where?: speaker_assignmentWhereInput
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    cursor?: speaker_assignmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Speaker_assignmentScalarFieldEnum | Speaker_assignmentScalarFieldEnum[]
+  }
+
+  /**
+   * Event.topic_one_speaker_assignments
+   */
+  export type Event$topic_one_speaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    where?: speaker_assignmentWhereInput
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    cursor?: speaker_assignmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Speaker_assignmentScalarFieldEnum | Speaker_assignmentScalarFieldEnum[]
+  }
+
+  /**
+   * Event.topic_two_speaker_assignments
+   */
+  export type Event$topic_two_speaker_assignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the speaker_assignment
+     */
+    select?: speaker_assignmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the speaker_assignment
+     */
+    omit?: speaker_assignmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: speaker_assignmentInclude<ExtArgs> | null
+    where?: speaker_assignmentWhereInput
+    orderBy?: speaker_assignmentOrderByWithRelationInput | speaker_assignmentOrderByWithRelationInput[]
+    cursor?: speaker_assignmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Speaker_assignmentScalarFieldEnum | Speaker_assignmentScalarFieldEnum[]
   }
 
   /**
@@ -19529,6 +21026,8 @@ export namespace Prisma {
     job_title: number
     subscribe_to_newletter: number
     share_with_third_party: number
+    benefits: number
+    remaining_benefits: number
     password: number
     _all: number
   }
@@ -19584,6 +21083,8 @@ export namespace Prisma {
     job_title?: true
     subscribe_to_newletter?: true
     share_with_third_party?: true
+    benefits?: true
+    remaining_benefits?: true
     password?: true
     _all?: true
   }
@@ -19686,6 +21187,8 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter: boolean | null
     share_with_third_party: boolean | null
+    benefits: JsonValue | null
+    remaining_benefits: JsonValue | null
     password: string
     _count: PartnerCountAggregateOutputType | null
     _avg: PartnerAvgAggregateOutputType | null
@@ -19720,9 +21223,12 @@ export namespace Prisma {
     job_title?: boolean
     subscribe_to_newletter?: boolean
     share_with_third_party?: boolean
+    benefits?: boolean
+    remaining_benefits?: boolean
     password?: boolean
     EventPartnerPackages?: boolean | Partner$EventPartnerPackagesArgs<ExtArgs>
     schedules?: boolean | Partner$schedulesArgs<ExtArgs>
+    PartnerAssignedBooth?: boolean | Partner$PartnerAssignedBoothArgs<ExtArgs>
     _count?: boolean | PartnerCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["partner"]>
 
@@ -19740,13 +21246,16 @@ export namespace Prisma {
     job_title?: boolean
     subscribe_to_newletter?: boolean
     share_with_third_party?: boolean
+    benefits?: boolean
+    remaining_benefits?: boolean
     password?: boolean
   }
 
-  export type PartnerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "firstname" | "lastname" | "email" | "phone_number" | "entity_name" | "country" | "job_title" | "subscribe_to_newletter" | "share_with_third_party" | "password", ExtArgs["result"]["partner"]>
+  export type PartnerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "firstname" | "lastname" | "email" | "phone_number" | "entity_name" | "country" | "job_title" | "subscribe_to_newletter" | "share_with_third_party" | "benefits" | "remaining_benefits" | "password", ExtArgs["result"]["partner"]>
   export type PartnerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     EventPartnerPackages?: boolean | Partner$EventPartnerPackagesArgs<ExtArgs>
     schedules?: boolean | Partner$schedulesArgs<ExtArgs>
+    PartnerAssignedBooth?: boolean | Partner$PartnerAssignedBoothArgs<ExtArgs>
     _count?: boolean | PartnerCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -19755,6 +21264,7 @@ export namespace Prisma {
     objects: {
       EventPartnerPackages: Prisma.$EventPartnerPackagesPayload<ExtArgs>[]
       schedules: Prisma.$SchedulePayload<ExtArgs>[]
+      PartnerAssignedBooth: Prisma.$PartnerAssignedBoothPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -19768,6 +21278,8 @@ export namespace Prisma {
       job_title: string
       subscribe_to_newletter: boolean | null
       share_with_third_party: boolean | null
+      benefits: Prisma.JsonValue | null
+      remaining_benefits: Prisma.JsonValue | null
       password: string
     }, ExtArgs["result"]["partner"]>
     composites: {}
@@ -20111,6 +21623,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     EventPartnerPackages<T extends Partner$EventPartnerPackagesArgs<ExtArgs> = {}>(args?: Subset<T, Partner$EventPartnerPackagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPartnerPackagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     schedules<T extends Partner$schedulesArgs<ExtArgs> = {}>(args?: Subset<T, Partner$schedulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    PartnerAssignedBooth<T extends Partner$PartnerAssignedBoothArgs<ExtArgs> = {}>(args?: Subset<T, Partner$PartnerAssignedBoothArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20151,6 +21664,8 @@ export namespace Prisma {
     readonly job_title: FieldRef<"Partner", 'String'>
     readonly subscribe_to_newletter: FieldRef<"Partner", 'Boolean'>
     readonly share_with_third_party: FieldRef<"Partner", 'Boolean'>
+    readonly benefits: FieldRef<"Partner", 'Json'>
+    readonly remaining_benefits: FieldRef<"Partner", 'Json'>
     readonly password: FieldRef<"Partner", 'String'>
   }
     
@@ -20543,6 +22058,30 @@ export namespace Prisma {
   }
 
   /**
+   * Partner.PartnerAssignedBooth
+   */
+  export type Partner$PartnerAssignedBoothArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    where?: PartnerAssignedBoothWhereInput
+    orderBy?: PartnerAssignedBoothOrderByWithRelationInput | PartnerAssignedBoothOrderByWithRelationInput[]
+    cursor?: PartnerAssignedBoothWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PartnerAssignedBoothScalarFieldEnum | PartnerAssignedBoothScalarFieldEnum[]
+  }
+
+  /**
    * Partner without action
    */
   export type PartnerDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20558,6 +22097,1021 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PartnerInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PartnerAssignedBooth
+   */
+
+  export type AggregatePartnerAssignedBooth = {
+    _count: PartnerAssignedBoothCountAggregateOutputType | null
+    _avg: PartnerAssignedBoothAvgAggregateOutputType | null
+    _sum: PartnerAssignedBoothSumAggregateOutputType | null
+    _min: PartnerAssignedBoothMinAggregateOutputType | null
+    _max: PartnerAssignedBoothMaxAggregateOutputType | null
+  }
+
+  export type PartnerAssignedBoothAvgAggregateOutputType = {
+    id: number | null
+    booth_id: number | null
+    partner_id: number | null
+  }
+
+  export type PartnerAssignedBoothSumAggregateOutputType = {
+    id: number | null
+    booth_id: number | null
+    partner_id: number | null
+  }
+
+  export type PartnerAssignedBoothMinAggregateOutputType = {
+    id: number | null
+    exhibition_title: string | null
+    description: string | null
+    booth_id: number | null
+    partner_id: number | null
+    assignedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PartnerAssignedBoothMaxAggregateOutputType = {
+    id: number | null
+    exhibition_title: string | null
+    description: string | null
+    booth_id: number | null
+    partner_id: number | null
+    assignedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PartnerAssignedBoothCountAggregateOutputType = {
+    id: number
+    exhibition_title: number
+    description: number
+    exhibition_material: number
+    booth_id: number
+    partner_id: number
+    assignedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PartnerAssignedBoothAvgAggregateInputType = {
+    id?: true
+    booth_id?: true
+    partner_id?: true
+  }
+
+  export type PartnerAssignedBoothSumAggregateInputType = {
+    id?: true
+    booth_id?: true
+    partner_id?: true
+  }
+
+  export type PartnerAssignedBoothMinAggregateInputType = {
+    id?: true
+    exhibition_title?: true
+    description?: true
+    booth_id?: true
+    partner_id?: true
+    assignedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PartnerAssignedBoothMaxAggregateInputType = {
+    id?: true
+    exhibition_title?: true
+    description?: true
+    booth_id?: true
+    partner_id?: true
+    assignedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PartnerAssignedBoothCountAggregateInputType = {
+    id?: true
+    exhibition_title?: true
+    description?: true
+    exhibition_material?: true
+    booth_id?: true
+    partner_id?: true
+    assignedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PartnerAssignedBoothAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PartnerAssignedBooth to aggregate.
+     */
+    where?: PartnerAssignedBoothWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerAssignedBooths to fetch.
+     */
+    orderBy?: PartnerAssignedBoothOrderByWithRelationInput | PartnerAssignedBoothOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PartnerAssignedBoothWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerAssignedBooths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerAssignedBooths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PartnerAssignedBooths
+    **/
+    _count?: true | PartnerAssignedBoothCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PartnerAssignedBoothAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PartnerAssignedBoothSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PartnerAssignedBoothMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PartnerAssignedBoothMaxAggregateInputType
+  }
+
+  export type GetPartnerAssignedBoothAggregateType<T extends PartnerAssignedBoothAggregateArgs> = {
+        [P in keyof T & keyof AggregatePartnerAssignedBooth]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePartnerAssignedBooth[P]>
+      : GetScalarType<T[P], AggregatePartnerAssignedBooth[P]>
+  }
+
+
+
+
+  export type PartnerAssignedBoothGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PartnerAssignedBoothWhereInput
+    orderBy?: PartnerAssignedBoothOrderByWithAggregationInput | PartnerAssignedBoothOrderByWithAggregationInput[]
+    by: PartnerAssignedBoothScalarFieldEnum[] | PartnerAssignedBoothScalarFieldEnum
+    having?: PartnerAssignedBoothScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PartnerAssignedBoothCountAggregateInputType | true
+    _avg?: PartnerAssignedBoothAvgAggregateInputType
+    _sum?: PartnerAssignedBoothSumAggregateInputType
+    _min?: PartnerAssignedBoothMinAggregateInputType
+    _max?: PartnerAssignedBoothMaxAggregateInputType
+  }
+
+  export type PartnerAssignedBoothGroupByOutputType = {
+    id: number
+    exhibition_title: string
+    description: string | null
+    exhibition_material: JsonValue | null
+    booth_id: number
+    partner_id: number
+    assignedAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: PartnerAssignedBoothCountAggregateOutputType | null
+    _avg: PartnerAssignedBoothAvgAggregateOutputType | null
+    _sum: PartnerAssignedBoothSumAggregateOutputType | null
+    _min: PartnerAssignedBoothMinAggregateOutputType | null
+    _max: PartnerAssignedBoothMaxAggregateOutputType | null
+  }
+
+  type GetPartnerAssignedBoothGroupByPayload<T extends PartnerAssignedBoothGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PartnerAssignedBoothGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PartnerAssignedBoothGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PartnerAssignedBoothGroupByOutputType[P]>
+            : GetScalarType<T[P], PartnerAssignedBoothGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PartnerAssignedBoothSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    exhibition_title?: boolean
+    description?: boolean
+    exhibition_material?: boolean
+    booth_id?: boolean
+    partner_id?: boolean
+    assignedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    booth?: boolean | BoothsDefaultArgs<ExtArgs>
+    partner?: boolean | PartnerDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["partnerAssignedBooth"]>
+
+
+
+  export type PartnerAssignedBoothSelectScalar = {
+    id?: boolean
+    exhibition_title?: boolean
+    description?: boolean
+    exhibition_material?: boolean
+    booth_id?: boolean
+    partner_id?: boolean
+    assignedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PartnerAssignedBoothOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "exhibition_title" | "description" | "exhibition_material" | "booth_id" | "partner_id" | "assignedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["partnerAssignedBooth"]>
+  export type PartnerAssignedBoothInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    booth?: boolean | BoothsDefaultArgs<ExtArgs>
+    partner?: boolean | PartnerDefaultArgs<ExtArgs>
+  }
+
+  export type $PartnerAssignedBoothPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PartnerAssignedBooth"
+    objects: {
+      booth: Prisma.$BoothsPayload<ExtArgs>
+      partner: Prisma.$PartnerPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      exhibition_title: string
+      description: string | null
+      exhibition_material: Prisma.JsonValue | null
+      booth_id: number
+      partner_id: number
+      assignedAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["partnerAssignedBooth"]>
+    composites: {}
+  }
+
+  type PartnerAssignedBoothGetPayload<S extends boolean | null | undefined | PartnerAssignedBoothDefaultArgs> = $Result.GetResult<Prisma.$PartnerAssignedBoothPayload, S>
+
+  type PartnerAssignedBoothCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PartnerAssignedBoothFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PartnerAssignedBoothCountAggregateInputType | true
+    }
+
+  export interface PartnerAssignedBoothDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PartnerAssignedBooth'], meta: { name: 'PartnerAssignedBooth' } }
+    /**
+     * Find zero or one PartnerAssignedBooth that matches the filter.
+     * @param {PartnerAssignedBoothFindUniqueArgs} args - Arguments to find a PartnerAssignedBooth
+     * @example
+     * // Get one PartnerAssignedBooth
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PartnerAssignedBoothFindUniqueArgs>(args: SelectSubset<T, PartnerAssignedBoothFindUniqueArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PartnerAssignedBooth that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PartnerAssignedBoothFindUniqueOrThrowArgs} args - Arguments to find a PartnerAssignedBooth
+     * @example
+     * // Get one PartnerAssignedBooth
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PartnerAssignedBoothFindUniqueOrThrowArgs>(args: SelectSubset<T, PartnerAssignedBoothFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PartnerAssignedBooth that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerAssignedBoothFindFirstArgs} args - Arguments to find a PartnerAssignedBooth
+     * @example
+     * // Get one PartnerAssignedBooth
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PartnerAssignedBoothFindFirstArgs>(args?: SelectSubset<T, PartnerAssignedBoothFindFirstArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PartnerAssignedBooth that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerAssignedBoothFindFirstOrThrowArgs} args - Arguments to find a PartnerAssignedBooth
+     * @example
+     * // Get one PartnerAssignedBooth
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PartnerAssignedBoothFindFirstOrThrowArgs>(args?: SelectSubset<T, PartnerAssignedBoothFindFirstOrThrowArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PartnerAssignedBooths that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerAssignedBoothFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PartnerAssignedBooths
+     * const partnerAssignedBooths = await prisma.partnerAssignedBooth.findMany()
+     * 
+     * // Get first 10 PartnerAssignedBooths
+     * const partnerAssignedBooths = await prisma.partnerAssignedBooth.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const partnerAssignedBoothWithIdOnly = await prisma.partnerAssignedBooth.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PartnerAssignedBoothFindManyArgs>(args?: SelectSubset<T, PartnerAssignedBoothFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PartnerAssignedBooth.
+     * @param {PartnerAssignedBoothCreateArgs} args - Arguments to create a PartnerAssignedBooth.
+     * @example
+     * // Create one PartnerAssignedBooth
+     * const PartnerAssignedBooth = await prisma.partnerAssignedBooth.create({
+     *   data: {
+     *     // ... data to create a PartnerAssignedBooth
+     *   }
+     * })
+     * 
+     */
+    create<T extends PartnerAssignedBoothCreateArgs>(args: SelectSubset<T, PartnerAssignedBoothCreateArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PartnerAssignedBooths.
+     * @param {PartnerAssignedBoothCreateManyArgs} args - Arguments to create many PartnerAssignedBooths.
+     * @example
+     * // Create many PartnerAssignedBooths
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PartnerAssignedBoothCreateManyArgs>(args?: SelectSubset<T, PartnerAssignedBoothCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a PartnerAssignedBooth.
+     * @param {PartnerAssignedBoothDeleteArgs} args - Arguments to delete one PartnerAssignedBooth.
+     * @example
+     * // Delete one PartnerAssignedBooth
+     * const PartnerAssignedBooth = await prisma.partnerAssignedBooth.delete({
+     *   where: {
+     *     // ... filter to delete one PartnerAssignedBooth
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PartnerAssignedBoothDeleteArgs>(args: SelectSubset<T, PartnerAssignedBoothDeleteArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PartnerAssignedBooth.
+     * @param {PartnerAssignedBoothUpdateArgs} args - Arguments to update one PartnerAssignedBooth.
+     * @example
+     * // Update one PartnerAssignedBooth
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PartnerAssignedBoothUpdateArgs>(args: SelectSubset<T, PartnerAssignedBoothUpdateArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PartnerAssignedBooths.
+     * @param {PartnerAssignedBoothDeleteManyArgs} args - Arguments to filter PartnerAssignedBooths to delete.
+     * @example
+     * // Delete a few PartnerAssignedBooths
+     * const { count } = await prisma.partnerAssignedBooth.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PartnerAssignedBoothDeleteManyArgs>(args?: SelectSubset<T, PartnerAssignedBoothDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PartnerAssignedBooths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerAssignedBoothUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PartnerAssignedBooths
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PartnerAssignedBoothUpdateManyArgs>(args: SelectSubset<T, PartnerAssignedBoothUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PartnerAssignedBooth.
+     * @param {PartnerAssignedBoothUpsertArgs} args - Arguments to update or create a PartnerAssignedBooth.
+     * @example
+     * // Update or create a PartnerAssignedBooth
+     * const partnerAssignedBooth = await prisma.partnerAssignedBooth.upsert({
+     *   create: {
+     *     // ... data to create a PartnerAssignedBooth
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PartnerAssignedBooth we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PartnerAssignedBoothUpsertArgs>(args: SelectSubset<T, PartnerAssignedBoothUpsertArgs<ExtArgs>>): Prisma__PartnerAssignedBoothClient<$Result.GetResult<Prisma.$PartnerAssignedBoothPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PartnerAssignedBooths.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerAssignedBoothCountArgs} args - Arguments to filter PartnerAssignedBooths to count.
+     * @example
+     * // Count the number of PartnerAssignedBooths
+     * const count = await prisma.partnerAssignedBooth.count({
+     *   where: {
+     *     // ... the filter for the PartnerAssignedBooths we want to count
+     *   }
+     * })
+    **/
+    count<T extends PartnerAssignedBoothCountArgs>(
+      args?: Subset<T, PartnerAssignedBoothCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PartnerAssignedBoothCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PartnerAssignedBooth.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerAssignedBoothAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PartnerAssignedBoothAggregateArgs>(args: Subset<T, PartnerAssignedBoothAggregateArgs>): Prisma.PrismaPromise<GetPartnerAssignedBoothAggregateType<T>>
+
+    /**
+     * Group by PartnerAssignedBooth.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnerAssignedBoothGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PartnerAssignedBoothGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PartnerAssignedBoothGroupByArgs['orderBy'] }
+        : { orderBy?: PartnerAssignedBoothGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PartnerAssignedBoothGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPartnerAssignedBoothGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PartnerAssignedBooth model
+   */
+  readonly fields: PartnerAssignedBoothFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PartnerAssignedBooth.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PartnerAssignedBoothClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    booth<T extends BoothsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BoothsDefaultArgs<ExtArgs>>): Prisma__BoothsClient<$Result.GetResult<Prisma.$BoothsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    partner<T extends PartnerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PartnerDefaultArgs<ExtArgs>>): Prisma__PartnerClient<$Result.GetResult<Prisma.$PartnerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PartnerAssignedBooth model
+   */
+  interface PartnerAssignedBoothFieldRefs {
+    readonly id: FieldRef<"PartnerAssignedBooth", 'Int'>
+    readonly exhibition_title: FieldRef<"PartnerAssignedBooth", 'String'>
+    readonly description: FieldRef<"PartnerAssignedBooth", 'String'>
+    readonly exhibition_material: FieldRef<"PartnerAssignedBooth", 'Json'>
+    readonly booth_id: FieldRef<"PartnerAssignedBooth", 'Int'>
+    readonly partner_id: FieldRef<"PartnerAssignedBooth", 'Int'>
+    readonly assignedAt: FieldRef<"PartnerAssignedBooth", 'DateTime'>
+    readonly createdAt: FieldRef<"PartnerAssignedBooth", 'DateTime'>
+    readonly updatedAt: FieldRef<"PartnerAssignedBooth", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PartnerAssignedBooth findUnique
+   */
+  export type PartnerAssignedBoothFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * Filter, which PartnerAssignedBooth to fetch.
+     */
+    where: PartnerAssignedBoothWhereUniqueInput
+  }
+
+  /**
+   * PartnerAssignedBooth findUniqueOrThrow
+   */
+  export type PartnerAssignedBoothFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * Filter, which PartnerAssignedBooth to fetch.
+     */
+    where: PartnerAssignedBoothWhereUniqueInput
+  }
+
+  /**
+   * PartnerAssignedBooth findFirst
+   */
+  export type PartnerAssignedBoothFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * Filter, which PartnerAssignedBooth to fetch.
+     */
+    where?: PartnerAssignedBoothWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerAssignedBooths to fetch.
+     */
+    orderBy?: PartnerAssignedBoothOrderByWithRelationInput | PartnerAssignedBoothOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PartnerAssignedBooths.
+     */
+    cursor?: PartnerAssignedBoothWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerAssignedBooths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerAssignedBooths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PartnerAssignedBooths.
+     */
+    distinct?: PartnerAssignedBoothScalarFieldEnum | PartnerAssignedBoothScalarFieldEnum[]
+  }
+
+  /**
+   * PartnerAssignedBooth findFirstOrThrow
+   */
+  export type PartnerAssignedBoothFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * Filter, which PartnerAssignedBooth to fetch.
+     */
+    where?: PartnerAssignedBoothWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerAssignedBooths to fetch.
+     */
+    orderBy?: PartnerAssignedBoothOrderByWithRelationInput | PartnerAssignedBoothOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PartnerAssignedBooths.
+     */
+    cursor?: PartnerAssignedBoothWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerAssignedBooths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerAssignedBooths.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PartnerAssignedBooths.
+     */
+    distinct?: PartnerAssignedBoothScalarFieldEnum | PartnerAssignedBoothScalarFieldEnum[]
+  }
+
+  /**
+   * PartnerAssignedBooth findMany
+   */
+  export type PartnerAssignedBoothFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * Filter, which PartnerAssignedBooths to fetch.
+     */
+    where?: PartnerAssignedBoothWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PartnerAssignedBooths to fetch.
+     */
+    orderBy?: PartnerAssignedBoothOrderByWithRelationInput | PartnerAssignedBoothOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PartnerAssignedBooths.
+     */
+    cursor?: PartnerAssignedBoothWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PartnerAssignedBooths from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PartnerAssignedBooths.
+     */
+    skip?: number
+    distinct?: PartnerAssignedBoothScalarFieldEnum | PartnerAssignedBoothScalarFieldEnum[]
+  }
+
+  /**
+   * PartnerAssignedBooth create
+   */
+  export type PartnerAssignedBoothCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PartnerAssignedBooth.
+     */
+    data: XOR<PartnerAssignedBoothCreateInput, PartnerAssignedBoothUncheckedCreateInput>
+  }
+
+  /**
+   * PartnerAssignedBooth createMany
+   */
+  export type PartnerAssignedBoothCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PartnerAssignedBooths.
+     */
+    data: PartnerAssignedBoothCreateManyInput | PartnerAssignedBoothCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PartnerAssignedBooth update
+   */
+  export type PartnerAssignedBoothUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PartnerAssignedBooth.
+     */
+    data: XOR<PartnerAssignedBoothUpdateInput, PartnerAssignedBoothUncheckedUpdateInput>
+    /**
+     * Choose, which PartnerAssignedBooth to update.
+     */
+    where: PartnerAssignedBoothWhereUniqueInput
+  }
+
+  /**
+   * PartnerAssignedBooth updateMany
+   */
+  export type PartnerAssignedBoothUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PartnerAssignedBooths.
+     */
+    data: XOR<PartnerAssignedBoothUpdateManyMutationInput, PartnerAssignedBoothUncheckedUpdateManyInput>
+    /**
+     * Filter which PartnerAssignedBooths to update
+     */
+    where?: PartnerAssignedBoothWhereInput
+    /**
+     * Limit how many PartnerAssignedBooths to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PartnerAssignedBooth upsert
+   */
+  export type PartnerAssignedBoothUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PartnerAssignedBooth to update in case it exists.
+     */
+    where: PartnerAssignedBoothWhereUniqueInput
+    /**
+     * In case the PartnerAssignedBooth found by the `where` argument doesn't exist, create a new PartnerAssignedBooth with this data.
+     */
+    create: XOR<PartnerAssignedBoothCreateInput, PartnerAssignedBoothUncheckedCreateInput>
+    /**
+     * In case the PartnerAssignedBooth was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PartnerAssignedBoothUpdateInput, PartnerAssignedBoothUncheckedUpdateInput>
+  }
+
+  /**
+   * PartnerAssignedBooth delete
+   */
+  export type PartnerAssignedBoothDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
+    /**
+     * Filter which PartnerAssignedBooth to delete.
+     */
+    where: PartnerAssignedBoothWhereUniqueInput
+  }
+
+  /**
+   * PartnerAssignedBooth deleteMany
+   */
+  export type PartnerAssignedBoothDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PartnerAssignedBooths to delete
+     */
+    where?: PartnerAssignedBoothWhereInput
+    /**
+     * Limit how many PartnerAssignedBooths to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PartnerAssignedBooth without action
+   */
+  export type PartnerAssignedBoothDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PartnerAssignedBooth
+     */
+    select?: PartnerAssignedBoothSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PartnerAssignedBooth
+     */
+    omit?: PartnerAssignedBoothOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PartnerAssignedBoothInclude<ExtArgs> | null
   }
 
 
@@ -22702,7 +25256,7 @@ export namespace Prisma {
     work_email: 'work_email',
     bio: 'bio',
     profile_image: 'profile_image',
-    topic: 'topic',
+    area_of_expertise: 'area_of_expertise',
     experience: 'experience',
     password: 'password',
     role: 'role',
@@ -22713,6 +25267,25 @@ export namespace Prisma {
   };
 
   export type SpeakersScalarFieldEnum = (typeof SpeakersScalarFieldEnum)[keyof typeof SpeakersScalarFieldEnum]
+
+
+  export const Speaker_assignmentScalarFieldEnum: {
+    id: 'id',
+    speaker_id: 'speaker_id',
+    event_id: 'event_id',
+    topic_one: 'topic_one',
+    topic_one_approved: 'topic_one_approved',
+    topic_two: 'topic_two',
+    topic_two_approved: 'topic_two_approved',
+    topic_one_event_id: 'topic_one_event_id',
+    topic_two_event_id: 'topic_two_event_id',
+    admin_note: 'admin_note',
+    submittedAt: 'submittedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type Speaker_assignmentScalarFieldEnum = (typeof Speaker_assignmentScalarFieldEnum)[keyof typeof Speaker_assignmentScalarFieldEnum]
 
 
   export const EventPackagesScalarFieldEnum: {
@@ -22851,10 +25424,27 @@ export namespace Prisma {
     job_title: 'job_title',
     subscribe_to_newletter: 'subscribe_to_newletter',
     share_with_third_party: 'share_with_third_party',
+    benefits: 'benefits',
+    remaining_benefits: 'remaining_benefits',
     password: 'password'
   };
 
   export type PartnerScalarFieldEnum = (typeof PartnerScalarFieldEnum)[keyof typeof PartnerScalarFieldEnum]
+
+
+  export const PartnerAssignedBoothScalarFieldEnum: {
+    id: 'id',
+    exhibition_title: 'exhibition_title',
+    description: 'description',
+    exhibition_material: 'exhibition_material',
+    booth_id: 'booth_id',
+    partner_id: 'partner_id',
+    assignedAt: 'assignedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PartnerAssignedBoothScalarFieldEnum = (typeof PartnerAssignedBoothScalarFieldEnum)[keyof typeof PartnerAssignedBoothScalarFieldEnum]
 
 
   export const ResourcesScalarFieldEnum: {
@@ -23047,12 +25637,21 @@ export namespace Prisma {
     work_email: 'work_email',
     bio: 'bio',
     profile_image: 'profile_image',
-    topic: 'topic',
+    area_of_expertise: 'area_of_expertise',
     experience: 'experience',
     password: 'password'
   };
 
   export type SpeakersOrderByRelevanceFieldEnum = (typeof SpeakersOrderByRelevanceFieldEnum)[keyof typeof SpeakersOrderByRelevanceFieldEnum]
+
+
+  export const speaker_assignmentOrderByRelevanceFieldEnum: {
+    topic_one: 'topic_one',
+    topic_two: 'topic_two',
+    admin_note: 'admin_note'
+  };
+
+  export type speaker_assignmentOrderByRelevanceFieldEnum = (typeof speaker_assignmentOrderByRelevanceFieldEnum)[keyof typeof speaker_assignmentOrderByRelevanceFieldEnum]
 
 
   export const EventPackagesOrderByRelevanceFieldEnum: {
@@ -23130,6 +25729,14 @@ export namespace Prisma {
   };
 
   export type PartnerOrderByRelevanceFieldEnum = (typeof PartnerOrderByRelevanceFieldEnum)[keyof typeof PartnerOrderByRelevanceFieldEnum]
+
+
+  export const PartnerAssignedBoothOrderByRelevanceFieldEnum: {
+    exhibition_title: 'exhibition_title',
+    description: 'description'
+  };
+
+  export type PartnerAssignedBoothOrderByRelevanceFieldEnum = (typeof PartnerAssignedBoothOrderByRelevanceFieldEnum)[keyof typeof PartnerAssignedBoothOrderByRelevanceFieldEnum]
 
 
   export const ResourcesOrderByRelevanceFieldEnum: {
@@ -23671,6 +26278,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Booths"> | Date | string
     updatedAt?: DateTimeFilter<"Booths"> | Date | string
     assigned_booths?: Assigned_boothsListRelationFilter
+    PartnerAssignedBooth?: PartnerAssignedBoothListRelationFilter
   }
 
   export type BoothsOrderByWithRelationInput = {
@@ -23684,6 +26292,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     assigned_booths?: assigned_boothsOrderByRelationAggregateInput
+    PartnerAssignedBooth?: PartnerAssignedBoothOrderByRelationAggregateInput
     _relevance?: BoothsOrderByRelevanceInput
   }
 
@@ -23701,6 +26310,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Booths"> | Date | string
     updatedAt?: DateTimeFilter<"Booths"> | Date | string
     assigned_booths?: Assigned_boothsListRelationFilter
+    PartnerAssignedBooth?: PartnerAssignedBoothListRelationFilter
   }, "id" | "booth_number">
 
   export type BoothsOrderByWithAggregationInput = {
@@ -23970,7 +26580,7 @@ export namespace Prisma {
     work_email?: StringFilter<"Speakers"> | string
     bio?: StringFilter<"Speakers"> | string
     profile_image?: StringNullableFilter<"Speakers"> | string | null
-    topic?: StringFilter<"Speakers"> | string
+    area_of_expertise?: StringNullableFilter<"Speakers"> | string | null
     experience?: StringNullableFilter<"Speakers"> | string | null
     password?: StringFilter<"Speakers"> | string
     role?: EnumRoleFilter<"Speakers"> | $Enums.Role
@@ -23979,6 +26589,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Speakers"> | Date | string
     updatedAt?: DateTimeFilter<"Speakers"> | Date | string
     schedules?: ScheduleListRelationFilter
+    speaker_assignments?: Speaker_assignmentListRelationFilter
   }
 
   export type SpeakersOrderByWithRelationInput = {
@@ -23995,7 +26606,7 @@ export namespace Prisma {
     work_email?: SortOrder
     bio?: SortOrder
     profile_image?: SortOrderInput | SortOrder
-    topic?: SortOrder
+    area_of_expertise?: SortOrderInput | SortOrder
     experience?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -24004,6 +26615,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     schedules?: ScheduleOrderByRelationAggregateInput
+    speaker_assignments?: speaker_assignmentOrderByRelationAggregateInput
     _relevance?: SpeakersOrderByRelevanceInput
   }
 
@@ -24024,7 +26636,7 @@ export namespace Prisma {
     social_media?: JsonNullableFilter<"Speakers">
     bio?: StringFilter<"Speakers"> | string
     profile_image?: StringNullableFilter<"Speakers"> | string | null
-    topic?: StringFilter<"Speakers"> | string
+    area_of_expertise?: StringNullableFilter<"Speakers"> | string | null
     experience?: StringNullableFilter<"Speakers"> | string | null
     password?: StringFilter<"Speakers"> | string
     role?: EnumRoleFilter<"Speakers"> | $Enums.Role
@@ -24033,6 +26645,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Speakers"> | Date | string
     updatedAt?: DateTimeFilter<"Speakers"> | Date | string
     schedules?: ScheduleListRelationFilter
+    speaker_assignments?: Speaker_assignmentListRelationFilter
   }, "id" | "work_email">
 
   export type SpeakersOrderByWithAggregationInput = {
@@ -24049,7 +26662,7 @@ export namespace Prisma {
     work_email?: SortOrder
     bio?: SortOrder
     profile_image?: SortOrderInput | SortOrder
-    topic?: SortOrder
+    area_of_expertise?: SortOrderInput | SortOrder
     experience?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -24081,7 +26694,7 @@ export namespace Prisma {
     work_email?: StringWithAggregatesFilter<"Speakers"> | string
     bio?: StringWithAggregatesFilter<"Speakers"> | string
     profile_image?: StringNullableWithAggregatesFilter<"Speakers"> | string | null
-    topic?: StringWithAggregatesFilter<"Speakers"> | string
+    area_of_expertise?: StringNullableWithAggregatesFilter<"Speakers"> | string | null
     experience?: StringNullableWithAggregatesFilter<"Speakers"> | string | null
     password?: StringWithAggregatesFilter<"Speakers"> | string
     role?: EnumRoleWithAggregatesFilter<"Speakers"> | $Enums.Role
@@ -24089,6 +26702,113 @@ export namespace Prisma {
     registeredAt?: DateTimeWithAggregatesFilter<"Speakers"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Speakers"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Speakers"> | Date | string
+  }
+
+  export type speaker_assignmentWhereInput = {
+    AND?: speaker_assignmentWhereInput | speaker_assignmentWhereInput[]
+    OR?: speaker_assignmentWhereInput[]
+    NOT?: speaker_assignmentWhereInput | speaker_assignmentWhereInput[]
+    id?: IntFilter<"speaker_assignment"> | number
+    speaker_id?: IntFilter<"speaker_assignment"> | number
+    event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    topic_one?: StringNullableFilter<"speaker_assignment"> | string | null
+    topic_one_approved?: BoolFilter<"speaker_assignment"> | boolean
+    topic_two?: StringNullableFilter<"speaker_assignment"> | string | null
+    topic_two_approved?: BoolNullableFilter<"speaker_assignment"> | boolean | null
+    topic_one_event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    topic_two_event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    admin_note?: StringNullableFilter<"speaker_assignment"> | string | null
+    submittedAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    createdAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    updatedAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    speaker?: XOR<SpeakersScalarRelationFilter, SpeakersWhereInput>
+    event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+    topic_one_event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+    topic_two_event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+  }
+
+  export type speaker_assignmentOrderByWithRelationInput = {
+    id?: SortOrder
+    speaker_id?: SortOrder
+    event_id?: SortOrderInput | SortOrder
+    topic_one?: SortOrderInput | SortOrder
+    topic_one_approved?: SortOrder
+    topic_two?: SortOrderInput | SortOrder
+    topic_two_approved?: SortOrderInput | SortOrder
+    topic_one_event_id?: SortOrderInput | SortOrder
+    topic_two_event_id?: SortOrderInput | SortOrder
+    admin_note?: SortOrderInput | SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    speaker?: SpeakersOrderByWithRelationInput
+    event?: EventOrderByWithRelationInput
+    topic_one_event?: EventOrderByWithRelationInput
+    topic_two_event?: EventOrderByWithRelationInput
+    _relevance?: speaker_assignmentOrderByRelevanceInput
+  }
+
+  export type speaker_assignmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: speaker_assignmentWhereInput | speaker_assignmentWhereInput[]
+    OR?: speaker_assignmentWhereInput[]
+    NOT?: speaker_assignmentWhereInput | speaker_assignmentWhereInput[]
+    speaker_id?: IntFilter<"speaker_assignment"> | number
+    event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    topic_one?: StringNullableFilter<"speaker_assignment"> | string | null
+    topic_one_approved?: BoolFilter<"speaker_assignment"> | boolean
+    topic_two?: StringNullableFilter<"speaker_assignment"> | string | null
+    topic_two_approved?: BoolNullableFilter<"speaker_assignment"> | boolean | null
+    topic_one_event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    topic_two_event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    admin_note?: StringNullableFilter<"speaker_assignment"> | string | null
+    submittedAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    createdAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    updatedAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    speaker?: XOR<SpeakersScalarRelationFilter, SpeakersWhereInput>
+    event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+    topic_one_event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+    topic_two_event?: XOR<EventNullableScalarRelationFilter, EventWhereInput> | null
+  }, "id">
+
+  export type speaker_assignmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    speaker_id?: SortOrder
+    event_id?: SortOrderInput | SortOrder
+    topic_one?: SortOrderInput | SortOrder
+    topic_one_approved?: SortOrder
+    topic_two?: SortOrderInput | SortOrder
+    topic_two_approved?: SortOrderInput | SortOrder
+    topic_one_event_id?: SortOrderInput | SortOrder
+    topic_two_event_id?: SortOrderInput | SortOrder
+    admin_note?: SortOrderInput | SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: speaker_assignmentCountOrderByAggregateInput
+    _avg?: speaker_assignmentAvgOrderByAggregateInput
+    _max?: speaker_assignmentMaxOrderByAggregateInput
+    _min?: speaker_assignmentMinOrderByAggregateInput
+    _sum?: speaker_assignmentSumOrderByAggregateInput
+  }
+
+  export type speaker_assignmentScalarWhereWithAggregatesInput = {
+    AND?: speaker_assignmentScalarWhereWithAggregatesInput | speaker_assignmentScalarWhereWithAggregatesInput[]
+    OR?: speaker_assignmentScalarWhereWithAggregatesInput[]
+    NOT?: speaker_assignmentScalarWhereWithAggregatesInput | speaker_assignmentScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"speaker_assignment"> | number
+    speaker_id?: IntWithAggregatesFilter<"speaker_assignment"> | number
+    event_id?: IntNullableWithAggregatesFilter<"speaker_assignment"> | number | null
+    topic_one?: StringNullableWithAggregatesFilter<"speaker_assignment"> | string | null
+    topic_one_approved?: BoolWithAggregatesFilter<"speaker_assignment"> | boolean
+    topic_two?: StringNullableWithAggregatesFilter<"speaker_assignment"> | string | null
+    topic_two_approved?: BoolNullableWithAggregatesFilter<"speaker_assignment"> | boolean | null
+    topic_one_event_id?: IntNullableWithAggregatesFilter<"speaker_assignment"> | number | null
+    topic_two_event_id?: IntNullableWithAggregatesFilter<"speaker_assignment"> | number | null
+    admin_note?: StringNullableWithAggregatesFilter<"speaker_assignment"> | string | null
+    submittedAt?: DateTimeWithAggregatesFilter<"speaker_assignment"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"speaker_assignment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"speaker_assignment"> | Date | string
   }
 
   export type EventPackagesWhereInput = {
@@ -24420,6 +27140,7 @@ export namespace Prisma {
 
   export type EventPartnerPackagesWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    event_partner_id_event_package_id?: EventPartnerPackagesEvent_partner_idEvent_package_idCompoundUniqueInput
     AND?: EventPartnerPackagesWhereInput | EventPartnerPackagesWhereInput[]
     OR?: EventPartnerPackagesWhereInput[]
     NOT?: EventPartnerPackagesWhereInput | EventPartnerPackagesWhereInput[]
@@ -24434,7 +27155,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"EventPartnerPackages"> | Date | string
     event_partner?: XOR<PartnerScalarRelationFilter, PartnerWhereInput>
     event_package?: XOR<PartnerPackageScalarRelationFilter, PartnerPackageWhereInput>
-  }, "id">
+  }, "id" | "event_partner_id_event_package_id">
 
   export type EventPartnerPackagesOrderByWithAggregationInput = {
     id?: SortOrder
@@ -24492,6 +27213,9 @@ export namespace Prisma {
     track?: StringNullableFilter<"Event"> | string | null
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
+    speaker_assignments?: Speaker_assignmentListRelationFilter
+    topic_one_speaker_assignments?: Speaker_assignmentListRelationFilter
+    topic_two_speaker_assignments?: Speaker_assignmentListRelationFilter
     scheduleEvents?: ScheduleEventListRelationFilter
   }
 
@@ -24514,6 +27238,9 @@ export namespace Prisma {
     track?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    speaker_assignments?: speaker_assignmentOrderByRelationAggregateInput
+    topic_one_speaker_assignments?: speaker_assignmentOrderByRelationAggregateInput
+    topic_two_speaker_assignments?: speaker_assignmentOrderByRelationAggregateInput
     scheduleEvents?: ScheduleEventOrderByRelationAggregateInput
     _relevance?: EventOrderByRelevanceInput
   }
@@ -24540,6 +27267,9 @@ export namespace Prisma {
     track?: StringNullableFilter<"Event"> | string | null
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
+    speaker_assignments?: Speaker_assignmentListRelationFilter
+    topic_one_speaker_assignments?: Speaker_assignmentListRelationFilter
+    topic_two_speaker_assignments?: Speaker_assignmentListRelationFilter
     scheduleEvents?: ScheduleEventListRelationFilter
   }, "id" | "slug">
 
@@ -24761,9 +27491,12 @@ export namespace Prisma {
     job_title?: StringFilter<"Partner"> | string
     subscribe_to_newletter?: BoolNullableFilter<"Partner"> | boolean | null
     share_with_third_party?: BoolNullableFilter<"Partner"> | boolean | null
+    benefits?: JsonNullableFilter<"Partner">
+    remaining_benefits?: JsonNullableFilter<"Partner">
     password?: StringFilter<"Partner"> | string
     EventPartnerPackages?: EventPartnerPackagesListRelationFilter
     schedules?: ScheduleListRelationFilter
+    PartnerAssignedBooth?: PartnerAssignedBoothListRelationFilter
   }
 
   export type PartnerOrderByWithRelationInput = {
@@ -24778,9 +27511,12 @@ export namespace Prisma {
     job_title?: SortOrder
     subscribe_to_newletter?: SortOrderInput | SortOrder
     share_with_third_party?: SortOrderInput | SortOrder
+    benefits?: SortOrderInput | SortOrder
+    remaining_benefits?: SortOrderInput | SortOrder
     password?: SortOrder
     EventPartnerPackages?: EventPartnerPackagesOrderByRelationAggregateInput
     schedules?: ScheduleOrderByRelationAggregateInput
+    PartnerAssignedBooth?: PartnerAssignedBoothOrderByRelationAggregateInput
     _relevance?: PartnerOrderByRelevanceInput
   }
 
@@ -24799,9 +27535,12 @@ export namespace Prisma {
     job_title?: StringFilter<"Partner"> | string
     subscribe_to_newletter?: BoolNullableFilter<"Partner"> | boolean | null
     share_with_third_party?: BoolNullableFilter<"Partner"> | boolean | null
+    benefits?: JsonNullableFilter<"Partner">
+    remaining_benefits?: JsonNullableFilter<"Partner">
     password?: StringFilter<"Partner"> | string
     EventPartnerPackages?: EventPartnerPackagesListRelationFilter
     schedules?: ScheduleListRelationFilter
+    PartnerAssignedBooth?: PartnerAssignedBoothListRelationFilter
   }, "id" | "email">
 
   export type PartnerOrderByWithAggregationInput = {
@@ -24816,6 +27555,8 @@ export namespace Prisma {
     job_title?: SortOrder
     subscribe_to_newletter?: SortOrderInput | SortOrder
     share_with_third_party?: SortOrderInput | SortOrder
+    benefits?: SortOrderInput | SortOrder
+    remaining_benefits?: SortOrderInput | SortOrder
     password?: SortOrder
     _count?: PartnerCountOrderByAggregateInput
     _avg?: PartnerAvgOrderByAggregateInput
@@ -24839,7 +27580,90 @@ export namespace Prisma {
     job_title?: StringWithAggregatesFilter<"Partner"> | string
     subscribe_to_newletter?: BoolNullableWithAggregatesFilter<"Partner"> | boolean | null
     share_with_third_party?: BoolNullableWithAggregatesFilter<"Partner"> | boolean | null
+    benefits?: JsonNullableWithAggregatesFilter<"Partner">
+    remaining_benefits?: JsonNullableWithAggregatesFilter<"Partner">
     password?: StringWithAggregatesFilter<"Partner"> | string
+  }
+
+  export type PartnerAssignedBoothWhereInput = {
+    AND?: PartnerAssignedBoothWhereInput | PartnerAssignedBoothWhereInput[]
+    OR?: PartnerAssignedBoothWhereInput[]
+    NOT?: PartnerAssignedBoothWhereInput | PartnerAssignedBoothWhereInput[]
+    id?: IntFilter<"PartnerAssignedBooth"> | number
+    exhibition_title?: StringFilter<"PartnerAssignedBooth"> | string
+    description?: StringNullableFilter<"PartnerAssignedBooth"> | string | null
+    exhibition_material?: JsonNullableFilter<"PartnerAssignedBooth">
+    booth_id?: IntFilter<"PartnerAssignedBooth"> | number
+    partner_id?: IntFilter<"PartnerAssignedBooth"> | number
+    assignedAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    createdAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    updatedAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    booth?: XOR<BoothsScalarRelationFilter, BoothsWhereInput>
+    partner?: XOR<PartnerScalarRelationFilter, PartnerWhereInput>
+  }
+
+  export type PartnerAssignedBoothOrderByWithRelationInput = {
+    id?: SortOrder
+    exhibition_title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    exhibition_material?: SortOrderInput | SortOrder
+    booth_id?: SortOrder
+    partner_id?: SortOrder
+    assignedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    booth?: BoothsOrderByWithRelationInput
+    partner?: PartnerOrderByWithRelationInput
+    _relevance?: PartnerAssignedBoothOrderByRelevanceInput
+  }
+
+  export type PartnerAssignedBoothWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PartnerAssignedBoothWhereInput | PartnerAssignedBoothWhereInput[]
+    OR?: PartnerAssignedBoothWhereInput[]
+    NOT?: PartnerAssignedBoothWhereInput | PartnerAssignedBoothWhereInput[]
+    exhibition_title?: StringFilter<"PartnerAssignedBooth"> | string
+    description?: StringNullableFilter<"PartnerAssignedBooth"> | string | null
+    exhibition_material?: JsonNullableFilter<"PartnerAssignedBooth">
+    booth_id?: IntFilter<"PartnerAssignedBooth"> | number
+    partner_id?: IntFilter<"PartnerAssignedBooth"> | number
+    assignedAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    createdAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    updatedAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    booth?: XOR<BoothsScalarRelationFilter, BoothsWhereInput>
+    partner?: XOR<PartnerScalarRelationFilter, PartnerWhereInput>
+  }, "id">
+
+  export type PartnerAssignedBoothOrderByWithAggregationInput = {
+    id?: SortOrder
+    exhibition_title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    exhibition_material?: SortOrderInput | SortOrder
+    booth_id?: SortOrder
+    partner_id?: SortOrder
+    assignedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PartnerAssignedBoothCountOrderByAggregateInput
+    _avg?: PartnerAssignedBoothAvgOrderByAggregateInput
+    _max?: PartnerAssignedBoothMaxOrderByAggregateInput
+    _min?: PartnerAssignedBoothMinOrderByAggregateInput
+    _sum?: PartnerAssignedBoothSumOrderByAggregateInput
+  }
+
+  export type PartnerAssignedBoothScalarWhereWithAggregatesInput = {
+    AND?: PartnerAssignedBoothScalarWhereWithAggregatesInput | PartnerAssignedBoothScalarWhereWithAggregatesInput[]
+    OR?: PartnerAssignedBoothScalarWhereWithAggregatesInput[]
+    NOT?: PartnerAssignedBoothScalarWhereWithAggregatesInput | PartnerAssignedBoothScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"PartnerAssignedBooth"> | number
+    exhibition_title?: StringWithAggregatesFilter<"PartnerAssignedBooth"> | string
+    description?: StringNullableWithAggregatesFilter<"PartnerAssignedBooth"> | string | null
+    exhibition_material?: JsonNullableWithAggregatesFilter<"PartnerAssignedBooth">
+    booth_id?: IntWithAggregatesFilter<"PartnerAssignedBooth"> | number
+    partner_id?: IntWithAggregatesFilter<"PartnerAssignedBooth"> | number
+    assignedAt?: DateTimeWithAggregatesFilter<"PartnerAssignedBooth"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"PartnerAssignedBooth"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PartnerAssignedBooth"> | Date | string
   }
 
   export type ResourcesWhereInput = {
@@ -25482,6 +28306,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     assigned_booths?: assigned_boothsCreateNestedManyWithoutBoothInput
+    PartnerAssignedBooth?: PartnerAssignedBoothCreateNestedManyWithoutBoothInput
   }
 
   export type BoothsUncheckedCreateInput = {
@@ -25495,6 +28320,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     assigned_booths?: assigned_boothsUncheckedCreateNestedManyWithoutBoothInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedCreateNestedManyWithoutBoothInput
   }
 
   export type BoothsUpdateInput = {
@@ -25507,6 +28333,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assigned_booths?: assigned_boothsUpdateManyWithoutBoothNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUpdateManyWithoutBoothNestedInput
   }
 
   export type BoothsUncheckedUpdateInput = {
@@ -25520,6 +28347,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assigned_booths?: assigned_boothsUncheckedUpdateManyWithoutBoothNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedUpdateManyWithoutBoothNestedInput
   }
 
   export type BoothsCreateManyInput = {
@@ -25827,7 +28655,7 @@ export namespace Prisma {
     work_email: string
     bio: string
     profile_image?: string | null
-    topic: string
+    area_of_expertise?: string | null
     experience?: string | null
     password: string
     role?: $Enums.Role
@@ -25836,6 +28664,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     schedules?: ScheduleCreateNestedManyWithoutSpeakerInput
+    speaker_assignments?: speaker_assignmentCreateNestedManyWithoutSpeakerInput
   }
 
   export type SpeakersUncheckedCreateInput = {
@@ -25852,7 +28681,7 @@ export namespace Prisma {
     work_email: string
     bio: string
     profile_image?: string | null
-    topic: string
+    area_of_expertise?: string | null
     experience?: string | null
     password: string
     role?: $Enums.Role
@@ -25861,6 +28690,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     schedules?: ScheduleUncheckedCreateNestedManyWithoutSpeakerInput
+    speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutSpeakerInput
   }
 
   export type SpeakersUpdateInput = {
@@ -25876,7 +28706,7 @@ export namespace Prisma {
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profile_image?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: StringFieldUpdateOperationsInput | string
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -25885,6 +28715,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedules?: ScheduleUpdateManyWithoutSpeakerNestedInput
+    speaker_assignments?: speaker_assignmentUpdateManyWithoutSpeakerNestedInput
   }
 
   export type SpeakersUncheckedUpdateInput = {
@@ -25901,7 +28732,7 @@ export namespace Prisma {
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profile_image?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: StringFieldUpdateOperationsInput | string
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -25910,6 +28741,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     schedules?: ScheduleUncheckedUpdateManyWithoutSpeakerNestedInput
+    speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutSpeakerNestedInput
   }
 
   export type SpeakersCreateManyInput = {
@@ -25926,7 +28758,7 @@ export namespace Prisma {
     work_email: string
     bio: string
     profile_image?: string | null
-    topic: string
+    area_of_expertise?: string | null
     experience?: string | null
     password: string
     role?: $Enums.Role
@@ -25949,7 +28781,7 @@ export namespace Prisma {
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profile_image?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: StringFieldUpdateOperationsInput | string
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -25973,12 +28805,117 @@ export namespace Prisma {
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profile_image?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: StringFieldUpdateOperationsInput | string
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentCreateInput = {
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker: SpeakersCreateNestedOneWithoutSpeaker_assignmentsInput
+    event?: EventCreateNestedOneWithoutSpeaker_assignmentsInput
+    topic_one_event?: EventCreateNestedOneWithoutTopic_one_speaker_assignmentsInput
+    topic_two_event?: EventCreateNestedOneWithoutTopic_two_speaker_assignmentsInput
+  }
+
+  export type speaker_assignmentUncheckedCreateInput = {
+    id?: number
+    speaker_id: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentUpdateInput = {
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker?: SpeakersUpdateOneRequiredWithoutSpeaker_assignmentsNestedInput
+    event?: EventUpdateOneWithoutSpeaker_assignmentsNestedInput
+    topic_one_event?: EventUpdateOneWithoutTopic_one_speaker_assignmentsNestedInput
+    topic_two_event?: EventUpdateOneWithoutTopic_two_speaker_assignmentsNestedInput
+  }
+
+  export type speaker_assignmentUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentCreateManyInput = {
+    id?: number
+    speaker_id: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentUpdateManyMutationInput = {
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26392,6 +29329,9 @@ export namespace Prisma {
     track?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentCreateNestedManyWithoutEventInput
+    topic_one_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_one_eventInput
+    topic_two_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_two_eventInput
     scheduleEvents?: ScheduleEventCreateNestedManyWithoutEventInput
   }
 
@@ -26414,6 +29354,9 @@ export namespace Prisma {
     track?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutEventInput
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_one_eventInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_two_eventInput
     scheduleEvents?: ScheduleEventUncheckedCreateNestedManyWithoutEventInput
   }
 
@@ -26435,6 +29378,9 @@ export namespace Prisma {
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUpdateManyWithoutEventNestedInput
+    topic_one_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_one_eventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_two_eventNestedInput
     scheduleEvents?: ScheduleEventUpdateManyWithoutEventNestedInput
   }
 
@@ -26457,6 +29403,9 @@ export namespace Prisma {
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutEventNestedInput
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_one_eventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_two_eventNestedInput
     scheduleEvents?: ScheduleEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
@@ -26673,9 +29622,12 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password: string
     EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput
     schedules?: ScheduleCreateNestedManyWithoutPartnerInput
+    PartnerAssignedBooth?: PartnerAssignedBoothCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerUncheckedCreateInput = {
@@ -26690,9 +29642,12 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password: string
     EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput
     schedules?: ScheduleUncheckedCreateNestedManyWithoutPartnerInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerUpdateInput = {
@@ -26706,9 +29661,12 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
     EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput
     schedules?: ScheduleUpdateManyWithoutPartnerNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerUncheckedUpdateInput = {
@@ -26723,9 +29681,12 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
     EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput
     schedules?: ScheduleUncheckedUpdateManyWithoutPartnerNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerCreateManyInput = {
@@ -26740,6 +29701,8 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password: string
   }
 
@@ -26754,6 +29717,8 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
   }
 
@@ -26769,7 +29734,88 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PartnerAssignedBoothCreateInput = {
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booth: BoothsCreateNestedOneWithoutPartnerAssignedBoothInput
+    partner: PartnerCreateNestedOneWithoutPartnerAssignedBoothInput
+  }
+
+  export type PartnerAssignedBoothUncheckedCreateInput = {
+    id?: number
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id: number
+    partner_id: number
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PartnerAssignedBoothUpdateInput = {
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booth?: BoothsUpdateOneRequiredWithoutPartnerAssignedBoothNestedInput
+    partner?: PartnerUpdateOneRequiredWithoutPartnerAssignedBoothNestedInput
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id?: IntFieldUpdateOperationsInput | number
+    partner_id?: IntFieldUpdateOperationsInput | number
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerAssignedBoothCreateManyInput = {
+    id?: number
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id: number
+    partner_id: number
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PartnerAssignedBoothUpdateManyMutationInput = {
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id?: IntFieldUpdateOperationsInput | number
+    partner_id?: IntFieldUpdateOperationsInput | number
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ResourcesCreateInput = {
@@ -27527,7 +30573,17 @@ export namespace Prisma {
     none?: assigned_boothsWhereInput
   }
 
+  export type PartnerAssignedBoothListRelationFilter = {
+    every?: PartnerAssignedBoothWhereInput
+    some?: PartnerAssignedBoothWhereInput
+    none?: PartnerAssignedBoothWhereInput
+  }
+
   export type assigned_boothsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PartnerAssignedBoothOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27809,6 +30865,16 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type Speaker_assignmentListRelationFilter = {
+    every?: speaker_assignmentWhereInput
+    some?: speaker_assignmentWhereInput
+    none?: speaker_assignmentWhereInput
+  }
+
+  export type speaker_assignmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type SpeakersOrderByRelevanceInput = {
     fields: SpeakersOrderByRelevanceFieldEnum | SpeakersOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -27829,7 +30895,7 @@ export namespace Prisma {
     work_email?: SortOrder
     bio?: SortOrder
     profile_image?: SortOrder
-    topic?: SortOrder
+    area_of_expertise?: SortOrder
     experience?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -27856,7 +30922,7 @@ export namespace Prisma {
     work_email?: SortOrder
     bio?: SortOrder
     profile_image?: SortOrder
-    topic?: SortOrder
+    area_of_expertise?: SortOrder
     experience?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -27879,7 +30945,7 @@ export namespace Prisma {
     work_email?: SortOrder
     bio?: SortOrder
     profile_image?: SortOrder
-    topic?: SortOrder
+    area_of_expertise?: SortOrder
     experience?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -27891,6 +30957,99 @@ export namespace Prisma {
 
   export type SpeakersSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type SpeakersScalarRelationFilter = {
+    is?: SpeakersWhereInput
+    isNot?: SpeakersWhereInput
+  }
+
+  export type EventNullableScalarRelationFilter = {
+    is?: EventWhereInput | null
+    isNot?: EventWhereInput | null
+  }
+
+  export type speaker_assignmentOrderByRelevanceInput = {
+    fields: speaker_assignmentOrderByRelevanceFieldEnum | speaker_assignmentOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type speaker_assignmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    speaker_id?: SortOrder
+    event_id?: SortOrder
+    topic_one?: SortOrder
+    topic_one_approved?: SortOrder
+    topic_two?: SortOrder
+    topic_two_approved?: SortOrder
+    topic_one_event_id?: SortOrder
+    topic_two_event_id?: SortOrder
+    admin_note?: SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type speaker_assignmentAvgOrderByAggregateInput = {
+    id?: SortOrder
+    speaker_id?: SortOrder
+    event_id?: SortOrder
+    topic_one_event_id?: SortOrder
+    topic_two_event_id?: SortOrder
+  }
+
+  export type speaker_assignmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    speaker_id?: SortOrder
+    event_id?: SortOrder
+    topic_one?: SortOrder
+    topic_one_approved?: SortOrder
+    topic_two?: SortOrder
+    topic_two_approved?: SortOrder
+    topic_one_event_id?: SortOrder
+    topic_two_event_id?: SortOrder
+    admin_note?: SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type speaker_assignmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    speaker_id?: SortOrder
+    event_id?: SortOrder
+    topic_one?: SortOrder
+    topic_one_approved?: SortOrder
+    topic_two?: SortOrder
+    topic_two_approved?: SortOrder
+    topic_one_event_id?: SortOrder
+    topic_two_event_id?: SortOrder
+    admin_note?: SortOrder
+    submittedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type speaker_assignmentSumOrderByAggregateInput = {
+    id?: SortOrder
+    speaker_id?: SortOrder
+    event_id?: SortOrder
+    topic_one_event_id?: SortOrder
+    topic_two_event_id?: SortOrder
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type EventPackagesOrderByRelevanceInput = {
@@ -28120,6 +31279,11 @@ export namespace Prisma {
     fields: EventPartnerPackagesOrderByRelevanceFieldEnum | EventPartnerPackagesOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
+  }
+
+  export type EventPartnerPackagesEvent_partner_idEvent_package_idCompoundUniqueInput = {
+    event_partner_id: number
+    event_package_id: number
   }
 
   export type EventPartnerPackagesCountOrderByAggregateInput = {
@@ -28396,11 +31560,6 @@ export namespace Prisma {
     eventId?: SortOrder
   }
 
-  export type BoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
   export type PartnerOrderByRelevanceInput = {
     fields: PartnerOrderByRelevanceFieldEnum | PartnerOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -28419,6 +31578,8 @@ export namespace Prisma {
     job_title?: SortOrder
     subscribe_to_newletter?: SortOrder
     share_with_third_party?: SortOrder
+    benefits?: SortOrder
+    remaining_benefits?: SortOrder
     password?: SortOrder
   }
 
@@ -28460,12 +31621,56 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
+  export type PartnerAssignedBoothOrderByRelevanceInput = {
+    fields: PartnerAssignedBoothOrderByRelevanceFieldEnum | PartnerAssignedBoothOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PartnerAssignedBoothCountOrderByAggregateInput = {
+    id?: SortOrder
+    exhibition_title?: SortOrder
+    description?: SortOrder
+    exhibition_material?: SortOrder
+    booth_id?: SortOrder
+    partner_id?: SortOrder
+    assignedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PartnerAssignedBoothAvgOrderByAggregateInput = {
+    id?: SortOrder
+    booth_id?: SortOrder
+    partner_id?: SortOrder
+  }
+
+  export type PartnerAssignedBoothMaxOrderByAggregateInput = {
+    id?: SortOrder
+    exhibition_title?: SortOrder
+    description?: SortOrder
+    booth_id?: SortOrder
+    partner_id?: SortOrder
+    assignedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PartnerAssignedBoothMinOrderByAggregateInput = {
+    id?: SortOrder
+    exhibition_title?: SortOrder
+    description?: SortOrder
+    booth_id?: SortOrder
+    partner_id?: SortOrder
+    assignedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PartnerAssignedBoothSumOrderByAggregateInput = {
+    id?: SortOrder
+    booth_id?: SortOrder
+    partner_id?: SortOrder
   }
 
   export type EnumVisibilityFilter<$PrismaModel = never> = {
@@ -28771,11 +31976,25 @@ export namespace Prisma {
     connect?: assigned_boothsWhereUniqueInput | assigned_boothsWhereUniqueInput[]
   }
 
+  export type PartnerAssignedBoothCreateNestedManyWithoutBoothInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutBoothInput, PartnerAssignedBoothUncheckedCreateWithoutBoothInput> | PartnerAssignedBoothCreateWithoutBoothInput[] | PartnerAssignedBoothUncheckedCreateWithoutBoothInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutBoothInput | PartnerAssignedBoothCreateOrConnectWithoutBoothInput[]
+    createMany?: PartnerAssignedBoothCreateManyBoothInputEnvelope
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+  }
+
   export type assigned_boothsUncheckedCreateNestedManyWithoutBoothInput = {
     create?: XOR<assigned_boothsCreateWithoutBoothInput, assigned_boothsUncheckedCreateWithoutBoothInput> | assigned_boothsCreateWithoutBoothInput[] | assigned_boothsUncheckedCreateWithoutBoothInput[]
     connectOrCreate?: assigned_boothsCreateOrConnectWithoutBoothInput | assigned_boothsCreateOrConnectWithoutBoothInput[]
     createMany?: assigned_boothsCreateManyBoothInputEnvelope
     connect?: assigned_boothsWhereUniqueInput | assigned_boothsWhereUniqueInput[]
+  }
+
+  export type PartnerAssignedBoothUncheckedCreateNestedManyWithoutBoothInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutBoothInput, PartnerAssignedBoothUncheckedCreateWithoutBoothInput> | PartnerAssignedBoothCreateWithoutBoothInput[] | PartnerAssignedBoothUncheckedCreateWithoutBoothInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutBoothInput | PartnerAssignedBoothCreateOrConnectWithoutBoothInput[]
+    createMany?: PartnerAssignedBoothCreateManyBoothInputEnvelope
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -28800,6 +32019,20 @@ export namespace Prisma {
     deleteMany?: assigned_boothsScalarWhereInput | assigned_boothsScalarWhereInput[]
   }
 
+  export type PartnerAssignedBoothUpdateManyWithoutBoothNestedInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutBoothInput, PartnerAssignedBoothUncheckedCreateWithoutBoothInput> | PartnerAssignedBoothCreateWithoutBoothInput[] | PartnerAssignedBoothUncheckedCreateWithoutBoothInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutBoothInput | PartnerAssignedBoothCreateOrConnectWithoutBoothInput[]
+    upsert?: PartnerAssignedBoothUpsertWithWhereUniqueWithoutBoothInput | PartnerAssignedBoothUpsertWithWhereUniqueWithoutBoothInput[]
+    createMany?: PartnerAssignedBoothCreateManyBoothInputEnvelope
+    set?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    disconnect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    delete?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    update?: PartnerAssignedBoothUpdateWithWhereUniqueWithoutBoothInput | PartnerAssignedBoothUpdateWithWhereUniqueWithoutBoothInput[]
+    updateMany?: PartnerAssignedBoothUpdateManyWithWhereWithoutBoothInput | PartnerAssignedBoothUpdateManyWithWhereWithoutBoothInput[]
+    deleteMany?: PartnerAssignedBoothScalarWhereInput | PartnerAssignedBoothScalarWhereInput[]
+  }
+
   export type assigned_boothsUncheckedUpdateManyWithoutBoothNestedInput = {
     create?: XOR<assigned_boothsCreateWithoutBoothInput, assigned_boothsUncheckedCreateWithoutBoothInput> | assigned_boothsCreateWithoutBoothInput[] | assigned_boothsUncheckedCreateWithoutBoothInput[]
     connectOrCreate?: assigned_boothsCreateOrConnectWithoutBoothInput | assigned_boothsCreateOrConnectWithoutBoothInput[]
@@ -28812,6 +32045,20 @@ export namespace Prisma {
     update?: assigned_boothsUpdateWithWhereUniqueWithoutBoothInput | assigned_boothsUpdateWithWhereUniqueWithoutBoothInput[]
     updateMany?: assigned_boothsUpdateManyWithWhereWithoutBoothInput | assigned_boothsUpdateManyWithWhereWithoutBoothInput[]
     deleteMany?: assigned_boothsScalarWhereInput | assigned_boothsScalarWhereInput[]
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateManyWithoutBoothNestedInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutBoothInput, PartnerAssignedBoothUncheckedCreateWithoutBoothInput> | PartnerAssignedBoothCreateWithoutBoothInput[] | PartnerAssignedBoothUncheckedCreateWithoutBoothInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutBoothInput | PartnerAssignedBoothCreateOrConnectWithoutBoothInput[]
+    upsert?: PartnerAssignedBoothUpsertWithWhereUniqueWithoutBoothInput | PartnerAssignedBoothUpsertWithWhereUniqueWithoutBoothInput[]
+    createMany?: PartnerAssignedBoothCreateManyBoothInputEnvelope
+    set?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    disconnect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    delete?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    update?: PartnerAssignedBoothUpdateWithWhereUniqueWithoutBoothInput | PartnerAssignedBoothUpdateWithWhereUniqueWithoutBoothInput[]
+    updateMany?: PartnerAssignedBoothUpdateManyWithWhereWithoutBoothInput | PartnerAssignedBoothUpdateManyWithWhereWithoutBoothInput[]
+    deleteMany?: PartnerAssignedBoothScalarWhereInput | PartnerAssignedBoothScalarWhereInput[]
   }
 
   export type assigned_boothsCreateNestedManyWithoutAssigned_toInput = {
@@ -28863,11 +32110,25 @@ export namespace Prisma {
     connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
   }
 
+  export type speaker_assignmentCreateNestedManyWithoutSpeakerInput = {
+    create?: XOR<speaker_assignmentCreateWithoutSpeakerInput, speaker_assignmentUncheckedCreateWithoutSpeakerInput> | speaker_assignmentCreateWithoutSpeakerInput[] | speaker_assignmentUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutSpeakerInput | speaker_assignmentCreateOrConnectWithoutSpeakerInput[]
+    createMany?: speaker_assignmentCreateManySpeakerInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+  }
+
   export type ScheduleUncheckedCreateNestedManyWithoutSpeakerInput = {
     create?: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput> | ScheduleCreateWithoutSpeakerInput[] | ScheduleUncheckedCreateWithoutSpeakerInput[]
     connectOrCreate?: ScheduleCreateOrConnectWithoutSpeakerInput | ScheduleCreateOrConnectWithoutSpeakerInput[]
     createMany?: ScheduleCreateManySpeakerInputEnvelope
     connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
+  }
+
+  export type speaker_assignmentUncheckedCreateNestedManyWithoutSpeakerInput = {
+    create?: XOR<speaker_assignmentCreateWithoutSpeakerInput, speaker_assignmentUncheckedCreateWithoutSpeakerInput> | speaker_assignmentCreateWithoutSpeakerInput[] | speaker_assignmentUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutSpeakerInput | speaker_assignmentCreateOrConnectWithoutSpeakerInput[]
+    createMany?: speaker_assignmentCreateManySpeakerInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
   }
 
   export type ScheduleUpdateManyWithoutSpeakerNestedInput = {
@@ -28884,6 +32145,20 @@ export namespace Prisma {
     deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
   }
 
+  export type speaker_assignmentUpdateManyWithoutSpeakerNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutSpeakerInput, speaker_assignmentUncheckedCreateWithoutSpeakerInput> | speaker_assignmentCreateWithoutSpeakerInput[] | speaker_assignmentUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutSpeakerInput | speaker_assignmentCreateOrConnectWithoutSpeakerInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutSpeakerInput | speaker_assignmentUpsertWithWhereUniqueWithoutSpeakerInput[]
+    createMany?: speaker_assignmentCreateManySpeakerInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutSpeakerInput | speaker_assignmentUpdateWithWhereUniqueWithoutSpeakerInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutSpeakerInput | speaker_assignmentUpdateManyWithWhereWithoutSpeakerInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+  }
+
   export type ScheduleUncheckedUpdateManyWithoutSpeakerNestedInput = {
     create?: XOR<ScheduleCreateWithoutSpeakerInput, ScheduleUncheckedCreateWithoutSpeakerInput> | ScheduleCreateWithoutSpeakerInput[] | ScheduleUncheckedCreateWithoutSpeakerInput[]
     connectOrCreate?: ScheduleCreateOrConnectWithoutSpeakerInput | ScheduleCreateOrConnectWithoutSpeakerInput[]
@@ -28896,6 +32171,86 @@ export namespace Prisma {
     update?: ScheduleUpdateWithWhereUniqueWithoutSpeakerInput | ScheduleUpdateWithWhereUniqueWithoutSpeakerInput[]
     updateMany?: ScheduleUpdateManyWithWhereWithoutSpeakerInput | ScheduleUpdateManyWithWhereWithoutSpeakerInput[]
     deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutSpeakerNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutSpeakerInput, speaker_assignmentUncheckedCreateWithoutSpeakerInput> | speaker_assignmentCreateWithoutSpeakerInput[] | speaker_assignmentUncheckedCreateWithoutSpeakerInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutSpeakerInput | speaker_assignmentCreateOrConnectWithoutSpeakerInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutSpeakerInput | speaker_assignmentUpsertWithWhereUniqueWithoutSpeakerInput[]
+    createMany?: speaker_assignmentCreateManySpeakerInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutSpeakerInput | speaker_assignmentUpdateWithWhereUniqueWithoutSpeakerInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutSpeakerInput | speaker_assignmentUpdateManyWithWhereWithoutSpeakerInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+  }
+
+  export type SpeakersCreateNestedOneWithoutSpeaker_assignmentsInput = {
+    create?: XOR<SpeakersCreateWithoutSpeaker_assignmentsInput, SpeakersUncheckedCreateWithoutSpeaker_assignmentsInput>
+    connectOrCreate?: SpeakersCreateOrConnectWithoutSpeaker_assignmentsInput
+    connect?: SpeakersWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutSpeaker_assignmentsInput = {
+    create?: XOR<EventCreateWithoutSpeaker_assignmentsInput, EventUncheckedCreateWithoutSpeaker_assignmentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutSpeaker_assignmentsInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutTopic_one_speaker_assignmentsInput = {
+    create?: XOR<EventCreateWithoutTopic_one_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_one_speaker_assignmentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutTopic_one_speaker_assignmentsInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type EventCreateNestedOneWithoutTopic_two_speaker_assignmentsInput = {
+    create?: XOR<EventCreateWithoutTopic_two_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_two_speaker_assignmentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutTopic_two_speaker_assignmentsInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
+  export type SpeakersUpdateOneRequiredWithoutSpeaker_assignmentsNestedInput = {
+    create?: XOR<SpeakersCreateWithoutSpeaker_assignmentsInput, SpeakersUncheckedCreateWithoutSpeaker_assignmentsInput>
+    connectOrCreate?: SpeakersCreateOrConnectWithoutSpeaker_assignmentsInput
+    upsert?: SpeakersUpsertWithoutSpeaker_assignmentsInput
+    connect?: SpeakersWhereUniqueInput
+    update?: XOR<XOR<SpeakersUpdateToOneWithWhereWithoutSpeaker_assignmentsInput, SpeakersUpdateWithoutSpeaker_assignmentsInput>, SpeakersUncheckedUpdateWithoutSpeaker_assignmentsInput>
+  }
+
+  export type EventUpdateOneWithoutSpeaker_assignmentsNestedInput = {
+    create?: XOR<EventCreateWithoutSpeaker_assignmentsInput, EventUncheckedCreateWithoutSpeaker_assignmentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutSpeaker_assignmentsInput
+    upsert?: EventUpsertWithoutSpeaker_assignmentsInput
+    disconnect?: EventWhereInput | boolean
+    delete?: EventWhereInput | boolean
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutSpeaker_assignmentsInput, EventUpdateWithoutSpeaker_assignmentsInput>, EventUncheckedUpdateWithoutSpeaker_assignmentsInput>
+  }
+
+  export type EventUpdateOneWithoutTopic_one_speaker_assignmentsNestedInput = {
+    create?: XOR<EventCreateWithoutTopic_one_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_one_speaker_assignmentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutTopic_one_speaker_assignmentsInput
+    upsert?: EventUpsertWithoutTopic_one_speaker_assignmentsInput
+    disconnect?: EventWhereInput | boolean
+    delete?: EventWhereInput | boolean
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutTopic_one_speaker_assignmentsInput, EventUpdateWithoutTopic_one_speaker_assignmentsInput>, EventUncheckedUpdateWithoutTopic_one_speaker_assignmentsInput>
+  }
+
+  export type EventUpdateOneWithoutTopic_two_speaker_assignmentsNestedInput = {
+    create?: XOR<EventCreateWithoutTopic_two_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_two_speaker_assignmentsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutTopic_two_speaker_assignmentsInput
+    upsert?: EventUpsertWithoutTopic_two_speaker_assignmentsInput
+    disconnect?: EventWhereInput | boolean
+    delete?: EventWhereInput | boolean
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutTopic_two_speaker_assignmentsInput, EventUpdateWithoutTopic_two_speaker_assignmentsInput>, EventUncheckedUpdateWithoutTopic_two_speaker_assignmentsInput>
   }
 
   export type EventPartnerPackagesCreateNestedManyWithoutEvent_packageInput = {
@@ -28996,6 +32351,27 @@ export namespace Prisma {
     update?: XOR<XOR<PartnerPackageUpdateToOneWithWhereWithoutEventPartnerPackagesInput, PartnerPackageUpdateWithoutEventPartnerPackagesInput>, PartnerPackageUncheckedUpdateWithoutEventPartnerPackagesInput>
   }
 
+  export type speaker_assignmentCreateNestedManyWithoutEventInput = {
+    create?: XOR<speaker_assignmentCreateWithoutEventInput, speaker_assignmentUncheckedCreateWithoutEventInput> | speaker_assignmentCreateWithoutEventInput[] | speaker_assignmentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutEventInput | speaker_assignmentCreateOrConnectWithoutEventInput[]
+    createMany?: speaker_assignmentCreateManyEventInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+  }
+
+  export type speaker_assignmentCreateNestedManyWithoutTopic_one_eventInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_one_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput> | speaker_assignmentCreateWithoutTopic_one_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_one_eventInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+  }
+
+  export type speaker_assignmentCreateNestedManyWithoutTopic_two_eventInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_two_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput> | speaker_assignmentCreateWithoutTopic_two_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_two_eventInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+  }
+
   export type ScheduleEventCreateNestedManyWithoutEventInput = {
     create?: XOR<ScheduleEventCreateWithoutEventInput, ScheduleEventUncheckedCreateWithoutEventInput> | ScheduleEventCreateWithoutEventInput[] | ScheduleEventUncheckedCreateWithoutEventInput[]
     connectOrCreate?: ScheduleEventCreateOrConnectWithoutEventInput | ScheduleEventCreateOrConnectWithoutEventInput[]
@@ -29003,11 +32379,74 @@ export namespace Prisma {
     connect?: ScheduleEventWhereUniqueInput | ScheduleEventWhereUniqueInput[]
   }
 
+  export type speaker_assignmentUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<speaker_assignmentCreateWithoutEventInput, speaker_assignmentUncheckedCreateWithoutEventInput> | speaker_assignmentCreateWithoutEventInput[] | speaker_assignmentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutEventInput | speaker_assignmentCreateOrConnectWithoutEventInput[]
+    createMany?: speaker_assignmentCreateManyEventInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+  }
+
+  export type speaker_assignmentUncheckedCreateNestedManyWithoutTopic_one_eventInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_one_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput> | speaker_assignmentCreateWithoutTopic_one_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_one_eventInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+  }
+
+  export type speaker_assignmentUncheckedCreateNestedManyWithoutTopic_two_eventInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_two_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput> | speaker_assignmentCreateWithoutTopic_two_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_two_eventInputEnvelope
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+  }
+
   export type ScheduleEventUncheckedCreateNestedManyWithoutEventInput = {
     create?: XOR<ScheduleEventCreateWithoutEventInput, ScheduleEventUncheckedCreateWithoutEventInput> | ScheduleEventCreateWithoutEventInput[] | ScheduleEventUncheckedCreateWithoutEventInput[]
     connectOrCreate?: ScheduleEventCreateOrConnectWithoutEventInput | ScheduleEventCreateOrConnectWithoutEventInput[]
     createMany?: ScheduleEventCreateManyEventInputEnvelope
     connect?: ScheduleEventWhereUniqueInput | ScheduleEventWhereUniqueInput[]
+  }
+
+  export type speaker_assignmentUpdateManyWithoutEventNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutEventInput, speaker_assignmentUncheckedCreateWithoutEventInput> | speaker_assignmentCreateWithoutEventInput[] | speaker_assignmentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutEventInput | speaker_assignmentCreateOrConnectWithoutEventInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutEventInput | speaker_assignmentUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: speaker_assignmentCreateManyEventInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutEventInput | speaker_assignmentUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutEventInput | speaker_assignmentUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+  }
+
+  export type speaker_assignmentUpdateManyWithoutTopic_one_eventNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_one_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput> | speaker_assignmentCreateWithoutTopic_one_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutTopic_one_eventInput | speaker_assignmentUpsertWithWhereUniqueWithoutTopic_one_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_one_eventInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutTopic_one_eventInput | speaker_assignmentUpdateWithWhereUniqueWithoutTopic_one_eventInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutTopic_one_eventInput | speaker_assignmentUpdateManyWithWhereWithoutTopic_one_eventInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+  }
+
+  export type speaker_assignmentUpdateManyWithoutTopic_two_eventNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_two_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput> | speaker_assignmentCreateWithoutTopic_two_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutTopic_two_eventInput | speaker_assignmentUpsertWithWhereUniqueWithoutTopic_two_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_two_eventInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutTopic_two_eventInput | speaker_assignmentUpdateWithWhereUniqueWithoutTopic_two_eventInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutTopic_two_eventInput | speaker_assignmentUpdateManyWithWhereWithoutTopic_two_eventInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
   }
 
   export type ScheduleEventUpdateManyWithoutEventNestedInput = {
@@ -29022,6 +32461,48 @@ export namespace Prisma {
     update?: ScheduleEventUpdateWithWhereUniqueWithoutEventInput | ScheduleEventUpdateWithWhereUniqueWithoutEventInput[]
     updateMany?: ScheduleEventUpdateManyWithWhereWithoutEventInput | ScheduleEventUpdateManyWithWhereWithoutEventInput[]
     deleteMany?: ScheduleEventScalarWhereInput | ScheduleEventScalarWhereInput[]
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutEventInput, speaker_assignmentUncheckedCreateWithoutEventInput> | speaker_assignmentCreateWithoutEventInput[] | speaker_assignmentUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutEventInput | speaker_assignmentCreateOrConnectWithoutEventInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutEventInput | speaker_assignmentUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: speaker_assignmentCreateManyEventInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutEventInput | speaker_assignmentUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutEventInput | speaker_assignmentUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutTopic_one_eventNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_one_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput> | speaker_assignmentCreateWithoutTopic_one_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutTopic_one_eventInput | speaker_assignmentUpsertWithWhereUniqueWithoutTopic_one_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_one_eventInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutTopic_one_eventInput | speaker_assignmentUpdateWithWhereUniqueWithoutTopic_one_eventInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutTopic_one_eventInput | speaker_assignmentUpdateManyWithWhereWithoutTopic_one_eventInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutTopic_two_eventNestedInput = {
+    create?: XOR<speaker_assignmentCreateWithoutTopic_two_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput> | speaker_assignmentCreateWithoutTopic_two_eventInput[] | speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput[]
+    connectOrCreate?: speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput | speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput[]
+    upsert?: speaker_assignmentUpsertWithWhereUniqueWithoutTopic_two_eventInput | speaker_assignmentUpsertWithWhereUniqueWithoutTopic_two_eventInput[]
+    createMany?: speaker_assignmentCreateManyTopic_two_eventInputEnvelope
+    set?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    disconnect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    delete?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    connect?: speaker_assignmentWhereUniqueInput | speaker_assignmentWhereUniqueInput[]
+    update?: speaker_assignmentUpdateWithWhereUniqueWithoutTopic_two_eventInput | speaker_assignmentUpdateWithWhereUniqueWithoutTopic_two_eventInput[]
+    updateMany?: speaker_assignmentUpdateManyWithWhereWithoutTopic_two_eventInput | speaker_assignmentUpdateManyWithWhereWithoutTopic_two_eventInput[]
+    deleteMany?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
   }
 
   export type ScheduleEventUncheckedUpdateManyWithoutEventNestedInput = {
@@ -29174,6 +32655,13 @@ export namespace Prisma {
     connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
   }
 
+  export type PartnerAssignedBoothCreateNestedManyWithoutPartnerInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutPartnerInput, PartnerAssignedBoothUncheckedCreateWithoutPartnerInput> | PartnerAssignedBoothCreateWithoutPartnerInput[] | PartnerAssignedBoothUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutPartnerInput | PartnerAssignedBoothCreateOrConnectWithoutPartnerInput[]
+    createMany?: PartnerAssignedBoothCreateManyPartnerInputEnvelope
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+  }
+
   export type EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput = {
     create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
     connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
@@ -29188,8 +32676,11 @@ export namespace Prisma {
     connect?: ScheduleWhereUniqueInput | ScheduleWhereUniqueInput[]
   }
 
-  export type NullableBoolFieldUpdateOperationsInput = {
-    set?: boolean | null
+  export type PartnerAssignedBoothUncheckedCreateNestedManyWithoutPartnerInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutPartnerInput, PartnerAssignedBoothUncheckedCreateWithoutPartnerInput> | PartnerAssignedBoothCreateWithoutPartnerInput[] | PartnerAssignedBoothUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutPartnerInput | PartnerAssignedBoothCreateOrConnectWithoutPartnerInput[]
+    createMany?: PartnerAssignedBoothCreateManyPartnerInputEnvelope
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
   }
 
   export type EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput = {
@@ -29220,6 +32711,20 @@ export namespace Prisma {
     deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
   }
 
+  export type PartnerAssignedBoothUpdateManyWithoutPartnerNestedInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutPartnerInput, PartnerAssignedBoothUncheckedCreateWithoutPartnerInput> | PartnerAssignedBoothCreateWithoutPartnerInput[] | PartnerAssignedBoothUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutPartnerInput | PartnerAssignedBoothCreateOrConnectWithoutPartnerInput[]
+    upsert?: PartnerAssignedBoothUpsertWithWhereUniqueWithoutPartnerInput | PartnerAssignedBoothUpsertWithWhereUniqueWithoutPartnerInput[]
+    createMany?: PartnerAssignedBoothCreateManyPartnerInputEnvelope
+    set?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    disconnect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    delete?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    update?: PartnerAssignedBoothUpdateWithWhereUniqueWithoutPartnerInput | PartnerAssignedBoothUpdateWithWhereUniqueWithoutPartnerInput[]
+    updateMany?: PartnerAssignedBoothUpdateManyWithWhereWithoutPartnerInput | PartnerAssignedBoothUpdateManyWithWhereWithoutPartnerInput[]
+    deleteMany?: PartnerAssignedBoothScalarWhereInput | PartnerAssignedBoothScalarWhereInput[]
+  }
+
   export type EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput = {
     create?: XOR<EventPartnerPackagesCreateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput> | EventPartnerPackagesCreateWithoutEvent_partnerInput[] | EventPartnerPackagesUncheckedCreateWithoutEvent_partnerInput[]
     connectOrCreate?: EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput | EventPartnerPackagesCreateOrConnectWithoutEvent_partnerInput[]
@@ -29246,6 +32751,48 @@ export namespace Prisma {
     update?: ScheduleUpdateWithWhereUniqueWithoutPartnerInput | ScheduleUpdateWithWhereUniqueWithoutPartnerInput[]
     updateMany?: ScheduleUpdateManyWithWhereWithoutPartnerInput | ScheduleUpdateManyWithWhereWithoutPartnerInput[]
     deleteMany?: ScheduleScalarWhereInput | ScheduleScalarWhereInput[]
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateManyWithoutPartnerNestedInput = {
+    create?: XOR<PartnerAssignedBoothCreateWithoutPartnerInput, PartnerAssignedBoothUncheckedCreateWithoutPartnerInput> | PartnerAssignedBoothCreateWithoutPartnerInput[] | PartnerAssignedBoothUncheckedCreateWithoutPartnerInput[]
+    connectOrCreate?: PartnerAssignedBoothCreateOrConnectWithoutPartnerInput | PartnerAssignedBoothCreateOrConnectWithoutPartnerInput[]
+    upsert?: PartnerAssignedBoothUpsertWithWhereUniqueWithoutPartnerInput | PartnerAssignedBoothUpsertWithWhereUniqueWithoutPartnerInput[]
+    createMany?: PartnerAssignedBoothCreateManyPartnerInputEnvelope
+    set?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    disconnect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    delete?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    connect?: PartnerAssignedBoothWhereUniqueInput | PartnerAssignedBoothWhereUniqueInput[]
+    update?: PartnerAssignedBoothUpdateWithWhereUniqueWithoutPartnerInput | PartnerAssignedBoothUpdateWithWhereUniqueWithoutPartnerInput[]
+    updateMany?: PartnerAssignedBoothUpdateManyWithWhereWithoutPartnerInput | PartnerAssignedBoothUpdateManyWithWhereWithoutPartnerInput[]
+    deleteMany?: PartnerAssignedBoothScalarWhereInput | PartnerAssignedBoothScalarWhereInput[]
+  }
+
+  export type BoothsCreateNestedOneWithoutPartnerAssignedBoothInput = {
+    create?: XOR<BoothsCreateWithoutPartnerAssignedBoothInput, BoothsUncheckedCreateWithoutPartnerAssignedBoothInput>
+    connectOrCreate?: BoothsCreateOrConnectWithoutPartnerAssignedBoothInput
+    connect?: BoothsWhereUniqueInput
+  }
+
+  export type PartnerCreateNestedOneWithoutPartnerAssignedBoothInput = {
+    create?: XOR<PartnerCreateWithoutPartnerAssignedBoothInput, PartnerUncheckedCreateWithoutPartnerAssignedBoothInput>
+    connectOrCreate?: PartnerCreateOrConnectWithoutPartnerAssignedBoothInput
+    connect?: PartnerWhereUniqueInput
+  }
+
+  export type BoothsUpdateOneRequiredWithoutPartnerAssignedBoothNestedInput = {
+    create?: XOR<BoothsCreateWithoutPartnerAssignedBoothInput, BoothsUncheckedCreateWithoutPartnerAssignedBoothInput>
+    connectOrCreate?: BoothsCreateOrConnectWithoutPartnerAssignedBoothInput
+    upsert?: BoothsUpsertWithoutPartnerAssignedBoothInput
+    connect?: BoothsWhereUniqueInput
+    update?: XOR<XOR<BoothsUpdateToOneWithWhereWithoutPartnerAssignedBoothInput, BoothsUpdateWithoutPartnerAssignedBoothInput>, BoothsUncheckedUpdateWithoutPartnerAssignedBoothInput>
+  }
+
+  export type PartnerUpdateOneRequiredWithoutPartnerAssignedBoothNestedInput = {
+    create?: XOR<PartnerCreateWithoutPartnerAssignedBoothInput, PartnerUncheckedCreateWithoutPartnerAssignedBoothInput>
+    connectOrCreate?: PartnerCreateOrConnectWithoutPartnerAssignedBoothInput
+    upsert?: PartnerUpsertWithoutPartnerAssignedBoothInput
+    connect?: PartnerWhereUniqueInput
+    update?: XOR<XOR<PartnerUpdateToOneWithWhereWithoutPartnerAssignedBoothInput, PartnerUpdateWithoutPartnerAssignedBoothInput>, PartnerUncheckedUpdateWithoutPartnerAssignedBoothInput>
   }
 
   export type EnumVisibilityFieldUpdateOperationsInput = {
@@ -29566,6 +33113,19 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumSubmitterTypeNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.SubmitterType | EnumSubmitterTypeFieldRefInput<$PrismaModel> | null
     in?: $Enums.SubmitterType[] | null
@@ -29581,19 +33141,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel>
     _max?: NestedEnumSubmitterTypeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolNullableFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
-  }
-
-  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
-    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBoolNullableFilter<$PrismaModel>
-    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumVisibilityFilter<$PrismaModel = never> = {
@@ -29834,6 +33381,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PartnerAssignedBoothCreateWithoutBoothInput = {
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    partner: PartnerCreateNestedOneWithoutPartnerAssignedBoothInput
+  }
+
+  export type PartnerAssignedBoothUncheckedCreateWithoutBoothInput = {
+    id?: number
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    partner_id: number
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PartnerAssignedBoothCreateOrConnectWithoutBoothInput = {
+    where: PartnerAssignedBoothWhereUniqueInput
+    create: XOR<PartnerAssignedBoothCreateWithoutBoothInput, PartnerAssignedBoothUncheckedCreateWithoutBoothInput>
+  }
+
+  export type PartnerAssignedBoothCreateManyBoothInputEnvelope = {
+    data: PartnerAssignedBoothCreateManyBoothInput | PartnerAssignedBoothCreateManyBoothInput[]
+    skipDuplicates?: boolean
+  }
+
   export type assigned_boothsUpsertWithWhereUniqueWithoutBoothInput = {
     where: assigned_boothsWhereUniqueInput
     update: XOR<assigned_boothsUpdateWithoutBoothInput, assigned_boothsUncheckedUpdateWithoutBoothInput>
@@ -29860,6 +33438,37 @@ export namespace Prisma {
     assignedAt?: DateTimeFilter<"assigned_booths"> | Date | string
     createdAt?: DateTimeFilter<"assigned_booths"> | Date | string
     updatedAt?: DateTimeFilter<"assigned_booths"> | Date | string
+  }
+
+  export type PartnerAssignedBoothUpsertWithWhereUniqueWithoutBoothInput = {
+    where: PartnerAssignedBoothWhereUniqueInput
+    update: XOR<PartnerAssignedBoothUpdateWithoutBoothInput, PartnerAssignedBoothUncheckedUpdateWithoutBoothInput>
+    create: XOR<PartnerAssignedBoothCreateWithoutBoothInput, PartnerAssignedBoothUncheckedCreateWithoutBoothInput>
+  }
+
+  export type PartnerAssignedBoothUpdateWithWhereUniqueWithoutBoothInput = {
+    where: PartnerAssignedBoothWhereUniqueInput
+    data: XOR<PartnerAssignedBoothUpdateWithoutBoothInput, PartnerAssignedBoothUncheckedUpdateWithoutBoothInput>
+  }
+
+  export type PartnerAssignedBoothUpdateManyWithWhereWithoutBoothInput = {
+    where: PartnerAssignedBoothScalarWhereInput
+    data: XOR<PartnerAssignedBoothUpdateManyMutationInput, PartnerAssignedBoothUncheckedUpdateManyWithoutBoothInput>
+  }
+
+  export type PartnerAssignedBoothScalarWhereInput = {
+    AND?: PartnerAssignedBoothScalarWhereInput | PartnerAssignedBoothScalarWhereInput[]
+    OR?: PartnerAssignedBoothScalarWhereInput[]
+    NOT?: PartnerAssignedBoothScalarWhereInput | PartnerAssignedBoothScalarWhereInput[]
+    id?: IntFilter<"PartnerAssignedBooth"> | number
+    exhibition_title?: StringFilter<"PartnerAssignedBooth"> | string
+    description?: StringNullableFilter<"PartnerAssignedBooth"> | string | null
+    exhibition_material?: JsonNullableFilter<"PartnerAssignedBooth">
+    booth_id?: IntFilter<"PartnerAssignedBooth"> | number
+    partner_id?: IntFilter<"PartnerAssignedBooth"> | number
+    assignedAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    createdAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
+    updatedAt?: DateTimeFilter<"PartnerAssignedBooth"> | Date | string
   }
 
   export type assigned_boothsCreateWithoutAssigned_toInput = {
@@ -29938,6 +33547,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type speaker_assignmentCreateWithoutSpeakerInput = {
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    event?: EventCreateNestedOneWithoutSpeaker_assignmentsInput
+    topic_one_event?: EventCreateNestedOneWithoutTopic_one_speaker_assignmentsInput
+    topic_two_event?: EventCreateNestedOneWithoutTopic_two_speaker_assignmentsInput
+  }
+
+  export type speaker_assignmentUncheckedCreateWithoutSpeakerInput = {
+    id?: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentCreateOrConnectWithoutSpeakerInput = {
+    where: speaker_assignmentWhereUniqueInput
+    create: XOR<speaker_assignmentCreateWithoutSpeakerInput, speaker_assignmentUncheckedCreateWithoutSpeakerInput>
+  }
+
+  export type speaker_assignmentCreateManySpeakerInputEnvelope = {
+    data: speaker_assignmentCreateManySpeakerInput | speaker_assignmentCreateManySpeakerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ScheduleUpsertWithWhereUniqueWithoutSpeakerInput = {
     where: ScheduleWhereUniqueInput
     update: XOR<ScheduleUpdateWithoutSpeakerInput, ScheduleUncheckedUpdateWithoutSpeakerInput>
@@ -29952,6 +33600,485 @@ export namespace Prisma {
   export type ScheduleUpdateManyWithWhereWithoutSpeakerInput = {
     where: ScheduleScalarWhereInput
     data: XOR<ScheduleUpdateManyMutationInput, ScheduleUncheckedUpdateManyWithoutSpeakerInput>
+  }
+
+  export type speaker_assignmentUpsertWithWhereUniqueWithoutSpeakerInput = {
+    where: speaker_assignmentWhereUniqueInput
+    update: XOR<speaker_assignmentUpdateWithoutSpeakerInput, speaker_assignmentUncheckedUpdateWithoutSpeakerInput>
+    create: XOR<speaker_assignmentCreateWithoutSpeakerInput, speaker_assignmentUncheckedCreateWithoutSpeakerInput>
+  }
+
+  export type speaker_assignmentUpdateWithWhereUniqueWithoutSpeakerInput = {
+    where: speaker_assignmentWhereUniqueInput
+    data: XOR<speaker_assignmentUpdateWithoutSpeakerInput, speaker_assignmentUncheckedUpdateWithoutSpeakerInput>
+  }
+
+  export type speaker_assignmentUpdateManyWithWhereWithoutSpeakerInput = {
+    where: speaker_assignmentScalarWhereInput
+    data: XOR<speaker_assignmentUpdateManyMutationInput, speaker_assignmentUncheckedUpdateManyWithoutSpeakerInput>
+  }
+
+  export type speaker_assignmentScalarWhereInput = {
+    AND?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+    OR?: speaker_assignmentScalarWhereInput[]
+    NOT?: speaker_assignmentScalarWhereInput | speaker_assignmentScalarWhereInput[]
+    id?: IntFilter<"speaker_assignment"> | number
+    speaker_id?: IntFilter<"speaker_assignment"> | number
+    event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    topic_one?: StringNullableFilter<"speaker_assignment"> | string | null
+    topic_one_approved?: BoolFilter<"speaker_assignment"> | boolean
+    topic_two?: StringNullableFilter<"speaker_assignment"> | string | null
+    topic_two_approved?: BoolNullableFilter<"speaker_assignment"> | boolean | null
+    topic_one_event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    topic_two_event_id?: IntNullableFilter<"speaker_assignment"> | number | null
+    admin_note?: StringNullableFilter<"speaker_assignment"> | string | null
+    submittedAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    createdAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+    updatedAt?: DateTimeFilter<"speaker_assignment"> | Date | string
+  }
+
+  export type SpeakersCreateWithoutSpeaker_assignmentsInput = {
+    prefix?: string | null
+    first_name: string
+    last_name: string
+    fullname: string
+    country: string
+    job_title: string
+    organization: string
+    phone: string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email: string
+    bio: string
+    profile_image?: string | null
+    area_of_expertise?: string | null
+    experience?: string | null
+    password: string
+    role?: $Enums.Role
+    status?: $Enums.Status
+    registeredAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedules?: ScheduleCreateNestedManyWithoutSpeakerInput
+  }
+
+  export type SpeakersUncheckedCreateWithoutSpeaker_assignmentsInput = {
+    id?: number
+    prefix?: string | null
+    first_name: string
+    last_name: string
+    fullname: string
+    country: string
+    job_title: string
+    organization: string
+    phone: string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email: string
+    bio: string
+    profile_image?: string | null
+    area_of_expertise?: string | null
+    experience?: string | null
+    password: string
+    role?: $Enums.Role
+    status?: $Enums.Status
+    registeredAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    schedules?: ScheduleUncheckedCreateNestedManyWithoutSpeakerInput
+  }
+
+  export type SpeakersCreateOrConnectWithoutSpeaker_assignmentsInput = {
+    where: SpeakersWhereUniqueInput
+    create: XOR<SpeakersCreateWithoutSpeaker_assignmentsInput, SpeakersUncheckedCreateWithoutSpeaker_assignmentsInput>
+  }
+
+  export type EventCreateWithoutSpeaker_assignmentsInput = {
+    slug: string
+    event_date: string
+    start_time: string
+    end_time: string
+    title: string
+    location: string
+    description?: string | null
+    hasLiveStream?: boolean
+    liveStreamUrl?: string | null
+    isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    topic_one_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_one_eventInput
+    topic_two_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_two_eventInput
+    scheduleEvents?: ScheduleEventCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutSpeaker_assignmentsInput = {
+    id?: number
+    slug: string
+    event_date: string
+    start_time: string
+    end_time: string
+    title: string
+    location: string
+    description?: string | null
+    hasLiveStream?: boolean
+    liveStreamUrl?: string | null
+    isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_one_eventInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_two_eventInput
+    scheduleEvents?: ScheduleEventUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutSpeaker_assignmentsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutSpeaker_assignmentsInput, EventUncheckedCreateWithoutSpeaker_assignmentsInput>
+  }
+
+  export type EventCreateWithoutTopic_one_speaker_assignmentsInput = {
+    slug: string
+    event_date: string
+    start_time: string
+    end_time: string
+    title: string
+    location: string
+    description?: string | null
+    hasLiveStream?: boolean
+    liveStreamUrl?: string | null
+    isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentCreateNestedManyWithoutEventInput
+    topic_two_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_two_eventInput
+    scheduleEvents?: ScheduleEventCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutTopic_one_speaker_assignmentsInput = {
+    id?: number
+    slug: string
+    event_date: string
+    start_time: string
+    end_time: string
+    title: string
+    location: string
+    description?: string | null
+    hasLiveStream?: boolean
+    liveStreamUrl?: string | null
+    isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutEventInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_two_eventInput
+    scheduleEvents?: ScheduleEventUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutTopic_one_speaker_assignmentsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutTopic_one_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_one_speaker_assignmentsInput>
+  }
+
+  export type EventCreateWithoutTopic_two_speaker_assignmentsInput = {
+    slug: string
+    event_date: string
+    start_time: string
+    end_time: string
+    title: string
+    location: string
+    description?: string | null
+    hasLiveStream?: boolean
+    liveStreamUrl?: string | null
+    isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentCreateNestedManyWithoutEventInput
+    topic_one_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_one_eventInput
+    scheduleEvents?: ScheduleEventCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutTopic_two_speaker_assignmentsInput = {
+    id?: number
+    slug: string
+    event_date: string
+    start_time: string
+    end_time: string
+    title: string
+    location: string
+    description?: string | null
+    hasLiveStream?: boolean
+    liveStreamUrl?: string | null
+    isKeynote?: boolean
+    moderator?: string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutEventInput
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_one_eventInput
+    scheduleEvents?: ScheduleEventUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutTopic_two_speaker_assignmentsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutTopic_two_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_two_speaker_assignmentsInput>
+  }
+
+  export type SpeakersUpsertWithoutSpeaker_assignmentsInput = {
+    update: XOR<SpeakersUpdateWithoutSpeaker_assignmentsInput, SpeakersUncheckedUpdateWithoutSpeaker_assignmentsInput>
+    create: XOR<SpeakersCreateWithoutSpeaker_assignmentsInput, SpeakersUncheckedCreateWithoutSpeaker_assignmentsInput>
+    where?: SpeakersWhereInput
+  }
+
+  export type SpeakersUpdateToOneWithWhereWithoutSpeaker_assignmentsInput = {
+    where?: SpeakersWhereInput
+    data: XOR<SpeakersUpdateWithoutSpeaker_assignmentsInput, SpeakersUncheckedUpdateWithoutSpeaker_assignmentsInput>
+  }
+
+  export type SpeakersUpdateWithoutSpeaker_assignmentsInput = {
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    fullname?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    organization?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: ScheduleUpdateManyWithoutSpeakerNestedInput
+  }
+
+  export type SpeakersUncheckedUpdateWithoutSpeaker_assignmentsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    first_name?: StringFieldUpdateOperationsInput | string
+    last_name?: StringFieldUpdateOperationsInput | string
+    fullname?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    organization?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    social_media?: NullableJsonNullValueInput | InputJsonValue
+    work_email?: StringFieldUpdateOperationsInput | string
+    bio?: StringFieldUpdateOperationsInput | string
+    profile_image?: NullableStringFieldUpdateOperationsInput | string | null
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
+    experience?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    schedules?: ScheduleUncheckedUpdateManyWithoutSpeakerNestedInput
+  }
+
+  export type EventUpsertWithoutSpeaker_assignmentsInput = {
+    update: XOR<EventUpdateWithoutSpeaker_assignmentsInput, EventUncheckedUpdateWithoutSpeaker_assignmentsInput>
+    create: XOR<EventCreateWithoutSpeaker_assignmentsInput, EventUncheckedCreateWithoutSpeaker_assignmentsInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutSpeaker_assignmentsInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutSpeaker_assignmentsInput, EventUncheckedUpdateWithoutSpeaker_assignmentsInput>
+  }
+
+  export type EventUpdateWithoutSpeaker_assignmentsInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    event_date?: StringFieldUpdateOperationsInput | string
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
+    liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    topic_one_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_one_eventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_two_eventNestedInput
+    scheduleEvents?: ScheduleEventUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutSpeaker_assignmentsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    event_date?: StringFieldUpdateOperationsInput | string
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
+    liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_one_eventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_two_eventNestedInput
+    scheduleEvents?: ScheduleEventUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUpsertWithoutTopic_one_speaker_assignmentsInput = {
+    update: XOR<EventUpdateWithoutTopic_one_speaker_assignmentsInput, EventUncheckedUpdateWithoutTopic_one_speaker_assignmentsInput>
+    create: XOR<EventCreateWithoutTopic_one_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_one_speaker_assignmentsInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutTopic_one_speaker_assignmentsInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutTopic_one_speaker_assignmentsInput, EventUncheckedUpdateWithoutTopic_one_speaker_assignmentsInput>
+  }
+
+  export type EventUpdateWithoutTopic_one_speaker_assignmentsInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    event_date?: StringFieldUpdateOperationsInput | string
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
+    liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUpdateManyWithoutEventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_two_eventNestedInput
+    scheduleEvents?: ScheduleEventUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutTopic_one_speaker_assignmentsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    event_date?: StringFieldUpdateOperationsInput | string
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
+    liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutEventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_two_eventNestedInput
+    scheduleEvents?: ScheduleEventUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUpsertWithoutTopic_two_speaker_assignmentsInput = {
+    update: XOR<EventUpdateWithoutTopic_two_speaker_assignmentsInput, EventUncheckedUpdateWithoutTopic_two_speaker_assignmentsInput>
+    create: XOR<EventCreateWithoutTopic_two_speaker_assignmentsInput, EventUncheckedCreateWithoutTopic_two_speaker_assignmentsInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutTopic_two_speaker_assignmentsInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutTopic_two_speaker_assignmentsInput, EventUncheckedUpdateWithoutTopic_two_speaker_assignmentsInput>
+  }
+
+  export type EventUpdateWithoutTopic_two_speaker_assignmentsInput = {
+    slug?: StringFieldUpdateOperationsInput | string
+    event_date?: StringFieldUpdateOperationsInput | string
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
+    liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUpdateManyWithoutEventNestedInput
+    topic_one_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_one_eventNestedInput
+    scheduleEvents?: ScheduleEventUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutTopic_two_speaker_assignmentsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    slug?: StringFieldUpdateOperationsInput | string
+    event_date?: StringFieldUpdateOperationsInput | string
+    start_time?: StringFieldUpdateOperationsInput | string
+    end_time?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    hasLiveStream?: BoolFieldUpdateOperationsInput | boolean
+    liveStreamUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isKeynote?: BoolFieldUpdateOperationsInput | boolean
+    moderator?: NullableStringFieldUpdateOperationsInput | string | null
+    main_speakers?: NullableJsonNullValueInput | InputJsonValue
+    lead_speakers?: NullableJsonNullValueInput | InputJsonValue
+    speakers?: NullableJsonNullValueInput | InputJsonValue
+    track?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutEventNestedInput
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_one_eventNestedInput
+    scheduleEvents?: ScheduleEventUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type EventPartnerPackagesCreateWithoutEvent_packageInput = {
@@ -30028,6 +34155,7 @@ export namespace Prisma {
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
+    PartnerAssignedBooth?: PartnerAssignedBoothCreateNestedManyWithoutBoothInput
   }
 
   export type BoothsUncheckedCreateWithoutAssigned_boothsInput = {
@@ -30040,6 +34168,7 @@ export namespace Prisma {
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedCreateNestedManyWithoutBoothInput
   }
 
   export type BoothsCreateOrConnectWithoutAssigned_boothsInput = {
@@ -30107,6 +34236,7 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    PartnerAssignedBooth?: PartnerAssignedBoothUpdateManyWithoutBoothNestedInput
   }
 
   export type BoothsUncheckedUpdateWithoutAssigned_boothsInput = {
@@ -30119,6 +34249,7 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedUpdateManyWithoutBoothNestedInput
   }
 
   export type ExhibitorsUpsertWithoutAssigned_boothsInput = {
@@ -30178,8 +34309,11 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password: string
     schedules?: ScheduleCreateNestedManyWithoutPartnerInput
+    PartnerAssignedBooth?: PartnerAssignedBoothCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerUncheckedCreateWithoutEventPartnerPackagesInput = {
@@ -30194,8 +34328,11 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password: string
     schedules?: ScheduleUncheckedCreateNestedManyWithoutPartnerInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerCreateOrConnectWithoutEventPartnerPackagesInput = {
@@ -30257,8 +34394,11 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
     schedules?: ScheduleUpdateManyWithoutPartnerNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerUncheckedUpdateWithoutEventPartnerPackagesInput = {
@@ -30273,8 +34413,11 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
     schedules?: ScheduleUncheckedUpdateManyWithoutPartnerNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerPackageUpsertWithoutEventPartnerPackagesInput = {
@@ -30315,6 +34458,123 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type speaker_assignmentCreateWithoutEventInput = {
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker: SpeakersCreateNestedOneWithoutSpeaker_assignmentsInput
+    topic_one_event?: EventCreateNestedOneWithoutTopic_one_speaker_assignmentsInput
+    topic_two_event?: EventCreateNestedOneWithoutTopic_two_speaker_assignmentsInput
+  }
+
+  export type speaker_assignmentUncheckedCreateWithoutEventInput = {
+    id?: number
+    speaker_id: number
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentCreateOrConnectWithoutEventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    create: XOR<speaker_assignmentCreateWithoutEventInput, speaker_assignmentUncheckedCreateWithoutEventInput>
+  }
+
+  export type speaker_assignmentCreateManyEventInputEnvelope = {
+    data: speaker_assignmentCreateManyEventInput | speaker_assignmentCreateManyEventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type speaker_assignmentCreateWithoutTopic_one_eventInput = {
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker: SpeakersCreateNestedOneWithoutSpeaker_assignmentsInput
+    event?: EventCreateNestedOneWithoutSpeaker_assignmentsInput
+    topic_two_event?: EventCreateNestedOneWithoutTopic_two_speaker_assignmentsInput
+  }
+
+  export type speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput = {
+    id?: number
+    speaker_id: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentCreateOrConnectWithoutTopic_one_eventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    create: XOR<speaker_assignmentCreateWithoutTopic_one_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput>
+  }
+
+  export type speaker_assignmentCreateManyTopic_one_eventInputEnvelope = {
+    data: speaker_assignmentCreateManyTopic_one_eventInput | speaker_assignmentCreateManyTopic_one_eventInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type speaker_assignmentCreateWithoutTopic_two_eventInput = {
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    speaker: SpeakersCreateNestedOneWithoutSpeaker_assignmentsInput
+    event?: EventCreateNestedOneWithoutSpeaker_assignmentsInput
+    topic_one_event?: EventCreateNestedOneWithoutTopic_one_speaker_assignmentsInput
+  }
+
+  export type speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput = {
+    id?: number
+    speaker_id: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentCreateOrConnectWithoutTopic_two_eventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    create: XOR<speaker_assignmentCreateWithoutTopic_two_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput>
+  }
+
+  export type speaker_assignmentCreateManyTopic_two_eventInputEnvelope = {
+    data: speaker_assignmentCreateManyTopic_two_eventInput | speaker_assignmentCreateManyTopic_two_eventInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ScheduleEventCreateWithoutEventInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30336,6 +34596,54 @@ export namespace Prisma {
   export type ScheduleEventCreateManyEventInputEnvelope = {
     data: ScheduleEventCreateManyEventInput | ScheduleEventCreateManyEventInput[]
     skipDuplicates?: boolean
+  }
+
+  export type speaker_assignmentUpsertWithWhereUniqueWithoutEventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    update: XOR<speaker_assignmentUpdateWithoutEventInput, speaker_assignmentUncheckedUpdateWithoutEventInput>
+    create: XOR<speaker_assignmentCreateWithoutEventInput, speaker_assignmentUncheckedCreateWithoutEventInput>
+  }
+
+  export type speaker_assignmentUpdateWithWhereUniqueWithoutEventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    data: XOR<speaker_assignmentUpdateWithoutEventInput, speaker_assignmentUncheckedUpdateWithoutEventInput>
+  }
+
+  export type speaker_assignmentUpdateManyWithWhereWithoutEventInput = {
+    where: speaker_assignmentScalarWhereInput
+    data: XOR<speaker_assignmentUpdateManyMutationInput, speaker_assignmentUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type speaker_assignmentUpsertWithWhereUniqueWithoutTopic_one_eventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    update: XOR<speaker_assignmentUpdateWithoutTopic_one_eventInput, speaker_assignmentUncheckedUpdateWithoutTopic_one_eventInput>
+    create: XOR<speaker_assignmentCreateWithoutTopic_one_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_one_eventInput>
+  }
+
+  export type speaker_assignmentUpdateWithWhereUniqueWithoutTopic_one_eventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    data: XOR<speaker_assignmentUpdateWithoutTopic_one_eventInput, speaker_assignmentUncheckedUpdateWithoutTopic_one_eventInput>
+  }
+
+  export type speaker_assignmentUpdateManyWithWhereWithoutTopic_one_eventInput = {
+    where: speaker_assignmentScalarWhereInput
+    data: XOR<speaker_assignmentUpdateManyMutationInput, speaker_assignmentUncheckedUpdateManyWithoutTopic_one_eventInput>
+  }
+
+  export type speaker_assignmentUpsertWithWhereUniqueWithoutTopic_two_eventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    update: XOR<speaker_assignmentUpdateWithoutTopic_two_eventInput, speaker_assignmentUncheckedUpdateWithoutTopic_two_eventInput>
+    create: XOR<speaker_assignmentCreateWithoutTopic_two_eventInput, speaker_assignmentUncheckedCreateWithoutTopic_two_eventInput>
+  }
+
+  export type speaker_assignmentUpdateWithWhereUniqueWithoutTopic_two_eventInput = {
+    where: speaker_assignmentWhereUniqueInput
+    data: XOR<speaker_assignmentUpdateWithoutTopic_two_eventInput, speaker_assignmentUncheckedUpdateWithoutTopic_two_eventInput>
+  }
+
+  export type speaker_assignmentUpdateManyWithWhereWithoutTopic_two_eventInput = {
+    where: speaker_assignmentScalarWhereInput
+    data: XOR<speaker_assignmentUpdateManyMutationInput, speaker_assignmentUncheckedUpdateManyWithoutTopic_two_eventInput>
   }
 
   export type ScheduleEventUpsertWithWhereUniqueWithoutEventInput = {
@@ -30438,8 +34746,11 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password: string
     EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput
+    PartnerAssignedBooth?: PartnerAssignedBoothCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerUncheckedCreateWithoutSchedulesInput = {
@@ -30454,8 +34765,11 @@ export namespace Prisma {
     job_title: string
     subscribe_to_newletter?: boolean | null
     share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password: string
     EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedCreateNestedManyWithoutPartnerInput
   }
 
   export type PartnerCreateOrConnectWithoutSchedulesInput = {
@@ -30476,7 +34790,7 @@ export namespace Prisma {
     work_email: string
     bio: string
     profile_image?: string | null
-    topic: string
+    area_of_expertise?: string | null
     experience?: string | null
     password: string
     role?: $Enums.Role
@@ -30484,6 +34798,7 @@ export namespace Prisma {
     registeredAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentCreateNestedManyWithoutSpeakerInput
   }
 
   export type SpeakersUncheckedCreateWithoutSchedulesInput = {
@@ -30500,7 +34815,7 @@ export namespace Prisma {
     work_email: string
     bio: string
     profile_image?: string | null
-    topic: string
+    area_of_expertise?: string | null
     experience?: string | null
     password: string
     role?: $Enums.Role
@@ -30508,6 +34823,7 @@ export namespace Prisma {
     registeredAt?: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutSpeakerInput
   }
 
   export type SpeakersCreateOrConnectWithoutSchedulesInput = {
@@ -30628,8 +34944,11 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
     EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUpdateManyWithoutPartnerNestedInput
   }
 
   export type PartnerUncheckedUpdateWithoutSchedulesInput = {
@@ -30644,8 +34963,11 @@ export namespace Prisma {
     job_title?: StringFieldUpdateOperationsInput | string
     subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
     share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
     password?: StringFieldUpdateOperationsInput | string
     EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput
+    PartnerAssignedBooth?: PartnerAssignedBoothUncheckedUpdateManyWithoutPartnerNestedInput
   }
 
   export type SpeakersUpsertWithoutSchedulesInput = {
@@ -30672,7 +34994,7 @@ export namespace Prisma {
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profile_image?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: StringFieldUpdateOperationsInput | string
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -30680,6 +35002,7 @@ export namespace Prisma {
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUpdateManyWithoutSpeakerNestedInput
   }
 
   export type SpeakersUncheckedUpdateWithoutSchedulesInput = {
@@ -30696,7 +35019,7 @@ export namespace Prisma {
     work_email?: StringFieldUpdateOperationsInput | string
     bio?: StringFieldUpdateOperationsInput | string
     profile_image?: NullableStringFieldUpdateOperationsInput | string | null
-    topic?: StringFieldUpdateOperationsInput | string
+    area_of_expertise?: NullableStringFieldUpdateOperationsInput | string | null
     experience?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -30704,6 +35027,7 @@ export namespace Prisma {
     registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutSpeakerNestedInput
   }
 
   export type ScheduleEventUpsertWithWhereUniqueWithoutScheduleInput = {
@@ -30770,6 +35094,9 @@ export namespace Prisma {
     track?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentCreateNestedManyWithoutEventInput
+    topic_one_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_one_eventInput
+    topic_two_speaker_assignments?: speaker_assignmentCreateNestedManyWithoutTopic_two_eventInput
   }
 
   export type EventUncheckedCreateWithoutScheduleEventsInput = {
@@ -30791,6 +35118,9 @@ export namespace Prisma {
     track?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutEventInput
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_one_eventInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedCreateNestedManyWithoutTopic_two_eventInput
   }
 
   export type EventCreateOrConnectWithoutScheduleEventsInput = {
@@ -30863,6 +35193,9 @@ export namespace Prisma {
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUpdateManyWithoutEventNestedInput
+    topic_one_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_one_eventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUpdateManyWithoutTopic_two_eventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutScheduleEventsInput = {
@@ -30884,6 +35217,9 @@ export namespace Prisma {
     track?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutEventNestedInput
+    topic_one_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_one_eventNestedInput
+    topic_two_speaker_assignments?: speaker_assignmentUncheckedUpdateManyWithoutTopic_two_eventNestedInput
   }
 
   export type EventPartnerPackagesCreateWithoutEvent_partnerInput = {
@@ -30954,6 +35290,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PartnerAssignedBoothCreateWithoutPartnerInput = {
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    booth: BoothsCreateNestedOneWithoutPartnerAssignedBoothInput
+  }
+
+  export type PartnerAssignedBoothUncheckedCreateWithoutPartnerInput = {
+    id?: number
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id: number
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PartnerAssignedBoothCreateOrConnectWithoutPartnerInput = {
+    where: PartnerAssignedBoothWhereUniqueInput
+    create: XOR<PartnerAssignedBoothCreateWithoutPartnerInput, PartnerAssignedBoothUncheckedCreateWithoutPartnerInput>
+  }
+
+  export type PartnerAssignedBoothCreateManyPartnerInputEnvelope = {
+    data: PartnerAssignedBoothCreateManyPartnerInput | PartnerAssignedBoothCreateManyPartnerInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EventPartnerPackagesUpsertWithWhereUniqueWithoutEvent_partnerInput = {
     where: EventPartnerPackagesWhereUniqueInput
     update: XOR<EventPartnerPackagesUpdateWithoutEvent_partnerInput, EventPartnerPackagesUncheckedUpdateWithoutEvent_partnerInput>
@@ -30984,6 +35351,178 @@ export namespace Prisma {
   export type ScheduleUpdateManyWithWhereWithoutPartnerInput = {
     where: ScheduleScalarWhereInput
     data: XOR<ScheduleUpdateManyMutationInput, ScheduleUncheckedUpdateManyWithoutPartnerInput>
+  }
+
+  export type PartnerAssignedBoothUpsertWithWhereUniqueWithoutPartnerInput = {
+    where: PartnerAssignedBoothWhereUniqueInput
+    update: XOR<PartnerAssignedBoothUpdateWithoutPartnerInput, PartnerAssignedBoothUncheckedUpdateWithoutPartnerInput>
+    create: XOR<PartnerAssignedBoothCreateWithoutPartnerInput, PartnerAssignedBoothUncheckedCreateWithoutPartnerInput>
+  }
+
+  export type PartnerAssignedBoothUpdateWithWhereUniqueWithoutPartnerInput = {
+    where: PartnerAssignedBoothWhereUniqueInput
+    data: XOR<PartnerAssignedBoothUpdateWithoutPartnerInput, PartnerAssignedBoothUncheckedUpdateWithoutPartnerInput>
+  }
+
+  export type PartnerAssignedBoothUpdateManyWithWhereWithoutPartnerInput = {
+    where: PartnerAssignedBoothScalarWhereInput
+    data: XOR<PartnerAssignedBoothUpdateManyMutationInput, PartnerAssignedBoothUncheckedUpdateManyWithoutPartnerInput>
+  }
+
+  export type BoothsCreateWithoutPartnerAssignedBoothInput = {
+    booth_number: string
+    location: string
+    price: number
+    booth_size: string
+    features: JsonNullValueInput | InputJsonValue
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assigned_booths?: assigned_boothsCreateNestedManyWithoutBoothInput
+  }
+
+  export type BoothsUncheckedCreateWithoutPartnerAssignedBoothInput = {
+    id?: number
+    booth_number: string
+    location: string
+    price: number
+    booth_size: string
+    features: JsonNullValueInput | InputJsonValue
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assigned_booths?: assigned_boothsUncheckedCreateNestedManyWithoutBoothInput
+  }
+
+  export type BoothsCreateOrConnectWithoutPartnerAssignedBoothInput = {
+    where: BoothsWhereUniqueInput
+    create: XOR<BoothsCreateWithoutPartnerAssignedBoothInput, BoothsUncheckedCreateWithoutPartnerAssignedBoothInput>
+  }
+
+  export type PartnerCreateWithoutPartnerAssignedBoothInput = {
+    prefix?: string | null
+    firstname: string
+    lastname: string
+    email: string
+    phone_number: string
+    entity_name: string
+    country: string
+    job_title: string
+    subscribe_to_newletter?: boolean | null
+    share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
+    password: string
+    EventPartnerPackages?: EventPartnerPackagesCreateNestedManyWithoutEvent_partnerInput
+    schedules?: ScheduleCreateNestedManyWithoutPartnerInput
+  }
+
+  export type PartnerUncheckedCreateWithoutPartnerAssignedBoothInput = {
+    id?: number
+    prefix?: string | null
+    firstname: string
+    lastname: string
+    email: string
+    phone_number: string
+    entity_name: string
+    country: string
+    job_title: string
+    subscribe_to_newletter?: boolean | null
+    share_with_third_party?: boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
+    password: string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedCreateNestedManyWithoutEvent_partnerInput
+    schedules?: ScheduleUncheckedCreateNestedManyWithoutPartnerInput
+  }
+
+  export type PartnerCreateOrConnectWithoutPartnerAssignedBoothInput = {
+    where: PartnerWhereUniqueInput
+    create: XOR<PartnerCreateWithoutPartnerAssignedBoothInput, PartnerUncheckedCreateWithoutPartnerAssignedBoothInput>
+  }
+
+  export type BoothsUpsertWithoutPartnerAssignedBoothInput = {
+    update: XOR<BoothsUpdateWithoutPartnerAssignedBoothInput, BoothsUncheckedUpdateWithoutPartnerAssignedBoothInput>
+    create: XOR<BoothsCreateWithoutPartnerAssignedBoothInput, BoothsUncheckedCreateWithoutPartnerAssignedBoothInput>
+    where?: BoothsWhereInput
+  }
+
+  export type BoothsUpdateToOneWithWhereWithoutPartnerAssignedBoothInput = {
+    where?: BoothsWhereInput
+    data: XOR<BoothsUpdateWithoutPartnerAssignedBoothInput, BoothsUncheckedUpdateWithoutPartnerAssignedBoothInput>
+  }
+
+  export type BoothsUpdateWithoutPartnerAssignedBoothInput = {
+    booth_number?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    booth_size?: StringFieldUpdateOperationsInput | string
+    features?: JsonNullValueInput | InputJsonValue
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assigned_booths?: assigned_boothsUpdateManyWithoutBoothNestedInput
+  }
+
+  export type BoothsUncheckedUpdateWithoutPartnerAssignedBoothInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    booth_number?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    booth_size?: StringFieldUpdateOperationsInput | string
+    features?: JsonNullValueInput | InputJsonValue
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assigned_booths?: assigned_boothsUncheckedUpdateManyWithoutBoothNestedInput
+  }
+
+  export type PartnerUpsertWithoutPartnerAssignedBoothInput = {
+    update: XOR<PartnerUpdateWithoutPartnerAssignedBoothInput, PartnerUncheckedUpdateWithoutPartnerAssignedBoothInput>
+    create: XOR<PartnerCreateWithoutPartnerAssignedBoothInput, PartnerUncheckedCreateWithoutPartnerAssignedBoothInput>
+    where?: PartnerWhereInput
+  }
+
+  export type PartnerUpdateToOneWithWhereWithoutPartnerAssignedBoothInput = {
+    where?: PartnerWhereInput
+    data: XOR<PartnerUpdateWithoutPartnerAssignedBoothInput, PartnerUncheckedUpdateWithoutPartnerAssignedBoothInput>
+  }
+
+  export type PartnerUpdateWithoutPartnerAssignedBoothInput = {
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    entity_name?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
+    password?: StringFieldUpdateOperationsInput | string
+    EventPartnerPackages?: EventPartnerPackagesUpdateManyWithoutEvent_partnerNestedInput
+    schedules?: ScheduleUpdateManyWithoutPartnerNestedInput
+  }
+
+  export type PartnerUncheckedUpdateWithoutPartnerAssignedBoothInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    prefix?: NullableStringFieldUpdateOperationsInput | string | null
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone_number?: StringFieldUpdateOperationsInput | string
+    entity_name?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    job_title?: StringFieldUpdateOperationsInput | string
+    subscribe_to_newletter?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    share_with_third_party?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    benefits?: NullableJsonNullValueInput | InputJsonValue
+    remaining_benefits?: NullableJsonNullValueInput | InputJsonValue
+    password?: StringFieldUpdateOperationsInput | string
+    EventPartnerPackages?: EventPartnerPackagesUncheckedUpdateManyWithoutEvent_partnerNestedInput
+    schedules?: ScheduleUncheckedUpdateManyWithoutPartnerNestedInput
   }
 
   export type OrganizationCreateManyParentInput = {
@@ -31080,6 +35619,17 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type PartnerAssignedBoothCreateManyBoothInput = {
+    id?: number
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    partner_id: number
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type assigned_boothsUpdateWithoutBoothInput = {
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31098,6 +35648,38 @@ export namespace Prisma {
   export type assigned_boothsUncheckedUpdateManyWithoutBoothInput = {
     id?: IntFieldUpdateOperationsInput | number
     assigned_to_id?: IntFieldUpdateOperationsInput | number
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerAssignedBoothUpdateWithoutBoothInput = {
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    partner?: PartnerUpdateOneRequiredWithoutPartnerAssignedBoothNestedInput
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateWithoutBoothInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    partner_id?: IntFieldUpdateOperationsInput | number
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateManyWithoutBoothInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    partner_id?: IntFieldUpdateOperationsInput | number
     assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31146,6 +35728,21 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type speaker_assignmentCreateManySpeakerInput = {
+    id?: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ScheduleUpdateWithoutSpeakerInput = {
     userId?: StringFieldUpdateOperationsInput | string
     submittedBy?: NullableEnumSubmitterTypeFieldUpdateOperationsInput | $Enums.SubmitterType | null
@@ -31179,6 +35776,50 @@ export namespace Prisma {
     attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
     partnerId?: NullableIntFieldUpdateOperationsInput | number | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUpdateWithoutSpeakerInput = {
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    event?: EventUpdateOneWithoutSpeaker_assignmentsNestedInput
+    topic_one_event?: EventUpdateOneWithoutTopic_one_speaker_assignmentsNestedInput
+    topic_two_event?: EventUpdateOneWithoutTopic_two_speaker_assignmentsNestedInput
+  }
+
+  export type speaker_assignmentUncheckedUpdateWithoutSpeakerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutSpeakerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31230,11 +35871,188 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type speaker_assignmentCreateManyEventInput = {
+    id?: number
+    speaker_id: number
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentCreateManyTopic_one_eventInput = {
+    id?: number
+    speaker_id: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_two_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentCreateManyTopic_two_eventInput = {
+    id?: number
+    speaker_id: number
+    event_id?: number | null
+    topic_one?: string | null
+    topic_one_approved?: boolean
+    topic_two?: string | null
+    topic_two_approved?: boolean | null
+    topic_one_event_id?: number | null
+    admin_note?: string | null
+    submittedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ScheduleEventCreateManyEventInput = {
     id?: number
     scheduleId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type speaker_assignmentUpdateWithoutEventInput = {
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker?: SpeakersUpdateOneRequiredWithoutSpeaker_assignmentsNestedInput
+    topic_one_event?: EventUpdateOneWithoutTopic_one_speaker_assignmentsNestedInput
+    topic_two_event?: EventUpdateOneWithoutTopic_two_speaker_assignmentsNestedInput
+  }
+
+  export type speaker_assignmentUncheckedUpdateWithoutEventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutEventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUpdateWithoutTopic_one_eventInput = {
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker?: SpeakersUpdateOneRequiredWithoutSpeaker_assignmentsNestedInput
+    event?: EventUpdateOneWithoutSpeaker_assignmentsNestedInput
+    topic_two_event?: EventUpdateOneWithoutTopic_two_speaker_assignmentsNestedInput
+  }
+
+  export type speaker_assignmentUncheckedUpdateWithoutTopic_one_eventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutTopic_one_eventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_two_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUpdateWithoutTopic_two_eventInput = {
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    speaker?: SpeakersUpdateOneRequiredWithoutSpeaker_assignmentsNestedInput
+    event?: EventUpdateOneWithoutSpeaker_assignmentsNestedInput
+    topic_one_event?: EventUpdateOneWithoutTopic_one_speaker_assignmentsNestedInput
+  }
+
+  export type speaker_assignmentUncheckedUpdateWithoutTopic_two_eventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type speaker_assignmentUncheckedUpdateManyWithoutTopic_two_eventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    speaker_id?: IntFieldUpdateOperationsInput | number
+    event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    topic_one?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_one_approved?: BoolFieldUpdateOperationsInput | boolean
+    topic_two?: NullableStringFieldUpdateOperationsInput | string | null
+    topic_two_approved?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    topic_one_event_id?: NullableIntFieldUpdateOperationsInput | number | null
+    admin_note?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ScheduleEventUpdateWithoutEventInput = {
@@ -31308,6 +36126,17 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type PartnerAssignedBoothCreateManyPartnerInput = {
+    id?: number
+    exhibition_title: string
+    description?: string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id: number
+    assignedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type EventPartnerPackagesUpdateWithoutEvent_partnerInput = {
     payment_reference?: NullableStringFieldUpdateOperationsInput | string | null
     payment_status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
@@ -31376,6 +36205,38 @@ export namespace Prisma {
     attendeeId?: NullableIntFieldUpdateOperationsInput | number | null
     speakerId?: NullableIntFieldUpdateOperationsInput | number | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerAssignedBoothUpdateWithoutPartnerInput = {
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    booth?: BoothsUpdateOneRequiredWithoutPartnerAssignedBoothNestedInput
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateWithoutPartnerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id?: IntFieldUpdateOperationsInput | number
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PartnerAssignedBoothUncheckedUpdateManyWithoutPartnerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    exhibition_title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    exhibition_material?: NullableJsonNullValueInput | InputJsonValue
+    booth_id?: IntFieldUpdateOperationsInput | number
+    assignedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

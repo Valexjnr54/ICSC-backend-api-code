@@ -130,10 +130,10 @@ export async function loginAttendee(request: Request, response: Response) {
             return;
         }
 
-        if (!user.status || user.status !== 'Approved') {
-            console.error('Account Not Approved:', user.password);
-            return response.status(400).json({ message: 'Account Not Approved' });
-        }
+        // if (!user.status || user.status !== 'Approved') {
+        //     console.error('Account Not Approved:', user.password);
+        //     return response.status(400).json({ message: 'Account Not Approved' });
+        // }
 
         // Generate a JWT token for the admin
         const token = jwt.sign({ 
